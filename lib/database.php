@@ -8,8 +8,8 @@
         // public $pass   = DB_PASS;
         // public $dbname = DB_NAME;
         public $host   = "localhost";
-        public $user   = "root";
-        public $pass   = "123456";
+        public $user   = "quin";
+        public $pass   = "Quin123@123.";
         public $dbname = "quin";
 
         public $link;
