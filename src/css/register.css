@@ -1,0 +1,124 @@
+.register{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("https://static.vecteezy.com/system/resources/thumbnails/000/579/041/small_2x/RR-v-apr-2019-5.jpg");
+}
+.wrapper{
+    min-width: 500px;
+    border-radius: 6px;
+    padding: 20px 30px;
+    min-height: 70vh;
+    background-color: white;
+    box-shadow: 0 0 4px var(--primary);
+    
+    /* background: url("https://img.freepik.com/premium-vector/abstract-background-with-modern-style-hexagon-pattern_7505-1722.jpg"); */
+}
+form{
+    padding: 30px 20px;
+}
+.form-register h1, .form-login h1{
+    font-size: 2.6rem;
+    color: var(--primary);
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+.form-register,.form-login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form-group label{
+    color: var(--text-color);
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+.form-group{
+    width: 100%;
+    margin-bottom: 10px;
+}
+.form-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+.form-body{
+    border: 1px solid var(--boder-color);
+    padding: 8px 10px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+    gap: 8px;
+    transition: .3s ease;
+}
+.form-body i{
+    font-size: 1.4rem;
+    color: #7875B5;
+}
+.form-body input{
+    flex: 1;
+    border: none;
+    outline: none;
+    font-weight: 500;
+}
+.form-body:hover{
+    border-color: #7875B5;
+}
+.form-body input:focus.form-body{
+    border-color: #7875B5;
+
+}
+.form-btn{
+    display: flex;
+    justify-content: center;
+    padding: 40px 0 30px;
+   width: 100%;
+}
+.btn-submit{
+    text-align: center;
+    width: 40%;
+    font-size: 1.8rem;
+    padding: 8px 40px;
+    border-radius: 6px;
+    outline: none;
+    border: 1px solid var(--primary);
+    background-color: var(--primary);
+    color: var(--white);
+    transition: all .3s ease;
+}
+
+.btn-submit:hover{
+    opacity: 0.8;
+}
+.form-change{
+    font-size: 1.2rem;
+}
+.form-change span{
+    font-size: 1.6rem;
+    margin-left: 6px;
+    color: var(--blue);
+    font-weight: 500;
+    cursor: pointer;
+}
+.form-msg{
+    color: var(--red);
+    font-size: 1.2rem;
+    margin-top: 4px;
+    padding-left: 6px;
+}
+/* .invalidate .form-body{
+    border-color: var(--red);
+} */
+.form-body.invalid{
+    border-color: #f33a58;
+}
+
+.form-body.invalid .form-msg {
+    color: #f33a58;
+}
+.form-control{
+
+    height: auto !important;
+}
