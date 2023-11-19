@@ -3,6 +3,7 @@
      include "../lib/session.php";
      Session::checkSession();
      Session::checkPermission(0);
+     
 ?>
 <?php
     header("Cache-Control: no-cache, must-revalidate");
@@ -49,6 +50,7 @@
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
 />
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 </head>
 <body>
     <div class="app">
@@ -164,7 +166,7 @@
                                 
                             </div>
                             <div class="header-top-item-title">
-                                Help
+                                Admin
                             </div>
                         </a>
                         <a href="./shopowner" class="header-top-item">

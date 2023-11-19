@@ -5,6 +5,7 @@ include 'inc/header.php';
 <?php
 include 'inc/profilesidebar.php';
 ?>
+           
             <div class="profile-container">
                 <div class="profile-title">Profile</div>
                 <form class="form-update-profile">

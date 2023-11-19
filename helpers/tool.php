@@ -9,7 +9,7 @@ class Tool
 
         return sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(16384, 20479), mt_rand(32768, 49151), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535));
     }
-    public  function  uploadFile($file)
+    public function uploadFile($file)
     {
         // print_r($file);
         $fileDir = "../assest/upload/";
@@ -18,7 +18,7 @@ class Tool
             if (!file_exists($fileDir)) {
                 mkdir($fileDir, 0, true);
             }
-            $fileDir = $fileDir . '/' . self::GUID() . "." . (explode(".", $fileName)[1]);
+            $fileDir = $fileDir . self::GUID() . "." . (explode(".", $fileName)[1]);
             if (move_uploaded_file($file['tmp_name'], $fileDir)) {
                 return $fileDir;
             }
@@ -52,6 +52,24 @@ class Tool
         }
 
         return $text;
+    }
+    function path()
+    {
+        $url = $_SERVER['HTTP_HOST'];
+        $url .= $_SERVER['REQUEST_URI'];
+        $url = str_contains($url, "localhost") ? str_replace("localhost/web-demo_php", "", $url) : $url;
+
+        $url = explode("/", $url);
+        $value = "";
+        if (count($url) > 2) {
+            for ($i = 0; $i < count($url) - 2; $i++) {
+                $value .= "../";
+            }
+        } else {
+            $value = "/";
+
+        }
+        return $value;
     }
 }
 

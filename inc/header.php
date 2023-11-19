@@ -1,6 +1,25 @@
 <?php
 session_start();
-include "./lib/session.php";
+
+
+include "lib/session.php";
+function path(){ 
+    $url= $_SERVER['HTTP_HOST'];   
+    $url.= $_SERVER['REQUEST_URI']; 
+    $url = str_contains($url,"localhost") ? str_replace("localhost/web-demo_php","",$url) : $url; 
+    
+    $url= explode("/",$url);
+    $value ="";
+    if(count($url)> 2){
+        for($i= 0;$i<count($url)-2;$i++){
+            $value .= "../";
+        }
+    }else{
+        $value ="./";
+    }
+    return $value;
+}
+
 ?>
 <?php
 header("Cache-Control: no-cache, must-revalidate");
@@ -174,7 +193,7 @@ header("Cache-Control:max-age=2592000");
 
                             </div>
                             <div class="header-top-item-title">
-                                Help
+                                Admin
                             </div>
                         </a>
                         <a href="./shopowner" class="header-top-item">

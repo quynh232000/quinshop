@@ -1,20 +1,22 @@
 <?php
-  include "./controller/adminlogin.php";
-  $class = new Adminlogin();
+include "./controller/adminlogin.php";
+$class = new Adminlogin();
 
-  if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $checkRegister = $class->registerlogin_admin($_POST['username']
-    ,$_POST['fullname'],
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $checkRegister = $class->registerlogin_admin(
+    $_POST['username']
+    ,
+    $_POST['fullname'],
     $_POST['email'],
     $_POST['phone'],
-    $_POST['password'],
-    $_POST['confirmpassword']
-    );
+    md5($_POST['password']),
+    md5($_POST['confirmpassword'])
+  );
 
-  }
+}
 
 
-  
+
 
 ?>
 
@@ -38,27 +40,28 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://code.jquery.com/jquery-2.2.4.min.js"
     integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <style>
-      /* .body-register{
+  <style>
+    /* .body-register{
         max-height: 80vh;
         overflow-y: scroll;
       }
       ::-webkit-scrollbar{
         display: hidden;
       } */
-      .form-group{
-        margin-top: 0;
-      }
-      .register{
-        padding: 40px 0;
-      }
-    </style>
+    .form-group {
+      margin-top: 0;
+    }
+
+    .register {
+      padding: 40px 0;
+    }
+  </style>
 </head>
 
 <body>
   <div class="register">
     <div class="wrapper body-register">
-      <form class="form-register"  id="register-form" method="POST" action="register.php">
+      <form class="form-register" id="register-form" method="POST" action="register.php">
         <h1>Register form</h1>
         <!-- invalidate -->
         <div class="form-group">
@@ -131,12 +134,12 @@
         <div class="form-group invalid">
           <div class="form-wrapper">
             <div class="form-msg">
-              <?php 
-                if(isset($checkRegister)){
-                  echo $checkRegister;
-                }else{
-                  echo "";
-                }
+              <?php
+              if (isset($checkRegister)) {
+                echo $checkRegister;
+              } else {
+                echo "";
+              }
               ?>
             </div>
           </div>
@@ -151,7 +154,7 @@
       </form>
     </div>
   </div>
- 
+
 
   <script src="./src/js/register.js" type="module"></script>
   <!-- <script src="./src/js/main.js" type="module"></script> -->

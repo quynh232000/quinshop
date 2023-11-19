@@ -177,7 +177,7 @@
     width: 100%;
 }
 .w-50{
-    flex: 1;
+    /* flex: 50; */
 }
 .m-deli-row{
     border-bottom: 1px solid rgba(22,22,24,.12);

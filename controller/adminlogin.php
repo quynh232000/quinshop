@@ -42,7 +42,7 @@
                     Session::set('phone',$value['phone']);
                     Session::set('role',$value['roleId']);
                     
-                    header("Location:/web-demo_php/admin/index.php");
+                    header("Location: ./");
                     // return Session::get('fullName');
                 } else{
                     $alert = "Username or Password is incorrect!";

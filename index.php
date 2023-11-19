@@ -1,5 +1,12 @@
 <?php
-    include 'inc/header.php';
+include_once './inc/header.php';
+include_once path() . "controller/category.php";
+$cate = new Category();
+
+$allCategory = $cate->getAllCate();
+if ($allCategory == false) {
+    $allCategory = array();
+}
 ?>
 <!-- main -->
 <main class="home-main">
@@ -57,266 +64,22 @@
         </div>
         <div class="categories">
             <div class="wrapper ">
-                <div class="swiper categories-wrapper">
-                    <!-- Additional required wrapper -->
-                    <div class="swiper-wrapper">
-                    <!-- Slides -->
-                    <div class="swiper-slide cate-group">
-                        <a href="./collections.php" class="cate-item">
+                <div class=" categories-wrapper">
+                    <?php foreach ($allCategory as $key => $value) { ?>
+                        <a href="./collections.php?category=<?= $value['slug'] ?>" class="cate-item" >
                             <div class="cate-item-body">
                                 <div class="cate-img">
-                                    <img src="./assest/images/Banner/nu 1.svg" alt="">
+                                    <img src=".<?= ltrim($value['imageCate'], ".") ?>" alt="">
                                 </div>
                                 <div class="cate-name">
-                                    Women's Clothing
+                                    <?= $value['nameCate'] ?>
                                 </div>
                                 <div class="cate-count">
-                                    1 items
+                                <?= random_int(1, 100) ?> items
                                 </div>
                             </div>
                         </a>
-                        <a href="./collections.php" class="cate-item">
-                            <div class="cate-item-body">
-                                <div class="cate-img">
-                                    <img src="https://down-vn.img.susercontent.com/file/c3f3edfaa9f6dafc4825b77d8449999d_tn" alt="">
-                                </div>
-                                <div class="cate-name">
-                                    Women's Clothing
-                                </div>
-                                <div class="cate-count">
-                                    2 items
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide cate-group">
-                        <a href="./collections.php" class="cate-item">
-                            <div class="cate-item-body">
-                                <div class="cate-img">
-                                    <img src="https://down-vn.img.susercontent.com/file/687f3967b7c2fe6a134a2c11894eea4b_tn" alt="">
-                                </div>
-                                <div class="cate-name">
-                                    Women's Clothing
-                                </div>
-                                <div class="cate-count">
-                                    2 items
-                                </div>
-                            </div>
-                        </a>
-                        <a href="./collections.php" class="cate-item">
-                            <div class="cate-item-body">
-                                <div class="cate-img">
-                                    <img src="./assest/images/Banner/nu 1.svg" alt="">
-                                </div>
-                                <div class="cate-name">
-                                    Women's Clothing
-                                </div>
-                                <div class="cate-count">
-                                    2 items
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide cate-group">
-                        <a href="./collections.php" class="cate-item">
-                            <div class="cate-item-body">
-                                <div class="cate-img">
-                                    <img src="https://down-vn.img.susercontent.com/file/86c294aae72ca1db5f541790f7796260_tn" alt="">
-                                </div>
-                                <div class="cate-name">
-                                    Women's Clothing
-                                </div>
-                                <div class="cate-count">
-                                    2 items
-                                </div>
-                            </div>
-                        </a>
-                        <a href="./collections.php" class="cate-item">
-                            <div class="cate-item-body">
-                                <div class="cate-img">
-                                    <img src="https://down-vn.img.susercontent.com/file/86c294aae72ca1db5f541790f7796260_tn" alt="">
-                                </div>
-                                <div class="cate-name">
-                                    Women's Clothing
-                                </div>
-                                <div class="cate-count">
-                                    2 items
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide cate-group">
-                        <a href="./collections.php" class="cate-item">
-                            <div class="cate-item-body">
-                                <div class="cate-img">
-                                    <img src="./assest/images/Banner/nu 1.svg" alt="">
-                                </div>
-                                <div class="cate-name">
-                                    Women's Clothing
-                                </div>
-                                <div class="cate-count">
-                                    2 items
-                                </div>
-                            </div>
-                        </a>
-                        <a href="./collections.php" class="cate-item">
-                            <div class="cate-item-body">
-                                <div class="cate-img">
-                                    <img src="./assest/images/Banner/nu 1.svg" alt="">
-                                </div>
-                                <div class="cate-name">
-                                    Women's Clothing
-                                </div>
-                                <div class="cate-count">
-                                    2 items
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide cate-group">
-                        <a href="./collections.php" class="cate-item">
-                            <div class="cate-item-body">
-                                <div class="cate-img">
-                                    <img src="./assest/images/Banner/nu 1.svg" alt="">
-                                </div>
-                                <div class="cate-name">
-                                    Women's Clothing
-                                </div>
-                                <div class="cate-count">
-                                    2 items
-                                </div>
-                            </div>
-                        </a>
-                        <a href="./collections.php" class="cate-item">
-                            <div class="cate-item-body">
-                                <div class="cate-img">
-                                    <img src="./assest/images/Banner/nu 1.svg" alt="">
-                                </div>
-                                <div class="cate-name">
-                                    Women's Clothing
-                                </div>
-                                <div class="cate-count">
-                                    2 items
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide cate-group">
-                        <a href="./collections.php" class="cate-item">
-                            <div class="cate-item-body">
-                                <div class="cate-img">
-                                    <img src="./assest/images/Banner/nu 1.svg" alt="">
-                                </div>
-                                <div class="cate-name">
-                                    Women's Clothing
-                                </div>
-                                <div class="cate-count">
-                                    2 items
-                                </div>
-                            </div>
-                        </a>
-                        <a href="./collections.php" class="cate-item">
-                            <div class="cate-item-body">
-                                <div class="cate-img">
-                                    <img src="./assest/images/Banner/nu 1.svg" alt="">
-                                </div>
-                                <div class="cate-name">
-                                    Women's Clothing
-                                </div>
-                                <div class="cate-count">
-                                    2 items
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide cate-group">
-                        <a href="./collections.php" class="cate-item">
-                            <div class="cate-item-body">
-                                <div class="cate-img">
-                                    <img src="https://down-vn.img.susercontent.com/file/687f3967b7c2fe6a134a2c11894eea4b_tn" alt="">
-                                </div>
-                                <div class="cate-name">
-                                    Women's Clothing
-                                </div>
-                                <div class="cate-count">
-                                    2 items
-                                </div>
-                            </div>
-                        </a>
-                        <a href="./collections.php" class="cate-item">
-                            <div class="cate-item-body">
-                                <div class="cate-img">
-                                    <img src="https://down-vn.img.susercontent.com/file/24b194a695ea59d384768b7b471d563f_tn" alt="">
-                                </div>
-                                <div class="cate-name">
-                                    Women's Clothing
-                                </div>
-                                <div class="cate-count">
-                                    2 items
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide cate-group">
-                        <a href="./collections.php" class="cate-item">
-                            <div class="cate-item-body">
-                                <div class="cate-img">
-                                    <img src="https://down-vn.img.susercontent.com/file/687f3967b7c2fe6a134a2c11894eea4b_tn" alt="">
-                                </div>
-                                <div class="cate-name">
-                                    Women's Clothing
-                                </div>
-                                <div class="cate-count">
-                                    2 items
-                                </div>
-                            </div>
-                        </a>
-                        <a href="./collections.php" class="cate-item">
-                            <div class="cate-item-body">
-                                <div class="cate-img">
-                                    <img src="https://down-vn.img.susercontent.com/file/24b194a695ea59d384768b7b471d563f_tn" alt="">
-                                </div>
-                                <div class="cate-name">
-                                    Women's Clothing
-                                </div>
-                                <div class="cate-count">
-                                    2 items
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide cate-group">
-                        <a href="./collections.php" class="cate-item">
-                            <div class="cate-item-body">
-                                <div class="cate-img">
-                                    <img src="https://down-vn.img.susercontent.com/file/687f3967b7c2fe6a134a2c11894eea4b_tn" alt="">
-                                </div>
-                                <div class="cate-name">
-                                    Women's Clothing
-                                </div>
-                                <div class="cate-count">
-                                    2 items
-                                </div>
-                            </div>
-                        </a>
-                        <a href="./collections.php" class="cate-item">
-                            <div class="cate-item-body">
-                                <div class="cate-img">
-                                    <img src="https://down-vn.img.susercontent.com/file/24b194a695ea59d384768b7b471d563f_tn" alt="">
-                                </div>
-                                <div class="cate-name">
-                                    Women's Clothing
-                                </div>
-                                <div class="cate-count">
-                                    2 items
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    
-                    </div>
-                    <!-- <div class="swiper-pagination"></div> -->
-                    <!-- <div class="swiper-scrollbar"></div> -->
+                    <?php }?>
                 </div>
             
             </div>
@@ -1903,5 +1666,5 @@
     </div>
 </main>
 <?php
-    include 'inc/footer.php';
+include 'inc/footer.php';
 ?>

@@ -140,6 +140,9 @@ function handleCreateProduct(){
            if(parent) parent.empty()
         })
     })
+    // var quill = new Quill('#editor', {
+    //     theme: 'snow'
+    //   });
     
 
 }

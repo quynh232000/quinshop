@@ -1,15 +1,7 @@
 <?php 
-    include "../lib/database.php";
-    include "../helpers/format.php";
-    include "../helpers/tool.php";
-    
-
-    // $upload =$tool->uploadFile($_FILES['file']);
-    //     if ($upload == false) {
-    //         echo "false";
-    //     }else{
-    //         echo $upload;
-    //     }
+    include path()."lib/database.php";
+    include path()."helpers/format.php";
+    include path()."helpers/tool.php";
 ?>
 <?php
     class Category{
@@ -60,7 +52,7 @@
                 return "Idcategory cannot be empty";
             }
             $query = "DELETE FROM category WHERE id='$id'";
-            $result = $this->db->select($query);
+            $result = $this->db->delete($query);
             if($result !=true){
                 return "Your category doesn't exist!";
             }else{

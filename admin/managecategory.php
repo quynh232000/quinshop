@@ -1,14 +1,35 @@
 <?php
-include "../inc/headerAdmin.php";
-include "../controller/category.php";
+ function path(){ 
+    $url= $_SERVER['HTTP_HOST'];   
+    $url.= $_SERVER['REQUEST_URI']; 
+    $url = str_contains($url,"localhost") ? str_replace("localhost/web-demo_php","",$url) : $url; 
+    
+    $url= explode("/",$url);
+    $value ="";
+    if(count($url)> 2){
+       for($i= 0;$i<count($url)-2;$i++){
+           $value .= "../";
+       }
+    }else{
+        $value ="./";
+    }
+   return $value;
+}
+include path()."inc/headerAdmin.php";
+include path()."controller/category.php";
 
 $cate = new Category();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (isset($_POST['create-cate-btn']) && $_POST['create-cate-btn']) {
     $createCate = $cate->createNewCate($_POST['name'], $_FILES['image']);
-
 }
+if ( isset($_POST['delete-cate']) && $_POST['delete-cate']) {
+    $createCate = $cate->deleteCate($_POST['idcate']);
+}
+
+
 $allCategory = $cate->getAllCate();
+
 
 ?>
 <div class="shop shop-no-bg">
@@ -47,7 +68,8 @@ $allCategory = $cate->getAllCate();
                                     ?>
                                 </div>
 
-                                <button class="form-submit">Tạo</button>
+                                <!-- <button class="form-submit">Tạo</button> -->
+                                <input class="form-submit" type="submit" name="create-cate-btn" vallue="Tạo">
 
 
                             </form>
@@ -57,7 +79,7 @@ $allCategory = $cate->getAllCate();
 
                     <div class="cate-list-item">
                         <div class="cate-nav">
-                            <div class="cate-item">
+                            <div class="cate-item1">
                                 <div class="cate-stt">
                                     <div class="cate-label">STT</div>
                                 </div>
@@ -81,7 +103,7 @@ $allCategory = $cate->getAllCate();
                             if (isset($allCategory)) {
                                 foreach ($allCategory as $key => $value) {
 
-                                    echo '<div class="cate-item">
+                                    echo '<div class="cate-item1">
                                             <div class="cate-stt">'.$value["id"].'</div>
                                             <div class="cate-iamge">
                                                 <img src="'.$value["imageCate"].'"
@@ -89,11 +111,11 @@ $allCategory = $cate->getAllCate();
                                             </div>
                                            <div class="cate-right">
                                             <div class="cate-name">'.$value["nameCate"].'</div>
-                                            <form class="cate-action">
+                                            <form method="post" class="cate-action" >
                                                 <div class="cate-action-item" title="Sửa"><i class="fa-regular fa-pen-to-square"></i></div>
                                                 <label for="btn-cate-delete" class="cate-action-item" title="Xóa"><i class="fa-solid fa-trash-can"></i></label>
-                                                <input hidden id="btn-cate-delete" name="delete-cate" type="submit">
-                                                <input hidden  name="idcate" type="text">
+                                                <input hidden id="btn-cate-delete" name="delete-cate" type="submit" onclick="confirm("Bạn có chắc sẽ xóa danh mục này chứ!");">
+                                                <input hidden  name="idcate" value="'.$value["id"].'" type="text">
                                             </form>
                                            </div>
                                         </div>';

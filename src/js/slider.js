@@ -46,46 +46,46 @@ const swiperCollection = new Swiper('.swipper-banner-collection', {
     //     el: '.swiper-scrollbar',
     // },
 });
-const swiperCategory = new Swiper(".categories-wrapper", {
-    slidesPerView: 7,
-    spaceBetween: 0,
-    freeMode: true,
-    // auto
-    // autoplay: {
-    //     delay: 5000,
-    //     disableOnInteraction: false,
-    // },
-    loop:true,
-    loopedSlides: 50,
-    pagination: {
-        el: ".categories-wrapper .swiper-pagination",
-        clickable: true,
-    },
-    navigation: {
-        nextEl: '.categories-wrapper .swiper-button-next',
-        prevEl: '.categories-wrapper .swiper-button-prev',
-    },
-    breakpoints: {
-        // when window width is <= 499px
-        370: {
-            slidesPerView: 2,
-            spaceBetweenSlides: 50
-        },
-        500: {
-            slidesPerView: 3,
-            spaceBetweenSlides: 50
-        },
-        860: {
-            slidesPerView: 5,
-            spaceBetweenSlides: 50
-        },
-        // when window width is <= 999px
-        1200: {
-            slidesPerView: 7,
-            spaceBetweenSlides: 50
-        }
-    }
-});
+// const swiperCategory = new Swiper(".categories-wrapper", {
+//     slidesPerView: 7,
+//     spaceBetween: 0,
+//     freeMode: true,
+//     // auto
+//     // autoplay: {
+//     //     delay: 5000,
+//     //     disableOnInteraction: false,
+//     // },
+//     loop:true,
+//     loopedSlides: 50,
+//     pagination: {
+//         el: ".categories-wrapper .swiper-pagination",
+//         clickable: true,
+//     },
+//     navigation: {
+//         nextEl: '.categories-wrapper .swiper-button-next',
+//         prevEl: '.categories-wrapper .swiper-button-prev',
+//     },
+//     breakpoints: {
+//         // when window width is <= 499px
+//         370: {
+//             slidesPerView: 2,
+//             spaceBetweenSlides: 50
+//         },
+//         500: {
+//             slidesPerView: 3,
+//             spaceBetweenSlides: 50
+//         },
+//         860: {
+//             slidesPerView: 5,
+//             spaceBetweenSlides: 50
+//         },
+//         // when window width is <= 999px
+//         1200: {
+//             slidesPerView: 7,
+//             spaceBetweenSlides: 50
+//         }
+//     }
+// });
 const swiperMegaSale = new Swiper(".mega-swipper-products", {
     slidesPerView: 5,
     spaceBetween: 10,
