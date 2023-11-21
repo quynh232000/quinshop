@@ -1,10 +1,4 @@
-<?php
-    session_start();
-     include "../lib/session.php";
-     Session::checkSession();
-     Session::checkPermission(0);
-     
-?>
+
 <?php
     header("Cache-Control: no-cache, must-revalidate");
     header("Pragma: no-cache");
@@ -36,14 +30,14 @@
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"
             integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../src/css/base.css">
-    <link rel="stylesheet" href="../src/css/style.css">
-    <link rel="stylesheet" href="../src/css/shopcustom.css">
-    <link rel="stylesheet" href="../src/css/shopdashboard.css">
-    <link rel="stylesheet" href="../src/css/shopmanageproduct.css">
-    <link rel="stylesheet" href="../src/css/shopaddproduct.css">
-    <link rel="stylesheet" href="../src/css/shopmanageorder.css">
-    <link rel="stylesheet" href="../src/css/shopdelivery.css">
+    <link rel="stylesheet" href="src/css/base.css">
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="src/css/shopcustom.css">
+    <link rel="stylesheet" href="src/css/shopdashboard.css">
+    <link rel="stylesheet" href="src/css/shopmanageproduct.css">
+    <link rel="stylesheet" href="src/css/shopaddproduct.css">
+    <link rel="stylesheet" href="src/css/shopmanageorder.css">
+    <link rel="stylesheet" href="src/css/shopdelivery.css">
 
     <!-- swiper -->
     <link
@@ -62,7 +56,7 @@
                 <div class="sidebar-close">
                     <i class="fa-solid fa-xmark"></i>
                     <a href="/shop" class="sidebar-img">
-                        <img src="../assest/images/UNIDI_LOGO-FINAL 2.svg" alt="logo">
+                        <img src="assest/images/UNIDI_LOGO-FINAL 2.svg" alt="logo">
                     
                     </a>
                 </div>
@@ -160,7 +154,7 @@
                                 Notifycations
                             </div>
                         </a>
-                        <a href="./shopowner" class="header-top-item">
+                        <a href="?mod=admin&act=dashboard" class="header-top-item">
                             <div class="header-top-item-body">
                                 <i class="fa-regular fa-circle-question"></i>
                                 
@@ -186,8 +180,8 @@
             </div >
             <div class="header-body">
                 <div class="wrapper">
-                    <a href="./" class="header-logo">
-                        <img src="../assest/images/UNIDI_LOGO-FINAL 2.svg" alt="">
+                    <a href="?mod=admin&act=dashboard" class="header-logo">
+                        <img src="assest/images/UNIDI_LOGO-FINAL 2.svg" alt="">
                         <div class="shop-header-name">ADMIN</div>
                     </a>
                     <div class="header-search-body">
@@ -243,7 +237,6 @@
                                     </a>
                                 </div>
                         </div>
-                        
                     </div>
                     <div class="header-menu" id="menumobile">
                         <i class="fa-solid fa-bars"></i>
@@ -252,3 +245,5 @@
             </div>
             
         </header>
+        <div class="shop">
+ <div class="wrapper">

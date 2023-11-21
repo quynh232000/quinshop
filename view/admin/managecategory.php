@@ -1,42 +1,4 @@
-<?php
- function path(){ 
-    $url= $_SERVER['HTTP_HOST'];   
-    $url.= $_SERVER['REQUEST_URI']; 
-    $url = str_contains($url,"localhost") ? str_replace("localhost/web-demo_php","",$url) : $url; 
-    
-    $url= explode("/",$url);
-    $value ="";
-    if(count($url)> 2){
-       for($i= 0;$i<count($url)-2;$i++){
-           $value .= "../";
-       }
-    }else{
-        $value ="./";
-    }
-   return $value;
-}
-include path()."inc/headerAdmin.php";
-include path()."controller/category.php";
 
-$cate = new Category();
-
-if (isset($_POST['create-cate-btn']) && $_POST['create-cate-btn']) {
-    $createCate = $cate->createNewCate($_POST['name'], $_FILES['image']);
-}
-if ( isset($_POST['delete-cate']) && $_POST['delete-cate']) {
-    $createCate = $cate->deleteCate($_POST['idcate']);
-}
-
-
-$allCategory = $cate->getAllCate();
-
-
-?>
-<div class="shop shop-no-bg">
-    <div class="wrapper">
-        <?php
-        include "../inc/sidebarAdmin.php";
-        ?>
 
         <!-- main -->
         <main class="shop-main">
@@ -106,7 +68,7 @@ $allCategory = $cate->getAllCate();
                                     echo '<div class="cate-item1">
                                             <div class="cate-stt">'.$value["id"].'</div>
                                             <div class="cate-iamge">
-                                                <img src="'.$value["imageCate"].'"
+                                                <img src="assest/upload/'.$value["imageCate"].'"
                                                     alt="">
                                             </div>
                                            <div class="cate-right">
@@ -134,6 +96,3 @@ $allCategory = $cate->getAllCate();
     </div>
 </div>
 
-<?php
-include "../inc/footerAdmin.php";
-?>

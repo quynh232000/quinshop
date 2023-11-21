@@ -1,10 +1,4 @@
-<?php
-include 'inc/header.php';
-?>
-<!-- main -->
-<?php
-include 'inc/profilesidebar.php';
-?>
+
             <!-- main -->
             <main class="orderhistory">
                 <div class="h-wrapper">
@@ -228,6 +222,3 @@ include 'inc/profilesidebar.php';
         </div>
     </div>
 </main>
-<?php
-include 'inc/footer.php';
-?>

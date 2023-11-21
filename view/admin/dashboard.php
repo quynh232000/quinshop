@@ -1,13 +1,7 @@
-<?php
-    include "../inc/headerAdmin.php";
-?>
+
         
-        <div class="shop">
-            <div class="wrapper">
-                 <!-- main sidebar -->
-                <?php 
-                    include "../inc/sidebarAdmin.php";
-                ?>
+        
+              
                 <!-- main -->
                 <main class="shop-main">
                     <!-- content -->
@@ -79,6 +73,3 @@
             </div>
         </div>
          
-<?php
-    include "../inc/footerAdmin.php";
-?>

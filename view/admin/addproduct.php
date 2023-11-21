@@ -1,12 +1,41 @@
 <?php
-    include "../inc/headerAdmin.php";
-?>
+    // function path(){ 
+    //     $url= $_SERVER['HTTP_HOST'];   
+    //     $url.= $_SERVER['REQUEST_URI']; 
+    //     $url = str_contains($url,"localhost") ? str_replace("localhost/web-demo_php","",$url) : $url; 
         
-        <div class="shop shop-no-bg">
-            <div class="wrapper">
-            <?php
-                include "../inc/sidebarAdmin.php";
-            ?>
+    //     $url= explode("/",$url);
+    //     $value ="";
+    //     if(count($url)> 2){
+    //        for($i= 0;$i<count($url)-2;$i++){
+    //            $value .= "../";
+    //        }
+    //     }else{
+    //         $value ="./";
+    //     }
+    //    return $value;
+    // }
+
+    // include_once path()."inc/headerAdmin.php";
+    // include_once path()."controller/category.php";
+    // include_once path()."controller/product.php";
+
+    // $classPro = new Product();
+    // $cate = new Category();
+    // $allCategory = $cate->getAllCate();
+
+    // if(isset($_POST['btn-create-product'] ) && $_POST['btn-create-product']){
+    //     echo 'quynh'.print_r($_FILES['image']);
+    //     $resAddPro = $classPro->updateProduct( $_POST['name']||"", 
+    //         $_POST["description"]||"", $_POST["categoryId"]||"",
+    //         $_POST["quantity"]||"", $_POST["origin"]||"", 
+    //         $_POST["brand"]||"", $_POST["price"]||"",
+    //         $_POST["salePercent"]||"", $_FILES["image"], 
+    //         $_FILES["listimage"]||"", $_POST["unit"]||"");
+        
+    // }
+?>
+       
                 <!-- main -->
                 <main class="shop-main">
                     <!-- content -->
@@ -19,9 +48,9 @@
                             <form class="c-body"
                             id="form-create-product"
                             method="POST"
-                            action="">
+                            enctype="multipart/form-data"
+                            action="?mod=admin&act=addproduct">
                           <div class="c-left">
-                             
                               <div class="detail-group-item w-100">
                                   <div class="shop-form-group  w-100">
                                       <div class="form-group-wrapper">
@@ -53,7 +82,11 @@
                                                                   rules="required"
                                                                   id=""
                                                                   class="list-categoryChild">
-                                                                <option value="">--Select category--</option>    
+                                                                <option value="">--Select category--</option>   
+                                                                <?php foreach ($allCategory as $key => $value) { ?>
+                                                                        <option value="<?=$value['id'] ?>"><?=$value['nameCate'] ?></option>
+                                                                 <?php   }
+                                                                ?> 
                                                             </select>
                                                       </div>
                                                   </div>
@@ -165,6 +198,7 @@
                                                   <div id="editor" style="min-height: 220px">
                                                   </div>
                                               </div>
+                                              <textarea name="description" style="display:none" id="description"></textarea>
                                           </div>
                                           <div class="form-msg"></div>
                                       </div>
@@ -189,7 +223,7 @@
                                                  id="upload-img-avatar"
                                                  class="upload-img hidden"
                                                  name="image"
-                                                 accept="image/*"
+                                                 
                                                  hidden />
                                           <label class="form-list-img label-img label-image-cover" for="upload-img-avatar">
                                               <div class="list-img w-100">
@@ -237,7 +271,8 @@
                               </div>
                               <div class="c-bottom w-100 create-new-product-btn">
                                 <button type="reset" class="c-btn">Cancel</button>
-                                <button type="submit" class="c-btn c-btn-save">Save</button>
+                                <!-- <button type="submit" class="c-btn c-btn-save">Save</button> -->
+                                <input type="submit" class="c-btn c-btn-save" name="btn-create-product" value ="Save">
                             </div>
                           </div>
                           
@@ -247,6 +282,4 @@
                 </main>
             </div>
         </div>
-        <?php
-    include "../inc/footerAdmin.php";
-?>   
+     

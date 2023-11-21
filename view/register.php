@@ -1,24 +1,3 @@
-<?php
-include "./controller/adminlogin.php";
-$class = new Adminlogin();
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $checkRegister = $class->registerlogin_admin(
-    $_POST['username']
-    ,
-    $_POST['fullname'],
-    $_POST['email'],
-    $_POST['phone'],
-    md5($_POST['password']),
-    md5($_POST['confirmpassword'])
-  );
-
-}
-
-
-
-
-?>
 
 
 <!DOCTYPE html>
@@ -61,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
   <div class="register">
     <div class="wrapper body-register">
-      <form class="form-register" id="register-form" method="POST" action="register.php">
+      <form class="form-register" id="register-form" method="POST" action="">
         <h1>Register form</h1>
         <!-- invalidate -->
         <div class="form-group">
@@ -149,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
         <div class="form-change">
           Already have an account?
-          <span><a href="./login.php">Signup</a></span>
+          <span><a href="?mod=profile&act=login">Signup</a></span>
         </div>
       </form>
     </div>

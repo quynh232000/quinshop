@@ -1,19 +1,4 @@
-<?php
-  include "./controller/adminlogin.php";
-  session_start();
-  // Session:: checkSession();
-?>
-<?php
 
-
-$class = new AdminLogin();
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $adminUser = $_POST['adminUser'];
-  $adminPass = md5($_POST['adminPass']);
-  // $adminPass = ($_POST['adminPass']);
-  $login_check = $class->login_admin($adminUser, $adminPass);
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
   <div class="register">
     <div class="wrapper">
-      <form class="form-login" action="login.php" method="post" enctype="multipart/form-data">
+      <form class="form-login" action="?mod=profile&act=login" method="post" enctype="multipart/form-data">
         <h1>Login form</h1>
 
         <!-- invalidate -->
@@ -86,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
         <div class="form-change">
           You don't have any account?
-          <span><a href="./register.php">Register</a></span>
+          <span><a href="?mod=profile&act=register">Register</a></span>
         </div>
       </form>
     </div>

@@ -1,16 +1,16 @@
 <?php
     // session_start();
     // include "./lib/session.php";
-    Session::checkSession();
+    // Session::checkSession();
     // Session::checkPermission(0);
 
-    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
-        $url = "https://";
-    else
-        $url = "http://";
-    $url .= $_SERVER['HTTP_HOST'];
-    $url .= $_SERVER['REQUEST_URI'];
-
+    // if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+    //     $url = "https://";
+    // else
+    //     $url = "http://";
+    // $url .= $_SERVER['HTTP_HOST'];
+    // $url .= $_SERVER['REQUEST_URI'];
+    extract($_REQUEST);
 
 ?>
 
@@ -29,22 +29,22 @@
                 </div>
                 <div class="profile-nav-list">
                     <div class="profile-nav-item  <?php if(
-                                !str_contains($url,"orderhistory.php")&&
-                                !str_contains($url,"sercurity.php")
+                                ($act !="orderhistory")&&
+                                ($act !="sercurity")
                                 ) {echo "active";}?>">
-                        <a href="./profile.php" class="profile-nav-content ">
+                        <a href="?mod=profile&act=profile" class="profile-nav-content ">
                             <div class="profile-nav-item-title">
                                 <i class="fa-regular fa-user"></i>
                                 <div class="profile-nav-name">Profile</div>
                             </div>
                             <div class="profile-nav-item-down">
-                                <!--  -->
+                                
                             </div>
                         </a>
 
                     </div>
-                    <div class="profile-nav-item <?php if(str_contains($url,"orderhistory.php")) {echo "active";}?>">
-                        <a href="./orderhistory.php" class="profile-nav-content">
+                    <div class="profile-nav-item <?php if(($act =="orderhistory")) {echo "active";}?>">
+                        <a href="?mod=profile&act=orderhistory" class="profile-nav-content">
                             <div class="profile-nav-item-title">
                             <i class="fa-solid fa-box"></i>
                                 <div class="profile-nav-name">History Orders</div>
@@ -52,8 +52,8 @@
                         </a>
 
                     </div>
-                    <div class="profile-nav-item <?php if(str_contains($url,"sercurity.php")) {echo "active";}?>">
-                        <a href="./sercurity.php" class="profile-nav-content">
+                    <div class="profile-nav-item <?php if(($act =="sercurity")) {echo "active";}?>">
+                        <a href="?mod=profile&act=sercurity" class="profile-nav-content">
                             <div class="profile-nav-item-title">
                                 <i class="fa-solid fa-shield"></i>
                                 <div class="profile-nav-name">Security</div>

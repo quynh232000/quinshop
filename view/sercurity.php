@@ -1,10 +1,4 @@
-<?php
-    include 'inc/header.php';
-?>
-<!-- main -->
-<?php
-include 'inc/profilesidebar.php';
-?>
+
             <div class="referral-body">
                 <div class="profile-title">Password</div>
                 <form class="form-update-password">
@@ -40,6 +34,3 @@ include 'inc/profilesidebar.php';
             </div>
     </div>
 </main>
-<?php
-    include 'inc/footer.php';
-?>

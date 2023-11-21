@@ -1,10 +1,10 @@
 <?php 
     
-    include "lib/session.php";
-    Session::checkLogin();
-    include "lib/database.php";
-    include "helpers/format.php";
-    include "helpers/tool.php";
+    include_once "lib/session.php";
+    // Session::checkLogin();
+    include_once "lib/database.php";
+    include_once "helpers/format.php";
+    include_once "helpers/tool.php";
     // $tool = new Tool();
 ?>
 <?php
@@ -40,7 +40,7 @@
                     Session::set('email',$value['email']);
                     Session::set('avatar',$value['avatar']);
                     Session::set('phone',$value['phone']);
-                    Session::set('role',$value['roleId']);
+                    Session::set('role',$value['role']);
                     
                     header("Location: ./");
                     // return Session::get('fullName');
@@ -95,7 +95,7 @@
             $result = $this->db->select($query);
             if($result != true){
                 
-                header("Location:login.php");
+                header("Location: ?mod=profile&act=login");
                 // return Session::get('fullName');
             } else{
                 $alert = "Something wrong from server!";

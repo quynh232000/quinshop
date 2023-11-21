@@ -1,32 +1,10 @@
-<?php
-session_start();
 
-
-include "lib/session.php";
-function path(){ 
-    $url= $_SERVER['HTTP_HOST'];   
-    $url.= $_SERVER['REQUEST_URI']; 
-    $url = str_contains($url,"localhost") ? str_replace("localhost/web-demo_php","",$url) : $url; 
-    
-    $url= explode("/",$url);
-    $value ="";
-    if(count($url)> 2){
-        for($i= 0;$i<count($url)-2;$i++){
-            $value .= "../";
-        }
-    }else{
-        $value ="./";
-    }
-    return $value;
-}
-
-?>
-<?php
+<!-- <?php
 header("Cache-Control: no-cache, must-revalidate");
 header("Pragma: no-cache");
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 header("Cache-Control:max-age=2592000");
-?>
+?> -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -187,7 +165,7 @@ header("Cache-Control:max-age=2592000");
                                 Notifycations
                             </div>
                         </a>
-                        <a href="./admin" class="header-top-item">
+                        <a href="?mod=admin&act=dashboard" class="header-top-item">
                             <div class="header-top-item-body">
                                 <i class="fa-regular fa-circle-question"></i>
 
@@ -262,7 +240,7 @@ header("Cache-Control:max-age=2592000");
                                 <div class="header-search-item-icon">
                                     <img src="<?php echo Session::get("avatar") ?>" class="img-user" alt="">
                                 </div>
-                                <a href="profile.php" class="header-search-info">
+                                <a href="?mod=profile&act=profile" class="header-search-info">
                                     <div class="fullname">Hi,
                                         <?php echo Session::get("fullName") ?>
                                     </div>
@@ -271,7 +249,7 @@ header("Cache-Control:max-age=2592000");
                                     </div>
                                 </a>
                                 <div class="account-more">
-                                    <a href="profile.php" class="account-more-item">
+                                    <a href="?mod=profile&act=profile" class="account-more-item">
                                         <i class="fa-solid fa-user"></i>
                                         <span>Profile</span>
                                     </a>
@@ -280,7 +258,7 @@ header("Cache-Control:max-age=2592000");
                                         echo Session::destroy();
                                     }
                                     ?>
-                                    <a href="?action=logout" class="account-more-item">
+                                    <a href="?mod=page&act=home&action=logout" class="account-more-item">
                                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
                                         <span>Logout</span>
                                     </a>
@@ -291,7 +269,7 @@ header("Cache-Control:max-age=2592000");
                                 <div class="header-search-item-icon">
                                     <i class="fa-solid fa-user"></i>
                                 </div>
-                                <a href="./login.php" class="header-search-info">
+                                <a href="?mod=profile&act=login" class="header-search-info">
                                     <span>Login</span>
                                     <div class="header-search-text-s">
                                         Account
@@ -299,7 +277,7 @@ header("Cache-Control:max-age=2592000");
                                     </div>
                                 </a>
                                 <div class="account-more">
-                                    <a href="./login.php" class="account-more-item">
+                                    <a href="?mod=profile&act=login" class="account-more-item">
                                         <i class="fa-solid fa-arrow-right-to-bracket"></i>
                                         <span>Login</span>
                                     </a>

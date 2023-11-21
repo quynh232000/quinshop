@@ -1,10 +1,5 @@
-<?php
-include 'inc/header.php';
-?>
-<!-- main -->
-<?php
-include 'inc/profilesidebar.php';
-?>
+
+
            
             <div class="profile-container">
                 <div class="profile-title">Profile</div>
@@ -33,23 +28,7 @@ include 'inc/profilesidebar.php';
                                 <input type="text" value="<?=Session::get("fullName") ?>" name="fullname" class="profile-input">
                             </div>
                         </div>
-                        <!-- <div class="profile-group">
-                            <label for="">Gender</label>
-                            <div class="profile-content">
-                                <div class="profile-gender">
-                                    <input type="radio" id="gender1" name="gender">
-                                    <label for="gender1">Male</label>
-                                </div>
-                                <div class="profile-gender">
-                                    <input type="radio" id="gender2" name="gender">
-                                    <label for="gender2">Female</label>
-                                </div>
-                                <div class="profile-gender">
-                                    <input type="radio" id="gender3" name="gender">
-                                    <label for="gender3">Orther</label>
-                                </div>
-                            </div>
-                        </div> -->
+                       
                         <div class="profile-group">
                             <label for="">Phone number</label>
                             <div class="profile-content">

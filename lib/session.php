@@ -26,7 +26,7 @@
         public static function checkPermission($role){
             self::checkSession();
             if(self::get("role") != $role){
-                header("Location:/web-demo_php/login.php");
+                header("Location: ?mod=profile&act=login");
             }
 
         }
@@ -41,20 +41,20 @@
                 $_SESSION['LAST_ACTIVITY'] = time();
 
             }else{
-                header("Location:/web-demo_php/login.php");
+                header("Location: ?mod=profile&act=login");
             }
         }
         public static function checkLogin(){
             self::init();
             if((self::get("isLogin"))==true){
-                header("Location:/web-demo_php/index.php");
+                header("Location: ./");
             }
         }
         public static function destroy(){
             self::init();
             
             session_destroy();
-            return  "<script>location.href = '/web-demo_php/login.php';</script>";
+            return  "<script>location.href = '?mod=profile&act=login';</script>";
             // self::checkLogin();
             // header("Location:/web-demo_php/login.php");
             // exit(header("Location:/web-demo_php/login.php"));

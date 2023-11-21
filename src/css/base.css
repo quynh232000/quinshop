@@ -49,6 +49,9 @@ input{
     border: 1px solid rgba(22,22,24,.12);
     outline: none;
 }
+select{
+    outline: none;
+}
 .btn {
     min-width: 124px;
     height: 34px;

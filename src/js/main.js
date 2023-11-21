@@ -108,7 +108,7 @@ function handleCreateProduct(){
         })
     })
     //show img
-    $("input[name='Image']").on("change",function(e){
+    $("input[name='image']").on("change",function(e){
         const [file] = e.target.files
         if(file){
             $(".label-image-cover").css("display","none")
@@ -117,7 +117,7 @@ function handleCreateProduct(){
         }
     })
     //show list img
-    $("input[name='ImagePreview']").on("change",function(e){
+    $("input[name='listimage']").on("change",function(e){
         const [...files] = e.target.files
         const listImg =  files.map(file=>{
             return `
@@ -140,14 +140,15 @@ function handleCreateProduct(){
            if(parent) parent.empty()
         })
     })
-    // var quill = new Quill('#editor', {
-    //     theme: 'snow'
-    //   });
+    // update product
+    $("#form-create-product").on("submit",function() {
+        $("#description").val($("#editor").html());
+      })
+   
     
 
 }
 // ==============function end===================//
-
 
 $().ready(function(){
     // -----------home page start----------//

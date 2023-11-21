@@ -1,6 +1,4 @@
-<?php
-    include 'inc/header.php';
-?>
+
 
 <!-- main -->
 <main class="cart">
@@ -308,7 +306,7 @@
                         <i class="fa-solid fa-cart-plus"></i>
                         ADD TO CARD
                     </button>
-                    <a href="./checkout.php" class="cart-btn cart-btn-buy">CHECKOUT</a>
+                    <a href="?mod=page&act=checkout" class="cart-btn cart-btn-buy">CHECKOUT</a>
                 </div>
             </div>
 
@@ -354,6 +352,3 @@
         </div>
     </div>
 </main>
-<?php
-    include 'inc/footer.php';
-?>

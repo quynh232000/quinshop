@@ -1,7 +1,7 @@
 <?php 
-    include path()."lib/database.php";
-    include path()."helpers/format.php";
-    include path()."helpers/tool.php";
+    include_once "lib/database.php";
+    include_once "helpers/format.php";
+    include_once "helpers/tool.php";
 ?>
 <?php
     class Category{
