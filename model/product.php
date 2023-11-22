@@ -2,9 +2,7 @@
 include_once "lib/database.php";
 include_once "helpers/format.php";
 include_once "helpers/tool.php";
-
-
-
+include_once "model/entity.php";
 ?>
 <?php
 class Product
@@ -12,12 +10,14 @@ class Product
     private $db;
     private $fm;
     private $tool;
+    private $response;
 
     public function __construct()
     {
         $this->db = new Database();
         $this->fm = new Format();
         $this->tool = new Tool();
+        // $this->response = new Response();
     }
     public function updateProduct(
         $name,
@@ -34,9 +34,6 @@ class Product
     ) {
         $slug = $this->tool->slug($name, '-');
         $fileResult = $this->tool->uploadFile($image);
-       
-
-
         $query = "INSERT INTO product (product.namePro, product.description, product.categoryId,product.status,
             product.quantity,product.brand,product.image,origin,price,
             salePercent,slug,unit,createdAt,sold) VALUES
@@ -57,7 +54,6 @@ class Product
                     0
                 )
             ";
-
         $result = $this->db->insert($query);
         if ($result == false) {
             $alert = "Create new product error! Wrong from server!";
@@ -80,10 +76,7 @@ class Product
                 $fileNameNew = $this->tool->GUID() . "." . (explode(".", $fileName)[1]);
                 $fileDir = $fileDir . $fileNameNew;
                 if (move_uploaded_file($listImage['tmp_name'][$i], $fileDir)) {
-
                     $querylistImg .= "('$idPro', '$fileNameNew',NOW()),";
-                    
-
                 }
             }
         }
@@ -92,18 +85,15 @@ class Product
                 $querylistImg ";
         $resulltListImage = $this->db->insert($queryImg);
         if ($resulltListImage == false) {
-           
             return false;
         } else {
             return true;
-            // header("Refresh:0");
-            // return '<script>$alert("Tạo sản phẩm thành công!")</script>';
         }
         // return "Create new product successfully!";
     }
     public function getAllProduct()
     {
-        $query = "SELECT pr.*, cate.nameCate as nameCategory from product as pr INNER JOIN category as cate where pr.categoryId = cate.id ";
+        $query = "SELECT pr.*, cate.nameCate as nameCategory from product as pr INNER JOIN category as cate on pr.categoryId = cate.id ";
         $result = $this->db->select($query);
         if ($result != false) {
             $rows = [];
@@ -117,17 +107,73 @@ class Product
             return "something wrong from server!";
         }
     }
+    public function filterProduct($key = "", $value="", $limit = 20)
+    {
+        if ($limit == "all") {
+            $limit = "0,18446744073709551615";
+        }
+        $query = "";
+        switch ($key) {
+            case 'random':
+                $query = "SELECT pr.id, pr.brand, pr.namePro ,pr.categoryId, pr.quantity , pr.image, pr.origin, pr.price, pr.salePercent, pr.slug,
+                 cate.nameCate as nameCategory from product as pr INNER JOIN category as cate on pr.categoryId = cate.id  ORDER BY RAND() LIMIT $limit";
+                break;
+            case 'detail':
+                $query = "SELECT pr.*,
+                 cate.nameCate as nameCategory from product as pr INNER JOIN category as cate on pr.categoryId = cate.id  WHERE pr.id = $value";
+
+                break;
+            case 'category':
+                $query = "SELECT pr.id, pr.brand, pr.namePro ,pr.categoryId, pr.quantity, pr.image, pr.origin, pr.price, pr.salePercent, pr.slug,
+                 cate.nameCate as nameCategory from product as pr INNER JOIN category as cate on pr.categoryId = cate.id  WHERE pr.categoryId = $value LIMIT $limit";
+                break;
+
+            default:
+                $query = "SELECT pr.id, pr.brand, pr.namePro ,pr.categoryId, pr.quantity, pr.image, pr.origin, pr.price, pr.salePercent, pr.slug,
+                 cate.nameCate as nameCategory from product as pr INNER JOIN category as cate on pr.categoryId = cate.id  ORDER BY pr.createdAt LIMIT $limit";
+                break;
+        }
+        // ================================
+        $response = $this->db->select($query);
+        if ($response == false) {
+
+            return new Response(false, "Error", "", "");
+        } else {
+            $result = [];
+            if ($key == "detail") {
+                // mysqli_fetch_assoc
+                while ($row = mysqli_fetch_assoc($response)) {
+                    $result[] = $row;
+                }
+                $listImg = $this->db->select("SELECT imagePro as link FROM listimage WHERE productId = $value ");
+                if ($listImg != false) {
+                    $arrayimg =[];
+                    while ($rowimg = mysqli_fetch_array($listImg)) {
+                        $arrayimg[] = $rowimg;
+                    }
+                    array_push($result,$arrayimg);
+                }
+            } else {
+                while ($row = mysqli_fetch_array($response)) {
+                    $result[] = $row;
+                }
+               
+            }
+            return new Response(true, "Successcully", $result, "");
+        }
+    }
     public function deleteProduct($id)
     {
         if (empty($id)) {
-            return "Id product cannot be empty";
+            // return "Id product cannot be empty";
+            return new Response(false, "Hành động không hợp lệ! Vui lòng thử lại!", "", "?mod=admin&act=manageproduct");
         }
         $query = "DELETE FROM product WHERE id='$id'";
         $result = $this->db->delete($query);
         if ($result != false) {
-            return true;
+            return new Response(true, "Xóa sản phẩm thành công", "", "?mod=admin&act=manageproduct");
         } else {
-            return "Your product doesn't exist!";
+            return new Response(false, "Hành động không hợp lệ! Vui lòng thử lại!", "", "?mod=admin&act=manageproduct");
         }
     }
 

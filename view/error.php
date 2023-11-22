@@ -1,7 +1,7 @@
 <?php
-session_start();
-include "lib/session.php";
-Session::checkSession();
+// session_start();
+include_once "lib/session.php";
+// Session::checkSession();
 include_once 'view/inc/header.php';
 ?>
 <link rel="stylesheet" href="./src/css/error.css">

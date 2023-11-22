@@ -87,6 +87,7 @@ form{
     background-color: var(--primary);
     color: var(--white);
     transition: all .3s ease;
+    cursor: pointer;
 }
 
 .btn-submit:hover{

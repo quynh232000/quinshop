@@ -809,7 +809,8 @@
 }
 .product-img img{
     width: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    height: 156px;
 }
 .product-brand{
     color: #ADADAD;
@@ -820,7 +821,13 @@
     color: #676767;
     font-size: 1.6rem;
     line-height: 2rem;
+    height: 3.6rem;
     margin: 4px 0 8px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
 }
 .product-stars i{
     color: var(--bg-yellow);
@@ -897,7 +904,7 @@
 .detail-tab-item span{
     color: var(--primary);
     display: inline-block;
-    min-width: 100px;
+    /* min-width: 100px; */
 
 }
 .detail-tab-item-name span{
@@ -1083,4 +1090,11 @@
         display: flex;
         align-items: center;
     }
+}
+.ql-editor{
+    color: rgb(34, 34, 45);
+    line-height: 2.4rem;
+}
+.navllink-cate{
+    min-width: 100px;
 }

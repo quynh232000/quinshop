@@ -37,10 +37,10 @@ if (isset($act)) {
                     $_FILES["listImage"],
                     $_POST["unit"]
                 );
-               
             }
             include_once 'view/inc/headerAdmin.php';
-            if ($resAddPro) {
+            if (isset($resAddPro)) {
+
                 echo '<div id="toast" mes-type="success" mes-title="Thành công!" mes-text="Đăng sản phẩm thành công."></div>';
             }
             include_once 'view/inc/sidebarAdmin.php';
@@ -51,7 +51,28 @@ if (isset($act)) {
             $viewTitle = 'Manage your products';
             $classPro = new Product();
             $allProduct = $classPro->getAllProduct();
+            // ddelete product
+            if ((isset($_GET['type']) && isset($_GET['idPro'])) && ($_GET['type']) && $_GET['idPro']) {
+                $type = $_GET['type'];
+                $idPro = $_GET['idPro'];
+                if ($type == "delete") {
+                   $resultDeletePro =  $classPro->deleteProduct($idPro);
+                }
+            }
             include_once 'view/inc/headerAdmin.php';
+            if(isset($resultDeletePro)) {
+                print_r($resultDeletePro);
+                if($resultDeletePro->status == true){
+                    echo '<div id="toast" mes-type="success" mes-title="Thành công!" mes-text="'.$resultDeletePro->message.'"></div>';
+                }else{
+                    echo '<div id="toast" mes-type="error" mes-title="Thành công!" mes-text="'.$resultDeletePro->message.'"></div>';
+                }
+                echo ' <script>
+                    setTimeout(function() {
+                        window.location.href="'.$resultDeletePro->redirect.'";
+                    }, 4000);
+                </script>';
+            }
             include_once 'view/inc/sidebarAdmin.php';
             include_once 'view/admin/manageproduct.php';
             include_once 'view/inc/footer.php';

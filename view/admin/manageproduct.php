@@ -115,7 +115,8 @@
                         </div>
                     </div>
                     <div class="shop-pro-list">
-                        <?php if (isset($allProduct)) {
+                        <?php if (isset($allProduct) && is_array($allProduct) > 0) {
+
                             foreach ($allProduct as $key => $value) { ?>
                                 <!-- item -->
                                 <div class="shop-pro-item">
@@ -167,35 +168,23 @@
                                         <!-- <i class="fa-regular fa-circle-xmark"></i> -->
                                     </div>
                                     <div class="shop-pro-action">
-                                        <a href="#?mod=admin&act=addproduct&type=edit&idPro=<?= $value['id'] ?>"
+                                        <a href="?mod=admin&act=addproduct&type=edit&idPro=<?= $value['id'] ?>"
                                             class="shop-pro-edit" title="Edit">
                                             <i class="fa-regular fa-pen-to-square"></i>
                                         </a>
-                                        <a href="?mod=admin&act=manageproduct&type=delete&idPro=" id="<?= $value['id'] ?>"
+                                        <a href="?mod=admin&act=manageproduct&type=delete&idPro=<?= $value['id'] ?>" 
                                             class="shop-pro-delete delete-product" title="Delete">
                                             <i class="fa-regular fa-trash-can"></i>
                                         </a>
                                     </div>
                                 </div>
                             <?php }
+                        }else{
+                            echo '<div class="no-data">No product found!</div>';
                         }
                         ?>
 
-                        <!-- <script type="text/javascript">
-                            $(".delete-product").each(function(){
-                                $(this).click(()=>{
-                                    const id = $(this).id
-                                    $.ajax('<?php echo $_SERVER['PHP_SELF']; ?>?mod=admin&act=manageproduct&type=delete&idPro='+id);
-                                })
-                            })
-                            // $(function () {
-                            //     $.('#spanLink').click(function () {
-                            //         $.ajax('<?php echo $_SERVER['PHP_SELF']; ?>?do=somestuff');
-                            //     });
-                            // });
-                        </script> -->
-
-                        <!-- <span style="cursor:hand;" id="spanLink">Some text to click</span> -->
+                       
 
                     </div>
                 </div>

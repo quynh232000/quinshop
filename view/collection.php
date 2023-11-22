@@ -26,7 +26,7 @@
         <div class="c-mall">
             <div class="c-mall-top">
                 <div class="c-mall-top-title">
-                    UNIDI MALL
+                    QUIN STORE
                 </div>
                 <div class="suggestion-nav-right">
                     See more
@@ -36,7 +36,6 @@
             <div class="c-mall-body">
                 <div class="swiper-collection-brand">
                     <div class="swiper-wrapper">
-                        <!-- Slides -->
                         <div class="swiper-slide c-mall-item">
                             <div class="c-mall-item-img">
                                 <img src="./assest/images/collections/brand1.png" alt="">
@@ -212,702 +211,84 @@
                 </div>
                 <!-- list product -->
                 <div class="g-list-product">
-                    <!-- item -->
-                    <div class="product ">
-                        <div class="product-wrapper">
-                            <a href="?mod=page&act=detail" class="product-info">
+                    <?php if (isset($collectionPro) && $collectionPro->status && is_array($collectionPro->result)) {
+                        foreach ($collectionPro->result as $key => $value) { ?>
 
-                                <div class="product-img">
-                                    <img src="https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/8/14/638276090577696669_msiI-modern-14-c7m-221vn-r7-7730u-dd.jpg"
-                                        alt="">
+                            <div class="product">
+                                <div class="product-wrapper">
+                                    <a href="?mod=page&act=detail&id=<?= $value['id'] ?>" class="product-info">
+                                        <div class="product-sale-label">
+                                            <svg width="48" height="50" viewBox="0 0 48 50" fill="red"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <g filter="url(#filter0_d_604_13229)">
+                                                    <path
+                                                        d="M4.49011 0C3.66365 0 2.99416 0.677946 2.99416 1.51484V11.0288V26.9329C2.99416 30.7346 5.01545 34.2444 8.28604 36.116L20.4106 43.0512C22.6241 44.3163 25.3277 44.3163 27.5412 43.0512L39.6658 36.116C42.9363 34.2444 44.9576 30.7346 44.9576 26.9329V11.0288V1.51484C44.9576 0.677946 44.2882 0 43.4617 0H4.49011Z"
+                                                        fill="#F5C144" />
+                                                </g>
+                                                <defs>
+                                                    <filter id="filter0_d_604_13229" x="-1.00584" y="0" width="49.9635"
+                                                        height="52" filterUnits="userSpaceOnUse"
+                                                        color-interpolation-filters="sRGB">
+                                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                        <feColorMatrix in="SourceAlpha" type="matrix"
+                                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                                            result="hardAlpha" />
+                                                        <feOffset dy="4" />
+                                                        <feGaussianBlur stdDeviation="2" />
+                                                        <feComposite in2="hardAlpha" operator="out" />
+                                                        <feColorMatrix type="matrix"
+                                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                                        <feBlend mode="normal" in2="BackgroundImageFix"
+                                                            result="effect1_dropShadow_604_13229" />
+                                                        <feBlend mode="normal" in="SourceGraphic"
+                                                            in2="effect1_dropShadow_604_13229" result="shape" />
+                                                    </filter>
+                                                </defs>
+                                            </svg>
+                                            <span>-%
+                                                <?= $value['salePercent'] ?>
+                                            </span>
+                                        </div>
+                                        <div class="product-img">
+                                            <img src="./assest/upload/<?= $value['image'] ?>" alt="">
+                                        </div>
+                                        <div class="product-brand">
+                                            <?= $value['brand'] ?>
+                                        </div>
+                                        <div class="product-name">
+                                            <?= $value['namePro'] ?>
+                                        </div>
+                                        <div class="product-stars">
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <span>(1.1k)</span>
+                                        </div>
+                                        <div class="product-price">
+                                            <div class="product-price-sale fm-price">
+                                                <?= $value['price'] ?>
+                                            </div>
+                                            <del class="product-price-old fm-price">
+                                                <?= $value['price'] * (1 - $value['salePercent'] / 100) ?>
+                                            </del>
+                                        </div>
+                                    </a>
+                                    <div class="product-btn">
+                                        <i class="fa-solid fa-cart-plus"></i>
+                                        <span>ADD TO CART</span>
+                                    </div>
                                 </div>
-                                <div class="product-brand">
-                                    IPHONE
-                                </div>
-                                <div class="product-name">
-                                    Stainless Steel Dual Basket ProFry...
-                                </div>
-                                <div class="product-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(1.1k)</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="product-price-sale">$500</div>
-                                    <del class="product-price-old">$700</del>
-                                    <div class="product-price-sale-percent">-25%</div>
-                                </div>
-                            </a>
-                            <div class="product-btn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>ADD TO CART</span>
                             </div>
-                        </div>
-                    </div>
-                    <!-- item -->
-                    <div class="product ">
-                        <div class="product-wrapper">
-                            <a href="?mod=page&act=detail" class="product-info">
 
-                                <div class="product-img">
-                                    <img src="https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/2/16/638121568991277911_msi-gaming-gf63-thin-11-den-dd.jpg"
-                                        alt="">
-                                </div>
-                                <div class="product-brand">
-                                    IPHONE
-                                </div>
-                                <div class="product-name">
-                                    Stainless Steel Dual Basket ProFry...
-                                </div>
-                                <div class="product-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(1.1k)</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="product-price-sale">$500</div>
-                                    <del class="product-price-old">$700</del>
-                                    <div class="product-price-sale-percent">-25%</div>
-                                </div>
-                            </a>
-                            <div class="product-btn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>ADD TO CART</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- item -->
-                    <div class="product ">
-                        <div class="product-wrapper">
-                            <a href="?mod=page&act=detail" class="product-info">
+                        <?php }
+                    }else{
+                        echo '<div class="no-data">No product found!</div>';
+                    } ?>
+                    
+                   
 
-                                <div class="product-img">
-                                    <img src="https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/8/24/638284697135459130_hp-pavilion-aero-13-bac-dd.jpg"
-                                        alt="">
-                                </div>
-                                <div class="product-brand">
-                                    IPHONE
-                                </div>
-                                <div class="product-name">
-                                    Stainless Steel Dual Basket ProFry...
-                                </div>
-                                <div class="product-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(1.1k)</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="product-price-sale">$500</div>
-                                    <del class="product-price-old">$700</del>
-                                    <div class="product-price-sale-percent">-25%</div>
-                                </div>
-                            </a>
-                            <div class="product-btn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>ADD TO CART</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- item -->
-                    <div class="product ">
-                        <div class="product-wrapper">
-                            <a href="?mod=page&act=detail" class="product-info">
-
-                                <div class="product-img">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdtP1DWFkoc4zbxzQvd3TkR604kZs8qo1u8A&usqp=CAU"
-                                        alt="">
-                                </div>
-                                <div class="product-brand">
-                                    IPHONE
-                                </div>
-                                <div class="product-name">
-                                    Stainless Steel Dual Basket ProFry...
-                                </div>
-                                <div class="product-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(1.1k)</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="product-price-sale">$500</div>
-                                    <del class="product-price-old">$700</del>
-                                    <div class="product-price-sale-percent">-25%</div>
-                                </div>
-                            </a>
-                            <div class="product-btn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>ADD TO CART</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- item -->
-                    <div class="product ">
-                        <div class="product-wrapper">
-                            <a href="?mod=page&act=detail" class="product-info">
-
-                                <div class="product-img">
-                                    <img src="./assest/images/phone.png" alt="">
-                                </div>
-                                <div class="product-brand">
-                                    IPHONE
-                                </div>
-                                <div class="product-name">
-                                    Stainless Steel Dual Basket ProFry...
-                                </div>
-                                <div class="product-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(1.1k)</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="product-price-sale">$500</div>
-                                    <del class="product-price-old">$700</del>
-                                    <div class="product-price-sale-percent">-25%</div>
-                                </div>
-                            </a>
-                            <div class="product-btn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>ADD TO CART</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- item -->
-                    <div class="product ">
-                        <div class="product-wrapper">
-                            <a href="?mod=page&act=detail" class="product-info">
-
-                                <div class="product-img">
-                                    <img src="https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/8/14/638276090577696669_msiI-modern-14-c7m-221vn-r7-7730u-dd.jpg"
-                                        alt="">
-                                </div>
-                                <div class="product-brand">
-                                    IPHONE
-                                </div>
-                                <div class="product-name">
-                                    Stainless Steel Dual Basket ProFry...
-                                </div>
-                                <div class="product-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(1.1k)</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="product-price-sale">$500</div>
-                                    <del class="product-price-old">$700</del>
-                                    <div class="product-price-sale-percent">-25%</div>
-                                </div>
-                            </a>
-                            <div class="product-btn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>ADD TO CART</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- item -->
-                    <div class="product ">
-                        <div class="product-wrapper">
-                            <a href="?mod=page&act=detail" class="product-info">
-
-                                <div class="product-img">
-                                    <img src="https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/2/16/638121568991277911_msi-gaming-gf63-thin-11-den-dd.jpg"
-                                        alt="">
-                                </div>
-                                <div class="product-brand">
-                                    IPHONE
-                                </div>
-                                <div class="product-name">
-                                    Stainless Steel Dual Basket ProFry...
-                                </div>
-                                <div class="product-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(1.1k)</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="product-price-sale">$500</div>
-                                    <del class="product-price-old">$700</del>
-                                    <div class="product-price-sale-percent">-25%</div>
-                                </div>
-                            </a>
-                            <div class="product-btn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>ADD TO CART</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- item -->
-                    <div class="product ">
-                        <div class="product-wrapper">
-                            <a href="?mod=page&act=detail" class="product-info">
-
-                                <div class="product-img">
-                                    <img src="https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/8/24/638284697135459130_hp-pavilion-aero-13-bac-dd.jpg"
-                                        alt="">
-                                </div>
-                                <div class="product-brand">
-                                    IPHONE
-                                </div>
-                                <div class="product-name">
-                                    Stainless Steel Dual Basket ProFry...
-                                </div>
-                                <div class="product-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(1.1k)</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="product-price-sale">$500</div>
-                                    <del class="product-price-old">$700</del>
-                                    <div class="product-price-sale-percent">-25%</div>
-                                </div>
-                            </a>
-                            <div class="product-btn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>ADD TO CART</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- item -->
-                    <div class="product ">
-                        <div class="product-wrapper">
-                            <a href="?mod=page&act=detail" class="product-info">
-
-                                <div class="product-img">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdtP1DWFkoc4zbxzQvd3TkR604kZs8qo1u8A&usqp=CAU"
-                                        alt="">
-                                </div>
-                                <div class="product-brand">
-                                    IPHONE
-                                </div>
-                                <div class="product-name">
-                                    Stainless Steel Dual Basket ProFry...
-                                </div>
-                                <div class="product-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(1.1k)</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="product-price-sale">$500</div>
-                                    <del class="product-price-old">$700</del>
-                                    <div class="product-price-sale-percent">-25%</div>
-                                </div>
-                            </a>
-                            <div class="product-btn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>ADD TO CART</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- item -->
-                    <div class="product ">
-                        <div class="product-wrapper">
-                            <a href="?mod=page&act=detail" class="product-info">
-
-                                <div class="product-img">
-                                    <img src="./assest/images/phone.png" alt="">
-                                </div>
-                                <div class="product-brand">
-                                    IPHONE
-                                </div>
-                                <div class="product-name">
-                                    Stainless Steel Dual Basket ProFry...
-                                </div>
-                                <div class="product-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(1.1k)</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="product-price-sale">$500</div>
-                                    <del class="product-price-old">$700</del>
-                                    <div class="product-price-sale-percent">-25%</div>
-                                </div>
-                            </a>
-                            <div class="product-btn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>ADD TO CART</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- item -->
-                    <div class="product ">
-                        <div class="product-wrapper">
-                            <a href="?mod=page&act=detail" class="product-info">
-
-                                <div class="product-img">
-                                    <img src="https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/8/14/638276090577696669_msiI-modern-14-c7m-221vn-r7-7730u-dd.jpg"
-                                        alt="">
-                                </div>
-                                <div class="product-brand">
-                                    IPHONE
-                                </div>
-                                <div class="product-name">
-                                    Stainless Steel Dual Basket ProFry...
-                                </div>
-                                <div class="product-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(1.1k)</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="product-price-sale">$500</div>
-                                    <del class="product-price-old">$700</del>
-                                    <div class="product-price-sale-percent">-25%</div>
-                                </div>
-                            </a>
-                            <div class="product-btn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>ADD TO CART</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- item -->
-                    <div class="product ">
-                        <div class="product-wrapper">
-                            <a href="?mod=page&act=detail" class="product-info">
-
-                                <div class="product-img">
-                                    <img src="https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/2/16/638121568991277911_msi-gaming-gf63-thin-11-den-dd.jpg"
-                                        alt="">
-                                </div>
-                                <div class="product-brand">
-                                    IPHONE
-                                </div>
-                                <div class="product-name">
-                                    Stainless Steel Dual Basket ProFry...
-                                </div>
-                                <div class="product-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(1.1k)</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="product-price-sale">$500</div>
-                                    <del class="product-price-old">$700</del>
-                                    <div class="product-price-sale-percent">-25%</div>
-                                </div>
-                            </a>
-                            <div class="product-btn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>ADD TO CART</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- item -->
-                    <div class="product ">
-                        <div class="product-wrapper">
-                            <a href="?mod=page&act=detail" class="product-info">
-
-                                <div class="product-img">
-                                    <img src="https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/8/24/638284697135459130_hp-pavilion-aero-13-bac-dd.jpg"
-                                        alt="">
-                                </div>
-                                <div class="product-brand">
-                                    IPHONE
-                                </div>
-                                <div class="product-name">
-                                    Stainless Steel Dual Basket ProFry...
-                                </div>
-                                <div class="product-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(1.1k)</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="product-price-sale">$500</div>
-                                    <del class="product-price-old">$700</del>
-                                    <div class="product-price-sale-percent">-25%</div>
-                                </div>
-                            </a>
-                            <div class="product-btn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>ADD TO CART</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- item -->
-                    <div class="product ">
-                        <div class="product-wrapper">
-                            <a href="?mod=page&act=detail" class="product-info">
-
-                                <div class="product-img">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdtP1DWFkoc4zbxzQvd3TkR604kZs8qo1u8A&usqp=CAU"
-                                        alt="">
-                                </div>
-                                <div class="product-brand">
-                                    IPHONE
-                                </div>
-                                <div class="product-name">
-                                    Stainless Steel Dual Basket ProFry...
-                                </div>
-                                <div class="product-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(1.1k)</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="product-price-sale">$500</div>
-                                    <del class="product-price-old">$700</del>
-                                    <div class="product-price-sale-percent">-25%</div>
-                                </div>
-                            </a>
-                            <div class="product-btn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>ADD TO CART</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- item -->
-                    <div class="product ">
-                        <div class="product-wrapper">
-                            <a href="?mod=page&act=detail" class="product-info">
-
-                                <div class="product-img">
-                                    <img src="./assest/images/phone.png" alt="">
-                                </div>
-                                <div class="product-brand">
-                                    IPHONE
-                                </div>
-                                <div class="product-name">
-                                    Stainless Steel Dual Basket ProFry...
-                                </div>
-                                <div class="product-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(1.1k)</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="product-price-sale">$500</div>
-                                    <del class="product-price-old">$700</del>
-                                    <div class="product-price-sale-percent">-25%</div>
-                                </div>
-                            </a>
-                            <div class="product-btn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>ADD TO CART</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- item -->
-                    <div class="product ">
-                        <div class="product-wrapper">
-                            <a href="?mod=page&act=detail" class="product-info">
-
-                                <div class="product-img">
-                                    <img src="https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/8/14/638276090577696669_msiI-modern-14-c7m-221vn-r7-7730u-dd.jpg"
-                                        alt="">
-                                </div>
-                                <div class="product-brand">
-                                    IPHONE
-                                </div>
-                                <div class="product-name">
-                                    Stainless Steel Dual Basket ProFry...
-                                </div>
-                                <div class="product-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(1.1k)</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="product-price-sale">$500</div>
-                                    <del class="product-price-old">$700</del>
-                                    <div class="product-price-sale-percent">-25%</div>
-                                </div>
-                            </a>
-                            <div class="product-btn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>ADD TO CART</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- item -->
-                    <div class="product ">
-                        <div class="product-wrapper">
-                            <a href="?mod=page&act=detail" class="product-info">
-
-                                <div class="product-img">
-                                    <img src="https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/2/16/638121568991277911_msi-gaming-gf63-thin-11-den-dd.jpg"
-                                        alt="">
-                                </div>
-                                <div class="product-brand">
-                                    IPHONE
-                                </div>
-                                <div class="product-name">
-                                    Stainless Steel Dual Basket ProFry...
-                                </div>
-                                <div class="product-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(1.1k)</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="product-price-sale">$500</div>
-                                    <del class="product-price-old">$700</del>
-                                    <div class="product-price-sale-percent">-25%</div>
-                                </div>
-                            </a>
-                            <div class="product-btn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>ADD TO CART</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- item -->
-                    <div class="product ">
-                        <div class="product-wrapper">
-                            <a href="?mod=page&act=detail" class="product-info">
-
-                                <div class="product-img">
-                                    <img src="https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/8/24/638284697135459130_hp-pavilion-aero-13-bac-dd.jpg"
-                                        alt="">
-                                </div>
-                                <div class="product-brand">
-                                    IPHONE
-                                </div>
-                                <div class="product-name">
-                                    Stainless Steel Dual Basket ProFry...
-                                </div>
-                                <div class="product-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(1.1k)</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="product-price-sale">$500</div>
-                                    <del class="product-price-old">$700</del>
-                                    <div class="product-price-sale-percent">-25%</div>
-                                </div>
-                            </a>
-                            <div class="product-btn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>ADD TO CART</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- item -->
-                    <div class="product ">
-                        <div class="product-wrapper">
-                            <a href="?mod=page&act=detail" class="product-info">
-
-                                <div class="product-img">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdtP1DWFkoc4zbxzQvd3TkR604kZs8qo1u8A&usqp=CAU"
-                                        alt="">
-                                </div>
-                                <div class="product-brand">
-                                    IPHONE
-                                </div>
-                                <div class="product-name">
-                                    Stainless Steel Dual Basket ProFry...
-                                </div>
-                                <div class="product-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(1.1k)</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="product-price-sale">$500</div>
-                                    <del class="product-price-old">$700</del>
-                                    <div class="product-price-sale-percent">-25%</div>
-                                </div>
-                            </a>
-                            <div class="product-btn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>ADD TO CART</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- item -->
-                    <div class="product ">
-                        <div class="product-wrapper">
-                            <a href="?mod=page&act=detail" class="product-info">
-
-                                <div class="product-img">
-                                    <img src="./assest/images/phone.png" alt="">
-                                </div>
-                                <div class="product-brand">
-                                    IPHONE
-                                </div>
-                                <div class="product-name">
-                                    Stainless Steel Dual Basket ProFry...
-                                </div>
-                                <div class="product-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(1.1k)</span>
-                                </div>
-                                <div class="product-price">
-                                    <div class="product-price-sale">$500</div>
-                                    <del class="product-price-old">$700</del>
-                                    <div class="product-price-sale-percent">-25%</div>
-                                </div>
-                            </a>
-                            <div class="product-btn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>ADD TO CART</span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

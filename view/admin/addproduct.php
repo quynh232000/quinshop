@@ -110,7 +110,7 @@
                                           </label>
                                           <div class="shop-form-control">
                                               <div class="form-input-body">
-                                                  <input type="text"
+                                                  <input type="number"
                                                          name="price"
                                                          class="form-input"
                                                          rules="required"

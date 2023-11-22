@@ -44,7 +44,6 @@
                     
                     // header("Location: ./");
                     return ["status"=>true,"message"=> "Đăng nhập thành công!","result"=>[],"redirect"=>"./"];
-                    // return Session::get('fullName');
                 } else{
                     $alert = "Tên đăng nhập hoặc tài khoản không đúng!";
                     return ["status"=>false,"message"=> $alert,"result"=>[],"redirect"=>""];
