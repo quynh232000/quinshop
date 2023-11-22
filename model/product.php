@@ -29,18 +29,18 @@ class Product
         $price,
         $salePercent,
         $image,
-        $listimage,
+        $listImage,
         $unit
     ) {
-
         $slug = $this->tool->slug($name, '-');
         $fileResult = $this->tool->uploadFile($image);
+       
+
 
         $query = "INSERT INTO product (product.namePro, product.description, product.categoryId,product.status,
             product.quantity,product.brand,product.image,origin,price,
             salePercent,slug,unit,createdAt,sold) VALUES
                 (
-                    
                     '$name',
                     '$description',
                     '$categoryId',
@@ -59,12 +59,47 @@ class Product
             ";
 
         $result = $this->db->insert($query);
-        if ($result != false) {
-            return "Create new product successfully!";
-        } else {
+        if ($result == false) {
             $alert = "Create new product error! Wrong from server!";
             return $alert;
+
         }
+        // get id product
+        $getIdPro = $this->db->select("SELECT LAST_INSERT_ID();");
+        $idPro = mysqli_fetch_assoc($getIdPro)['LAST_INSERT_ID()'];
+        // list img
+        $totalFile = count($listImage['name']);
+        $querylistImg = "";
+        for ($i = 0; $i < $totalFile; $i++) {
+            $fileDir = "./assest/upload/";
+            if (isset($listImage['error'][$i]) && $listImage['error'][$i] == 0) {
+                $fileName = basename($listImage['name'][$i]);
+                if (!file_exists($fileDir)) {
+                    mkdir($fileDir, 0, true);
+                }
+                $fileNameNew = $this->tool->GUID() . "." . (explode(".", $fileName)[1]);
+                $fileDir = $fileDir . $fileNameNew;
+                if (move_uploaded_file($listImage['tmp_name'][$i], $fileDir)) {
+
+                    $querylistImg .= "('$idPro', '$fileNameNew',NOW()),";
+                    
+
+                }
+            }
+        }
+        $querylistImg = rtrim($querylistImg, ",");
+        $queryImg = "INSERT into listimage (productId,imagePro,createdAt) values
+                $querylistImg ";
+        $resulltListImage = $this->db->insert($queryImg);
+        if ($resulltListImage == false) {
+           
+            return false;
+        } else {
+            return true;
+            // header("Refresh:0");
+            // return '<script>$alert("Tạo sản phẩm thành công!")</script>';
+        }
+        // return "Create new product successfully!";
     }
     public function getAllProduct()
     {
@@ -77,20 +112,21 @@ class Product
             }
             return $rows;
 
-        }else{
+        } else {
 
             return "something wrong from server!";
         }
     }
-    public function deleteProduct($id){
-        if(empty($id)){
+    public function deleteProduct($id)
+    {
+        if (empty($id)) {
             return "Id product cannot be empty";
         }
         $query = "DELETE FROM product WHERE id='$id'";
         $result = $this->db->delete($query);
-        if($result !=false){
+        if ($result != false) {
             return true;
-        }else{
+        } else {
             return "Your product doesn't exist!";
         }
     }

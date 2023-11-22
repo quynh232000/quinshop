@@ -1,9 +1,4 @@
-<!-- <div class="shop shop-no-bg">
-            <div class="wrapper">
-            <?php
-            include "../inc/sidebarAdmin.php";
-            ?> -->
-<!-- main -->
+
 <main class="shop-main">
     <!-- content -->
     <div class="shop-main-content">
@@ -200,7 +195,7 @@
                             // });
                         </script> -->
 
-                        <span style="cursor:hand;" id="spanLink">Some text to click</span>
+                        <!-- <span style="cursor:hand;" id="spanLink">Some text to click</span> -->
 
                     </div>
                 </div>
@@ -210,7 +205,7 @@
 </main>
 </div>
 </div>
-<script >
+<script>
     $(function () {
         $("#spanLink").click(function () {
             console.log("okok")

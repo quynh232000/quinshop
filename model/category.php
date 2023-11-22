@@ -56,7 +56,7 @@
             if($result !=true){
                 return "Your category doesn't exist!";
             }else{
-                return $result;
+                header("Location: ?mod=admin&act=managecategory");
             }
         }
         

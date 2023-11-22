@@ -26,8 +26,8 @@
             $adminPass = mysqli_real_escape_string($this->db->link, $adminPass);
 
             if(empty($adminUser) || empty($adminPass)){
-                $alert = "Username and Password must no be empty!";
-                return $alert;
+                $alert = "Vui lòng nhập đầy đủ thông tin!";
+                return ["status"=>false,"message"=> $alert,"result"=>[],"redirect"=>""];
             }else{
                 $query = "SELECT * FROM user WHERE userName ='$adminUser' AND pass = '$adminPass' LIMIT 1";
                 $result = $this->db->select($query);
@@ -42,11 +42,12 @@
                     Session::set('phone',$value['phone']);
                     Session::set('role',$value['role']);
                     
-                    header("Location: ./");
+                    // header("Location: ./");
+                    return ["status"=>true,"message"=> "Đăng nhập thành công!","result"=>[],"redirect"=>"./"];
                     // return Session::get('fullName');
                 } else{
-                    $alert = "Username or Password is incorrect!";
-                    return $alert;
+                    $alert = "Tên đăng nhập hoặc tài khoản không đúng!";
+                    return ["status"=>false,"message"=> $alert,"result"=>[],"redirect"=>""];
                 }
             }
         }
@@ -67,19 +68,22 @@
 
             if(empty($userName) ){
                 $alert = "UserName must no be empty!";
-                return $alert;
+                return ["status"=>false,"message"=> $alert,"result"=>[]];
             }
             if(empty($email) ){
                 $alert = "UserName must no be empty!";
-                return $alert;
+                return ["status"=>false,"message"=> $alert,"result"=>[]];
+
             }
             if(empty($password )||empty( $confirmPassword) ){
                 $alert = "UserName must no be empty!";
-                return $alert;
+                return ["status"=>false,"message"=> $alert,"result"=>[]];
+
             }
             if($password != $confirmPassword ){
                 $alert = "Password and passwordconfirm doesn't match!";
-                return $alert;
+                return ["status"=>false,"message"=> $alert,"result"=>[]];
+
             }
             $avatar = 'https://static.vecteezy.com/system/resources/previews/012/941/847/original/illustration-of-avatar-girl-nice-smiling-woman-with-black-hair-flat-icon-on-purple-background-vector.jpg';
             $id = $this->tool->GUID();
@@ -95,11 +99,14 @@
             $result = $this->db->select($query);
             if($result != true){
                 
-                header("Location: ?mod=profile&act=login");
+                // header("Location: ?mod=profile&act=login");
+                return ["status"=>true,"message"=> "","result"=>[],"redirect"=>"?mod=profile&act=login"];
+
                 // return Session::get('fullName');
             } else{
                 $alert = "Something wrong from server!";
-                return $alert;
+                return ["status"=>false,"message"=> $alert,"result"=>[]];
+                
             }
         }
     }

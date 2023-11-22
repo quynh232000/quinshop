@@ -1,6 +1,8 @@
 <?php
-include_once './inc/header.php';
-
+session_start();
+include "lib/session.php";
+Session::checkSession();
+include_once 'view/inc/header.php';
 ?>
 <link rel="stylesheet" href="./src/css/error.css">
 <section class="page_404">
@@ -23,4 +25,6 @@ include_once './inc/header.php';
         </div>
     </div>
 </section>
-<?php include_once "inc/footerAdmin.php"; ?>
+<?php
+include_once 'view/inc/footer.php';
+?>

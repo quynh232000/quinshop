@@ -1,47 +1,11 @@
-<?php
-    // function path(){ 
-    //     $url= $_SERVER['HTTP_HOST'];   
-    //     $url.= $_SERVER['REQUEST_URI']; 
-    //     $url = str_contains($url,"localhost") ? str_replace("localhost/web-demo_php","",$url) : $url; 
-        
-    //     $url= explode("/",$url);
-    //     $value ="";
-    //     if(count($url)> 2){
-    //        for($i= 0;$i<count($url)-2;$i++){
-    //            $value .= "../";
-    //        }
-    //     }else{
-    //         $value ="./";
-    //     }
-    //    return $value;
-    // }
 
-    // include_once path()."inc/headerAdmin.php";
-    // include_once path()."controller/category.php";
-    // include_once path()."controller/product.php";
-
-    // $classPro = new Product();
-    // $cate = new Category();
-    // $allCategory = $cate->getAllCate();
-
-    // if(isset($_POST['btn-create-product'] ) && $_POST['btn-create-product']){
-    //     echo 'quynh'.print_r($_FILES['image']);
-    //     $resAddPro = $classPro->updateProduct( $_POST['name']||"", 
-    //         $_POST["description"]||"", $_POST["categoryId"]||"",
-    //         $_POST["quantity"]||"", $_POST["origin"]||"", 
-    //         $_POST["brand"]||"", $_POST["price"]||"",
-    //         $_POST["salePercent"]||"", $_FILES["image"], 
-    //         $_FILES["listimage"]||"", $_POST["unit"]||"");
-        
-    // }
-?>
        
                 <!-- main -->
                 <main class="shop-main">
                     <!-- content -->
                     <div class="shop-main-content">
                         <div class="shop-top">
-                            <div class="shop-title">Add a new product</div>
+                            <div class="shop-title">Tạo sản phẩm mới</div>
                             
                         </div>
                         <div class="shop-add">
@@ -57,7 +21,7 @@
                                          
                                           <div class="form-group-body w-100">
                                           <label for="" class="form-label">
-                                              Name <i class="fa-solid fa-circle-info"></i>
+                                              Tên <i class="fa-solid fa-circle-info"></i>
                                           </label>
                                           <div class="shop-form-control">
                                               <div class="form-input-body">
@@ -74,7 +38,7 @@
                                       <div class="cate-body w-50">
                                           <div class="form-group-body w-100">
                                               <label for="" class="form-label">
-                                                  Category <i class="fa-solid fa-circle-info"></i>
+                                                  Đanh mục <i class="fa-solid fa-circle-info"></i>
                                               </label>
                                               <div class="shop-form-control">
                                                       <div class="form-input-body">
@@ -82,7 +46,7 @@
                                                                   rules="required"
                                                                   id=""
                                                                   class="list-categoryChild">
-                                                                <option value="">--Select category--</option>   
+                                                                <option value="">--Chọn danh mục--</option>   
                                                                 <?php foreach ($allCategory as $key => $value) { ?>
                                                                         <option value="<?=$value['id'] ?>"><?=$value['nameCate'] ?></option>
                                                                  <?php   }
@@ -96,11 +60,11 @@
                                       </div>
                                       <div class="form-group-body w-50">
                                           <label for="" class="form-label">
-                                              Unit <i class="fa-solid fa-circle-info"></i>
+                                              Đơn vị <i class="fa-solid fa-circle-info"></i>
                                           </label>
                                           <div class="shop-form-control">
                                               <div class="form-input-body">
-                                                  <input type="text" name="unit" placeholder="Unit..." />
+                                                  <input type="text" name="unit" placeholder="Cái, cặp, hộp,..." />
               
                                               </div>
                                           </div>
@@ -108,28 +72,28 @@
                                       </div>
                                           <div class="form-group-body w-50">
                                               <label for="" class="form-label">
-                                                  Brand<i class="fa-solid fa-circle-info"></i>
+                                                  Thương hiệu<i class="fa-solid fa-circle-info"></i>
                                               </label>
                                               <div class="shop-form-control">
                                                   <div class="form-input-body">
                                                       <input type="text"
                                                              name="brand"
                                                              class="form-input"
-                                                             placeholder="Aa..." />
+                                                             placeholder="Iphone, Samsung,..." />
                                                   </div>
                                               </div>
                                               <div class="form-msg"></div>
                                           </div>
                                           <div class="form-group-body w-50">
                                               <label for="" class="form-label">
-                                                  Origin
+                                                  Xuất sứ
                                               </label>
                                               <div class="shop-form-control">
                                                   <div class="form-input-body">
                                                       <input type="text"
                                                              name="origin"
                                                              class="form-input"
-                                                             placeholder="Origin..." />
+                                                             placeholder="Trung Quốc, Nhật Bản..." />
                                                   </div>
                                               </div>
                                               <div class="form-msg"></div>
@@ -142,7 +106,7 @@
                                       
                                       <div class="form-group-body w-50">
                                           <label for="" class="form-label">
-                                              Price ( VND )<i class="fa-solid fa-circle-info"></i>
+                                              Giá ( VND )<i class="fa-solid fa-circle-info"></i>
                                           </label>
                                           <div class="shop-form-control">
                                               <div class="form-input-body">
@@ -156,13 +120,13 @@
                                           <div class="form-msg"></div>
                                       </div>
                                       <div class="form-group-body w-50">
-                                          <label for="" class="form-label">Sale price (%) </label>
+                                          <label for="" class="form-label">(%) giảm giá </label>
                                           <div class="shop-form-control">
                                               <div class="form-input-body">
                                                   <input type="number"
                                                          name="salePercent"
                                                          class="form-input"
-                                                         value="0"
+                                                         
                                                          placeholder="0%" />
                                               </div>
                                           </div>
@@ -170,7 +134,7 @@
                                       </div>
                                       <div class="form-group-body w-50">
                                           <label for="" class="form-label">
-                                              Quantity<i class="fa-solid fa-circle-info"></i>
+                                              Số lượng<i class="fa-solid fa-circle-info"></i>
                                           </label>
                                           <div class="shop-form-control">
                                               <div class="form-input-body">
@@ -253,7 +217,7 @@
                                           <input type="file"
                                                  id="upload-img"
                                                  class="upload-img"
-                                                 name="listimage"
+                                                 name="listImage[]"
                                                  accept="image/*"
                                                  multiple />
                                           <label class="form-list-img label-list-img" for="upload-img">
@@ -282,4 +246,4 @@
                 </main>
             </div>
         </div>
-     
+

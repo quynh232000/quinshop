@@ -73,12 +73,11 @@
                                             </div>
                                            <div class="cate-right">
                                             <div class="cate-name">'.$value["nameCate"].'</div>
-                                            <form method="post" class="cate-action" >
-                                                <div class="cate-action-item" title="Sửa"><i class="fa-regular fa-pen-to-square"></i></div>
-                                                <label for="btn-cate-delete" class="cate-action-item" title="Xóa"><i class="fa-solid fa-trash-can"></i></label>
-                                                <input hidden id="btn-cate-delete" name="delete-cate" type="submit" onclick="confirm("Bạn có chắc sẽ xóa danh mục này chứ!");">
-                                                <input hidden  name="idcate" value="'.$value["id"].'" type="text">
-                                            </form>
+                                            <div class="cate-action" >
+                                                <a href="?mod=admin&act=managecategory&type=edit&idCate='.$value["id"].'" class="cate-action-item" title="Sửa"><i class="fa-regular fa-pen-to-square"></i></a>
+                                                <a href="?mod=admin&act=managecategory&type=delete&idCate='.$value["id"].'" class="cate-action-item" title="Xóa"><i class="fa-solid fa-trash-can"></i></a>
+                                               
+                                            </div>
                                            </div>
                                         </div>';
                                 }

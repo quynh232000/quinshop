@@ -1,5 +1,4 @@
 <?php
-
 extract($_REQUEST);
 if (isset($mod)) {
     switch ($mod) {
@@ -15,7 +14,6 @@ if (isset($mod)) {
 
         default:
             header("Location: ?page=404");
-
     }
 } else {
     if (isset($page)) {
@@ -26,6 +24,4 @@ if (isset($mod)) {
         header('location: ?mod=page&act=home');
     }
 }
-
-
 ?>

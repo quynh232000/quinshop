@@ -1,10 +1,10 @@
 
-<!-- <?php
-header("Cache-Control: no-cache, must-revalidate");
-header("Pragma: no-cache");
-header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
-header("Cache-Control:max-age=2592000");
-?> -->
+<?php
+
+if(empty($viewTitle)){
+    $viewTitle = "HOME";
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,7 @@ header("Cache-Control:max-age=2592000");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="./assest/images/logo-no-text.png">
-    <title>QUIN- home </title>
+    <title>QUIN- <?=$viewTitle?> </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

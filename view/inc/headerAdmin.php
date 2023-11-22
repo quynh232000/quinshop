@@ -6,7 +6,9 @@
     header("Cache-Control:max-age=2592000");
 
 
-    
+    if(empty($viewTitle)){
+        $viewTitle = "ADMIN";
+    }
 
 ?>
 <!DOCTYPE html>
@@ -14,8 +16,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../assest/images/logo-no-text.png">
-    <title>QUINSTORE - ADMIN </title>
+    <link rel="icon" type="image/x-icon" href="./assest/images/logo-no-text.png">
+    <title>QUIN -  <?=$viewTitle?> </title>
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -45,6 +47,8 @@
   href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
 />
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<!-- toast -->
+
 </head>
 <body>
     <div class="app">

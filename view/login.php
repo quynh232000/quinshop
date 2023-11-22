@@ -45,7 +45,7 @@
             <label for="password">Password</label>
             <div class="form-body">
               <i class="fa-solid fa-lock"></i>
-              <input type="text" class="form-control" id="password" name="adminPass" rules="required|min:6"
+              <input type="password" class="form-control" id="password" name="adminPass" rules="required|min:6"
                 placeholder="Password" />
             </div>
             <div class="form-msg"></div>
@@ -55,13 +55,18 @@
         <div class="form-noti" style="width:100%">
           <div class="form-msg">
             <?php
-            if (isset($login_check)) {
-              echo $login_check;
+            if (isset($login_check) ) {
+              if ($login_check['status'] == false) {
+                  echo  '<div id="toast" mes-type="error" mes-title="Thất bại!" mes-text="'.$login_check['message'].'."></div>';
+              }else{
+                echo  '<div id="toast" mes-type="success" mes-title="Thành công!" mes-text="'.$login_check['message'].'."></div>';
+                echo ' <script>
+                setTimeout(function() {
+                    window.location.href="'.$login_check['redirect'].'";
+                }, 4000);
+            </script>';
+              }
             }
-
-            // echo "okok".$_SESSION['fullName'];
-            // echo "okok".Session::get("fullName");
-            
             ?>
           </div>
         </div>
@@ -85,8 +90,7 @@
     <div class="spinner-2"></div>
   </div>
 
-  <!-- <script src="./src/js/main.js" type="module"></script> -->
-  <!-- <script src="./src/js/register.js" type="module"></script> -->
+  <script src="./src/js/main.js" type="module"></script>
 </body>
 
 </html>
