@@ -361,9 +361,15 @@ $().ready(function(){
         }).done(data=>{
           data =JSON.parse(data)
           toastjs( data.message)
+          
+          let newCount = +$(".view-total-count").attr("view-total-count")+1
+          $(".view-total-count").attr("view-total-count",newCount)
+          $(".view-total-count").text(newCount +"")
+          
           let newPrice = +price + +$(".view-total-cart").attr("view-total-cart") 
+          $(".view-total-cart").attr("view-total-cart",newPrice)
           $(".view-total-cart").text(formartPrice(newPrice))
-          $(".view-total-count").text(+$(".view-total-count").attr("view-total-count")+1 +"")
+
         })
 
       }
