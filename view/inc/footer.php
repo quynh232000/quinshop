@@ -78,14 +78,20 @@
     </div>
 </footer>
 </div>
+
+
+
+<div id="snackbar"></div>
+
+
 <script>
     const VND = new Intl.NumberFormat("vi-VN", {
-        style: "currency",
-        currency: "VND",
+      style: "currency",
+      currency: "VND",
     });
-    const prices = document.querySelectorAll(".fm-price")
-    prices.forEach(item => {
-        item.textContent = VND.format(item.textContent)
+    const prices =document.querySelectorAll(".fm-price")
+    prices.forEach(item=>{
+      item.textContent =VND.format(item.textContent)
     })
 </script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>

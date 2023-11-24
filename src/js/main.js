@@ -57,7 +57,7 @@ function handleReferralTab(){
     })
 }
 const ONE = document.querySelector.bind(document);
-export function Validator(selector, options) {
+ function Validator(selector, options) {
   if (!options) {
     options = {};
   }
@@ -199,165 +199,16 @@ export function Validator(selector, options) {
     };
   }
 }
- function ValidatorCreate(selector, options) {
-  if (!options) {
-    options = {};
-  }
-
-  function getParent(element, selector) {
-    while (element.parentElement) {
-      if (element.parentElement.matches(selector)) {
-        return element.parentElement;
-      }
-      element = element.parentElement;
-    }
-  }
-
-  var formRules = {};
-  var validatorRules = {
-    required: function (value) {
-      return value ? undefined : "Please enter this field";
-    },
-    email: function (value) {
-      const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-      return regex.test(value) ? undefined : "It must be an email";
-    },
-    min: function (min) {
-      return function (value) {
-        return value.length >= min ? undefined : `its min ${min} keys`;
-      };
-    },
-  };
-  var formElement = document.querySelector(selector);
-  if (formElement) {
-    var inputs = formElement.querySelectorAll("[name][rules]");
-    for (var input of inputs) {
-      var rules = input.getAttribute("rules").split("|");
-      for (var rule of rules) {
-        var ruleInfo;
-        var isRuleHasValue = rule.includes(":");
-        if (isRuleHasValue) {
-          ruleInfo = rule.split(":");
-          rule = ruleInfo[0];
-        }
-        var ruleFunc = validatorRules[rule];
-        if (isRuleHasValue) {
-          ruleFunc = ruleFunc(ruleInfo[1]);
-        }
-        if (Array.isArray(formRules[input.name])) {
-          formRules[input.name].push(ruleFunc);
-        } else {
-          formRules[input.name] = [ruleFunc];
-        }
-      }
-
-      // lawng nghe input
-
-  //    input.onblur = handleValidate;
-      input.oninput = handleClearError;
-    }
-    // ham onblur
-    function handleValidate(e) {
-      var rules = formRules[e.target.name];
-      var errorMessage;
-
-      for (var rule1 of rules) {
-        errorMessage = rule1(e.target.value);
-        if (errorMessage) break;
-      }
-
-      // neu co loi hienj message loi
-      if (errorMessage) {
-        var formGroup = getParent(e.target, ".form-control");
-        // console.log(formGroup.childNodes[1].childNodes[1]);
-        if (formGroup) {
-          formGroup.childNodes[1].childNodes[1].classList.add("invalid");
-          if (formGroup.nextElementSibling) {
-            formGroup.nextElementSibling.innerText = errorMessage;
-          }
-        }
-      }
-      return !errorMessage;
-
-      // console.log(errorMessage)
-    }
-
-    function handleClearError(e) {
-       
-      var formGroup = getParent(e.target, ".form-control");
-      if (formGroup.childNodes[1].childNodes[1].classList.contains("invalid")) {
-        formGroup.classList.remove("invalid");
-        if (formGroup.nextElementSibling) {
-          formGroup.nextElementSibling.innerText = "";
-        }
-      }
-    }
-    // xu li hanh vi submit
-    formElement.onsubmit = function (e) {
-      e.preventDefault();
-
-      var inputs = formElement.querySelectorAll("[name][rules]");
-      var isValid = true;
-
-      for (var input of inputs) {
-        if (!handleValidate({ target: input })) {
-          isValid = false;
-        }
-      }
-      if (isValid) {
-        if (ONE(".loading")) ONE(".loading").style.display = "flex";
-        if (typeof options.onSubmit === "function") {
-          var enableInputs = formElement.querySelectorAll("[name]");
-          var formValues = Array.from(enableInputs).reduce(function (
-            values,
-            input
-          ) {
-            switch (input.type) {
-              case "radio":
-                values[input.name] = formElement.querySelector(
-                  'input[name="' + input.name + '"]:checked'
-                ).value;
-                break;
-              case "checkbox":
-                if (!input.matches(":checked")) {
-                  values[input.name] = "";
-                  return values;
-                }
-                if (!Array.isArray(values[input.name])) {
-                  values[input.name] = [];
-                }
-                values[input.name].push(input.value);
-                break;
-              case "file":
-               /*   const file = input.files
-                  console.log(file)
-                  var fr = new FileReader();
-                      fr.onload = function () {
-                        values[input.name] = fr.result;
-                      };
-                      fr.readAsDataURL(file[0]);*/
-                values[input.name]=input.files
-                console.log("img",input.files)
-                
-                break;
-              default:
-                values[input.name] = input.value;
-            }
-            return values;
-          },
-          {});
-          console.log(123,formValues)
-
-       options.onSubmit(formValues);
-        }
-      }
-    };
-  }
+function formartPrice(number) {
+  const VND = new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
+  return VND.format(number)
+  
 }
-
-
              
-// -----------------------------------------------------shopowner------------------------------//
+// -----------------------------------------------------admdin------------------------------//
 function handleCreateProduct(){
     let num = 0;
    
@@ -493,7 +344,30 @@ $().ready(function(){
        })
        
     }
-    // -----------shop owner page end--------------------------------//
+    if($(".detail-img-item img").length){
+      $(".detail-img-item img").each(function() {
+        $(this).mouseover(()=>{
+          $(".detail-img-show img").attr("src",$(this).attr("src")) 
+        })
+      })
+    }
+    // add to cart
+    $(".product-btn").click(function(){
+      const id = $(this).attr("idpro")
+      const price = $(this).attr("data-price")
+      if(id){
+        $.ajax({
+          url:"?mod=request&act=cart&type=addcart&idpro="+id
+        }).done(data=>{
+          data =JSON.parse(data)
+          toastjs( data.message)
+          let newPrice = +price + +$(".view-total-cart").attr("view-total-cart") 
+          $(".view-total-cart").text(formartPrice(newPrice))
+          $(".view-total-count").text(+$(".view-total-count").attr("view-total-count")+1 +"")
+        })
+
+      }
+    })
 
 
 })
@@ -556,3 +430,11 @@ function toast({ title = "", message = "", type = "info", duration = 3000 }) {
     main.appendChild(toast);
     }
 }
+
+function toastjs(text) {
+  var x = document.getElementById("snackbar");
+  x.className = "show";
+  x.textContent=text
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+// ======

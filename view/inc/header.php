@@ -6,6 +6,7 @@ if(empty($viewTitle)){
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,7 +44,8 @@ if(empty($viewTitle)){
 </head>
 
 <body>
-    <div class="app">
+    <div id="toastjs"></div>
+    <div class="app" >
         <!--header-->
         <header class="header">
             <!-- sidebar -->
@@ -125,7 +127,7 @@ if(empty($viewTitle)){
                     <div class="header-top-left">
                         <div class="header-top-item">
                             <div class="header-top-item-title">
-                                Language:
+                                Ngôn ngữ:
                             </div>
                             <div class="header-top-item-body">
                                 <div class="header-top-iem-img">
@@ -162,7 +164,7 @@ if(empty($viewTitle)){
 
                             </div>
                             <div class="header-top-item-title">
-                                Notifycations
+                                Thông báo
                             </div>
                         </a>
                         <a href="?mod=admin&act=dashboard" class="header-top-item">
@@ -171,7 +173,7 @@ if(empty($viewTitle)){
 
                             </div>
                             <div class="header-top-item-title">
-                                Admin
+                                Quản trị
                             </div>
                         </a>
                         <a href="./shopowner" class="header-top-item">
@@ -179,7 +181,7 @@ if(empty($viewTitle)){
                                 <i class="fa-regular fa-circle-down"></i>
                             </div>
                             <div class="header-top-item-title">
-                                Download
+                                Tải xuống
                             </div>
                         </a>
 
@@ -188,6 +190,10 @@ if(empty($viewTitle)){
                     </div>
 
                 </div>
+            </div>
+            <div style="color:black">
+    
+    
             </div>
             <div class="header-body">
                 <div class="wrapper">
@@ -199,12 +205,12 @@ if(empty($viewTitle)){
                         <!-- <div class="header-search-menu"><i class="fa-solid fa-bars"></i></div> -->
                         <div class="header-search">
                             <div class="header-search-left">
-                                <span>All Colections</span>
+                                <span>Danh mục</span>
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
-                            <input type="text" placeholder="Search our products...">
+                            <input type="text" placeholder="Tìm kiếm sản phẩm...">
                             <div class="header__search-history">
-                                <h3 class="header__search-history-header">History</h3>
+                                <h3 class="header__search-history-header">Lịch sử</h3>
                                 <ul class="header__search-history-list">
                                     <li class="header__search-history-item">
                                         <a href="">Kem dưỡng da</a>
@@ -229,7 +235,7 @@ if(empty($viewTitle)){
                             <div class="header-search-info">
                                 <span>(+800) 09..</span>
                                 <div class="header-search-text-s">
-                                    (Call Us Now)
+                                    (Liên hệ)
                                 </div>
                             </div>
                         </div>
@@ -245,13 +251,13 @@ if(empty($viewTitle)){
                                         <?php echo Session::get("fullName") ?>
                                     </div>
                                     <div class="header-search-text-s">
-                                        Profile
+                                        Hồ sơ
                                     </div>
                                 </a>
                                 <div class="account-more">
                                     <a href="?mod=profile&act=profile" class="account-more-item">
                                         <i class="fa-solid fa-user"></i>
-                                        <span>Profile</span>
+                                        <span>Hồ sơ</span>
                                     </a>
                                     <?php
                                     if (isset($_GET['action']) && $_GET["action"] == 'logout') {
@@ -260,7 +266,7 @@ if(empty($viewTitle)){
                                     ?>
                                     <a href="?mod=page&act=home&action=logout" class="account-more-item">
                                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                        <span>Logout</span>
+                                        <span>Đăng xuất</span>
                                     </a>
                                 </div>
                             </div>
@@ -270,35 +276,35 @@ if(empty($viewTitle)){
                                     <i class="fa-solid fa-user"></i>
                                 </div>
                                 <a href="?mod=profile&act=login" class="header-search-info">
-                                    <span>Login</span>
+                                    <span>Đăng nhập</span>
                                     <div class="header-search-text-s">
-                                        Account
+                                        Tài khoản
 
                                     </div>
                                 </a>
                                 <div class="account-more">
                                     <a href="?mod=profile&act=login" class="account-more-item">
                                         <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                                        <span>Login</span>
+                                        <span>Đăng nhập</span>
                                     </a>
-                                    <a href="#" class="account-more-item">
+                                    <a href="?mod=profile&act=register" class="account-more-item">
                                         <i class="fa-solid fa-user-plus"></i>
-                                        <span>Create Account</span>
+                                        <span>Đăng kí</span>
 
                                     </a>
                                 </div>
                             </div>
                         <?php } ?>
-
+                        
                         <div class="header-search-item header-cart">
                             <div class="header-search-item-icon icon-cart">
                                 <i class="fa-solid fa-cart-plus"></i>
-                                <div class="cart-count">2</div>
+                                <div class="cart-count view-total-count" view-total-count="<?=($getCartInfo->result['total'])?>"><?=($getCartInfo->result['total'])?></div>
                             </div>
-                            <a href="./cart.php" class="header-search-info">
-                                <span>Checkout</span>
-                                <div class="header-search-text-s">
-                                    $250.000
+                            <a href="?mod=page&act=cart" class="header-search-info">
+                                <span>Giỏ hàng</span>
+                                <div class="header-search-text-s fm-price view-total-cart" view-total-cart=" <?=($getCartInfo->result['totalPrice'])?>">
+                                <?=($getCartInfo->result['totalPrice'])?>
                                 </div>
                             </a>
                             <!-- no cart :: header__cart-list--no-cart -->

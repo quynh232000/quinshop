@@ -163,11 +163,11 @@ if (isset($productInfo)) {
                                         <div class="detail-deli-wrapper">
                                             <span>Transport fee</span>
                                             <div class="detail-deli-dropdown">
-                                                $0
+                                                0đ
                                                 <i class="fa-solid fa-angle-down"></i>
                                                 <div class="detail-deli-more">
-                                                    <div class="detail-deli-more-item">$10</div>
-                                                    <div class="detail-deli-more-item">$5</div>
+                                                    <div class="detail-deli-more-item">10đ</div>
+                                                    <div class="detail-deli-more-item">5đ</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -188,7 +188,7 @@ if (isset($productInfo)) {
                             <div class="detail-info-quantity">
                                 <div class="detail-amount">
                                     <div class="detail-info-quantity-item"><i class="fa-solid fa-minus"></i></div>
-                                    <input class="detail-info-quantity-item" type="number" value="1" min="1" />
+                                    <input class="detail-info-quantity-item" type="text" value="1" />
                                     <div class="detail-info-quantity-item"><i class="fa-solid fa-plus"></i></div>
                                 </div>
                                 <div class="detail-amount-total">
@@ -201,7 +201,7 @@ if (isset($productInfo)) {
                                 <i class="fa-solid fa-cart-plus"></i>
                                 ADD TO CARD
                             </button>
-                            <a href="?mod=page&act=cart?id=<?= $proInfo['id'] ?>&cout=1"
+                            <a href="?mod=page&act=cart&id=<?= $proInfo['id'] ?>&cout=1"
                                 class="detail-btn detail-btn-buy">BUY
                                 NOW</a>
                         </div>
@@ -299,7 +299,7 @@ if (isset($productInfo)) {
                                                         </del>
                                                     </div>
                                                 </a>
-                                                <div class="product-btn">
+                                                <div class="product-btn" idpro="<?= $value['id'] ?>" data-price= "<?= $value['price'] ?>">
                                                     <i class="fa-solid fa-cart-plus"></i>
                                                     <span>ADD TO CART</span>
                                                 </div>

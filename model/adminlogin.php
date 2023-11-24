@@ -50,43 +50,36 @@
                 }
             }
         }
-        public function registerlogin_admin($userName,$fullName,$email,$phone,$password,$confirmPassword){
-            $userName = $this->fm->validation($userName);
-            $fullName = $this->fm->validation($fullName);
-            $email = $this->fm->validation($email);
-            $phone = $this->fm->validation($phone);
-            $password = $this->fm->validation($password);
-            $confirmPassword = $this->fm->validation($confirmPassword);
-
-            $userName = mysqli_real_escape_string($this->db->link, $userName);
-            $fullName = mysqli_real_escape_string($this->db->link, $fullName);
-            $email = mysqli_real_escape_string($this->db->link, $email);
-            $phone = mysqli_real_escape_string($this->db->link, $phone);
-            $password = mysqli_real_escape_string($this->db->link, $password);
-            $confirmPassword = mysqli_real_escape_string($this->db->link, $confirmPassword);
+        public function register_admin($userName,$fullName,$email,$phone,$password,$confirmPassword){
+           
 
             if(empty($userName) ){
-                $alert = "UserName must no be empty!";
+                $alert = "Tên đăng nhập không được để trống!";
                 return ["status"=>false,"message"=> $alert,"result"=>[]];
             }
             if(empty($email) ){
-                $alert = "UserName must no be empty!";
+                $alert = "Email không được để trống!";
                 return ["status"=>false,"message"=> $alert,"result"=>[]];
 
             }
             if(empty($password )||empty( $confirmPassword) ){
-                $alert = "UserName must no be empty!";
+                $alert = "Mật khẩu không được để trống!!";
                 return ["status"=>false,"message"=> $alert,"result"=>[]];
 
             }
             if($password != $confirmPassword ){
-                $alert = "Password and passwordconfirm doesn't match!";
+                $alert = "Mật khẩu không khớp!";
                 return ["status"=>false,"message"=> $alert,"result"=>[]];
 
             }
+
+            $checkUser = $this->db->select("select * from user where userName = '$userName';");
+            if($checkUser !=false){
+                return ["status"=>false,"message"=> "Tên đăng nhập đã tồn tại!","result"=>[]];
+            }
             $avatar = 'https://static.vecteezy.com/system/resources/previews/012/941/847/original/illustration-of-avatar-girl-nice-smiling-woman-with-black-hair-flat-icon-on-purple-background-vector.jpg';
             $id = $this->tool->GUID();
-            $query = "INSERT INTO user (id,userName,fullName,email,phone,pass,avatar) VALUES
+            $query = "INSERT INTO user (id,userName,fullName,email,phone,pass,avatar) VALUE
                ( '$id',
                 '$userName',
                  '$fullName',
@@ -95,18 +88,9 @@
                 '$password',
                 '$avatar')
             ";
-            $result = $this->db->select($query);
-            if($result != true){
-                
-                // header("Location: ?mod=profile&act=login");
-                return ["status"=>true,"message"=> "","result"=>[],"redirect"=>"?mod=profile&act=login"];
-
-                // return Session::get('fullName');
-            } else{
-                $alert = "Something wrong from server!";
-                return ["status"=>false,"message"=> $alert,"result"=>[]];
-                
-            }
+             $this->db->insert($query);
+            return ["status"=>true,"message"=> "Đăng kí thành công!","result"=>[],"redirect"=>"?mod=profile&act=login"];
+           
         }
     }
 

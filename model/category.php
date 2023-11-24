@@ -51,12 +51,22 @@
             if(empty($id)){
                 return "Idcategory cannot be empty";
             }
-            $query = "DELETE FROM category WHERE id='$id'";
+            $query = "DELETE FROM category WHERE id = '$id'";
             $result = $this->db->delete($query);
             if($result !=true){
                 return "Your category doesn't exist!";
             }else{
                 header("Location: ?mod=admin&act=managecategory");
+            }
+        }
+        public function getInfoCate($id){
+            if(!empty($id)){
+                $query = "SELECT * from category WHERE id = $id";
+                $result = $this->db->select($query);
+                if($result != false){
+                    return  mysqli_fetch_assoc($result);
+                    
+                }
             }
         }
         

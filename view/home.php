@@ -80,6 +80,7 @@
         </div>
 
     </div>
+
     <!-- mega-sale -->
     <div class="mega-sale">
         <div class="mage-sale-top">
@@ -104,6 +105,7 @@
                 </div>
             </div>
         </div>
+
         <div class="mega-body">
             <div class="mega-content">
                 <div class="wrapper">
@@ -116,7 +118,7 @@
                                 foreach ($megaPro->result as $key => $value) { ?>
 
                                     <div class="swiper-slide">
-                                        <div class="product">
+                                        <div class="product" id="pro<?= $value['id'] ?>">
                                             <div class="product-wrapper">
                                                 <a href="?mod=page&act=detail&id=<?= $value['id'] ?>" class="product-info">
                                                     <div class="product-sale-label">
@@ -173,11 +175,11 @@
                                                             <?= $value['price'] ?>
                                                         </div>
                                                         <del class="product-price-old fm-price">
-                                                            <?= $value['price'] * (1 - $value['salePercent'] / 100) ?>
+                                                            <?= $value['price'] * (1 + $value['salePercent'] / 100) ?>
                                                         </del>
                                                     </div>
                                                 </a>
-                                                <div class="product-btn">
+                                                <div idpro="<?= $value['id'] ?>" data-price= "<?= $value['price'] ?>" class="product-btn">
                                                     <i class="fa-solid fa-cart-plus"></i>
                                                     <span>ADD TO CART</span>
                                                 </div>
@@ -196,6 +198,10 @@
             </div>
         </div>
     </div>
+
+
+
+
     <!-- new product -->
     <div class="new-product">
         <div class="wrapper">
@@ -274,11 +280,11 @@
                                                 <?= $value['price'] ?>
                                             </div>
                                             <del class="product-price-old fm-price">
-                                                <?= $value['price'] * (1 - $value['salePercent'] / 100) ?>
+                                                <?= $value['price'] * (1 + $value['salePercent'] / 100) ?>
                                             </del>
                                         </div>
                                     </a>
-                                    <div class="product-btn">
+                                    <div class="product-btn" idpro="<?= $value['id'] ?>" data-price= "<?= $value['price'] ?>">
                                         <i class="fa-solid fa-cart-plus"></i>
                                         <span>ADD TO CART</span>
                                     </div>
@@ -372,11 +378,11 @@
                                                     <?= $value['price'] ?>
                                                 </div>
                                                 <del class="product-price-old fm-price">
-                                                    <?= $value['price'] * (1 - $value['salePercent'] / 100) ?>
+                                                    <?= $value['price'] * (1 + $value['salePercent'] / 100) ?>
                                                 </del>
                                             </div>
                                         </a>
-                                        <div class="product-btn">
+                                        <div class="product-btn" idpro="<?= $value['id'] ?>" data-price= "<?= $value['price'] ?>">
                                             <i class="fa-solid fa-cart-plus"></i>
                                             <span>ADD TO CART</span>
                                         </div>
@@ -515,11 +521,11 @@
                                             <?= $value['price'] ?>
                                         </div>
                                         <del class="product-price-old fm-price">
-                                            <?= $value['price'] * (1 - $value['salePercent'] / 100) ?>
+                                            <?= $value['price'] * (1 + $value['salePercent'] / 100) ?>
                                         </del>
                                     </div>
                                 </a>
-                                <div class="product-btn">
+                                <div class="product-btn" idpro="<?= $value['id'] ?>" data-price= "<?= $value['price'] ?>">
                                     <i class="fa-solid fa-cart-plus"></i>
                                     <span>ADD TO CART</span>
                                 </div>
@@ -528,7 +534,7 @@
 
                     <?php }
                 } ?>
-               
+
 
             </div>
             <div class="sugestion-btn-more">

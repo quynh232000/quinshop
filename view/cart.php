@@ -1,5 +1,3 @@
-
-
 <!-- main -->
 <main class="cart">
     <div class="wrapper">
@@ -12,6 +10,7 @@
                 <span>Cart</span>
             </div>
         </div>
+       
         <div class="cart-body">
             <div class="cart-nav">
                 <div class="cart-item">
@@ -19,7 +18,9 @@
                         <div class="cart-checkbox">
                             <input checked type="checkbox">
                         </div>
-                        <div class="cart-title">All(2 Products)</div>
+                        <div class="cart-title">All(
+                            <?= $cartResult->status ? count($cartResult->result) : 0 ?> Products)
+                        </div>
                     </div>
                     <div class="cart-price">
                         <div class="cart-title">Price</div>
@@ -42,247 +43,72 @@
                         <div class="cart-checkbox">
                             <input type="checkbox" checked>
                         </div>
-                        <a href="#" class="cart-shop-info">
+                        <div class="cart-shop-info">
                             <div class="cart-shop-img">
                                 <img src="./assest/images/logo-no-text.png" alt="">
                             </div>
-                            <div class="cart-shop-name">UNIDI SHOP</div>
-                        </a>
+                            <div class="cart-shop-name">QUIN SHOP</div>
+                        </div>
                     </div>
                     <div class="cart-product">
-                        <div class="cart-item">
-                            <div class="cart-info">
-                                <div class="cart-checkbox">
-                                    <input type="checkbox">
-                                </div>
-                                <div class="cart-item-pro">
-                                    <div class="cart-item-img">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu02y_je0LPzhQGB_U_sSHN0QAcf_UncL6gxXjN2YdV-cHH0eGQ7RG2UcbPyaptI-jtC0&usqp=CAU"
-                                            alt="">
-                                    </div>
-                                    <div class="cart-info-right">
-                                        <div class="cart-item-name">
-                                            iPhone 15 Pro Max 256GB iPhone 15 Pro Max 256GB iPhone 15 Pro Max 256GB
+                        <?php
+                        if ($cartResult->status && count($cartResult->result[0]) > 0) {
+                            foreach ($cartResult->result as $key => $value) { 
+                                ?>
+                                <div class="cart-item">
+                                    <div class="cart-info">
+                                        <div class="cart-checkbox">
+                                            <input type="checkbox"  <?=$value['check']?"checked":"" ?>>
                                         </div>
-                                        <div class="cart-item-note">
-                                            Đồng giá 325k/ gói tã quần Huggies
+                                        <div class="cart-item-pro">
+                                            <div class="cart-item-img">
+                                                <img src="./assest/upload/<?=$value['image'] ?>"
+                                                    alt="">
+                                            </div>
+                                            <div class="cart-info-right">
+                                                <div class="cart-item-name">
+                                                <?=$value['namePro']; ?>
+                                                </div>
+                                                <div class="cart-item-note">
+                                                <?=$value['brand']; ?> - <?=$value['origin']; ?>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="cart-price">
-                                <div class="cart-item-price">$100</div>
-                            </div>
-                            <div class="cart-quantity">
+                                    <div class="cart-price">
+                                        <div class="cart-item-price fm-price"><?=$value['price'];?> </div>
+                                    </div>
+                                    <div class="cart-quantity">
 
-                                <div class="cart-item-count">
-                                    <div class="cart-count-btn"><i class="fa-solid fa-minus"></i></div>
-                                    <input type="text" class="cart-count-input" value="1">
-                                    <div class="cart-count-btn"><i class="fa-solid fa-plus"></i></div>
-                                </div>
-                            </div>
-                            <div class="cart-subtotal">
-                                <div class="cart-item-subtotal">$100</div>
-                            </div>
-                            <div class="cart-action">
-                                <div class="cart-item-action-icon">
-                                    <i class="fa-regular fa-heart"></i>
-                                </div>
-                                <div class="cart-item-action-icon">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cart-item">
-                            <div class="cart-info">
-                                <div class="cart-checkbox">
-                                    <input type="checkbox">
-                                </div>
-                                <div class="cart-item-pro">
-                                    <div class="cart-item-img">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu02y_je0LPzhQGB_U_sSHN0QAcf_UncL6gxXjN2YdV-cHH0eGQ7RG2UcbPyaptI-jtC0&usqp=CAU"
-                                            alt="">
-                                    </div>
-                                    <div class="cart-info-right">
-                                        <div class="cart-item-name">
-                                            iPhone 15 Pro Max 256GB iPhone 15 Pro Max 256GB iPhone 15 Pro Max 256GB
+                                        <div class="cart-item-count">
+                                            <div class="cart-count-btn"><i class="fa-solid fa-minus"></i></div>
+                                            <input type="text" class="cart-count-input" value="<?=$value['count']?>">
+                                            <div class="cart-count-btn"><i class="fa-solid fa-plus"></i></div>
                                         </div>
-                                        <div class="cart-item-note">
-                                            Đồng giá 325k/ gói tã quần Huggies
+                                    </div>
+                                    <div class="cart-subtotal">
+                                        <div class="cart-item-subtotal fm-price"><?=$value['price']*$value['count']; ?></div>
+                                    </div>
+                                    <div class="cart-action">
+                                        <div class="cart-item-action-icon">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </div>
+                                        <div class="cart-item-action-icon">
+                                            <i class="fa-solid fa-trash-can"></i>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="cart-price">
-                                <div class="cart-item-price">$100</div>
-                            </div>
-                            <div class="cart-quantity">
+                            <?php }
+                        } else {
+                            echo '<div class="no-product-cart">Bạn không có sản phẩm nào trong giỏ hàng</div>';
+                        };
+                        ?>
 
-                                <div class="cart-item-count">
-                                    <div class="cart-count-btn"><i class="fa-solid fa-minus"></i></div>
-                                    <input type="text" class="cart-count-input" value="1">
-                                    <div class="cart-count-btn"><i class="fa-solid fa-plus"></i></div>
-                                </div>
-                            </div>
-                            <div class="cart-subtotal">
-                                <div class="cart-item-subtotal">$100</div>
-                            </div>
-                            <div class="cart-action">
-                                <div class="cart-item-action-icon">
-                                    <i class="fa-regular fa-heart"></i>
-                                </div>
-                                <div class="cart-item-action-icon">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </div>
-                            </div>
-                        </div>
+
+                       
                     </div>
                 </div>
-                <!-- shop  -->
-                <div class="cart-group">
-                    <div class="cart-shop">
-                        <div class="cart-checkbox">
-                            <input type="checkbox" checked>
-                        </div>
-                        <a href="#" class="cart-shop-info">
-                            <div class="cart-shop-img">
-                                <img src="./assest/images/logo-no-text.png" alt="">
-                            </div>
-                            <div class="cart-shop-name">UNIDI SHOP</div>
-                        </a>
-                    </div>
-                    <div class="cart-product">
-                        <div class="cart-item">
-                            <div class="cart-info">
-                                <div class="cart-checkbox">
-                                    <input type="checkbox">
-                                </div>
-                                <div class="cart-item-pro">
-                                    <div class="cart-item-img">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu02y_je0LPzhQGB_U_sSHN0QAcf_UncL6gxXjN2YdV-cHH0eGQ7RG2UcbPyaptI-jtC0&usqp=CAU"
-                                            alt="">
-                                    </div>
-                                    <div class="cart-info-right">
-                                        <div class="cart-item-name">
-                                            iPhone 15 Pro Max 256GB iPhone 15 Pro Max 256GB iPhone 15 Pro Max 256GB
-                                        </div>
-                                        <div class="cart-item-note">
-                                            Đồng giá 325k/ gói tã quần Huggies
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="cart-price">
-                                <div class="cart-item-price">$100</div>
-                            </div>
-                            <div class="cart-quantity">
-
-                                <div class="cart-item-count">
-                                    <div class="cart-count-btn"><i class="fa-solid fa-minus"></i></div>
-                                    <input type="text" class="cart-count-input" value="1">
-                                    <div class="cart-count-btn"><i class="fa-solid fa-plus"></i></div>
-                                </div>
-                            </div>
-                            <div class="cart-subtotal">
-                                <div class="cart-item-subtotal">$100</div>
-                            </div>
-                            <div class="cart-action">
-                                <div class="cart-item-action-icon">
-                                    <i class="fa-regular fa-heart"></i>
-                                </div>
-                                <div class="cart-item-action-icon">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cart-item">
-                            <div class="cart-info">
-                                <div class="cart-checkbox">
-                                    <input type="checkbox">
-                                </div>
-                                <div class="cart-item-pro">
-                                    <div class="cart-item-img">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu02y_je0LPzhQGB_U_sSHN0QAcf_UncL6gxXjN2YdV-cHH0eGQ7RG2UcbPyaptI-jtC0&usqp=CAU"
-                                            alt="">
-                                    </div>
-                                    <div class="cart-info-right">
-                                        <div class="cart-item-name">
-                                            iPhone 15 Pro Max 256GB iPhone 15 Pro Max 256GB iPhone 15 Pro Max 256GB
-                                        </div>
-                                        <div class="cart-item-note">
-                                            Đồng giá 325k/ gói tã quần Huggies
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="cart-price">
-                                <div class="cart-item-price">$100</div>
-                            </div>
-                            <div class="cart-quantity">
-
-                                <div class="cart-item-count">
-                                    <div class="cart-count-btn"><i class="fa-solid fa-minus"></i></div>
-                                    <input type="text" class="cart-count-input" value="1">
-                                    <div class="cart-count-btn"><i class="fa-solid fa-plus"></i></div>
-                                </div>
-                            </div>
-                            <div class="cart-subtotal">
-                                <div class="cart-item-subtotal">$100</div>
-                            </div>
-                            <div class="cart-action">
-                                <div class="cart-item-action-icon">
-                                    <i class="fa-regular fa-heart"></i>
-                                </div>
-                                <div class="cart-item-action-icon">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cart-item">
-                            <div class="cart-info">
-                                <div class="cart-checkbox">
-                                    <input type="checkbox">
-                                </div>
-                                <div class="cart-item-pro">
-                                    <div class="cart-item-img">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu02y_je0LPzhQGB_U_sSHN0QAcf_UncL6gxXjN2YdV-cHH0eGQ7RG2UcbPyaptI-jtC0&usqp=CAU"
-                                            alt="">
-                                    </div>
-                                    <div class="cart-info-right">
-                                        <div class="cart-item-name">
-                                            iPhone 15 Pro Max 256GB iPhone 15 Pro Max 256GB iPhone 15 Pro Max 256GB
-                                        </div>
-                                        <div class="cart-item-note">
-                                            Đồng giá 325k/ gói tã quần Huggies
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="cart-price">
-                                <div class="cart-item-price">$100</div>
-                            </div>
-                            <div class="cart-quantity">
-
-                                <div class="cart-item-count">
-                                    <div class="cart-count-btn"><i class="fa-solid fa-minus"></i></div>
-                                    <input type="text" class="cart-count-input" value="1">
-                                    <div class="cart-count-btn"><i class="fa-solid fa-plus"></i></div>
-                                </div>
-                            </div>
-                            <div class="cart-subtotal">
-                                <div class="cart-item-subtotal">$100</div>
-                            </div>
-                            <div class="cart-action">
-                                <div class="cart-item-action-icon">
-                                    <i class="fa-regular fa-heart"></i>
-                                </div>
-                                <div class="cart-item-action-icon">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
             <div class="cart-bottom">
                 <div class="cart-bottom-total">
@@ -290,23 +116,23 @@
                         <div class="cart-checkbox">
                             <input checked type="checkbox">
                         </div>
-                        <span>All (2 Products)</span>
+                        <span>Tổng ( <?= $cartResult->status ? count($cartResult->result) : 0 ?> Sản phẩm)</span>
                     </div>
                     <div class="cart-bottom-right">
                         <div class="cart-bottom-right-title">
-                            Total:
+                            Tổng tiền:
                         </div>
                         <div class="cart-bottom-right-total">
-                            $200
+                        <?=($getCartInfo->result['totalPrice'])?>
                         </div>
                     </div>
                 </div>
                 <div class="cart-bottom-btn">
-                    <button class="cart-btn cart-btn-add">
+                    <button disabled class="cart-btn cart-btn-add">
                         <i class="fa-solid fa-cart-plus"></i>
-                        ADD TO CARD
+                        Cập nhật giỏ hàng
                     </button>
-                    <a href="?mod=page&act=checkout" class="cart-btn cart-btn-buy">CHECKOUT</a>
+                    <a href="?mod=page&act=checkout" class="cart-btn cart-btn-buy">Thanh toán</a>
                 </div>
             </div>
 

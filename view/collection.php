@@ -26,7 +26,11 @@
         <div class="c-mall">
             <div class="c-mall-top">
                 <div class="c-mall-top-title">
-                    QUIN STORE
+                    <?php 
+                    if(isset($infoCate)){
+                        echo strtoupper($infoCate['nameCate']);
+                    }
+                    ?>
                 </div>
                 <div class="suggestion-nav-right">
                     See more
@@ -271,11 +275,11 @@
                                                 <?= $value['price'] ?>
                                             </div>
                                             <del class="product-price-old fm-price">
-                                                <?= $value['price'] * (1 - $value['salePercent'] / 100) ?>
+                                                <?= $value['price'] * (1 + $value['salePercent'] / 100) ?>
                                             </del>
                                         </div>
                                     </a>
-                                    <div class="product-btn">
+                                    <div class="product-btn" idpro="<?= $value['id'] ?>" data-price= "<?= $value['price'] ?>">
                                         <i class="fa-solid fa-cart-plus"></i>
                                         <span>ADD TO CART</span>
                                     </div>

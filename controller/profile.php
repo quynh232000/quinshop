@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 include_once "lib/session.php";
 include_once 'model/category.php';
 include_once 'model/product.php';
@@ -29,7 +29,7 @@ if (isset($act)) {
             $class = new Adminlogin();
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                $checkRegister = $class->registerlogin_admin(
+                $checkRegister = $class->register_admin(
                     $_POST['username']
                     ,
                     $_POST['fullname'],

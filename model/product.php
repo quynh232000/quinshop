@@ -17,7 +17,6 @@ class Product
         $this->db = new Database();
         $this->fm = new Format();
         $this->tool = new Tool();
-        // $this->response = new Response();
     }
     public function updateProduct(
         $name,

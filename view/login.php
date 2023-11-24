@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,15 +53,15 @@
         <div class="form-noti" style="width:100%">
           <div class="form-msg">
             <?php
-            if (isset($login_check) ) {
+            if (isset($login_check)) {
               if ($login_check['status'] == false) {
-                  echo  '<div id="toast" mes-type="error" mes-title="Thất bại!" mes-text="'.$login_check['message'].'."></div>';
-              }else{
-                echo  '<div id="toast" mes-type="success" mes-title="Thành công!" mes-text="'.$login_check['message'].'."></div>';
+                echo '<div id="toast" mes-type="error" mes-title="Thất bại!" mes-text="' . $login_check['message'] . '."></div>';
+              } else {
+                echo '<div id="toast" mes-type="success" mes-title="Thành công!" mes-text="' . $login_check['message'] . '."></div>';
                 echo ' <script>
                 setTimeout(function() {
-                    window.location.href="'.$login_check['redirect'].'";
-                }, 4000);
+                    window.location.href="' . $login_check['redirect'] . '";
+                }, 3000);
             </script>';
               }
             }
@@ -81,14 +79,8 @@
       </form>
     </div>
   </div>
-  <div class="toast">
-    <i class="fa-solid fa-check"></i>
-    <span class="toast-text"> Login successfully!</span>
-    <div class="toast-border"></div>
-  </div>
-  <div class="loading">
-    <div class="spinner-2"></div>
-  </div>
+
+
 
   <script src="./src/js/main.js" type="module"></script>
 </body>

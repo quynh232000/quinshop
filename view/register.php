@@ -104,7 +104,7 @@
             <label for="confirmPassword">Confirm Password</label>
             <div class="form-body">
               <i class="fa-solid fa-lock"></i>
-              <input type="text" class="form-control" id="confirmPassword" rules="required|min:6" name="confirmpassword"
+              <input type="password" class="form-control" id="confirmPassword" rules="required|min:6" name="confirmpassword"
                 placeholder="Confirm Password" />
             </div>
             <div class="form-msg"></div>
@@ -114,10 +114,23 @@
           <div class="form-wrapper">
             <div class="form-msg">
               <?php
+              // if (isset($checkRegister)) {
+              //   echo $checkRegister["message"];
+              // } else {
+              //   echo "";
+              // }
+
               if (isset($checkRegister)) {
-                echo $checkRegister;
-              } else {
-                echo "";
+                if ($checkRegister['status'] == false) {
+                  echo '<div id="toast" mes-type="error" mes-title="Thất bại!" mes-text="' . $checkRegister['message'] . '."></div>';
+                } else {
+                  echo '<div id="toast" mes-type="success" mes-title="Thành công!" mes-text="' . $checkRegister['message'] . '."></div>';
+                  echo ' <script>
+                  setTimeout(function() {
+                      window.location.href="' . $checkRegister['redirect'] . '";
+                  }, 3000);
+              </script>';
+                }
               }
               ?>
             </div>
@@ -135,8 +148,8 @@
   </div>
 
 
-  <script src="./src/js/register.js" type="module"></script>
-  <!-- <script src="./src/js/main.js" type="module"></script> -->
+  <!-- <script src="./src/js/register.js" type="module"></script> -->
+  <script src="./src/js/main.js" type="module"></script>
 </body>
 
 </html>

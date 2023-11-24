@@ -22,7 +22,6 @@ if (isset($act)) {
             $classPro = new Product();
             $cate = new Category();
             $allCategory = $cate->getAllCate();
-            
             if (isset($_POST['btn-create-product']) && $_POST['btn-create-product']) {
                 $resAddPro = $classPro->updateProduct(
                     $_POST['name'],
@@ -40,8 +39,8 @@ if (isset($act)) {
             }
             include_once 'view/inc/headerAdmin.php';
             if (isset($resAddPro)) {
-
                 echo '<div id="toast" mes-type="success" mes-title="Thành công!" mes-text="Đăng sản phẩm thành công."></div>';
+               
             }
             include_once 'view/inc/sidebarAdmin.php';
             include_once 'view/admin/addproduct.php';
