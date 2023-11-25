@@ -20,7 +20,7 @@ if (isset($act)) {
             $newPro = $product->filterProduct("", "", 8);
             $salePro = $product->filterProduct("random");
             $bestPro = $product->filterProduct("random", "", 10);
-            $suggestionPro = $product->filterProduct("random", "", 12);
+            $suggestionPro = $product->filterProduct("random", "", 10);
             include_once 'view/inc/header.php';
             include_once 'view/home.php';
             include_once 'view/inc/footer.php';

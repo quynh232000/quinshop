@@ -181,7 +181,7 @@
                                                 </a>
                                                 <div idpro="<?= $value['id'] ?>" data-price= "<?= $value['price'] ?>" class="product-btn">
                                                     <i class="fa-solid fa-cart-plus"></i>
-                                                    <span>ADD TO CART</span>
+                                                    <span>Thêm giỏ hàng</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -208,10 +208,10 @@
             <div class="new-product-wrapper">
                 <div class="new-product-top">
                     <div class="new-product-title">
-                        New products
+                        Sản phẩm mới
                     </div>
                     <div class="new-product-more">
-                        See more
+                        Xem thêm
                         <i class="fa-solid fa-chevron-right"></i>
                     </div>
                 </div>
@@ -286,7 +286,7 @@
                                     </a>
                                     <div class="product-btn" idpro="<?= $value['id'] ?>" data-price= "<?= $value['price'] ?>">
                                         <i class="fa-solid fa-cart-plus"></i>
-                                        <span>ADD TO CART</span>
+                                        <span>Thêm giỏ hàng</span>
                                     </div>
                                 </div>
                             </div>
@@ -384,7 +384,7 @@
                                         </a>
                                         <div class="product-btn" idpro="<?= $value['id'] ?>" data-price= "<?= $value['price'] ?>">
                                             <i class="fa-solid fa-cart-plus"></i>
-                                            <span>ADD TO CART</span>
+                                            <span>Thêm giỏ hàng</span>
                                         </div>
                                     </div>
                                 </div>
@@ -423,7 +423,7 @@
                                 </a>
                                 <div class="product-btn">
                                     <i class="fa-solid fa-cart-plus"></i>
-                                    <span>ADD TO CART</span>
+                                    <span>Thêm giỏ hàng</span>
                                 </div>
                             </div>
                         </div> -->
@@ -431,7 +431,7 @@
                     <div class="best-selling-btn-body">
                         <div class="best-selling-content">
                             <div class="best-selling-btn">
-                                See more
+                                Xem thêm
                             </div>
                         </div>
                     </div>
@@ -442,22 +442,22 @@
     <!-- product -suggesetion -->
     <div class="suggestion">
         <div class="wrapper suggestion-wrapper">
-            <div class="home-title">Product Suggestions</div>
+            <div class="home-title">Sản phẩm gợi ý</div>
             <div class="suggestion-nav">
                 <div class="suggestion-nav-left">
                     <div class="suggestion-nav-item active">
-                        Mom & Baby
+                        Thời trang nam
                     </div>
                     <div class="suggestion-nav-item">
-                        Mom & Baby
+                        Túi ví nữ
                     </div>
                     <div class="suggestion-nav-item">
-                        Mom & Baby
+                        Laptop
                     </div>
 
                 </div>
                 <div class="suggestion-nav-right">
-                    See more
+                    Xem thêm
                     <i class="fa-solid fa-chevron-right"></i>
                 </div>
             </div>
@@ -527,7 +527,7 @@
                                 </a>
                                 <div class="product-btn" idpro="<?= $value['id'] ?>" data-price= "<?= $value['price'] ?>">
                                     <i class="fa-solid fa-cart-plus"></i>
-                                    <span>ADD TO CART</span>
+                                    <span>Thêm giỏ hàng</span>
                                 </div>
                             </div>
                         </div>
@@ -538,7 +538,7 @@
 
             </div>
             <div class="sugestion-btn-more">
-                <div class="suggestion-btn-more-body">See more</div>
+                <div class="suggestion-btn-more-body">Xem thêm</div>
             </div>
             <div class="more-info">
                 <div class="more-info-item">
@@ -582,7 +582,7 @@
                 <div class="news-top">
                     <div class="home-title">Lastest News</div>
                     <div class="suggestion-nav-right">
-                        See more
+                        Xem thêm
                         <i class="fa-solid fa-chevron-right"></i>
                     </div>
                 </div>

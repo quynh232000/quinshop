@@ -4,52 +4,50 @@
         <div class="l-footer-wrapper">
             <div class="l-footer-item">
                 <div class="l-footer-title">
-                    Contact Information
+                    Thông tin liên hệ
                 </div>
                 <div class="l-footer-child">
                     <i class="fa-solid fa-headset"></i>
                     <div class="l-footer-child-info">
-                        <span>+91 0123 456 789</span>
+                        <span>0358723520</span>
                         <span>Call on Order/ Call us 24/7</span>
                     </div>
                 </div>
                 <div class="l-footer-child">
                     <i class="fa-solid fa-location-dot"></i>
                     <div class="l-footer-child-info">
-                        No. 1259 Freedom, Liberty, St , New York, 11111
+                       Cv phần mềm Quang Trung, Q.12, HCM, VN
                     </div>
                 </div>
                 <div class="l-footer-child">
                     <i class="fa-regular fa-envelope"></i>
                     <div class="l-footer-child-info">
-                        unidi@gmail.com
+                        quynh232000@gmail.com
                     </div>
                 </div>
             </div>
 
             <div class="l-footer-item">
                 <div class="l-footer-title">
-                    Terms & Condition
+                    Điều khoản
                 </div>
-                <a href="/overview/help" class="l-footer-child">
-                    Help
+                <a href="#" class="l-footer-child">
+                    Trợ giúp
                 </a>
-                <a href="/overview/Contact" class="l-footer-child">
+                <a href="#" class="l-footer-child">
                     Contact
                 </a>
-                <a href="/overview/privacyprolicy" class="l-footer-child">
-                    Privacy - Prolicy
+                <a href="#" class="l-footer-child">
+                    Chính sách - Bảo mật
                 </a>
-                <a href="/overview/news" class="l-footer-child">
-                    News
+                <a href="#" class="l-footer-child">
+                    Tin tức
                 </a>
-                <a href="/overview/termsconditions" class="l-footer-child">
-                    Terms - Condition
-                </a>
+               
             </div>
             <div class="l-footer-item">
                 <div class="l-footer-title">
-                    Comnunity
+                    Cộng đồng
                 </div>
                 <div class="l-list-community" style="display:flex">
                     <a href="#" class="l-footer-child">
@@ -73,7 +71,7 @@
 
         </div>
         <div class="footer-copy">
-            Copyright © 2023 UNIDI
+            Copyright © 2023 Mr Quynh
         </div>
     </div>
 </footer>
