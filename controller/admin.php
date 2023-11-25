@@ -1,6 +1,7 @@
 <?php
-session_start();
-include "lib/session.php";
+// session_start();
+include_once "./lib/session.php";
+// session_start();
 Session::checkSession();
 Session::checkPermission("admin");
 include_once 'model/category.php';
