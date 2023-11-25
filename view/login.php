@@ -23,7 +23,7 @@
   <div class="register">
     <div class="wrapper">
       <form class="form-login" action="?mod=profile&act=login" method="post" enctype="multipart/form-data">
-        <h1>Login form</h1>
+        <h1>Đăng nhập</h1>
 
         <!-- invalidate -->
         <div class="form-group">

@@ -41,7 +41,7 @@
                 <div class="cart-group">
                     <div class="cart-shop">
                         <div class="cart-checkbox">
-                            <input type="checkbox" checked>
+                            <!-- <input type="checkbox" checked> -->
                         </div>
                         <div class="cart-shop-info">
                             <div class="cart-shop-img">
@@ -55,10 +55,10 @@
                         if ($cartResult->status && count($cartResult->result[0]) > 0) {
                             foreach ($cartResult->result as $key => $value) { 
                                 ?>
-                                <div class="cart-item">
+                                <div class="cart-item" idpro="<?=$value['productId'] ?>" checkpro="<?=$value['origin']; ?>" countpro = "<?=$value['count'] ?>" pricepro="<?=$value['price'] ?>">
                                     <div class="cart-info">
                                         <div class="cart-checkbox">
-                                            <input type="checkbox"  <?=$value['check']?"checked":"" ?>>
+                                            <input type="checkbox "  <?=$value['check']?"checked":"" ?>>
                                         </div>
                                         <div class="cart-item-pro">
                                             <div class="cart-item-img">
@@ -81,19 +81,19 @@
                                     <div class="cart-quantity">
 
                                         <div class="cart-item-count">
-                                            <div class="cart-count-btn"><i class="fa-solid fa-minus"></i></div>
+                                            <div class="cart-count-btn cart-btn-action" type-btn="minus"><i class="fa-solid fa-minus"></i></div>
                                             <input type="text" class="cart-count-input" value="<?=$value['count']?>">
-                                            <div class="cart-count-btn"><i class="fa-solid fa-plus"></i></div>
+                                            <div class="cart-count-btn cart-btn-action" type-btn="plus"><i class="fa-solid fa-plus"></i></div>
                                         </div>
                                     </div>
                                     <div class="cart-subtotal">
-                                        <div class="cart-item-subtotal fm-price"><?=$value['price']*$value['count']; ?></div>
+                                        <div class="cart-item-subtotal cart-subtotal fm-price" data-subtotal="<?=($value['price']*$value['count']) ?>"><?=($value['price']*$value['count']) ?></div>
                                     </div>
                                     <div class="cart-action">
                                         <div class="cart-item-action-icon">
                                             <i class="fa-regular fa-heart"></i>
                                         </div>
-                                        <div class="cart-item-action-icon">
+                                        <div class="cart-item-action-icon cart-btn-action" type-btn="delete">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </div>
                                     </div>
@@ -103,9 +103,6 @@
                             echo '<div class="no-product-cart">Bạn không có sản phẩm nào trong giỏ hàng</div>';
                         };
                         ?>
-
-
-                       
                     </div>
                 </div>
                
@@ -122,7 +119,7 @@
                         <div class="cart-bottom-right-title">
                             Tổng tiền:
                         </div>
-                        <div class="cart-bottom-right-total">
+                        <div class="cart-bottom-right-total fm-price" cart-total=" <?=($getCartInfo->result['totalPrice'])?>">
                         <?=($getCartInfo->result['totalPrice'])?>
                         </div>
                     </div>

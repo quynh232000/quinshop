@@ -6,6 +6,7 @@ include_once 'model/entity.php';
 include_once "model/cart.php";
 $classCart = new Cart();
 $getCartInfo = $classCart->getCartView();
+$cartResult = $classCart->getCartUser();
 extract($_REQUEST);
 if (isset($act)) {
     switch ($act) {
@@ -60,7 +61,7 @@ if (isset($act)) {
             include_once 'view/inc/footer.php';
             break;
         case 'cart':
-            $cartResult = $classCart->getCartUser();
+            // $cartResult = $classCart->getCartUser();
             
             include_once 'view/inc/header.php';
             include_once 'view/cart.php';

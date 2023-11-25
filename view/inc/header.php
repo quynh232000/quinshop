@@ -1,8 +1,8 @@
-
 <?php
 
-if(empty($viewTitle)){
+if (empty($viewTitle)) {
     $viewTitle = "HOME";
+
 }
 ?>
 
@@ -14,7 +14,9 @@ if(empty($viewTitle)){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="./assest/images/logo-no-text.png">
-    <title>QUIN- <?=$viewTitle?> </title>
+    <title>QUIN-
+        <?= $viewTitle ?>
+    </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -45,7 +47,7 @@ if(empty($viewTitle)){
 
 <body>
     <div id="toastjs"></div>
-    <div class="app" >
+    <div class="app">
         <!--header-->
         <header class="header">
             <!-- sidebar -->
@@ -192,8 +194,8 @@ if(empty($viewTitle)){
                 </div>
             </div>
             <div style="color:black">
-    
-    
+
+
             </div>
             <div class="header-body">
                 <div class="wrapper">
@@ -295,16 +297,19 @@ if(empty($viewTitle)){
                                 </div>
                             </div>
                         <?php } ?>
-                        
+
                         <div class="header-search-item header-cart">
                             <div class="header-search-item-icon icon-cart">
                                 <i class="fa-solid fa-cart-plus"></i>
-                                <div class="cart-count view-total-count" view-total-count="<?=($getCartInfo->result['total'])?>"><?=($getCartInfo->result['total'])?></div>
+                                <div class="cart-count view-total-count"
+                                    view-total-count="<?= ($getCartInfo->result['total']) ?>">
+                                    <?= ($getCartInfo->result['total']) ?></div>
                             </div>
                             <a href="?mod=page&act=cart" class="header-search-info">
                                 <span>Giỏ hàng</span>
-                                <div class="header-search-text-s fm-price view-total-cart" view-total-cart=" <?=($getCartInfo->result['totalPrice'])?>">
-                                <?=($getCartInfo->result['totalPrice'])?>
+                                <div class="header-search-text-s fm-price view-total-cart"
+                                    view-total-cart=" <?= ($getCartInfo->result['totalPrice']) ?>">
+                                    <?= ($getCartInfo->result['totalPrice']) ?>
                                 </div>
                             </a>
                             <!-- no cart :: header__cart-list--no-cart -->
@@ -315,73 +320,37 @@ if(empty($viewTitle)){
                                     Chưa có sản phẩm
                                 </span>
 
-                                <p class="header__cart-heading">Recently added products</p>
+                                <p class="header__cart-heading">Sản phẩm đã thêm</p>
                                 <ul class="header__cart-list-item">
-                                    <!-- cart item -->
-                                    <li class="header__cart-item">
-                                        <img src="https://cdn.shopify.com/s/files/1/0824/3121/t/204/assets/iphone14-1682521510040_1200x.png?v=1682521526"
-                                            alt="" class="header__cart-img">
-                                        <div class="header__cart-item-info">
-                                            <div class="header__cart-item-head">
-                                                <h5 class="header__cart-item-name">Giay sneaker 45TK Giay sneaker 45TK
-                                                    Giay sneaker 45TK Giay sneaker 45TK Giay sneaker 45TK Giay sneaker
-                                                    45TK Giay sneaker 45TK</h5>
-                                                <div class="header__cart-item-price-wrap">
-                                                    <span class="header__cart-item-price">2.000.000$</span>
-                                                    <span class="header__cart-item-multiple">x</span>
-                                                    <span class="header__cart-item-qnt">2</span>
+                                    <?php
+                                    if ($cartResult->status && count($cartResult->result[0]) > 0) {
+                                        foreach ($cartResult->result as $key => $value) { ?>
+                                            <li class="header__cart-item">
+                                                <img src="./assest/upload/<?=$value['image']?>"
+                                                    alt="" class="header__cart-img">
+                                                <div class="header__cart-item-info">
+                                                    <div class="header__cart-item-head">
+                                                        <h5 class="header__cart-item-name"><?=$value['namePro']?></h5>
+                                                        <div class="header__cart-item-price-wrap">
+                                                            <span class="header__cart-item-price fm-price"><?=$value['price']?></span>
+                                                            <span class="header__cart-item-multiple">x</span>
+                                                            <span class="header__cart-item-qnt"><?=$value['count']?></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="header__cart-item-body">
+                                                        <span class="header__cart-item-description">
+                                                        <?=$value['brand']?> - <?=$value['origin']?>
+                                                        </span>
+                                                        <span class="header__cart-item-remmove">Delete</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="header__cart-item-body">
-                                                <span class="header__cart-item-description">
-                                                    San pham cao cap nhap khau
-                                                </span>
-                                                <span class="header__cart-item-remmove">Delete</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="header__cart-item">
-                                        <img src="https://cdn.shopify.com/s/files/1/0824/3121/t/204/assets/iphone14-1682521510040_1200x.png?v=1682521526"
-                                            alt="" class="header__cart-img">
-                                        <div class="header__cart-item-info">
-                                            <div class="header__cart-item-head">
-                                                <h5 class="header__cart-item-name">Giay sneaker 45TK</h5>
-                                                <div class="header__cart-item-price-wrap">
-                                                    <span class="header__cart-item-price">2.000.000$</span>
-                                                    <span class="header__cart-item-multiple">x</span>
-                                                    <span class="header__cart-item-qnt">2</span>
-                                                </div>
-                                            </div>
-                                            <div class="header__cart-item-body">
-                                                <span class="header__cart-item-description">
-                                                    San pham cao cap nhap khau
-                                                </span>
-                                                <span class="header__cart-item-remmove">Delete</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="header__cart-item">
-                                        <img src="https://cdn.shopify.com/s/files/1/0824/3121/t/204/assets/iphone14-1682521510040_1200x.png?v=1682521526"
-                                            alt="" class="header__cart-img">
-                                        <div class="header__cart-item-info">
-                                            <div class="header__cart-item-head">
-                                                <h5 class="header__cart-item-name">Giay sneaker 45TK</h5>
-                                                <div class="header__cart-item-price-wrap">
-                                                    <span class="header__cart-item-price">2.000.000$</span>
-                                                    <span class="header__cart-item-multiple">x</span>
-                                                    <span class="header__cart-item-qnt">2</span>
-                                                </div>
-                                            </div>
-                                            <div class="header__cart-item-body">
-                                                <span class="header__cart-item-description">
-                                                    San pham cao cap nhap khau
-                                                </span>
-                                                <span class="header__cart-item-remmove">Delete</span>
-                                            </div>
-                                        </div>
-                                    </li>
+                                            </li>
+
+                                        <?php }
+                                    }
+                                    ?>
                                 </ul>
-                                <a href="" class="header__cart-view-cart btn btn--primary">View cart</a>
+                                <a href="?mod=page&act=cart" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
                             </div>
                         </div>
                     </div>

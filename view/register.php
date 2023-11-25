@@ -20,13 +20,7 @@
   <script src="https://code.jquery.com/jquery-2.2.4.min.js"
     integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
   <style>
-    /* .body-register{
-        max-height: 80vh;
-        overflow-y: scroll;
-      }
-      ::-webkit-scrollbar{
-        display: hidden;
-      } */
+   
     .form-group {
       margin-top: 0;
     }

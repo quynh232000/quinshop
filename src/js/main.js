@@ -361,23 +361,54 @@ $().ready(function(){
         }).done(data=>{
           data =JSON.parse(data)
           toastjs( data.message)
-          
-          let newCount = +$(".view-total-count").attr("view-total-count")+1
-          $(".view-total-count").attr("view-total-count",newCount)
-          $(".view-total-count").text(newCount +"")
-          
-          let newPrice = +price + +$(".view-total-cart").attr("view-total-cart") 
-          $(".view-total-cart").attr("view-total-cart",newPrice)
-          $(".view-total-cart").text(formartPrice(newPrice))
-
+          if(data.status){
+            let newCount = +$(".view-total-count").attr("view-total-count")+1
+            $(".view-total-count").attr("view-total-count",newCount)
+            $(".view-total-count").text(newCount +"")
+            let newPrice = +price + +$(".view-total-cart").attr("view-total-cart") 
+            $(".view-total-cart").attr("view-total-cart",newPrice)
+            $(".view-total-cart").text(formartPrice(newPrice))
+          }
         })
-
       }
     })
+    // update cart
+    $(".cart-btn-action").click(function(){
+      const type = $(this).attr("type-btn")
+      const item = $(this).closest(".cart-item")
+      const idpro = item.attr("idpro")
+      const pricepro = item.attr("pricepro")
+      const countpro = item.attr("countpro")
+      // console.log(idpro,pricepro,countpro)
+      updateViewCart(type,countpro,pricepro)
 
-
+    })
 })
+function updateViewCart(type,count,price){
+    switch (type) {
+      case "minus":
+        $(".view-total-count").attr("view-total-count",+$(".view-total-count").attr("view-total-count")-1)
+        $(".view-total-count").text(+$(".view-total-count").attr("view-total-count")-1)
 
+        $(".view-total-cart").attr("view-total-cart",+$(".view-total-cart").attr("view-total-cart")- (price))
+        $(".view-total-cart").text(formartPrice(+$(".view-total-cart").attr("view-total-cart")- (price)))
+        break;
+      case "delete":
+        
+        break;
+    
+      default:
+        $(".view-total-count").attr("view-total-count",+$(".view-total-count").attr("view-total-count")+1)
+        $(".view-total-count").text(+$(".view-total-count").attr("view-total-count")+1)
+
+        $(".view-total-cart").attr("view-total-cart",+$(".view-total-cart").attr("view-total-cart")+ (price))
+        $(".view-total-cart").text(formartPrice(+$(".view-total-cart").attr("view-total-cart")+ (price)))
+        
+
+
+        break;
+    }
+}
 const toastEl = document.getElementById("toast")
 if(toastEl){
     const mesType = toastEl.getAttribute("mes-type")

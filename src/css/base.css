@@ -5,22 +5,32 @@
     --white: #ffffff;
     --black:#161618;
     --bg-yellow:#FFC200;
+    /* --bg-yellow:orangered; */
     --bg-hover:rgba(22,22,24,.06);
     --box-shadows:rgba(0, 0, 0, 0.12);
     --box-shadows2:rgba(22,22,24,.2);
     --red:rgba(255, 95, 95, 1);
-    
     --btn-hover-color:rgba(217, 237, 255, 1);
     --boder-color:rgba(218, 218, 218, 1);
     --gray-dark: #343a40;
     --green:rgb(39, 185, 39);
-    
     --width:1400px;
     /* --width:calc(100% - 20px); */
 
 }
 * {
     box-sizing: inherit;
+}
+.disabled{
+  background-color: rgb(170, 167, 167) !important;
+  color: white !important;
+  cursor: not-allowed !important;
+}
+.disabled:hover{
+  background-color: rgb(170, 167, 167) !important;
+  color: white !important;
+  cursor: not-allowed !important;
+  opacity: 1 !important;
 }
 html {
     line-height: 1.6rem;
