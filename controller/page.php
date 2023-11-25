@@ -21,17 +21,6 @@ if (isset($act)) {
             $salePro = $product->filterProduct("random");
             $bestPro = $product->filterProduct("random", "", 10);
             $suggestionPro = $product->filterProduct("random", "", 12);
-            //    add cart
-            // if (isset($_GET['type']) && isset($_GET['idpro']) && !empty($_GET['type']) && !empty($_GET['idpro'])) {
-
-            //     $json = json_encode(new Response(  true,"successfully","",""), JSON_PRETTY_PRINT);
-            //     echo $json;
-            //     return ;
-
-            // }
-
-
-
             include_once 'view/inc/header.php';
             include_once 'view/home.php';
             include_once 'view/inc/footer.php';

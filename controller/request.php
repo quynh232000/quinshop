@@ -16,7 +16,7 @@ if (isset($act)) {
                 echo $json;
                 return ;
             }
-            break;
+            // break;
         default:
             break;
            

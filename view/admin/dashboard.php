@@ -7,23 +7,23 @@
                     <!-- content -->
                     <div class="shop-main-content">
                         <div class="shop-top">
-                            <div class="shop-title">Dashboard</div>
+                            <div class="shop-title">Tổng quan</div>
                             <div class="dash-top">
                                 <div class="dash-top-item">
                                     <div class="dash-top-title">
                                         <div class="dash-top-icon">
                                             <i class="fa-solid fa-money-bills"></i>
                                         </div>
-                                        <span>Total balance</span>
+                                        <span>Doanh thu</span>
                                     </div>
-                                    <div class="dash-top-content">$ 1.000.000</div>
+                                    <div class="dash-top-content fm-price"> 1000000</div>
                                 </div>
                                 <div class="dash-top-item">
                                     <div class="dash-top-title">
                                         <div class="dash-top-icon">
                                             <i class="fa-solid fa-box-open"></i>
                                         </div>
-                                        <span>Total oders</span>
+                                        <span>Tổng đơn hàng</span>
                                     </div>
                                     <div class="dash-top-content"> 1.000</div>
                                 </div>

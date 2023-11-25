@@ -3,7 +3,7 @@
     <!-- content -->
     <div class="shop-main-content">
         <div class="shop-top">
-            <div class="shop-title">Dashboard</div>
+            <div class="shop-title">Quản lí sản phẩm</div>
             <div class="shop-pro-filter">
                 <div class="shop-pro-filter-item">
                     <div class="shop-pro-filter-input">

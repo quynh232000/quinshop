@@ -15,7 +15,7 @@
                                     <div class="shop-sidebar-icon">
                                         <i class="fa-solid fa-house"></i>
                                     </div>
-                                    <span class="shop-sidebar-title">OverView</span>
+                                    <span class="shop-sidebar-title">Tổng quan</span>
                                 </a>
                             </div>
                             <!--shop-sidebar item -->
@@ -24,7 +24,7 @@
                                     <div class="shop-sidebar-icon">
                                         <i class="fa-solid fa-box"></i>
                                     </div>
-                                    <span class="shop-sidebar-title">Products</span>
+                                    <span class="shop-sidebar-title">Sản phẩm</span>
                                    
                                 </a>
                                 
@@ -34,7 +34,7 @@
                                     <div class="shop-sidebar-icon">
                                         <i class="fa-solid fa-box"></i>
                                     </div>
-                                    <span class="shop-sidebar-title">Categories</span>
+                                    <span class="shop-sidebar-title">Danh mục</span>
                                    
                                 </a>
                                 
@@ -45,7 +45,7 @@
                                     <div class="shop-sidebar-icon">
                                         <i class="fa-solid fa-file-invoice"></i>
                                     </div>
-                                    <span class="shop-sidebar-title">Orders</span>
+                                    <span class="shop-sidebar-title">Đơn hàng</span>
                                 </a>
                             </div>
                             <!--shop-sidebar item -->
