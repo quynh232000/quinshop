@@ -3,11 +3,11 @@
     <div class="wrapper">
         <div class="detail-tab">
             <a href="#" class="detail-tab-item">
-                <span>Home</span>
+                <span>Trang chủ</span>
                 <i class="fa-solid fa-angle-right"></i>
             </a>
             <div class="detail-tab-item detail-tab-item-name">
-                <span>Cart</span>
+                <span>Giỏ hàng</span>
             </div>
         </div>
        
@@ -16,20 +16,20 @@
                 <div class="cart-item">
                     <div class="cart-info">
                         <div class="cart-checkbox">
-                            <input checked type="checkbox">
+                            <!-- <input checked type="checkbox"> -->
                         </div>
-                        <div class="cart-title">All(
-                            <?= $cartResult->status ? count($cartResult->result) : 0 ?> Products)
+                        <div class="cart-title">Tất cả (
+                            <?= $cartResult->status ? count($cartResult->result) : 0 ?> Sản phẩm)
                         </div>
                     </div>
                     <div class="cart-price">
-                        <div class="cart-title">Price</div>
+                        <div class="cart-title">Giá</div>
                     </div>
                     <div class="cart-quantity">
-                        <div class="cart-title">Quantity</div>
+                        <div class="cart-title">Số</div>
                     </div>
                     <div class="cart-subtotal">
-                        <div class="cart-title">Subtotal</div>
+                        <div class="cart-title">Tổng tiền</div>
                     </div>
                     <div class="cart-action">
                         <div class="cart-title"><i class="fa-solid fa-trash-can"></i></div>
@@ -58,7 +58,8 @@
                                 <div class="cart-item" idpro="<?=$value['productId'] ?>" checkpro="<?=$value['origin']; ?>" countpro = "<?=$value['count'] ?>" pricepro="<?=$value['price'] ?>">
                                     <div class="cart-info">
                                         <div class="cart-checkbox">
-                                            <input type="checkbox "  <?=$value['check']?"checked":"" ?>>
+                                            <!-- <input type="checkbox "  <?=$value['check']?"checked":"" ?> > -->
+                                            <input class="item-cart-checkbox" <?=($value['check']?"checked":"") ?> type="checkbox">
                                         </div>
                                         <div class="cart-item-pro">
                                             <div class="cart-item-img">
@@ -82,12 +83,12 @@
 
                                         <div class="cart-item-count">
                                             <div class="cart-count-btn cart-btn-action" type-btn="minus"><i class="fa-solid fa-minus"></i></div>
-                                            <input type="text" class="cart-count-input" value="<?=$value['count']?>">
+                                            <input type="text" class="cart-count-input" readonly value="<?=$value['count']?>">
                                             <div class="cart-count-btn cart-btn-action" type-btn="plus"><i class="fa-solid fa-plus"></i></div>
                                         </div>
                                     </div>
                                     <div class="cart-subtotal">
-                                        <div class="cart-item-subtotal cart-subtotal fm-price" data-subtotal="<?=($value['price']*$value['count']) ?>"><?=($value['price']*$value['count']) ?></div>
+                                        <div class="cart-item-subtotal cart-subtotal1 fm-price" data-subtotal="<?=($value['price']*$value['count']) ?>"><?=($value['price']*$value['count']) ?></div>
                                     </div>
                                     <div class="cart-action">
                                         <div class="cart-item-action-icon">
@@ -111,7 +112,7 @@
                 <div class="cart-bottom-total">
                     <div class="cart-bottom-left">
                         <div class="cart-checkbox">
-                            <input checked type="checkbox">
+                            <!-- <input checked type="checkbox"> -->
                         </div>
                         <span>Tổng ( <?= $cartResult->status ? count($cartResult->result) : 0 ?> Sản phẩm)</span>
                     </div>
@@ -125,11 +126,11 @@
                     </div>
                 </div>
                 <div class="cart-bottom-btn">
-                    <button disabled class="cart-btn cart-btn-add">
+                    <!-- <button disabled class="cart-btn cart-btn-add">
                         <i class="fa-solid fa-cart-plus"></i>
                         Cập nhật giỏ hàng
-                    </button>
-                    <a href="?mod=page&act=checkout" class="cart-btn cart-btn-buy">Thanh toán</a>
+                    </button> -->
+                    <a href="?mod=page&act=checkout" class="cart-btn cart-btn-buy">Mua hàng</a>
                 </div>
             </div>
 

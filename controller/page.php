@@ -62,12 +62,40 @@ if (isset($act)) {
             break;
         case 'cart':
             // $cartResult = $classCart->getCartUser();
-            
+
             include_once 'view/inc/header.php';
             include_once 'view/cart.php';
             include_once 'view/inc/footer.php';
             break;
         case 'checkout':
+            include_once 'model/cart.php';
+            $classCart = new Cart();
+            if (isset($_POST['nameReceiver']) && !empty($_POST['nameReceiver'])) {
+
+                $nameReceiver = $_POST['nameReceiver'];
+                $city = $_POST['city'];
+                $province = $_POST['province'];
+                $addressDetail = $_POST['addressDetail'];
+                $phone = $_POST['phone'];
+                $note = $_POST['note'];
+                $subtotal = $_POST['subTotal'];
+                $total = $_POST['total'];
+                $fee = $_POST['fee'];
+                $valueCheckout = $classCart->checkout($nameReceiver, $city, $province, $addressDetail, $phone, $note, $subtotal, $total, $fee);
+
+                if (isset($valueCheckout)) {
+                    if ($valueCheckout->status == false) {
+                        echo '<div id="toast" mes-type="error" mes-title="Thất bại!" mes-text="' . $valueCheckout->message . '."></div>';
+                    } else {
+                        echo '<div id="toast" mes-type="success" mes-title="Thành công!" mes-text="' . $valueCheckout->message . '."></div>';
+                        echo ' <script>
+                                setTimeout(function() {
+                                    window.location.href="' . $valueCheckout->redirect . '";
+                                }, 3000);
+                            </script>';
+                    }
+                }
+            }
             include_once 'view/inc/header.php';
             include_once 'view/checkout.php';
             include_once 'view/inc/footer.php';

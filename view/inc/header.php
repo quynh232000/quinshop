@@ -303,7 +303,14 @@ if (empty($viewTitle)) {
                                 <i class="fa-solid fa-cart-plus"></i>
                                 <div class="cart-count view-total-count"
                                     view-total-count="<?= ($getCartInfo->result['total']) ?>">
-                                    <?= ($getCartInfo->result['total']) ?></div>
+                                    <?php
+                                    if(empty(($getCartInfo->result['total']))){
+                                        echo "0";
+
+                                    }else{
+                                        echo $getCartInfo->result['total'];
+                                    }
+                                    ?></div>
                             </div>
                             <a href="?mod=page&act=cart" class="header-search-info">
                                 <span>Giỏ hàng</span>
@@ -314,11 +321,8 @@ if (empty($viewTitle)) {
                             </a>
                             <!-- no cart :: header__cart-list--no-cart -->
                             <div class="header__cart-list ">
-                                <img src="https://cdn.shopify.com/s/files/1/0824/3121/t/204/assets/iphone14-1682521510040_1200x.png?v=1682521526"
-                                    alt="" class="header__cart-no-cart-img">
-                                <span class="header__cart-list--no-cart-smg">
-                                    Chưa có sản phẩm
-                                </span>
+                               
+                                
 
                                 <p class="header__cart-heading">Sản phẩm đã thêm</p>
                                 <ul class="header__cart-list-item">

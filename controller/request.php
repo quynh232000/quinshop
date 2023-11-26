@@ -11,7 +11,8 @@ if (isset($act)) {
             if (isset($_GET['type']) && isset($_GET['idpro']) && !empty($_GET['type']) && !empty($_GET['idpro'])) {
                 $type = $_GET['type'];
                 $idPro = $_GET['idpro'];
-                $resultUpdateCart = $classCart->updateCart($type,$idPro);
+                $count = isset($_GET['count'])?$_GET['count']:"";
+                $resultUpdateCart = $classCart->updateCart($type,$idPro, $count);
                 $json = json_encode($resultUpdateCart, JSON_PRETTY_PRINT);
                 echo $json;
                 return ;

@@ -94,7 +94,7 @@ if (isset($productInfo)) {
                                 <span>
                                     <?= $proInfo['sold'] ?>
                                 </span>
-                                <div>Sold</div>
+                                <div>Đã bán</div>
                             </div>
                         </div>
                         <div class="detail-flash">
@@ -104,7 +104,7 @@ if (isset($productInfo)) {
                             </div>
                             <div class="detail-flash-right">
                                 <i class="fa-regular fa-clock"></i>
-                                <span>ends in</span>
+                                <span>Kết thúc trong</span>
                                 <div class="detail-flash-time">
                                     <div class="detail-flash-item">00</div>
                                     <div class="detail-flash-item">00</div>
@@ -125,7 +125,7 @@ if (isset($productInfo)) {
                             </div>
                         </div>
                         <div class="detail-group">
-                            <div class="detail-info-title">Shop discount code</div>
+                            <div class="detail-info-title">Shop giảm giá</div>
                             <div class="detail-info-content">
                                 <div class="detail-info-sale">Sale
                                     <?= $proInfo['salePercent'] ?>%
@@ -133,7 +133,7 @@ if (isset($productInfo)) {
                             </div>
                         </div>
                         <div class="detail-group">
-                            <div class="detail-info-title">Delivery</div>
+                            <div class="detail-info-title">Vận chuyển</div>
                             <div class="detail-info-content">
                                 <div class="detail-deli">
                                     <div class="detail-deli-item">
@@ -145,7 +145,7 @@ if (isset($productInfo)) {
                                     <div class="detail-deli-item">
                                         <div class="detail-deli-wrapper">
                                             <i class="fa-solid fa-truck-moving"></i>
-                                            <span>Delivery to</span>
+                                            <span>Vận chuyển đến</span>
                                             <div class="detail-deli-dropdown">
                                                 HCM city
                                                 <i class="fa-solid fa-angle-down"></i>
@@ -161,7 +161,7 @@ if (isset($productInfo)) {
                                 <div class="detail-deli">
                                     <div class="detail-deli-item">
                                         <div class="detail-deli-wrapper">
-                                            <span>Transport fee</span>
+                                            <span>Phí vận chuyển</span>
                                             <div class="detail-deli-dropdown">
                                                 0đ
                                                 <i class="fa-solid fa-angle-down"></i>
@@ -175,42 +175,41 @@ if (isset($productInfo)) {
                                 </div>
                             </div>
                         </div>
-                        <div class="detail-group">
+                        <!-- <div class="detail-group">
                             <div class="detail-info-title">Size</div>
                             <div class="detail-info-size">
                                 <div class="detail-info-size-item">Iphone 15</div>
                                 <div class="detail-info-size-item">Iphone 15</div>
                                 <div class="detail-info-size-item">Iphone 15</div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="detail-group">
-                            <div class="detail-info-title">Quantity</div>
+                            <div class="detail-info-title">Số lượng</div>
                             <div class="detail-info-quantity">
                                 <div class="detail-amount">
-                                    <div class="detail-info-quantity-item"><i class="fa-solid fa-minus"></i></div>
-                                    <input class="detail-info-quantity-item" type="text" value="1" />
-                                    <div class="detail-info-quantity-item"><i class="fa-solid fa-plus"></i></div>
+                                    <div class="detail-info-quantity-item detail-btn-count" type="minus"  ><i class="fa-solid fa-minus"></i></div>
+                                    <input class="detail-info-quantity-item detail-input-quantity" type="text"  value="1" readonly />
+                                    <div class="detail-info-quantity-item detail-btn-count" type="plus" ><i class="fa-solid fa-plus"></i></div>
                                 </div>
                                 <div class="detail-amount-total">
-                                    <?= $proInfo['quantity'] ?> items
+                                    <?= $proInfo['quantity'] ?> sản phẩm
                                 </div>
                             </div>
                         </div>
-                        <div class="detail-btn-body">
-                            <button class="detail-btn detail-btn-add">
+                        <div class="detail-btn-body" style="margin-top:30px">
+                            <button class=" detail-btn detail-btn-add" idpro="<?= $proInfo['id'] ?>" data-price="<?= $proInfo['price'] ?>"  >
                                 <i class="fa-solid fa-cart-plus"></i>
-                                ADD TO CARD
+                                Thêm vào giỏ hàng
                             </button>
-                            <a href="?mod=page&act=cart&id=<?= $proInfo['id'] ?>&cout=1"
-                                class="detail-btn detail-btn-buy">BUY
-                                NOW</a>
+                            <a href="?mod=page&act=cart"
+                                class="detail-btn detail-btn-buy">Giỏ hàng </a>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- desciption -->
             <div class="detail-desciption">
-                <div class="detail-desctiption-title">DESCRIPTION</div>
+                <div class="detail-desctiption-title">MÔ TẢ CHI TIẾT</div>
                 <div class="detail-description-body">
                     <?= $proInfo['description'] ?>
                 </div>
@@ -223,10 +222,10 @@ if (isset($productInfo)) {
                         <div class="new-product-wrapper">
                             <div class="new-product-top">
                                 <div class="new-product-title">
-                                    RECOMMENDED FOR YOU
+                                Gợi ý cho bạn
                                 </div>
                                 <div class="new-product-more">
-                                    See more
+                                    Xem thêm
                                     <i class="fa-solid fa-chevron-right"></i>
                                 </div>
                             </div>
@@ -301,7 +300,7 @@ if (isset($productInfo)) {
                                                 </a>
                                                 <div class="product-btn" idpro="<?= $value['id'] ?>" data-price= "<?= $value['price'] ?>">
                                                     <i class="fa-solid fa-cart-plus"></i>
-                                                    <span>ADD TO CART</span>
+                                                    <span>Thêm giỏ hàng</span>
                                                 </div>
                                             </div>
                                         </div>

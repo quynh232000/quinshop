@@ -5,6 +5,10 @@ include_once 'model/category.php';
 include_once 'model/product.php';
 include_once "model/category.php";
 include_once "model/adminlogin.php";
+include_once "model/cart.php";
+$classCart = new Cart();
+$getCartInfo = $classCart->getCartView();
+$cartResult = $classCart->getCartUser();
 extract($_REQUEST);
 if (isset($act)) {
     switch ($act) {

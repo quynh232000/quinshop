@@ -255,8 +255,10 @@
     transition: .3s ease;
 }
 .detail-info-quantity-item:nth-child(2){
-    max-width: 76px;
+    max-width: 86px;
+    width: fit-content;
     padding: 7px 32px;
+    text-align: center;
 }
 .detail-amount div,.detail-amount input{
     border: 1px solid var(--boder-color);
@@ -282,6 +284,7 @@
     color: var(--primary);
     display: flex;
     gap: 6px;
+    /* width:260px !important ; */
    
 }
 .detail-btn-buy{
@@ -290,6 +293,9 @@
     line-height: 2.1rem;
     
 
+}
+.detail-desciption img{
+    max-width: 220px;
 }
 a.detail-btn.detail-btn-buy {
     line-height: 2.2rem;

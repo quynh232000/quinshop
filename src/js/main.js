@@ -351,6 +351,17 @@ $().ready(function(){
         })
       })
     }
+    // plus and dminus in detail
+    $(".detail-btn-count").click(function(){
+      if($(this).attr("type") =="plus"){
+        $(".detail-input-quantity").val(+$(".detail-input-quantity").val() +1)
+       
+      }else{
+        if(+$(".detail-input-quantity").val() >1){
+          $(".detail-input-quantity").val(+$(".detail-input-quantity").val() -1)
+        }
+      }
+    })
     // add to cart
     $(".product-btn").click(function(){
       const id = $(this).attr("idpro")
@@ -372,6 +383,25 @@ $().ready(function(){
         })
       }
     })
+    // add to cart detail
+    $(".detail-btn-add").click(function(){
+     
+      const count = $(".detail-input-quantity").val()
+      const price = $(this).attr("data-price")
+      const idpro = $(this).attr("idpro")
+      $.ajax({
+        url:"?mod=request&act=cart&type=add"+"&idpro="+idpro+"&count="+count
+      }).done(data=>{
+        data =JSON.parse(data)
+        toastjs( data.message)
+        const currentCountView = +$(".view-total-count").attr("view-total-count")
+        const currentTotalView = +$(".view-total-cart").attr("view-total-cart")
+        $(".view-total-count").attr("view-total-count",currentCountView + +count)
+        $(".view-total-count").text(currentCountView + +count +"")
+        $(".view-total-cart").attr("view-total-cart",currentTotalView + (+price*+count))
+        $(".view-total-cart").text(formartPrice(+currentTotalView +(+price*+count) ))
+      })
+    })
     // update cart
     $(".cart-btn-action").click(function(){
       const type = $(this).attr("type-btn")
@@ -379,35 +409,99 @@ $().ready(function(){
       const idpro = item.attr("idpro")
       const pricepro = item.attr("pricepro")
       const countpro = item.attr("countpro")
-      // console.log(idpro,pricepro,countpro)
-      updateViewCart(type,countpro,pricepro)
+      updateViewCart(item,type,countpro,pricepro,idpro)
 
     })
+    // check box cart
+    $(".item-cart-checkbox").change(function(){
+      const item = $(this).closest(".cart-item")
+      const idpro = item.attr("idpro")
+      const pricepro = item.attr("pricepro")
+      const countpro = item.attr("countpro")
+      const type = $(this).is(':checked') ?"check":"uncheck"
+      console.log(type)
+      updateViewCart(item,type,countpro,pricepro,idpro)
+    })
 })
-function updateViewCart(type,count,price){
+function updateViewCart(_this,type,count,price,idpro){
+  const currentSubtotal =(_this.find(".cart-subtotal1").attr("data-subtotal"))
+  const currentInputCount =(_this.find(".cart-count-input").val())
+  const currentCountView = +$(".view-total-count").attr("view-total-count")
+  const currentTotalView = +$(".view-total-cart").attr("view-total-cart")
+
+  const deleteTotal = +count*+price
     switch (type) {
       case "minus":
-        $(".view-total-count").attr("view-total-count",+$(".view-total-count").attr("view-total-count")-1)
-        $(".view-total-count").text(+$(".view-total-count").attr("view-total-count")-1)
+        if(currentInputCount == 1) {
+          break
+        }
+        ajaxUpdateCart (type,idpro)
+        $(".view-total-count").attr("view-total-count",currentCountView - 1)
+        $(".view-total-count").text(currentCountView -1 +"")
 
-        $(".view-total-cart").attr("view-total-cart",+$(".view-total-cart").attr("view-total-cart")- (price))
-        $(".view-total-cart").text(formartPrice(+$(".view-total-cart").attr("view-total-cart")- (price)))
+        $(".view-total-cart").attr("view-total-cart",currentTotalView - +price)
+        $(".view-total-cart").text(formartPrice(+currentTotalView - +price ))
+        $(".cart-bottom-right-total").text(formartPrice(+currentTotalView - +price ))
+        // sub
+        _this.find(".cart-subtotal1").attr("data-subtotal",(+currentSubtotal - +price ))
+        _this.find(".cart-subtotal1").text(formartPrice(+currentSubtotal - +price ))
+        _this.find(".cart-count-input").val(currentInputCount - 1)
+        _this.attr("countpro",+count -1)
+
         break;
       case "delete":
+        ajaxUpdateCart (type,idpro)
+        $(".view-total-count").attr("view-total-count",currentCountView - (count))
+        $(".view-total-count").text(currentCountView -count +"")
+        $(".view-total-cart").attr("view-total-cart",currentTotalView -deleteTotal +"")
+        $(".view-total-cart").text(formartPrice(+currentTotalView -deleteTotal))
+        $(".cart-bottom-right-total").text(formartPrice(+currentTotalView -deleteTotal ))
+        // sub
+       _this.remove()
+        break;
+      case "check":
+        ajaxUpdateCart (type,idpro)
+        $(".view-total-count").attr("view-total-count",currentCountView + (+count))
+        $(".view-total-count").text(currentCountView + +count +"")
+        $(".view-total-cart").attr("view-total-cart",currentTotalView +deleteTotal +"")
+        $(".view-total-cart").text(formartPrice(+currentTotalView +deleteTotal))
+        $(".cart-bottom-right-total").text(formartPrice(+currentTotalView + deleteTotal ))
         
         break;
-    
+      case "uncheck":
+        ajaxUpdateCart (type,idpro)
+        $(".view-total-count").attr("view-total-count",currentCountView - (count))
+        $(".view-total-count").text(currentCountView - +count +"")
+        $(".view-total-cart").attr("view-total-cart",currentTotalView -deleteTotal +"")
+        $(".view-total-cart").text(formartPrice(+currentTotalView -deleteTotal))
+        $(".cart-bottom-right-total").text(formartPrice(+currentTotalView -deleteTotal ))
+        // sub
+        break;
+          
       default:
-        $(".view-total-count").attr("view-total-count",+$(".view-total-count").attr("view-total-count")+1)
-        $(".view-total-count").text(+$(".view-total-count").attr("view-total-count")+1)
-
-        $(".view-total-cart").attr("view-total-cart",+$(".view-total-cart").attr("view-total-cart")+ (price))
-        $(".view-total-cart").text(formartPrice(+$(".view-total-cart").attr("view-total-cart")+ (price)))
-        
-
+        ajaxUpdateCart (type,idpro)
+        $(".view-total-count").attr("view-total-count",currentCountView + 1)
+        $(".view-total-count").text(currentCountView +1 +"")
+        $(".view-total-cart").attr("view-total-cart",currentTotalView + +price)
+        $(".view-total-cart").text(formartPrice(+currentTotalView + +price ))
+        $(".cart-bottom-right-total").text(formartPrice(+currentTotalView + +price ))
+        // sub
+        _this.find(".cart-subtotal1").attr("data-subtotal",(+currentSubtotal + +price ))
+        _this.find(".cart-subtotal1").text(formartPrice(+currentSubtotal + +price ))
+        _this.find(".cart-count-input").val(+currentInputCount + 1)
+        _this.attr("countpro",+count +1)
 
         break;
     }
+}
+function ajaxUpdateCart (type,idpro){
+  $.ajax({
+    url:"?mod=request&act=cart&type="+type+"&idpro="+idpro
+  }).done(data=>{
+    data =JSON.parse(data)
+    toastjs( data.message)
+    
+  })
 }
 const toastEl = document.getElementById("toast")
 if(toastEl){

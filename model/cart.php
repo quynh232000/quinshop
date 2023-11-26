@@ -16,40 +16,46 @@ class Cart
         $this->db = new Database();
         $this->tool = new Tool();
     }
-    public function getCartUser(){
+    public function getCartUser($type ="")
+    {
         $isLogin = Session::get("isLogin");
         if ($isLogin != true) {
-            return new Response(false, "false","", "");
+            return new Response(false, "false", "", "");
         }
         $userId = Session::get("id");
+        if(!empty($type) && $type =="checked"){
+            $type = "AND c.check = '1'";
+        }else{
+            $type = "";
+        }
         $cartUser = $this->db->select("SELECT c.*,
         p.namePro, p.image, p.brand, p.price, p.quantity, p.origin
-        from cart AS c INNER JOIN product AS p  ON c.productId = p.id WHERE c.userId = '$userId'");
+        from cart AS c INNER JOIN product AS p  ON c.productId = p.id WHERE c.userId = '$userId'  $type");
         if ($cartUser == false) {
-            return new Response(false, "false","", "");
-        }else{
+            return new Response(false, "false", "", "");
+        } else {
             $result = [];
             while ($row = mysqli_fetch_array($cartUser)) {
-                $result[] =  $row;
+                $result[] = $row;
             }
-            return new Response(true, "success",$result, "");
+            return new Response(true, "success", $result, "");
         }
     }
     public function getCartView()
     {
         $isLogin = Session::get("isLogin");
         if ($isLogin != true) {
-            return new Response(true, "success", ["total" => 0, "totalPrice" => 0], "");
+            return new Response(true, "success", ["total" => "0", "totalPrice" => 0], "");
         }
         $userId = Session::get("id");
-        $checkCart = $this->db->select("SELECT * FROM cart WHERE userId = '$userId'");
+        $checkCart = $this->db->select("SELECT * FROM cart WHERE userId = '$userId' ");
         if ($checkCart == false) {
-            return new Response(true, "success", ["total" => 0, "totalPrice" => 0], "");
+            return new Response(true, "success", ["total" => "0", "totalPrice" => 0], "");
         }
-        $query = "select SUM(c.count * p.price) as totalPrice, SUM(c.count) as total from cart as c inner join product as p on c.productId = p.id where userId = '$userId';";
+        $query = "select SUM(c.count * p.price) as totalPrice, SUM(c.count) as total from cart as c inner join product as p on c.productId = p.id where userId = '$userId' AND c.check = '1';";
         $resultGetCart = $this->db->select($query);
         if ($resultGetCart == false) {
-            return new Response(true, "success", ["total" => 0, "totalPrice" => 0], "");
+            return new Response(true, "success", ["total" => "0", "totalPrice" => 0], "");
         } else {
 
             $result = $resultGetCart->fetch_assoc();
@@ -57,7 +63,7 @@ class Cart
             return new Response(true, "success", $result, "");
         }
     }
-    public function updateCart($key = "", $value = "")
+    public function updateCart($key = "", $value = "", $count)
     {
         $isLogin = Session::get("isLogin");
         if ($isLogin == false) {
@@ -71,19 +77,40 @@ class Cart
                 if ($checkCart == false) {
                     return new Response(false, "Thêm sản phẩm thất bại!", "", "");
                 } else {
-                    $updateCart = $this->db->update("UPDATE cart set count = count -1 where userId = $userId AND productId = $value");
+                    $updateCart = $this->db->update("UPDATE cart set count = count -1 where userId = '$userId' AND productId = '$value'");
                     if ($updateCart == false) {
                         return new Response(false, "Cập nhật giỏ hàng thất bại thất bại!", "", "");
                     } else {
                         return new Response(true, "Cập nhật giỏ hàng thành công!", "", "");
                     }
                 }
-
             case 'delete':
                 if ($checkCart == false) {
                     return new Response(false, "Xóa sản phẩm thất bại!", "", "");
                 } else {
-                    $updateCart = $this->db->delete("DELETE cart where userId = $userId AND productId = $value");
+                    $updateCart = $this->db->delete("DELETE FROM cart where userId = '$userId' AND productId = '$value'");
+                    if ($updateCart == false) {
+                        return new Response(false, "Cập nhật giỏ hàng thất bại thất bại!", "", "");
+                    } else {
+                        return new Response(true, "Cập nhật giỏ hàng thành công!", "", "");
+                    }
+                }
+            case 'check':
+                if ($checkCart == false) {
+                    return new Response(false, "Check sản phẩm thất bại!", "", "");
+                } else {
+                    $updateCart = $this->db->delete("UPDATE cart SET cart.check = '1' where userId = '$userId' AND productId = '$value'");
+                    if ($updateCart == false) {
+                        return new Response(false, "Cập nhật giỏ hàng thất bại thất bại!", "", "");
+                    } else {
+                        return new Response(true, "Cập nhật giỏ hàng thành công!", "", "");
+                    }
+                }
+            case 'uncheck':
+                if ($checkCart == false) {
+                    return new Response(false, "Uncheck sản phẩm thất bại!", "", "");
+                } else {
+                    $updateCart = $this->db->delete("UPDATE cart SET cart.check = '0' where userId = '$userId' AND productId = '$value'");
                     if ($updateCart == false) {
                         return new Response(false, "Cập nhật giỏ hàng thất bại thất bại!", "", "");
                     } else {
@@ -92,42 +119,78 @@ class Cart
                 }
 
             default:
-            if ($checkCart == false) {
-                    $createCart = $this->db->insert("INSERT INTO cart (userId,productId) VALUE ('$userId', '$value')");
+                if ($checkCart == false) {
+                    if(empty($count)){
+                        $createCart = $this->db->insert("INSERT INTO cart (userId,productId) VALUE ('$userId', '$value')");
+
+                    }else{
+                        $createCart = $this->db->insert("INSERT INTO cart (userId,productId,count) VALUE ('$userId', '$value', '$count')");
+                    }
                     if ($createCart == false) {
                         return new Response(false, "Thêm sản phẩm thất bại!", "", "");
                     } else {
                         return new Response(true, "Đã thêm sản phẩm vào giỏ hàng thành công!", "", "");
                     }
                 } else {
-                    $updateCart = $this->db->update("UPDATE cart set count = count +1 where userId = '$userId' AND productId = '$value'");
+                    if(empty($count)){
+                        $updateCart = $this->db->update("UPDATE cart set count = count +1 where userId = '$userId' AND productId = '$value'");
+                    }else{
+                        $updateCart = $this->db->update("UPDATE cart set count = count + $count where userId = '$userId' AND productId = '$value'");
+                    }
                     if ($updateCart == false) {
                         return new Response(false, "Thêm sản phẩm thất bại!", "", "");
                     } else {
                         return new Response(true, "Đã thêm sản phẩm vào giỏ hàng thành công!", "", "");
                     }
                 }
-                
+
         }
 
     }
-    public function deleteProduct($id)
+    public function checkout($nameReceiver,$city,$province,$addressDetail,$phone,$note,$subtotal,$total,$fee)
     {
-        if (empty($id)) {
-            // return "Id product cannot be empty";
-            return new Response(false, "Hành động không hợp lệ! Vui lòng thử lại!", "", "?mod=admin&act=manageproduct");
+        $isLogin = Session::get("isLogin");
+        if ($isLogin != true) {
+            return new Response(true, "success", ["total" => 0, "totalPrice" => 0], "");
         }
-        $query = "DELETE FROM product WHERE id='$id'";
-        $result = $this->db->delete($query);
-        if ($result != false) {
-            return new Response(true, "Xóa sản phẩm thành công", "", "?mod=admin&act=manageproduct");
-        } else {
-            return new Response(false, "Hành động không hợp lệ! Vui lòng thử lại!", "", "?mod=admin&act=manageproduct");
+        $userId = Session::get("id");
+        $newAddress = $this->db->insert("INSERT INTO quin.address (userId, nameReceiver, phone, city, province) VALUES
+            ('$userId','$nameReceiver','$phone','$city','$province');
+        ");
+        if ($newAddress == false) {
+            return new Response(false, "Create new address fail!","", "");
         }
+        $getIdAddress = $this->db->select("SELECT LAST_INSERT_ID();");
+        $idAddress = mysqli_fetch_assoc($getIdAddress)['LAST_INSERT_ID()'];
+        // creeate invoice
+        $invoince = $this->db->insert("INSERT INTO invoice (userId,subTotal,total,addressId,note,fee) VALUES
+            ('$userId','$subtotal','$total','$idAddress','$note','$fee');
+        ");
+        if ($invoince == false) {
+            return new Response(false, "Create new invoice fail!","", "");
+        }
+        $getIdInvoice = $this->db->select("SELECT LAST_INSERT_ID();");
+        $idInvoice = mysqli_fetch_assoc($getIdInvoice)['LAST_INSERT_ID()'];
+        // create invoicedetail
+        $invoiceDetail = $this->db->insert("INSERT INTO invoicedetail (invoinceId,productId,quantity)
+            SELECT  '$idInvoice' ,c.productId, c.count FROM cart AS c
+            WHERE c.userId = '$userId' AND c.check = '1'
+        ");
+        if ($invoiceDetail == false) {
+            return new Response(false, "Create new invoice detail fail!","", "");
+        }
+        $cartinfo = self::getCartUser("checked");
+        foreach ($cartinfo->result as $key => $value) {
+            $rowsId[] = $value["id"];
+        }
+        $rowsId = implode(",",$rowsId);
+        $deleteCart = $this->db->delete("DELETE FROM cart WHERE id IN  ($rowsId)");
+        if ($deleteCart == false) {
+            return new Response(false, "Delete cart detail fail!","", "");
+        }
+        return new Response(true, "Đặt hàng thành công!", "", "?mod=profile&act=orderhistory");
     }
-
-
-
+    
 }
 
 
