@@ -24,7 +24,7 @@
                     </div>
                     <div class="profile-nav-info">
                         <div class="profile-nav-user-name"><?=Session::get("fullName") ?></div>
-                        <div class="profile-nav-user-edit">Edit account</div>
+                        <div class="profile-nav-user-edit">Chỉnh sửa</div>
                     </div>
                 </div>
                 <div class="profile-nav-list">
@@ -35,7 +35,7 @@
                         <a href="?mod=profile&act=profile" class="profile-nav-content ">
                             <div class="profile-nav-item-title">
                                 <i class="fa-regular fa-user"></i>
-                                <div class="profile-nav-name">Profile</div>
+                                <div class="profile-nav-name">Hồ sơ</div>
                             </div>
                             <div class="profile-nav-item-down">
                                 
@@ -47,7 +47,7 @@
                         <a href="?mod=profile&act=orderhistory" class="profile-nav-content">
                             <div class="profile-nav-item-title">
                             <i class="fa-solid fa-box"></i>
-                                <div class="profile-nav-name">History Orders</div>
+                                <div class="profile-nav-name">Đơn hàng</div>
                             </div>
                         </a>
 
@@ -56,7 +56,7 @@
                         <a href="?mod=profile&act=sercurity" class="profile-nav-content">
                             <div class="profile-nav-item-title">
                                 <i class="fa-solid fa-shield"></i>
-                                <div class="profile-nav-name">Security</div>
+                                <div class="profile-nav-name">Mật khẩu</div>
                             </div>
                             <div class="profile-nav-item-down">
 

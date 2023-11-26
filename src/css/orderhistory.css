@@ -70,10 +70,21 @@
     gap: 5px;
     font-size: 14px;
 }
+.h-item-price{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
 .h-item-name{
     font-weight: 500;
     font-size: 16px;
     margin-bottom: 4px;
+    /* height: 36px; */
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
 }
 .h-item-status{
     color: rgb(33, 33, 141);
@@ -81,6 +92,9 @@
 }
 .success{
     color: #1bab3a;
+}
+.new{
+    color: var(--bg-yellow);
 }
 .h-item-info a{
     color: blue;

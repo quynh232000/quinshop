@@ -11,26 +11,26 @@
                         </div>
                         <label for="avatar-input">
                             <i class="fa-regular fa-pen-to-square"></i>
-                            <span>Upload photo</span>
+                            <span>Tải lên</span>
                         </label>
                         <input type="file" name="avatar" id="avatar-input" hidden>
                     </div>
                     <div class="profile-wrapper">
                         <div class="profile-group">
-                            <label for="">Username</label>
+                            <label for="">Tài khoản</label>
                             <div class="profile-content">
-                                <input type="text" value="<?=Session::get("userName") ?>" name="username" class="profile-input">
+                                <input readonly type="text" value="<?=Session::get("userName") ?>" name="username" class="profile-input">
                             </div>
                         </div>
                         <div class="profile-group">
-                            <label for="">Fullname</label>
+                            <label for="">Họ tên</label>
                             <div class="profile-content">
                                 <input type="text" value="<?=Session::get("fullName") ?>" name="fullname" class="profile-input">
                             </div>
                         </div>
                        
                         <div class="profile-group">
-                            <label for="">Phone number</label>
+                            <label for="">Số điện thoại</label>
                             <div class="profile-content">
                                 <input type="text" value="<?=Session::get("phone") ?>" name="phonenumber" class="profile-input">
                             </div>
@@ -48,14 +48,14 @@
                             </div>
                         </div> -->
                         <div class="profile-group">
-                            <label for="">Address</label>
+                            <label for="">Địa chỉ</label>
                             <div class="profile-content">
                                 <input type="text" value="q8, hcm" name="address" class="profile-input">
                             </div>
                         </div>
                         <div class="profile-eidt-submit">
                             <button class="btn-update-profile" type="submit">
-                                Update
+                                Cập nhật
                             </button>
                         </div>
                     </div>

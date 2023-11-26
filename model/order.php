@@ -16,7 +16,7 @@ class Order
         $this->db = new Database();
         $this->tool = new Tool();
     }
-    public function getOrder($type ="")
+    public function getAllOrder($type ="")
     {
         $isLogin = Session::get("isLogin");
         if ($isLogin != true) {
@@ -24,21 +24,22 @@ class Order
         }
         $userId = Session::get("id");
         
-        $oders = $this->db->select("SELECT *
+        $oders = $this->db->select("SELECT de.*, i.status,i.total,i.subTotal ,i.id as 'sku', p.namePro,p.image,p.price
             FROM invoicedetail as de
             INNER JOIN invoice as i
-            ON de.invoiceId = i.id
+            ON de.invoinceId = i.id
+            INNER JOIN product as p
+            ON de.productId = p.id
             WHERE i.userId = '$userId'
         ");
-        if ($cartUser == false) {
+        if ($oders == false) {
             return new Response(false, "false", "", "");
-        } else {
-            $result = [];
-            while ($row = mysqli_fetch_array($cartUser)) {
-                $result[] = $row;
-            }
-            return new Response(true, "success", $result, "");
+        } 
+        $result = [];
+        while ($row = mysqli_fetch_assoc($oders)) {
+            $result[] = $row;
         }
+        return new Response(true, "success", $result, "");
     }
     
 }

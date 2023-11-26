@@ -6,6 +6,7 @@ include_once 'model/product.php';
 include_once "model/category.php";
 include_once "model/adminlogin.php";
 include_once "model/cart.php";
+include_once "model/order.php";
 $classCart = new Cart();
 $getCartInfo = $classCart->getCartView();
 $cartResult = $classCart->getCartUser();
@@ -47,6 +48,10 @@ if (isset($act)) {
             include_once 'view/register.php';
             break;
         case 'orderhistory':
+            $classOrder = new Order();
+
+            $allOrder = $classOrder->getAllOrder();
+            
             include_once 'view/inc/header.php';
             include_once 'view/inc/profilesidebar.php';
             include_once 'view/orderhistory.php';

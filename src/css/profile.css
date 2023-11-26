@@ -145,7 +145,7 @@
     border: 1px solid var(--boder-color);
     width: 100%;
     padding: 12px;
-    border-radius: 12px;
+    border-radius: 6px;
     color: var(--text-color);
     font-size: 1.6rem;
 }
@@ -160,7 +160,7 @@
     background-color: var(--primary);
     color: var(--white);
     padding: 14px 64px;
-    border-radius: 12px;
+    border-radius: 6px;
     transition: .3s ease;
 }
 .btn-update-profile:hover{

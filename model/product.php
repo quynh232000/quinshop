@@ -92,7 +92,7 @@ class Product
     }
     public function getAllProduct()
     {
-        $query = "SELECT pr.*, cate.nameCate as nameCategory from product as pr INNER JOIN category as cate on pr.categoryId = cate.id ";
+        $query = "SELECT pr.*, cate.nameCate as nameCategory from product as pr INNER JOIN category as cate on pr.categoryId = cate.id ORDER BY pr.createdAt DESC limit 20";
         $result = $this->db->select($query);
         if ($result != false) {
             $rows = [];
