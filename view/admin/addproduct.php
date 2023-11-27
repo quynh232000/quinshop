@@ -5,9 +5,17 @@
                     <!-- content -->
                     <div class="shop-main-content">
                         <div class="shop-top">
-                            <div class="shop-title">Tạo sản phẩm mới</div>
-                            
+                            <div class="shop-title">
+                                <?php 
+                                    if(isset($_GET['idPro'])){
+                                        echo "Chỉnh sửa sản phẩm";
+                                    }else{
+                                        echo "Tạo sản phẩm mới";
+                                    }
+                                ?>
+                            </div>
                         </div>
+                        <!-- <?php if(isset($productInfo)){ echo ""; }?> -->
                         <div class="shop-add">
                             <form class="c-body"
                             id="form-create-product"
@@ -27,9 +35,10 @@
                                               <div class="form-input-body">
                                                   <input type="text"
                                                          name="name"
+                                                         value="<?=isset($productInfo) ? $productInfo[0]['namePro']:"" ?>"
                                                          rules="required"
                                                          class="form-input"
-                                                         placeholder="Enter name's product..." />
+                                                         placeholder="Nhập tên sản phẩm..." />
                                               </div>
                                           </div>
                                           <div class="form-msg"></div>
@@ -38,7 +47,7 @@
                                       <div class="cate-body w-50">
                                           <div class="form-group-body w-100">
                                               <label for="" class="form-label">
-                                                  Đanh mục <i class="fa-solid fa-circle-info"></i>
+                                                  Danh mục <i class="fa-solid fa-circle-info"></i>
                                               </label>
                                               <div class="shop-form-control">
                                                       <div class="form-input-body">
@@ -48,7 +57,9 @@
                                                                   class="list-categoryChild">
                                                                 <option value="">--Chọn danh mục--</option>   
                                                                 <?php foreach ($allCategory as $key => $value) { ?>
-                                                                        <option value="<?=$value['id'] ?>"><?=$value['nameCate'] ?></option>
+                                                                        <option value="<?=$value['id'] ?>"
+                                                                        <?=isset($productInfo) ? $productInfo[0]['categoryId'] ==$value['id']? "selected":"":"" ?>
+                                                                        ><?=$value['nameCate'] ?></option>
                                                                  <?php   }
                                                                 ?> 
                                                             </select>
@@ -64,7 +75,9 @@
                                           </label>
                                           <div class="shop-form-control">
                                               <div class="form-input-body">
-                                                  <input type="text" name="unit" placeholder="Cái, cặp, hộp,..." />
+                                                  <input type="text" 
+                                                  value="<?=isset($productInfo) ? $productInfo[0]['unit']:"" ?>"
+                                                  name="unit" placeholder="Cái, cặp, hộp,..." />
               
                                               </div>
                                           </div>
@@ -78,6 +91,7 @@
                                                   <div class="form-input-body">
                                                       <input type="text"
                                                              name="brand"
+                                                             value="<?=isset($productInfo) ? $productInfo[0]['brand']:"" ?>"
                                                              class="form-input"
                                                              placeholder="Iphone, Samsung,..." />
                                                   </div>
@@ -92,6 +106,7 @@
                                                   <div class="form-input-body">
                                                       <input type="text"
                                                              name="origin"
+                                                            value=" <?=isset($productInfo) ? $productInfo[0]['origin']:"" ?>"
                                                              class="form-input"
                                                              placeholder="Trung Quốc, Nhật Bản..." />
                                                   </div>
@@ -110,8 +125,9 @@
                                           </label>
                                           <div class="shop-form-control">
                                               <div class="form-input-body">
-                                                  <input type="number"
+                                                  <input type="text"
                                                          name="price"
+                                                        value=" <?=isset($productInfo) ? (int)$productInfo[0]['price']:0 ?>"
                                                          class="form-input"
                                                          rules="required"
                                                          placeholder="VND" />
@@ -123,10 +139,10 @@
                                           <label for="" class="form-label">(%) giảm giá </label>
                                           <div class="shop-form-control">
                                               <div class="form-input-body">
-                                                  <input type="number"
+                                                  <input type="text"
                                                          name="salePercent"
                                                          class="form-input"
-                                                         
+                                                        value =" <?=isset($productInfo) ? $productInfo[0]['salePercent']:"" ?>"
                                                          placeholder="0%" />
                                               </div>
                                           </div>
@@ -142,7 +158,7 @@
                                                          name="quantity"
                                                          class="form-input"
                                                          rules="required"
-                                                         value="100"
+                                                         value="<?=isset($productInfo) ? $productInfo[0]['quantity']:"100" ?>"
                                                          placeholder="0" />
                                               </div>
                                           </div>
@@ -154,15 +170,17 @@
                               <div class="shop-form-group  w-100">
                                   <div class="form-group-wrapper">
                                       <div class="form-group-body w-100">
-                                          <div class="form-group-title">Description</div>
+                                          <div class="form-group-title">Mô tả chi tiết</div>
                                       </div>
                                       <div class="form-group-body w-100">
                                           <div class="shop-form-control">
                                               <div class="form-input-body form-input-body-editor">
                                                   <div id="editor" style="min-height: 220px">
+                                                  <?=isset($productInfo) ? $productInfo[0]['description']:"" ?>
                                                   </div>
                                               </div>
-                                              <textarea name="description" style="display:none" id="description"></textarea>
+                                              
+                                              <textarea value="" style="display:none" name="description"  id="description"></textarea>
                                           </div>
                                           <div class="form-msg"></div>
                                       </div>
@@ -178,8 +196,8 @@
                                   <div class="form-group-wrapper">
                                       <div class="form-group-body w-100">
                                           <div class="form-group-title">
-                                              <div>Image cover</div>
-                                              <label for="upload-img-avatar" class="btn-upload-img">Upload images</label>
+                                              <div>Ảnh đại diện</div>
+                                              <label for="upload-img-avatar" class="btn-upload-img">Tải lên</label>
                                           </div>
                                       </div>
                                       <div class="form-group-body w-100 ">
@@ -189,16 +207,16 @@
                                                  name="image"
                                                  
                                                  hidden />
-                                          <label class="form-list-img label-img label-image-cover" for="upload-img-avatar">
+                                          <label class="form-list-img label-img label-image-cover" style="<?=isset($productInfo) ?"display:none":"" ?>" for="upload-img-avatar">
                                               <div class="list-img w-100">
                                                   <i class="fa-solid fa-images"></i>
                                               </div>
-                                              <div class="list-title">Drop your images here!</div>
+                                              <div class="list-title">Tải ảnh lên!</div>
                                           </label>
                                           <!-- @*show image*@ -->
-                                          <div class="product-imgs">
-                                              <div class="create-show-image-body">
-                                                  <img class="create-show-image" />
+                                          <div class="product-imgs ">
+                                              <div class="create-show-image-body" style=" <?=isset($productInfo) ?"display:flex":"" ?>" >
+                                                  <img class="create-show-image" src="./assest/upload/<?=isset($productInfo) ? $productInfo[0]['image']:"" ?>" />
                                               </div>
                                           </div>
                                           <div class="form-msg"></div>
@@ -209,8 +227,8 @@
                                   <div class="form-group-wrapper">
                                       <div class="form-group-body w-100">
                                           <div class="form-group-title">
-                                              <div>Images preview <span>(<span class="total-img">0</span>/10)</span></div>
-                                              <label for="upload-img" class="btn-upload-img">Upload images</label>
+                                              <div>Ảnh preview <span>(<span class="total-img">0</span>/10)</span></div>
+                                              <label for="upload-img" class="btn-upload-img">Tải lên</label>
                                           </div>
                                       </div>
                                       <div class="form-group-body w-100 ">
@@ -220,11 +238,28 @@
                                                  name="listImage[]"
                                                  accept="image/*"
                                                  multiple />
-                                          <label class="form-list-img label-list-img" for="upload-img">
+                                          <label class="form-list-img label-list-img"  style="<?=isset($productInfo) ?"display:block":"" ?>" for="upload-img">
                                               <div class="list-img w-100">
-                                                  <i class="fa-solid fa-images"></i>
+                                                  
+                                                  <?php 
+                                                    if(isset($productInfo)){
+                                                        foreach ($productInfo[1] as $key => $value) {?>
+                                                            <div class="product-img">
+                                                                <div class="product-img-wrapper">
+                                                                    <img src="./assest/upload/<?=$value['link'] ?>" />
+                                                                    <div class="product-img-delete">
+                                                                        <i class="fa-regular fa-trash-can"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                       <?php  }
+
+                                                    }else{
+                                                        echo '<i class="fa-solid fa-images"></i>';
+                                                    }
+                                                  ?>
                                               </div>
-                                              <div class="list-title">Drop your images here!</div>
+                                              <div class="list-title">Tải ảnh lên!</div>
                                           </label>
                                           <div class="product-imgs list-img-preview">
               
@@ -234,9 +269,9 @@
                                   </div>
                               </div>
                               <div class="c-bottom w-100 create-new-product-btn">
-                                <button type="reset" class="c-btn">Cancel</button>
+                                <button type="reset" class="c-btn">Hủy</button>
                                 <!-- <button type="submit" class="c-btn c-btn-save">Save</button> -->
-                                <input type="submit" class="c-btn c-btn-save" name="btn-create-product" value ="Save">
+                                <input type="submit" class="c-btn c-btn-save" name="btn-create-product" value ="<?=isset($_GET['idPro'])?"Cập nhật":"Lưu" ?>">
                             </div>
                           </div>
                           

@@ -29,25 +29,20 @@ if (isset($act)) {
             include_once 'view/inc/footer.php';
             break;
         case 'collection':
-            // $cate = new Category();
-            // $product = new Product();
+            $allCategory = $cate->getAllCate();
             if (isset($_GET['category']) && !empty($_GET['category'])) {
                 $collectionPro = $product->filterProduct("category", $_GET['category']);
                 $infoCate = $cate->getInfoCate($_GET['category']);
-
             } else {
                 $collectionPro = $product->filterProduct();
             }
             if (isset($infoCate))
                 $viewTitle = $infoCate['nameCate'];
-
-
             include_once 'view/inc/header.php';
             include_once 'view/collection.php';
             include_once 'view/inc/footer.php';
             break;
         case 'detail':
-            // $product = new Product();
             if (isset($_GET['id']) && !empty($_GET['id'])) {
                 $infoPro = $product->filterProduct("detail", $_GET['id']);
                 if (isset($infoPro) && $infoPro->status == true) {
@@ -63,17 +58,12 @@ if (isset($act)) {
             include_once 'view/inc/footer.php';
             break;
         case 'cart':
-            // $cartResult = $classCart->getCartUser();
-
             include_once 'view/inc/header.php';
             include_once 'view/cart.php';
             include_once 'view/inc/footer.php';
             break;
         case 'checkout':
-            include_once 'model/cart.php';
-            // $classCart = new Cart();
             if (isset($_POST['nameReceiver']) && !empty($_POST['nameReceiver'])) {
-
                 $nameReceiver = $_POST['nameReceiver'];
                 $city = $_POST['city'];
                 $province = $_POST['province'];
@@ -84,7 +74,6 @@ if (isset($act)) {
                 $total = $_POST['total'];
                 $fee = $_POST['fee'];
                 $valueCheckout = $classCart->checkout($nameReceiver, $city, $province, $addressDetail, $phone, $note, $subtotal, $total, $fee);
-
                 if (isset($valueCheckout)) {
                     if ($valueCheckout->status == false) {
                         echo '<div id="toast" mes-type="error" mes-title="Thất bại!" mes-text="' . $valueCheckout->message . '."></div>';
@@ -93,7 +82,7 @@ if (isset($act)) {
                         echo ' <script>
                                 setTimeout(function() {
                                     window.location.href="' . $valueCheckout->redirect . '";
-                                }, 3000);
+                                }, 2000);
                             </script>';
                     }
                 }

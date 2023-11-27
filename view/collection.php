@@ -26,9 +26,9 @@
         <div class="c-mall">
             <div class="c-mall-top">
                 <div class="c-mall-top-title">
-                    <?php 
-                    if(isset($infoCate)){
-                        echo strtoupper($infoCate['nameCate']);
+                    <?php
+                    if (isset($infoCate)) {
+                        echo ($infoCate['nameCate']);
                     }
                     ?>
                 </div>
@@ -37,7 +37,7 @@
                     <i class="fa-solid fa-chevron-right"></i>
                 </div>
             </div>
-            <div class="c-mall-body">
+            <!-- <div class="c-mall-body">
                 <div class="swiper-collection-brand">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide c-mall-item">
@@ -100,79 +100,51 @@
                     </div>
 
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <div class="c-body">
             <div class="g-left">
-                <div class="g-left-top">
-                    <div class="g-left-top-title">
-                        <i class="fa-solid fa-bars"></i>
-                        <p class="lg lg-allCategory">ALL CATEGORIES</p>
-                    </div>
-                    <div class="g-left-top-body g-left-top-body-checkbox">
-                        <div class="g-left-top-item">
-                            <span>Phone & accessories</span>
-                        </div>
-                        <p><input type="checkbox" /> Mobile</p>
-                        <p><input type="checkbox" checked />Ipad</p>
-                        <p><input type="checkbox" /> Battery backup</p>
-                        <p><input type="checkbox" /> Phone case</p>
-                        <a href="#" class="c-nav-see-more"> More</a>
-
-                    </div>
-                </div>
+               
                 <div class="g-left-top">
                     <div class="g-left-top-title">
                         <i class="fa-solid fa-filter"></i>
-                        <p>SEARCH FILTER</p>
+                        <p>LỌC</p>
                     </div>
                     <div class="g-left-top-body g-left-top-body-checkbox">
                         <div class="g-left-top-item">
-                            <span>By category</span>
+                            <span>THEO ĐANH MỤC</span>
                         </div>
-                        <p><input type="checkbox" /> Screen protector</p>
-                        <p><input type="checkbox" /> Screen protector</p>
-                        <p><input type="checkbox" /> Screen protector</p>
-                        <a href="#" class="c-nav-see-more"> More</a>
+                        <?php
+                        if (isset($allCategory)) {
+                            foreach ($allCategory as $key => $value) { ?>
+                                <p>
+                                    <a href="?mod=page&act=collection&category=<?=$value['id'] ?>">
+                                        <input type="radio" <?= $_GET['category'] == $value['id'] ? "checked" :  "" ?> /> <?=$value['nameCate'] ?>
+                                    </a>
+                                </p>
+                            <?php }
+                        }
+                        ?>
+
+
                     </div>
                 </div>
+
                 <div class="g-left-top">
-                    <div class="g-left-top-title">
-                    </div>
-                    <div class="g-left-top-body g-left-top-body-checkbox">
-                        <div class="g-left-top-item">
-                            <span>Place of sale</span>
-                        </div>
-                        <p><input type="checkbox" /> Viet nam</p>
-                        <p><input type="checkbox" /> China</p>
-                        <p><input type="checkbox" /> Japan</p>
-                        <a href="#" class="c-nav-see-more"> More</a>
-                    </div>
-                </div>
-                <div class="g-left-top">
-                    <div class="g-left-top-title">
-                    </div>
-                    <div class="g-left-top-body g-left-top-body-checkbox">
-                        <div class="g-left-top-item">
-                            <span>Shipping unit</span>
-                        </div>
-                        <p><input type="checkbox" /> Express</p>
-                        <p><input type="checkbox" />Fast</p>
-                        <p><input type="checkbox" />Save</p>
-                    </div>
+
                     <div class="g-left-top-body">
                         <div class="g-left-top-title"></div>
                         <div class="g-left-top-item">
-                            <span>Price range</span>
+                            <span>THEO GIÁ</span>
                         </div>
                         <div class="g-left-price-body">
-                            <input type="text" placeholder="$ FROM" />
+                            <input type="text" placeholder="$ Từ" />
                             <p>-</p>
-                            <input type="text" placeholder="$ TO" />
+                            <input type="text" placeholder="$ Đến" />
                         </div>
 
-                        <div class="g-left-btn">APPLY</div>
+                        <div class="g-left-btn">Áp dụng</div>
                     </div>
                 </div>
             </div>
@@ -182,20 +154,17 @@
                         <div class="c-nav-hhiden">
                             <i class="fa-solid fa-bars"></i>
                         </div>
-                        <div class="g-nav-title">Sort by</div>
+                        <div class="g-nav-title">Lọc theo</div>
                         <div class="g-nav-item">
-                            <span>Popular</span>
-                        </div>
-                        <div class="g-nav-item">
-                            <span>Latest</span>
+                            <span>Phổ biến</span>
                         </div>
                         <div class="g-nav-item">
-                            <span>Top Sales</span>
+                            <span>Mới nhất</span>
                         </div>
-                        <div class="g-nav-item g-nav-item-down">
-                            <span>Price</span>
-                            <i class="fa-solid fa-angle-down"></i>
+                        <div class="g-nav-item">
+                            <span>Bán chạy</span>
                         </div>
+
                     </div>
                     <div class="g-nav-right">
                         <div class="g-nav-page">
@@ -279,7 +248,7 @@
                                             </del>
                                         </div>
                                     </a>
-                                    <div class="product-btn" idpro="<?= $value['id'] ?>" data-price= "<?= $value['price'] ?>">
+                                    <div class="product-btn" idpro="<?= $value['id'] ?>" data-price="<?= $value['price'] ?>">
                                         <i class="fa-solid fa-cart-plus"></i>
                                         <span>ADD TO CART</span>
                                     </div>
@@ -287,11 +256,11 @@
                             </div>
 
                         <?php }
-                    }else{
+                    } else {
                         echo '<div class="no-data">No product found!</div>';
                     } ?>
-                    
-                   
+
+
 
                 </div>
             </div>

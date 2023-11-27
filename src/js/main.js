@@ -292,7 +292,8 @@ function handleCreateProduct(){
            if(parent) parent.empty()
         })
     })
-    
+    // fill data quilljs
+    console.log($("#description").val());
     // update product
     $("#form-create-product").on("submit",function() {
         $("#description").val($("#editor").html());
@@ -329,6 +330,7 @@ $().ready(function(){
         }
         handleCreateProduct()
     }
+    
     if($(".delivery-main").length){
        $(".shop-delivery-top-add").click(function(){
         $(".modal-delivery").css("display","flex")

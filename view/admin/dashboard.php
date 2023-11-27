@@ -33,37 +33,37 @@
                             <div class="dash-content-row">
                                 <a href="#" class="dash-content-item">
                                     <div class="dash-content-count">100</div>
-                                    <div class="dash-content-title">Total products</div>
+                                    <div class="dash-content-title">Tổng sản phẩm</div>
                                 </a>
                                 <a href="#" class="dash-content-item">
                                     <div class="dash-content-count">100</div>
-                                    <div class="dash-content-title">Active products</div>
+                                    <div class="dash-content-title">Sản phẩm đã bán</div>
                                 </a>
                                 <a href="#" class="dash-content-item">
                                     <div class="dash-content-count">100</div>
-                                    <div class="dash-content-title">Waiting</div>
+                                    <div class="dash-content-title">Sản phẩm hết hàng</div>
                                 </a>
                                 <a href="#" class="dash-content-item">
                                     <div class="dash-content-count">100</div>
-                                    <div class="dash-content-title">Denied</div>
+                                    <div class="dash-content-title">Sản phẩm ẩn</div>
                                 </a>
                             </div>
                             <div class="dash-content-row">
                                 <a href="#" class="dash-content-item">
                                     <div class="dash-content-count">100</div>
-                                    <div class="dash-content-title">Out off products</div>
+                                    <div class="dash-content-title">Tổng đơn hàng</div>
                                 </a>
                                 <a href="#" class="dash-content-item">
                                     <div class="dash-content-count">100</div>
-                                    <div class="dash-content-title">New orders</div>
+                                    <div class="dash-content-title">Đơn hàng mới</div>
                                 </a>
                                 <a href="#" class="dash-content-item">
                                     <div class="dash-content-count">100</div>
-                                    <div class="dash-content-title">Waiting pickup</div>
+                                    <div class="dash-content-title">Đơn hàng đã giao</div>
                                 </a>
                                 <a href="#" class="dash-content-item">
                                     <div class="dash-content-count">100</div>
-                                    <div class="dash-content-title">Sale</div>
+                                    <div class="dash-content-title">Đơn hàng hủy</div>
                                 </a>
 
                             </div>
