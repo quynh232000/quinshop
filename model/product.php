@@ -162,7 +162,16 @@ class Product
         }
     }
     public function deleteProduct($id)
+
     {
+        $isLogin = Session::get("isLogin");
+        if ($isLogin != true) {
+            return new Response(true, "success", ["total" => 0, "totalPrice" => 0], "");
+        }
+        $role = Session::get("role");
+        if ($role != "adminall") {
+            return new Response(false, "Bạn không có quyền cho hành động này!", "", "");
+        }
         if (empty($id)) {
             // return "Id product cannot be empty";
             return new Response(false, "Hành động không hợp lệ! Vui lòng thử lại!", "", "?mod=admin&act=manageproduct");

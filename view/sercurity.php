@@ -1,29 +1,29 @@
 
             <div class="referral-body">
-                <div class="profile-title">Password</div>
+                <div class="profile-title">Mật khẩu</div>
                 <form class="form-update-password">
                     <div class="profile-wrapper">
                         <div class="profile-group">
-                            <label for="">Old password</label>
+                            <label for="">Mật khẩu cũ</label>
                             <div class="profile-content">
-                                <input type="password" value="" placeholder="Enter old password" name="olldpassword" class="profile-input">
+                                <input type="password" value="" placeholder="Nhập mật khẩu cũ..." name="olldpassword" class="profile-input">
                             </div>
                         </div>
                         <div class="profile-group">
-                            <label for="">A new password</label>
+                            <label for="">Mật khẩu mới</label>
                             <div class="profile-content">
-                                <input type="password" placeholder="Enter your new password" name="newpassword" class="profile-input">
+                                <input type="password" placeholder="Mật khẩu mới..." name="newpassword" class="profile-input">
                             </div>
                         </div>
                         <div class="profile-group">
-                            <label for="">Confirm password</label>
+                            <label for="">Xác nhận</label>
                             <div class="profile-content">
-                                <input type="password" placeholder="Confirm password" name="confirmpassword" class="profile-input">
+                                <input type="password" placeholder="Xác nhận mật khẩu..." name="confirmpassword" class="profile-input">
                             </div>
                         </div>
                         <div class="profile-eidt-submit">
                             <button class="btn-update-profile" type="submit">
-                                Update
+                                Cập nhật
                             </button>
                         </div>
                     </div>

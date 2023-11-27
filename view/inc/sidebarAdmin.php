@@ -8,6 +8,7 @@
                                ($act !="manageproduct")&&
                                ($act !="manageorders")&&
                                ($act !="addproduct")&&
+                               ($act !="manageuser")&&
                                ($act !="managecategory")&&
                                ($act !="delivery")
                                 ) {echo "active";}?>">
@@ -46,6 +47,14 @@
                                         <i class="fa-solid fa-file-invoice"></i>
                                     </div>
                                     <span class="shop-sidebar-title">Đơn hàng</span>
+                                </a>
+                            </div>
+                            <div class="shop-sidebar-item <?php if(($act=="manageuser")) {echo "active";}?>">
+                                <a href="?mod=admin&act=manageuser" class="shop-sidebar-link">
+                                    <div class="shop-sidebar-icon">
+                                        <i class="fa-solid fa-file-invoice"></i>
+                                    </div>
+                                    <span class="shop-sidebar-title">Quản lý user</span>
                                 </a>
                             </div>
                             <!--shop-sidebar item -->

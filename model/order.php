@@ -41,6 +41,28 @@ class Order
         }
         return new Response(true, "success", $result, "");
     }
+    public function getAllInvoince()
+    {
+        $isLogin = Session::get("isLogin");
+        if ($isLogin != true) {
+            return new Response(false, "false", "", "");
+        }
+        $invoice = $this->db->select("SELECT i.*,ad.nameReceiver, ad.phone
+            FROM invoice AS i
+            INNER JOIN quin.address as ad
+            ON i.addressId = ad.id
+            ORDER BY i.createdAt
+        ");
+        if ($invoice == false) {
+            return new Response(false, "false", "", "");
+        } 
+        $result = [];
+        while ($row = mysqli_fetch_assoc($invoice)) {
+            $result[] = $row;
+        }
+        return new Response(true, "success", $result, "");
+    }
+    
     
 }
 

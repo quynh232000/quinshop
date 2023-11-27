@@ -25,15 +25,14 @@
         }
         public static function checkPermission($role){
             self::checkSession();
-            if(self::get("role") != $role){
+            if(!(self::get("role") == 'admin' || self::get("role") == 'adminall')){
                 header("Location: ?mod=profile&act=login");
             }
-
         }
         public static function checkSession(){
             self::init();
             if(isset($_SESSION['isLogin']) && $_SESSION['isLogin']==true){
-                if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
+                if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 76800)) {
                     session_unset(); 
                     session_destroy();
                     header("Location:/web-demo_php/login.php");
