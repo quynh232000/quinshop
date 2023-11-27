@@ -368,38 +368,7 @@
 
 
 
-    .p-pagination {
-        display: flex;
-        padding: 30px 10px 20px;
-        font-size: 1.2rem;
-        justify-content: space-between;
-        align-items: center;
-    }
-.p-pagination div{
-    margin:0 10px;
-    color: var(--secondary);
-}
-.p-pagination-left{
-    display: flex;
-    align-items: center;
-}
-.p-pagination-right{
-    display: flex;
-    justify-content: flex-end;
-}
-.p-pagination-item{
-    border: 1px solid rgba(22,22,24,0.2);
-    padding: 8px 14px;
-    border-radius: 6px;
-    margin: 0 3px!important;
-    transition: .3s ease;
-}
-.p-pagination-item:hover{
-    background-color: var(--primary);
-    color: var(--white);
-    cursor: pointer;
-    border-color: var(--primary);
-}
+   
 @media screen and (max-width:1100px) {
     .item-role{width: 50%;
     }

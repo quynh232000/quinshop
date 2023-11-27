@@ -53,6 +53,8 @@ if (isset($act)) {
             $viewTitle = 'Manage your products';
             $classPro = new Product();
             $allProduct = $classPro->getAllProduct();
+            $cate = new Category();
+            $allCategory = $cate->getAllCate();
             // ddelete product
             if ((isset($_GET['type']) && isset($_GET['idPro'])) && ($_GET['type']) && $_GET['idPro']) {
                 $type = $_GET['type'];

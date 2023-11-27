@@ -2,6 +2,7 @@
 // session_start();
 include_once "lib/session.php";
 include_once "model/cart.php";
+include_once "model/product.php";
 
 extract($_REQUEST);
 if (isset($act)) {
@@ -17,7 +18,14 @@ if (isset($act)) {
                 echo $json;
                 return ;
             }
-            // break;
+        case 'searchproduct':
+            $classProduct = new Product();
+            if (isset($_GET['keysearch']) ){
+                $valueSearch =  $classProduct->seachProduct($_GET['keysearch']) ;
+                echo json_encode($valueSearch, JSON_PRETTY_PRINT);
+                return;
+            }
+            break;
         default:
             break;
            

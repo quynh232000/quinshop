@@ -422,6 +422,9 @@ $().ready(function(){
       console.log(type)
       updateViewCart(item,type,countpro,pricepro,idpro)
     })
+    
+
+
 })
 function updateViewCart(_this,type,count,price,idpro){
   const currentSubtotal =(_this.find(".cart-subtotal1").attr("data-subtotal"))
@@ -568,4 +571,56 @@ function toastjs(text) {
   x.textContent=text
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
-// ======
+
+function getData() {
+  console.log('Data Fetched')
+}
+
+
+// funstion debounse
+function debounce (func, delay) {
+  let debounceTimer
+  return function() {
+      const context = this
+      const args = arguments
+      clearTimeout(debounceTimer)
+      debounceTimer = setTimeout(() => func.apply(context, args), delay)
+  }
+}
+const searchInput = document.querySelector(".search-input-product")
+if(searchInput){
+  searchInput.oninput = debounce(function(e){
+    const keysearch = e.target.value
+    if(keysearch){
+      $.ajax({
+        url:"?mod=request&act=searchproduct&keysearch="+keysearch
+      }).done(res=>{
+        res =JSON.parse(res)
+        // console.log(data)
+        if(res && res.status && res.result.length >0){
+          const data = res.result
+          const html = data.map(item=>{
+            return  `
+                  <li class="header__search-history-item">
+                    <a href="?mod=page&act=detail&id=${item.id}" class="h-s-item" >
+                        <div class="h-s-img">
+                            <img src="./assest/upload/${item.image}" alt="">
+                        </div>
+                        <div class="h-s-info">
+                            <div class="h-s-name">${item.namePro}</div>
+                            <div class="h-s-brandd">${item.brand}</div>
+                        </div>
+                    </a>
+                </li>
+            `
+          }).join("")
+          $(".search-totel").text(data.length)
+          $(".header__search-history-list").html(html)
+        }else{
+          $(".search-totel").text("0")
+          $(".header__search-history-list").html(`<div class="no-product">Không tìm thấy sản phẩm nào</div>`)
+        }
+      })
+    }
+  },1000)
+}

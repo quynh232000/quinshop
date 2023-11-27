@@ -210,17 +210,18 @@ if (empty($viewTitle)) {
                                 <span>Danh mục</span>
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
-                            <input type="text" placeholder="Tìm kiếm sản phẩm...">
+                            <input type="text" class="search-input-product" placeholder="Tìm kiếm sản phẩm...">
                             <div class="header__search-history">
-                                <h3 class="header__search-history-header">Lịch sử</h3>
+                                <h3 class="header__search-history-header">Kết quả tìm kiếm</h3>
                                 <ul class="header__search-history-list">
-                                    <li class="header__search-history-item">
-                                        <a href="">Kem dưỡng da</a>
-                                    </li>
-                                    <li class="header__search-history-item">
-                                        <a href="">Giày sneaker</a>
-                                    </li>
+                                    
+                                    <div class="no-product">Không có sản phẩm nào</div>
+                                    
                                 </ul>
+                                <div class="h-s-bottom">
+                                    <span><strong class="search-totel" >0</strong> Sản phẩm</span>
+                                    <span>Xem thêm</span>
+                                </div>
                             </div>
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </div>

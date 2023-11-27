@@ -90,16 +90,29 @@ class Product
         }
         // return "Create new product successfully!";
     }
-    public function getAllProduct()
+    public function getAllProduct($page =1, $limit = 10)
     {
-        $query = "SELECT pr.*, cate.nameCate as nameCategory from product as pr INNER JOIN category as cate on pr.categoryId = cate.id ORDER BY pr.createdAt DESC limit 20";
+        $getTotal = $this->db->select("SELECT COUNT(*) AS total from product");
+        $total =$getTotal->fetch_assoc();
+        $total = $total ==false ? 0 : $total['total']; 
+        if($page <1){
+            $page = 1;
+        }
+
+        $currentPage = ($page -1)* $limit;
+
+        $query = "SELECT pr.*, cate.nameCate as nameCategory from product as pr 
+            INNER JOIN category as cate on pr.categoryId = cate.id 
+            ORDER BY pr.createdAt DESC 
+            limit $currentPage,$limit
+        ";
         $result = $this->db->select($query);
         if ($result != false) {
             $rows = [];
             while ($row = mysqli_fetch_array($result)) {
                 $rows[] = $row;
             }
-            return $rows;
+            return new Response(true, "success", $rows, "",$total);;
 
         } else {
 
@@ -184,7 +197,25 @@ class Product
             return new Response(false, "Hành động không hợp lệ! Vui lòng thử lại!", "", "?mod=admin&act=manageproduct");
         }
     }
-
+    public function seachProduct($value =""){
+        
+        $resultSql = $this->db->select("SELECT p.id, p.namePro, p.brand,p.image FROM product AS p 
+                WHERE p.namePro 
+                LIKE '%$value%'
+                ORDER BY p.createdAt
+                LIMIT 10
+        ");
+        if($resultSql ==false){
+            return new Response(false,"Fail",[],"");
+        }
+        $result =[];
+         while ($row = mysqli_fetch_array($resultSql)) {
+            $result[] = $row;
+        }
+        
+        return new Response(true, "Successcully", $result, "");
+        
+    }
 
 
 }

@@ -185,7 +185,13 @@
             </div >
             <div class="header-body">
                 <div class="wrapper">
-                    <a href="?mod=admin&act=dashboard" class="header-logo">
+                    <a href="<?php 
+                    if($mod =="admin" && $act=="dashboard"){
+                        echo "./";
+                    }else{
+                        echo "?mod=admin&act=dashboard";
+                    }
+                    ?>" class="header-logo">
                         <img src="assest/images/UNIDI_LOGO-FINAL 2.svg" alt="">
                         <div class="shop-header-name">ADMIN</div>
                     </a>
@@ -215,7 +221,7 @@
                             <div class="header-search-item-icon">
                                 <img src="<?php echo Session::get("avatar");?>  " class="img-user" alt="">
                             </div>
-                            <a href="/account/profile" class="header-search-info">
+                            <a href="?mod=profile&act=profile" class="header-search-info">
                                
                                 <span>Hi, 
                                     <?php
@@ -227,7 +233,7 @@
                                 </div>
                             </a>
                             <div class="account-more">
-                                    <a href="../profile.php" class="account-more-item">
+                                    <a href="?mod=profile&act=profile" class="account-more-item">
                                         <i class="fa-solid fa-user"></i>
                                         <span>Profile</span>
                                     </a>
@@ -236,7 +242,7 @@
                                         echo Session::destroy();
                                     }
                                     ?>
-                                    <a href="?action=logout" class="account-more-item">
+                                    <a href="?mod=admin&act=dashboard&action=logout" class="account-more-item">
                                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
                                         <span>Logout</span>
                                     </a>

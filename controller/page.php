@@ -4,15 +4,17 @@ include_once 'model/category.php';
 include_once 'model/product.php';
 include_once 'model/entity.php';
 include_once "model/cart.php";
+$cate = new Category();
+$product = new Product();
 $classCart = new Cart();
 $getCartInfo = $classCart->getCartView();
 $cartResult = $classCart->getCartUser();
+
+
 extract($_REQUEST);
 if (isset($act)) {
     switch ($act) {
         case 'home':
-            $cate = new Category();
-            $product = new Product();
             $allCategory = $cate->getAllCate();
             if ($allCategory == false) {
                 $allCategory = array();
@@ -27,8 +29,8 @@ if (isset($act)) {
             include_once 'view/inc/footer.php';
             break;
         case 'collection':
-            $cate = new Category();
-            $product = new Product();
+            // $cate = new Category();
+            // $product = new Product();
             if (isset($_GET['category']) && !empty($_GET['category'])) {
                 $collectionPro = $product->filterProduct("category", $_GET['category']);
                 $infoCate = $cate->getInfoCate($_GET['category']);
@@ -45,7 +47,7 @@ if (isset($act)) {
             include_once 'view/inc/footer.php';
             break;
         case 'detail':
-            $product = new Product();
+            // $product = new Product();
             if (isset($_GET['id']) && !empty($_GET['id'])) {
                 $infoPro = $product->filterProduct("detail", $_GET['id']);
                 if (isset($infoPro) && $infoPro->status == true) {
@@ -69,7 +71,7 @@ if (isset($act)) {
             break;
         case 'checkout':
             include_once 'model/cart.php';
-            $classCart = new Cart();
+            // $classCart = new Cart();
             if (isset($_POST['nameReceiver']) && !empty($_POST['nameReceiver'])) {
 
                 $nameReceiver = $_POST['nameReceiver'];

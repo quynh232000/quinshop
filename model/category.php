@@ -67,7 +67,7 @@ class Category
         }
         $query = "DELETE FROM category WHERE id = '$id'";
         $result = $this->db->delete($query);
-        if ($result != true) {
+        if ($result != false) {
             return new Response(true, "Xóa danh mục thành công!", "", "");
         } else {
             return new Response(false, "Xóa danh mục thất bại!", "", "");

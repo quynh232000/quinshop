@@ -1,4 +1,3 @@
-
 <main class="shop-main">
     <!-- content -->
     <div class="shop-main-content">
@@ -8,19 +7,24 @@
                 <div class="shop-pro-filter-item">
                     <div class="shop-pro-filter-input">
                         <select name="" id="" class="shop-pro-filter-search">
-                            <option value="" selected>Name Product</option>
-                            <option value="">SKU Product</option>
+                            <option value="" selected>Tên sản phẩm</option>
+                            <option value="">SKU</option>
                         </select>
-                        <input type="text" placeholder="Search...">
+                        <input type="text" placeholder="Tìm kiếm...">
                     </div>
                 </div>
                 <div class="shop-pro-filter-item">
-                    <label for="">Category</label>
+                    <label for="">Danh mục</label>
                     <div class="shop-pro-filter-input">
                         <select name="" id="">
-                            <option value="" selected>Men's clothes</option>
-                            <option value="">Shoes</option>
-                            <option value="">Phone</option>
+                            <option value="" selected>--Chọn sanh mục--</option>
+                           
+                            <?php foreach ($allCategory as $key => $value) { ?>
+                                <option value="<?= $value['id'] ?>">
+                                    <?= $value['nameCate'] ?>
+                                </option>
+                            <?php }
+                            ?>
                         </select>
                     </div>
                 </div>
@@ -49,37 +53,56 @@
         <div class="shop-pro-content">
             <div class="shop-pro-show">
                 <div class="show-pro-show-item">
-                    All:
-                    <span>190</span>
+                    Tất cả:
+                    <span>
+                        <?php if (isset($allProduct) && $allProduct->status)
+                            echo $allProduct->total; ?>
+                    </span>
                 </div>
                 <div class="show-pro-show-item">
-                    Active:
-                    <span>190</span>
-                </div>
-                <div class="show-pro-show-item">
-                    Out off:
+                    Hết hàng:
                     <span>0</span>
                 </div>
                 <div class="show-pro-show-item">
-                    Waiting:
+                    Ẩn:
                     <span>0</span>
                 </div>
-                <div class="show-pro-show-item">
-                    Span:
-                    <span>0</span>
-                </div>
-                <div class="show-pro-show-item">
-                    Hidden:
-                    <span>0</span>
-                </div>
+
             </div>
-            <div class="shop-pro-add">
+            <div class="shop-pro-add" style="padding:0 20px">
                 <div class="shop-pro-add-title">
-                    100 Products
+                    <?php if (isset($allProduct) && $allProduct->status)
+                        echo $allProduct->total; ?> Sản phẩm
                 </div>
                 <a href="?mod=admin&act=addproduct" class="show-pro-add-btn">
-                    + Add new product
+                    + Tạo sản phẩm
                 </a>
+            </div>
+            <div class="p-pagination">
+                <div class="p-pagination-left">
+                    <span>
+                        (<span class="count-product">0</span>/20)
+                        sản phẩm
+                    </span>
+                    <div>|</div>
+                    <span>
+                        (<span class="current-page">1</span>/
+                        <span class="total-page">6</span>) trang
+                    </span>
+                </div>
+                <div class="p-pagination-right">
+                    <a href="<?= $currentUrl ?>&page=<?= isset($_GET['page']) ? $_GET['page'] + 1 : 2 ?>"
+                        class="<?php if (!isset($_GET['page']) || $_GET['page'] == 1)
+                            echo "disabled"; ?> p-pagination-item previous-page">
+                        Trước
+                    </a>
+
+                    <a href="<?= $currentUrl ?>&page=1" class="p-pagination-item active">1</a>
+                    <a href="<?= $currentUrl ?>&page=2" class="p-pagination-item">2</a>
+
+                    <a href="<?= $currentUrl ?>&page=<?= isset($_GET['page']) ? $_GET['page'] + 1 : 2 ?>"
+                        class="p-pagination-item next-page">Sau</a>
+                </div>
             </div>
             <div class="shop-pro-body">
                 <div class="shop-pro-body-wrapper">
@@ -88,36 +111,36 @@
                             <div class="shop-pro-info">
                                 <input type="checkbox">
                                 <div class="shop-pro-info-wrapper">
-                                    <div class="shop-pro-nav-title">Name</div>
+                                    <div class="shop-pro-nav-title">Tên</div>
                                 </div>
                             </div>
                             <div class="shop-pro-sku">
                                 <div class="shop-pro-nav-title">SKU</div>
                             </div>
                             <div class="shop-pro-type">
-                                <div class="shop-pro-nav-title">Type</div>
+                                <div class="shop-pro-nav-title">Loại</div>
                             </div>
                             <div class="shop-pro-price">
-                                <div class="shop-pro-nav-title">Price</div>
+                                <div class="shop-pro-nav-title">Giá</div>
                             </div>
                             <div class="shop-pro-quantity">
-                                <div class="shop-pro-nav-title">Quantity</div>
+                                <div class="shop-pro-nav-title">Số lượng</div>
                             </div>
                             <div class="shop-pro-balance">
-                                <div class="shop-pro-nav-title">Balance</div>
+                                <div class="shop-pro-nav-title">Doanh số</div>
                             </div>
                             <div class="shop-pro-status">
-                                <div class="shop-pro-nav-title">Status</div>
+                                <div class="shop-pro-nav-title">Trạng thái</div>
                             </div>
                             <div class="shop-pro-action">
-                                <div class="shop-pro-nav-title">Action</div>
+                                <div class="shop-pro-nav-title">Hành động</div>
                             </div>
                         </div>
                     </div>
                     <div class="shop-pro-list">
-                        <?php if (isset($allProduct) && is_array($allProduct) > 0) {
+                        <?php if (isset($allProduct) && is_array($allProduct->result) > 0) {
 
-                            foreach ($allProduct as $key => $value) { ?>
+                            foreach ($allProduct->result as $key => $value) { ?>
                                 <!-- item -->
                                 <div class="shop-pro-item">
                                     <div class="shop-pro-info">
@@ -172,19 +195,19 @@
                                             class="shop-pro-edit" title="Edit">
                                             <i class="fa-regular fa-pen-to-square"></i>
                                         </a>
-                                        <a href="?mod=admin&act=manageproduct&type=delete&idPro=<?= $value['id'] ?>" 
+                                        <a href="?mod=admin&act=manageproduct&type=delete&idPro=<?= $value['id'] ?>"
                                             class="shop-pro-delete delete-product" title="Delete">
                                             <i class="fa-regular fa-trash-can"></i>
                                         </a>
                                     </div>
                                 </div>
                             <?php }
-                        }else{
+                        } else {
                             echo '<div class="no-data">No product found!</div>';
                         }
                         ?>
 
-                       
+
 
                     </div>
                 </div>

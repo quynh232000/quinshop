@@ -76,6 +76,9 @@
           You don't have any account?
           <span><a href="?mod=profile&act=register">Register</a></span>
         </div>
+        <div class="l-back-home">
+          <a href="./" class="home-btn" >Trang chủ</a>
+        </div>
       </form>
     </div>
   </div>

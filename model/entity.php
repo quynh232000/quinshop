@@ -2,15 +2,18 @@
     
     class Response{
         public $status;
-        public $message;
+        public $page;
         public $result;
         public $redirect;
-        function __construct($status,$message ="",$result ="",$redirect="") {
+        public $total;
+        function __construct($status,$message ="",$result ="",$redirect="",$total=0) {
             $this->status = $status;
             $this->message = $message;
             $this->result = $result;
             $this->redirect = $redirect;
+            $this->total = $total;
         }
     }
+   
    
 ?>
