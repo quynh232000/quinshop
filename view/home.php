@@ -69,7 +69,7 @@
                                     <?= $value['nameCate'] ?>
                                 </div>
                                 <div class="cate-count">
-                                    <?= random_int(1, 100) ?> sản phẩm
+                                    <?=$value['count'] ?> sản phẩm
                                 </div>
                             </div>
                         </a>

@@ -21,7 +21,7 @@
                             id="form-create-product"
                             method="POST"
                             enctype="multipart/form-data"
-                            action="?mod=admin&act=addproduct">
+                            action="">
                           <div class="c-left">
                               <div class="detail-group-item w-100">
                                   <div class="shop-form-group  w-100">

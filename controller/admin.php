@@ -20,12 +20,13 @@ if (isset($act)) {
             include_once 'view/inc/footer.php';
             break;
         case 'addproduct':
-
             $viewTitle = 'Create new product';
             $classPro = new Product();
             $cate = new Category();
             $allCategory = $cate->getAllCate();
             if (isset($_POST['btn-create-product']) && $_POST['btn-create-product']) {
+                $type =isset( $_GET['type']) ? $_GET['type'] :"create";
+                $id = isset($_GET['idPro'])?$_GET['idPro']:"";
                 $resAddPro = $classPro->updateProduct(
                     $_POST['name'],
                     $_POST["description"],
@@ -37,20 +38,24 @@ if (isset($act)) {
                     $_POST["salePercent"],
                     $_FILES["image"],
                     $_FILES["listImage"],
-                    $_POST["unit"]
+                    $_POST["unit"],
+                    $type,
+                    $id
                 );
             }
             if (isset($resAddPro)) {
-                echo '<div id="toast" mes-type="success" mes-title="Thành công!" mes-text="Đăng sản phẩm thành công."></div>';
-                
+                if ($resAddPro->status) {
+                    echo '<div id="toast" mes-type="success" mes-title="Thành công!" mes-text="' . $resAddPro->message . '"></div>';
+                } else {
+                    echo '<div id="toast" mes-type="error" mes-title="Thành công!" mes-text="' . $resAddPro->message . '"></div>';
+                }
             }
-            if(isset($_GET['type']) && $_GET['idPro']) {
+            if (isset($_GET['type']) && $_GET['idPro']) {
                 $infoPro = $classPro->filterProduct("detail", $_GET['idPro']);
                 if (isset($infoPro) && $infoPro->status == true) {
                     $productInfo = $infoPro->result;
                     $viewTitle = $productInfo[0]['namePro'];
                 }
-                
             }
             include_once 'view/inc/headerAdmin.php';
             include_once 'view/inc/sidebarAdmin.php';
@@ -69,6 +74,7 @@ if (isset($act)) {
                 $idPro = $_GET['idPro'];
                 if ($type == "delete") {
                     $resultDeletePro = $classPro->deleteProduct($idPro);
+                    header("Location: ?mod=admin&act=manageproduct");
                 }
             }
             include_once 'view/inc/headerAdmin.php';

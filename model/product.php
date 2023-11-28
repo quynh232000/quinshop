@@ -19,21 +19,52 @@ class Product
         $this->tool = new Tool();
     }
     public function updateProduct(
-        $name,
-        $description,
-        $categoryId,
-        $quantity,
-        $origin,
-        $brand,
-        $price,
-        $salePercent,
-        $image,
-        $listImage,
-        $unit
+        $name = '',
+        $description = '',
+        $categoryId = '',
+        $quantity = '',
+        $origin = '',
+        $brand = '',
+        $price = '',
+        $salePercent = '',
+        $image = '',
+        $listImage = '',
+        $unit = '',
+        $type = '',
+        $id = '',
     ) {
-        $slug = $this->tool->slug($name, '-');
-        $fileResult = $this->tool->uploadFile($image);
-        $query = "INSERT INTO product (product.namePro, product.description, product.categoryId,product.status,
+        // edit
+
+        if ($type == 'edit' && $id !='') {
+            $queryUpdate ='';
+            $queryUpdate .= "p.namePro = '$name',";
+            $queryUpdate .= "p.description = '$description',";
+            $queryUpdate .= "p.categoryId = '$categoryId',";
+            $queryUpdate .= "p.quantity = '$quantity',";
+            $queryUpdate .= "p.origin = '$origin',";
+            $queryUpdate .= "p.brand = '$brand',";
+            $queryUpdate .= "p.price = '$price',";
+            $queryUpdate .= "p.salePercent = '$salePercent',";
+            $queryUpdate .= "p.price = '$price',";
+            // upload img
+            $fileResult = $this->tool->uploadFile($image);
+            if($fileResult){
+                $queryUpdate .= "p.image = '$fileResult',";
+            }
+            $queryUpdate .= 'updatedAt = NOW()';
+            $resultEditPro = $this->db->update("UPDATE product AS p
+                        SET $queryUpdate
+                        WHERE p.id = $id
+            ");
+            if($resultEditPro ==false){
+                return new Response(false, "Cập nhật sản phẩm thất bại", "", "","");
+            }
+            return new Response(true, "Cập nhật sản phẩm thành công", "", "","");
+        } else {
+            // create
+            $slug = $this->tool->slug($name, '-');
+            $fileResult = $this->tool->uploadFile($image);
+            $query = "INSERT INTO product (product.namePro, product.description, product.categoryId,product.status,
             product.quantity,product.brand,product.image,origin,price,
             salePercent,slug,unit,createdAt,sold) VALUES
                 (
@@ -53,53 +84,53 @@ class Product
                     0
                 )
             ";
-        $result = $this->db->insert($query);
-        if ($result == false) {
-            $alert = "Create new product error! Wrong from server!";
-            return $alert;
+            $result = $this->db->insert($query);
+            if ($result == false) {
+                $alert = "Create new product error! Wrong from server!";
+                return $alert;
 
-        }
-        // get id product
-        $getIdPro = $this->db->select("SELECT LAST_INSERT_ID();");
-        $idPro = mysqli_fetch_assoc($getIdPro)['LAST_INSERT_ID()'];
-        // list img
-        $totalFile = count($listImage['name']);
-        $querylistImg = "";
-        for ($i = 0; $i < $totalFile; $i++) {
-            $fileDir = "./assest/upload/";
-            if (isset($listImage['error'][$i]) && $listImage['error'][$i] == 0) {
-                $fileName = basename($listImage['name'][$i]);
-                if (!file_exists($fileDir)) {
-                    mkdir($fileDir, 0, true);
-                }
-                $fileNameNew = $this->tool->GUID() . "." . (explode(".", $fileName)[1]);
-                $fileDir = $fileDir . $fileNameNew;
-                if (move_uploaded_file($listImage['tmp_name'][$i], $fileDir)) {
-                    $querylistImg .= "('$idPro', '$fileNameNew',NOW()),";
+            }
+            // get id product
+            $getIdPro = $this->db->select("SELECT LAST_INSERT_ID();");
+            $idPro = mysqli_fetch_assoc($getIdPro)['LAST_INSERT_ID()'];
+            // list img
+            $totalFile = count($listImage['name']);
+            $querylistImg = "";
+            for ($i = 0; $i < $totalFile; $i++) {
+                $fileDir = "./assest/upload/";
+                if (isset($listImage['error'][$i]) && $listImage['error'][$i] == 0) {
+                    $fileName = basename($listImage['name'][$i]);
+                    if (!file_exists($fileDir)) {
+                        mkdir($fileDir, 0, true);
+                    }
+                    $fileNameNew = $this->tool->GUID() . "." . (explode(".", $fileName)[1]);
+                    $fileDir = $fileDir . $fileNameNew;
+                    if (move_uploaded_file($listImage['tmp_name'][$i], $fileDir)) {
+                        $querylistImg .= "('$idPro', '$fileNameNew',NOW()),";
+                    }
                 }
             }
-        }
-        $querylistImg = rtrim($querylistImg, ",");
-        $queryImg = "INSERT into listimage (productId,imagePro,createdAt) values
+            $querylistImg = rtrim($querylistImg, ",");
+            $queryImg = "INSERT into listimage (productId,imagePro,createdAt) values
                 $querylistImg ";
-        $resulltListImage = $this->db->insert($queryImg);
-        if ($resulltListImage == false) {
-            return false;
-        } else {
-            return true;
+            $resulltListImage = $this->db->insert($queryImg);
+            if ($resulltListImage == false) {
+                return new Response(false, "Đăng sản phẩm thất bại", "", "", "");
+            } else {
+                return new Response(true, "Đăng sản phẩm thành công", "", "", "");
+            }
         }
-        // return "Create new product successfully!";
     }
-    public function getAllProduct($page =1, $limit = 10)
+    public function getAllProduct($page = 1, $limit = 10)
     {
         $getTotal = $this->db->select("SELECT COUNT(*) AS total from product");
-        $total =$getTotal->fetch_assoc();
-        $total = $total ==false ? 0 : $total['total']; 
-        if($page <1){
+        $total = $getTotal->fetch_assoc();
+        $total = $total == false ? 0 : $total['total'];
+        if ($page < 1) {
             $page = 1;
         }
 
-        $currentPage = ($page -1)* $limit;
+        $currentPage = ($page - 1) * $limit;
 
         $query = "SELECT pr.*, cate.nameCate as nameCategory from product as pr 
             INNER JOIN category as cate on pr.categoryId = cate.id 
@@ -112,14 +143,14 @@ class Product
             while ($row = mysqli_fetch_array($result)) {
                 $rows[] = $row;
             }
-            return new Response(true, "success", $rows, "",$total);;
+            return new Response(true, "success", $rows, "", $total);
 
         } else {
 
             return "something wrong from server!";
         }
     }
-    public function filterProduct($key = "", $value="", $limit = 20)
+    public function filterProduct($key = "", $value = "", $limit = 20)
     {
         if ($limit == "all") {
             $limit = "0,18446744073709551615";
@@ -159,23 +190,22 @@ class Product
                 }
                 $listImg = $this->db->select("SELECT imagePro as link FROM listimage WHERE productId = $value ");
                 if ($listImg != false) {
-                    $arrayimg =[];
+                    $arrayimg = [];
                     while ($rowimg = mysqli_fetch_array($listImg)) {
                         $arrayimg[] = $rowimg;
                     }
-                    array_push($result,$arrayimg);
+                    array_push($result, $arrayimg);
                 }
             } else {
                 while ($row = mysqli_fetch_array($response)) {
                     $result[] = $row;
                 }
-               
+
             }
             return new Response(true, "Successcully", $result, "");
         }
     }
     public function deleteProduct($id)
-
     {
         $isLogin = Session::get("isLogin");
         if ($isLogin != true) {
@@ -197,24 +227,25 @@ class Product
             return new Response(false, "Hành động không hợp lệ! Vui lòng thử lại!", "", "?mod=admin&act=manageproduct");
         }
     }
-    public function seachProduct($value =""){
-        
+    public function seachProduct($value = "")
+    {
+
         $resultSql = $this->db->select("SELECT p.id, p.namePro, p.brand,p.image FROM product AS p 
                 WHERE p.namePro 
                 LIKE '%$value%'
                 ORDER BY p.createdAt
                 LIMIT 10
         ");
-        if($resultSql ==false){
-            return new Response(false,"Fail",[],"");
+        if ($resultSql == false) {
+            return new Response(false, "Fail", [], "");
         }
-        $result =[];
-         while ($row = mysqli_fetch_array($resultSql)) {
+        $result = [];
+        while ($row = mysqli_fetch_array($resultSql)) {
             $result[] = $row;
         }
-        
+
         return new Response(true, "Successcully", $result, "");
-        
+
     }
 
 

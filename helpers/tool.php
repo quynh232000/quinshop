@@ -23,6 +23,8 @@ class Tool
             if (move_uploaded_file($file['tmp_name'], $fileDir)) {
                 return $fileNameNew;
                 
+            }else{
+                return false;
             }
         } else {
             return false;
