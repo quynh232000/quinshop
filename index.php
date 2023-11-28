@@ -1,3 +1,4 @@
+<div>okquynh</div>
 <?php
 session_start();
 include_once "lib/session.php";
@@ -7,16 +8,16 @@ extract($_REQUEST);
 if (isset($mod)) {
     switch ($mod) {
         case 'page':
-            include_once 'controller/page.php';
+            include_once './controller/page.php';
             break;
         case 'profile':
-            include_once 'controller/profile.php';
+            include_once './controller/profile.php';
             break;
         case 'admin':
-            include_once 'controller/admin.php';
+            include_once './controller/admin.php';
             break;
             case 'request':
-                include_once 'controller/request.php';
+                include_once './controller/request.php';
                 break;
 
         default:
@@ -25,7 +26,7 @@ if (isset($mod)) {
 } else {
     if (isset($page)) {
         if ($page == "404") {
-            include_once 'view/error.php';
+            include_once './view/error.php';
         }
     } else {
         header('location: ?mod=page&act=home');
