@@ -91,16 +91,16 @@
                     </span>
                 </div>
                 <div class="p-pagination-right">
-                    <a href="<?= $currentUrl ?>&page=<?= isset($_GET['page']) ? $_GET['page'] + 1 : 2 ?>"
+                    <a href="&page=<?= isset($_GET['page']) ? $_GET['page'] + 1 : 2 ?>"
                         class="<?php if (!isset($_GET['page']) || $_GET['page'] == 1)
                             echo "disabled"; ?> p-pagination-item previous-page">
                         Trước
                     </a>
 
-                    <a href="<?= $currentUrl ?>&page=1" class="p-pagination-item active">1</a>
-                    <a href="<?= $currentUrl ?>&page=2" class="p-pagination-item">2</a>
+                    <a href="&page=1" class="p-pagination-item active">1</a>
+                    <a href="&page=2" class="p-pagination-item">2</a>
 
-                    <a href="<?= $currentUrl ?>&page=<?= isset($_GET['page']) ? $_GET['page'] + 1 : 2 ?>"
+                    <a href="&page=<?= isset($_GET['page']) ? $_GET['page'] + 1 : 2 ?>"
                         class="p-pagination-item next-page">Sau</a>
                 </div>
             </div>
