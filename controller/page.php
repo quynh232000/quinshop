@@ -1,13 +1,13 @@
 <?php
 
 
-include_once 'model/product.php';
+// include_once 'model/product.php';
 include_once 'model/entity.php';
+include_once 'model/category.php';
 include_once 'view/inc/header.php';
 include_once 'view/home.php';
 include_once 'view/inc/footer.php';
 include_once "model/cart.php";
-include_once 'model/category.php';
 $cate = new Category();
 $product = new Product();
 $classCart = new Cart();
