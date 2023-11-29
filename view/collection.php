@@ -120,14 +120,13 @@
                             foreach ($allCategory as $key => $value) { ?>
                                 <p>
                                     <a href="?mod=page&act=collection&category=<?=$value['id'] ?>">
-                                        <input type="radio" <?= $_GET['category'] == $value['id'] ? "checked" :  "" ?> /> <?=$value['nameCate'] ?>
+                                        <input type="radio" <?= $_GET['category'] == $value['id'] ? "checked" :  "" ?> /> 
+                                        <?=$value['nameCate'] ?> (<?=$value['count'] ?>)
                                     </a>
                                 </p>
                             <?php }
                         }
                         ?>
-
-
                     </div>
                 </div>
 

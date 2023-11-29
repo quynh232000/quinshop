@@ -303,6 +303,21 @@ a.detail-btn.detail-btn-buy {
 .detail-btn-buy:hover{
     opacity: .8;
 }
+button.detail-btn.detail-btn-add.detail-btn-buy {
+    border: none;
+    /* line-height: 1.1rem; */
+
+}
+a.detail-btn.detail-btn-cart {
+    border: 1px solid var(--primary);
+    background-color: rgba(166, 166, 170, 0.12);
+}
+a.detail-btn.detail-btn-cart :hover{
+    opacity: .8;
+}
+button.detail-btn.detail-btn-add.detail-btn-buy:hover {
+    background-color: var(--bg-yellow);
+}
 .detail-btn-add:hover{
    background-color: var(--btn-hover-color);
 }

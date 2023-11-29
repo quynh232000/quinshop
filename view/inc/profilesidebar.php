@@ -1,16 +1,5 @@
 <?php
-    // session_start();
-    // include "./lib/session.php";
-    // Session::checkSession();
-    // Session::checkPermission(0);
-
-    // if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
-    //     $url = "https://";
-    // else
-    //     $url = "http://";
-    // $url .= $_SERVER['HTTP_HOST'];
-    // $url .= $_SERVER['REQUEST_URI'];
-    extract($_REQUEST);
+extract($_REQUEST);
 
 ?>
 
@@ -20,39 +9,53 @@
             <div class="profile-nav">
                 <div class="profile-nav-user">
                     <div class="profile-nav-avatar">
-                        <img src="<?=Session::get("avatar") ?>" alt="">
+                        <img src="<?php
+                        if (str_contains(Session::get("avatar"), "http")) {
+                            echo Session::get('avatar');
+                        } else {
+                            echo "./assest/upload/" . Session::get("avatar");
+                        }
+                        ?>" alt="">
                     </div>
                     <div class="profile-nav-info">
-                        <div class="profile-nav-user-name"><?=Session::get("fullName") ?></div>
+                        <div class="profile-nav-user-name">
+                            <?= Session::get("fullName") ?>
+                        </div>
                         <div class="profile-nav-user-edit">Chỉnh sửa</div>
                     </div>
                 </div>
                 <div class="profile-nav-list">
-                    <div class="profile-nav-item  <?php if(
-                                ($act !="orderhistory")&&
-                                ($act !="sercurity")
-                                ) {echo "active";}?>">
+                    <div class="profile-nav-item  <?php if (
+                        ($act != "orderhistory") &&
+                        ($act != "sercurity")
+                    ) {
+                        echo "active";
+                    } ?>">
                         <a href="?mod=profile&act=profile" class="profile-nav-content ">
                             <div class="profile-nav-item-title">
                                 <i class="fa-regular fa-user"></i>
                                 <div class="profile-nav-name">Hồ sơ</div>
                             </div>
                             <div class="profile-nav-item-down">
-                                
+
                             </div>
                         </a>
 
                     </div>
-                    <div class="profile-nav-item <?php if(($act =="orderhistory")) {echo "active";}?>">
+                    <div class="profile-nav-item <?php if (($act == "orderhistory")) {
+                        echo "active";
+                    } ?>">
                         <a href="?mod=profile&act=orderhistory" class="profile-nav-content">
                             <div class="profile-nav-item-title">
-                            <i class="fa-solid fa-box"></i>
+                                <i class="fa-solid fa-box"></i>
                                 <div class="profile-nav-name">Đơn hàng</div>
                             </div>
                         </a>
 
                     </div>
-                    <div class="profile-nav-item <?php if(($act =="sercurity")) {echo "active";}?>">
+                    <div class="profile-nav-item <?php if (($act == "sercurity")) {
+                        echo "active";
+                    } ?>">
                         <a href="?mod=profile&act=sercurity" class="profile-nav-content">
                             <div class="profile-nav-item-title">
                                 <i class="fa-solid fa-shield"></i>

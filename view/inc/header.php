@@ -214,12 +214,12 @@ if (empty($viewTitle)) {
                             <div class="header__search-history">
                                 <h3 class="header__search-history-header">Kết quả tìm kiếm</h3>
                                 <ul class="header__search-history-list">
-                                    
+
                                     <div class="no-product">Không có sản phẩm nào</div>
-                                    
+
                                 </ul>
                                 <div class="h-s-bottom">
-                                    <span><strong class="search-totel" >0</strong> Sản phẩm</span>
+                                    <span><strong class="search-totel">0</strong> Sản phẩm</span>
                                     <span>Xem thêm</span>
                                 </div>
                             </div>
@@ -247,7 +247,13 @@ if (empty($viewTitle)) {
                             <!-- login -->
                             <div class="header-search-item header-search-account">
                                 <div class="header-search-item-icon">
-                                    <img src="<?php echo Session::get("avatar") ?>" class="img-user" alt="">
+                                    <img src="<?php
+                                    if (str_contains(Session::get("avatar"), "http")) {
+                                        echo Session::get('avatar');
+                                    } else {
+                                        echo "./assest/upload/" . Session::get("avatar");
+                                    }
+                                    ?>" class="img-user" alt="">
                                 </div>
                                 <a href="?mod=profile&act=profile" class="header-search-info">
                                     <div class="fullname">Hi,
@@ -305,13 +311,14 @@ if (empty($viewTitle)) {
                                 <div class="cart-count view-total-count"
                                     view-total-count="<?= ($getCartInfo->result['total']) ?>">
                                     <?php
-                                    if(empty(($getCartInfo->result['total']))){
+                                    if (empty(($getCartInfo->result['total']))) {
                                         echo "0";
 
-                                    }else{
+                                    } else {
                                         echo $getCartInfo->result['total'];
                                     }
-                                    ?></div>
+                                    ?>
+                                </div>
                             </div>
                             <a href="?mod=page&act=cart" class="header-search-info">
                                 <span>Giỏ hàng</span>
@@ -322,8 +329,8 @@ if (empty($viewTitle)) {
                             </a>
                             <!-- no cart :: header__cart-list--no-cart -->
                             <div class="header__cart-list ">
-                               
-                                
+
+
 
                                 <p class="header__cart-heading">Sản phẩm đã thêm</p>
                                 <ul class="header__cart-list-item">
@@ -331,20 +338,26 @@ if (empty($viewTitle)) {
                                     if ($cartResult->status && count($cartResult->result[0]) > 0) {
                                         foreach ($cartResult->result as $key => $value) { ?>
                                             <li class="header__cart-item">
-                                                <img src="./assest/upload/<?=$value['image']?>"
-                                                    alt="" class="header__cart-img">
+                                                <img src="./assest/upload/<?= $value['image'] ?>" alt="" class="header__cart-img">
                                                 <div class="header__cart-item-info">
                                                     <div class="header__cart-item-head">
-                                                        <h5 class="header__cart-item-name"><?=$value['namePro']?></h5>
+                                                        <h5 class="header__cart-item-name">
+                                                            <?= $value['namePro'] ?>
+                                                        </h5>
                                                         <div class="header__cart-item-price-wrap">
-                                                            <span class="header__cart-item-price fm-price"><?=$value['price']?></span>
+                                                            <span class="header__cart-item-price fm-price">
+                                                                <?= $value['price'] ?>
+                                                            </span>
                                                             <span class="header__cart-item-multiple">x</span>
-                                                            <span class="header__cart-item-qnt"><?=$value['count']?></span>
+                                                            <span class="header__cart-item-qnt">
+                                                                <?= $value['count'] ?>
+                                                            </span>
                                                         </div>
                                                     </div>
                                                     <div class="header__cart-item-body">
                                                         <span class="header__cart-item-description">
-                                                        <?=$value['brand']?> - <?=$value['origin']?>
+                                                            <?= $value['brand'] ?> -
+                                                            <?= $value['origin'] ?>
                                                         </span>
                                                         <span class="header__cart-item-remmove">Delete</span>
                                                     </div>
@@ -355,7 +368,8 @@ if (empty($viewTitle)) {
                                     }
                                     ?>
                                 </ul>
-                                <a href="?mod=page&act=cart" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
+                                <a href="?mod=page&act=cart" class="header__cart-view-cart btn btn--primary">Xem giỏ
+                                    hàng</a>
                             </div>
                         </div>
                     </div>

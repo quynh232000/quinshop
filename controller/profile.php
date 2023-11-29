@@ -8,12 +8,23 @@ include_once "model/adminlogin.php";
 include_once "model/cart.php";
 include_once "model/order.php";
 $classCart = new Cart();
+$classUser = new Adminlogin();
 $getCartInfo = $classCart->getCartView();
 $cartResult = $classCart->getCartUser();
 extract($_REQUEST);
 if (isset($act)) {
     switch ($act) {
         case 'profile':
+            if(isset($_POST['username']) && $_POST['username']) {
+                $updateUser = $classUser->updateProfile($_POST["fullName"],$_FILES['avatar'], $_POST["phone"], $_POST["email"]);
+                if (isset($updateUser)) {
+                    if ($updateUser->status) {
+                        echo '<div id="toast" mes-type="success" mes-title="Thành công!" mes-text="' . $updateUser->message. '"></div>';
+                    } else {
+                        echo '<div id="toast" mes-type="error" mes-title="Thành công!" mes-text="' . $updateUser->message . '"></div>';
+                    }
+                }
+            }
             include_once 'view/inc/header.php';
             include_once 'view/inc/profilesidebar.php';
             include_once 'view/profile.php';
@@ -25,18 +36,15 @@ if (isset($act)) {
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $adminUser = $_POST['adminUser'];
                 $adminPass = md5($_POST['adminPass']);
-                // $adminPass = ($_POST['adminPass']);
                 $login_check = $class->login_admin($adminUser, $adminPass);
             }
             include_once 'view/login.php';
             break;
         case 'register':
             $class = new Adminlogin();
-
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $checkRegister = $class->register_admin(
-                    $_POST['username']
-                    ,
+                    $_POST['username'],
                     $_POST['fullname'],
                     $_POST['email'],
                     $_POST['phone'],

@@ -427,6 +427,11 @@ $().ready(function(){
     $(".search-input-product").focus(function(e){
       $(".header__search-history ").toggle()
     })
+    // update profile
+    $("#avatar-input").on("input",function(){
+      const files = $(this).prop('files')
+      $(".profile-show-img").attr("src",URL.createObjectURL(files[0]))
+    })
 })
 function updateViewCart(_this,type,count,price,idpro){
   const currentSubtotal =(_this.find(".cart-subtotal1").attr("data-subtotal"))

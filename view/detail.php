@@ -197,12 +197,12 @@ if (isset($productInfo)) {
                             </div>
                         </div>
                         <div class="detail-btn-body" style="margin-top:30px">
-                            <button class=" detail-btn detail-btn-add" idpro="<?= $proInfo['id'] ?>" data-price="<?= $proInfo['price'] ?>"  >
-                                <i class="fa-solid fa-cart-plus"></i>
-                                Thêm vào giỏ hàng
-                            </button>
                             <a href="?mod=page&act=cart"
-                                class="detail-btn detail-btn-buy">Giỏ hàng </a>
+                                class="detail-btn detail-btn-cart">Giỏ hàng </a>
+                            <button class=" detail-btn  detail-btn-add detail-btn-buy" idpro="<?= $proInfo['id'] ?>" data-price="<?= $proInfo['price'] ?>"  >
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <span>Thêm vào giỏ hàng</span>
+                            </button>
                         </div>
                     </div>
                 </div>
