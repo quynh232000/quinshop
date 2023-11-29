@@ -211,13 +211,12 @@
     color: var(--text-color);
     
 }
-.m-search input:focus~.header__search-history {
+/* .m-search input:focus~.header__search-history {
     display: block;
 }
-/* search */
 .header-search input:focus~.header__search-history {
     display: block;
-}
+} */
 
 
 /* search history */

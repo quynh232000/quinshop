@@ -424,9 +424,9 @@ $().ready(function(){
       console.log(type)
       updateViewCart(item,type,countpro,pricepro,idpro)
     })
-    
-
-
+    $(".search-input-product").focus(function(e){
+      $(".header__search-history ").toggle()
+    })
 })
 function updateViewCart(_this,type,count,price,idpro){
   const currentSubtotal =(_this.find(".cart-subtotal1").attr("data-subtotal"))
