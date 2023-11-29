@@ -14,8 +14,8 @@ $cate = new Category();
 
 
 extract($_REQUEST);
-if (isset($act)) {
-    switch ($act) {
+if (isset($_GET['act'] )&& $_GET['act']) {
+    switch ($_GET['act']) {
         case 'home':
             $allCategory = $cate->getAllCate();
             if ($allCategory == false) {
