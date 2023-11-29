@@ -246,8 +246,9 @@ if (empty($viewTitle)) {
                             <!-- login -->
                             <div class="header-search-item header-search-account">
                                 <div class="header-search-item-icon">
-                                    <img src="<?php echo Session::get('avatar');
-                                   
+                                    <img src="<?php
+                                    // echo Session::get('avatar');
+                                    str_contains(Session::get("avatar"), "http") ? Session::get("avatar") : "./assest/upload/" . Session::get("avatar");
                                     ?>" class="img-user" alt="">
                                 </div>
                                 <!-- if (str_contains(Session::get("avatar"), "http")) {
@@ -338,7 +339,8 @@ if (empty($viewTitle)) {
                                     if ($cartResult->status && count($cartResult->result[0]) > 0) {
                                         foreach ($cartResult->result as $key => $value) { ?>
                                             <li class="header__cart-item">
-                                                <img src="./assest/upload/<?= $value['image'] ?>" alt="" class="header__cart-img">
+                                                <img src="./assest/upload/<?= $value['image'] ?>" alt=""
+                                                    class="header__cart-img">
                                                 <div class="header__cart-item-info">
                                                     <div class="header__cart-item-head">
                                                         <h5 class="header__cart-item-name">
