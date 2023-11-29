@@ -4,6 +4,11 @@
 include_once 'model/product.php';
 include_once 'model/entity.php';
 include_once "model/cart.php";
+include_once 'model/category.php';
+include_once 'view/inc/header.php';
+include_once 'view/collection.php';
+include_once 'view/home.php';
+include_once 'view/inc/footer.php';
 $cate = new Category();
 $product = new Product();
 $classCart = new Cart();
@@ -12,11 +17,6 @@ $cartResult = $classCart->getCartUser();
 
 
 extract($_REQUEST);
-include_once 'model/category.php';
-include_once 'view/inc/header.php';
-include_once 'view/collection.php';
-include_once 'view/home.php';
-include_once 'view/inc/footer.php';
 if (isset($act)) {
     switch ($act) {
         case 'home':
