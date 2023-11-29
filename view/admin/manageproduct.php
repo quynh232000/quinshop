@@ -136,7 +136,7 @@
                     if(isset($_GET['page']) && ($_GET['page'] < ceil($allProduct->total / 10))){
                         echo $_GET['page'] + 1;
                     } else{
-                        echo "2";
+                        echo  ceil($allProduct->total / 10);
                     }   ?>"
                         class="p-pagination-item next-page <?php
                         if (isset($_GET['page']) && (($_GET['page'] == ceil($allProduct->total / 10)))) {
