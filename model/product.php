@@ -31,7 +31,7 @@ class Product
         $listImage = '',
         $unit = '',
         $type = '',
-        $id = '',
+        $id = ''
     ) {
         // edit
 

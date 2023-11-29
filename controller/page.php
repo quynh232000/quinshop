@@ -1,16 +1,16 @@
 <?php
 
 
-// include_once 'model/product.php';
+include_once 'model/product.php';
 include_once 'model/entity.php';
 include_once 'model/category.php';
 
 include_once "model/cart.php";
 $cate = new Category();
-// $product = new Product();
-// $classCart = new Cart();
-// $getCartInfo = $classCart->getCartView();
-// $cartResult = $classCart->getCartUser();
+$product = new Product();
+$classCart = new Cart();
+$getCartInfo = $classCart->getCartView();
+$cartResult = $classCart->getCartUser();
 
 
 extract($_REQUEST);
@@ -21,11 +21,11 @@ if (isset($_GET['act'] )&& $_GET['act']) {
             if ($allCategory == false) {
                 $allCategory = array();
             }
-            // $megaPro = $product->filterProduct("random");
-            // $newPro = $product->filterProduct("", "", 8);
-            // $salePro = $product->filterProduct("random");
-            // $bestPro = $product->filterProduct("random", "", 10);
-            // $suggestionPro = $product->filterProduct("random", "", 10);
+            $megaPro = $product->filterProduct("random");
+            $newPro = $product->filterProduct("", "", 8);
+            $salePro = $product->filterProduct("random");
+            $bestPro = $product->filterProduct("random", "", 10);
+            $suggestionPro = $product->filterProduct("random", "", 10);
             include_once 'view/inc/header.php';
             include_once 'view/home.php';
             include_once 'view/inc/footer.php';
