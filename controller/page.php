@@ -1,7 +1,7 @@
 <?php
 
 
-include_once 'model/product.php';
+// include_once 'model/product.php';
 include_once 'model/entity.php';
 include_once 'model/category.php';
 
