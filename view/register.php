@@ -35,26 +35,26 @@
   <div class="register">
     <div class="wrapper body-register">
       <form class="form-register" id="register-form" method="POST" action="">
-        <h1>Register form</h1>
+        <h1>Đăng kí</h1>
         <!-- invalidate -->
         <div class="form-group">
           <div class="form-wrapper">
-            <label for="userName">Username</label>
+            <label for="userName">Tên đăng nhập</label>
             <div class="form-body">
               <i class="fa-solid fa-user"></i>
               <input type="text" class="form-control" id="userName" rules="required" name="username"
-                placeholder="Username" />
+                placeholder="Tên đăng nhập..." />
             </div>
             <div class="form-msg"></div>
           </div>
         </div>
         <div class="form-group">
           <div class="form-wrapper">
-            <label for="Full name">Full Name</label>
+            <label for="Full name">Họ tên</label>
             <div class="form-body">
               <i class="fa-solid fa-user"></i>
               <input type="text" class="form-control" id="Full name" rules="required" name="fullname"
-                placeholder="Full name" />
+                placeholder="Họ tên..." />
             </div>
             <div class="form-msg"></div>
           </div>
@@ -66,40 +66,40 @@
             <div class="form-body">
               <i class="fa-solid fa-paper-plane"></i>
               <input type="text" class="form-control" rules="required|email" id="email" name="email"
-                placeholder="Email" />
+                placeholder="Email..." />
             </div>
             <div class="form-msg"></div>
           </div>
         </div>
         <div class="form-group">
           <div class="form-wrapper">
-            <label for="phone">Phone</label>
+            <label for="phone">Số điện thoại</label>
             <div class="form-body">
               <i class="fa-solid fa-phone"></i>
               <input type="text" class="form-control" id="phone" rules="required" name="phone"
-                placeholder="Phone number" />
+                placeholder="Số điện thoại..." />
             </div>
             <div class="form-msg"></div>
           </div>
         </div>
         <div class="form-group">
           <div class="form-wrapper">
-            <label for="password">Password</label>
+            <label for="password">Mật khẩu</label>
             <div class="form-body">
               <i class="fa-solid fa-lock"></i>
               <input type="password" class="form-control" id="password" rules="required|min:6" name="password"
-                placeholder="Password" />
+                placeholder="Mật khẩu..." />
             </div>
             <div class="form-msg"></div>
           </div>
         </div>
         <div class="form-group">
           <div class="form-wrapper">
-            <label for="confirmPassword">Confirm Password</label>
+            <label for="confirmPassword">Xác nhận mật khẩu</label>
             <div class="form-body">
               <i class="fa-solid fa-lock"></i>
               <input type="password" class="form-control" id="confirmPassword" rules="required|min:6" name="confirmpassword"
-                placeholder="Confirm Password" />
+                placeholder="Xác nhận mật khẩu..." />
             </div>
             <div class="form-msg"></div>
           </div>
@@ -131,11 +131,11 @@
           </div>
         </div>
         <div class="form-btn">
-          <button class="btn-submit" type="submit">Register</button>
+          <button class="btn-submit" type="submit">Đăng kí</button>
         </div>
         <div class="form-change">
-          Already have an account?
-          <span><a href="?mod=profile&act=login">Signup</a></span>
+          Bạn đã có tài khoản?
+          <span><a href="?mod=profile&act=login">Đăng nhập</a></span>
         </div>
       </form>
     </div>

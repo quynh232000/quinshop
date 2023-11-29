@@ -18,7 +18,7 @@
                     <div class="shop-pro-filter-input">
                         <select name="" id="">
                             <option value="" selected>--Chọn sanh mục--</option>
-                           
+
                             <?php foreach ($allCategory as $key => $value) { ?>
                                 <option value="<?= $value['id'] ?>">
                                     <?= $value['nameCate'] ?>
@@ -55,8 +55,12 @@
                 <div class="show-pro-show-item">
                     Tất cả:
                     <span>
-                        <?php if (isset($allProduct) && $allProduct->status)
-                            echo $allProduct->total; ?>
+                        <?php if (isset($allProduct) && isset($allProduct->status)) {
+                            echo $allProduct->total;
+                        } else {
+                            echo "0";
+                        }
+                        ?>
                     </span>
                 </div>
                 <div class="show-pro-show-item">
@@ -71,7 +75,7 @@
             </div>
             <div class="shop-pro-add" style="padding:0 20px">
                 <div class="shop-pro-add-title">
-                    <?php if (isset($allProduct) && $allProduct->status)
+                    <?php if (isset($allProduct) && isset($allProduct->status))
                         echo $allProduct->total; ?> Sản phẩm
                 </div>
                 <a href="?mod=admin&act=addproduct" class="show-pro-add-btn">
@@ -81,27 +85,64 @@
             <div class="p-pagination">
                 <div class="p-pagination-left">
                     <span>
-                        (<span class="count-product">0</span>/20)
+                        (<span class="count-product">
+                            <?php if (isset($allProduct) && isset($allProduct->status)) {
+                                echo count($allProduct->result);
+                            } else {
+                                echo "0";
+                            }
+                            ?>
+                        </span>/10)
                         sản phẩm
                     </span>
                     <div>|</div>
                     <span>
-                        (<span class="current-page">1</span>/
-                        <span class="total-page">6</span>) trang
+                        (<span class="current-page">
+                            <?= isset($_GET['page']) ? $_GET['page'] : 1 ?>
+                        </span>/
+                        <span class="total-page">
+                            <?php if (isset($allProduct) && isset($allProduct->status)) {
+                                echo ceil($allProduct->total / 10);
+                            } else {
+                                echo "0";
+                            } ?>
+                        </span>) trang
                     </span>
                 </div>
                 <div class="p-pagination-right">
-                    <a href="&page=<?= isset($_GET['page']) ? $_GET['page'] + 1 : 2 ?>"
+                    <a href="?mod=admin&act=manageproduct&page=<?= isset($_GET['page']) ? $_GET['page'] > 1 ? $_GET['page'] - 1 : 1 : 1 ?>"
                         class="<?php if (!isset($_GET['page']) || $_GET['page'] == 1)
                             echo "disabled"; ?> p-pagination-item previous-page">
                         Trước
                     </a>
+                    <?php if (isset($allProduct) && isset($allProduct->status)) {
+                        for ($i = 1; $i < ceil($allProduct->total / 10) + 1; $i++) {
+                            $active = "";
+                            if (isset($_GET['page']) && $_GET['page'] == $i) {
+                                $active = "active";
+                            } else {
+                                if (!isset($_GET['page']) && $i == 1) {
+                                    $active = "active";
+                                }
+                            }
+                            echo '<a href="?mod=admin&act=manageproduct&page=' . $i . '" class="p-pagination-item ' . $active . '">' . $i . '</a>';
+                        }
+                    } else {
+                        echo "";
+                    }
+                    ?>
 
-                    <a href="&page=1" class="p-pagination-item active">1</a>
-                    <a href="&page=2" class="p-pagination-item">2</a>
-
-                    <a href="&page=<?= isset($_GET['page']) ? $_GET['page'] + 1 : 2 ?>"
-                        class="p-pagination-item next-page">Sau</a>
+                    <a href="?mod=admin&act=manageproduct&page=<?php 
+                    if(isset($_GET['page']) && ($_GET['page'] < ceil($allProduct->total / 10))){
+                        echo $_GET['page'] + 1;
+                    } else{
+                        echo "2";
+                    }   ?>"
+                        class="p-pagination-item next-page <?php
+                        if (isset($_GET['page']) && (($_GET['page'] == ceil($allProduct->total / 10)))) {
+                            echo "disabled";
+                        }
+                        ?>">Sau</a>
                 </div>
             </div>
             <div class="shop-pro-body">
@@ -138,7 +179,7 @@
                         </div>
                     </div>
                     <div class="shop-pro-list">
-                        <?php if (isset($allProduct) && is_array($allProduct->result) > 0) {
+                        <?php if (isset($allProduct) && isset($allProduct->status) && is_array($allProduct->result) > 0) {
 
                             foreach ($allProduct->result as $key => $value) { ?>
                                 <!-- item -->

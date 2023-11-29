@@ -65,7 +65,12 @@ if (isset($act)) {
         case 'manageproduct':
             $viewTitle = 'Manage your products';
             $classPro = new Product();
-            $allProduct = $classPro->getAllProduct();
+            // get page product
+            $page=1;
+            if(isset($_GET['page']) && $_GET['page']) {
+                $page = $_GET['page'];
+            }
+            $allProduct = $classPro->getAllProduct($page);
             $cate = new Category();
             $allCategory = $cate->getAllCate();
             // ddelete product

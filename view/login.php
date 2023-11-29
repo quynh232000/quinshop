@@ -28,11 +28,11 @@
         <!-- invalidate -->
         <div class="form-group">
           <div class="form-wrapper">
-            <label for="userName">Username</label>
+            <label for="userName">Tên đăng nhập</label>
             <div class="form-body">
               <i class="fa-solid fa-user"></i>
               <input type="text" class="form-control" id="userName" name="adminUser" rules="required"
-                placeholder="Username" />
+                placeholder="Tên đăng nhập..." />
             </div>
             <div class="form-msg"></div>
           </div>
@@ -40,11 +40,11 @@
 
         <div class="form-group invalidate">
           <div class="form-wrapper">
-            <label for="password">Password</label>
+            <label for="password">Mật khẩu</label>
             <div class="form-body">
               <i class="fa-solid fa-lock"></i>
               <input type="password" class="form-control" id="password" name="adminPass" rules="required|min:6"
-                placeholder="Password" />
+                placeholder="Mật khẩu..." />
             </div>
             <div class="form-msg"></div>
           </div>
@@ -70,11 +70,11 @@
         </div>
 
         <div class="form-btn">
-          <button class="btn-submit" type="submit">Login</button>
+          <button class="btn-submit" type="submit">Đăng nhập</button>
         </div>
         <div class="form-change">
-          You don't have any account?
-          <span><a href="?mod=profile&act=register">Register</a></span>
+          Bạn chưa có tài khoản?
+          <span><a href="?mod=profile&act=register">Đăng kí</a></span>
         </div>
         <div class="l-back-home">
           <a href="./" class="home-btn" >Trang chủ</a>

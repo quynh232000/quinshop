@@ -78,7 +78,7 @@ form{
 }
 .btn-submit{
     text-align: center;
-    width: 40%;
+    /* width: 50%; */
     font-size: 1.8rem;
     padding: 8px 40px;
     border-radius: 6px;

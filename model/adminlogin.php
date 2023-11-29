@@ -81,7 +81,7 @@ class Adminlogin
         if ($checkUser != false) {
             return ["status" => false, "message" => "Tên đăng nhập đã tồn tại!", "result" => []];
         }
-        $avatar = 'https://static.vecteezy.com/system/resources/previews/012/941/847/original/illustration-of-avatar-girl-nice-smiling-woman-with-black-hair-flat-icon-on-purple-background-vector.jpg';
+        $avatar = '5EA63482-44B3-40C9-B3A8-1479DB08CCD4.jpg';
         $id = $this->tool->GUID();
         $query = "INSERT INTO user (id,userName,fullName,email,phone,pass,avatar) VALUE
                ( '$id',
