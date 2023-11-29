@@ -9,13 +9,7 @@ extract($_REQUEST);
             <div class="profile-nav">
                 <div class="profile-nav-user">
                     <div class="profile-nav-avatar">
-                        <img src="<?php
-                        if (str_contains(Session::get("avatar"), "http")) {
-                            echo Session::get('avatar');
-                        } else {
-                            echo "./assest/upload/" . Session::get("avatar");
-                        }
-                        ?>" alt="">
+                        <img src="<?php echo "./assest/upload/" . Session::get("avatar");?>" alt="">
                     </div>
                     <div class="profile-nav-info">
                         <div class="profile-nav-user-name">

@@ -3,13 +3,7 @@
     <form class="form-update-profile" method="POST" enctype="multipart/form-data">
         <div class="profile-avatar-body">
             <div class="profile-img">
-                <img src="<?php 
-                    if(str_contains(Session::get("avatar"),"http")){
-                        echo Session::get('avatar');
-                    }else{
-                        echo "./assest/upload/".Session::get("avatar");
-                    }
-                ?>" alt="" class="profile-show-img">
+                <img src="<?php echo "./assest/upload/" . Session::get("avatar");?>" alt="" class="profile-show-img">
             </div>
             <label for="avatar-input">
                 <i class="fa-regular fa-pen-to-square"></i>

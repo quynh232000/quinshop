@@ -246,10 +246,7 @@ if (empty($viewTitle)) {
                             <!-- login -->
                             <div class="header-search-item header-search-account">
                                 <div class="header-search-item-icon">
-                                    <img src="<?php
-                                    // echo Session::get('avatar');
-                                    str_contains(Session::get("avatar"), "http") ? Session::get("avatar") : "./assest/upload/" . Session::get("avatar");
-                                    ?>" class="img-user" alt="">
+                                    <img src="<?php echo "./assest/upload/" . Session::get("avatar");?>" class="img-user" alt="">
                                 </div>
                                 <!-- if (str_contains(Session::get("avatar"), "http")) {
                                         echo Session::get('avatar');

@@ -219,13 +219,7 @@
                         </div>
                         <div class="header-search-item header-search-account">
                             <div class="header-search-item-icon">
-                                <img src="<?php
-                        if (str_contains(Session::get("avatar"), "http")) {
-                            echo Session::get('avatar');
-                        } else {
-                            echo "./assest/upload/" . Session::get("avatar");
-                        }
-                        ?> " class="img-user" alt="">
+                                <img src="<?php echo "./assest/upload/" . Session::get("avatar");?>" class="img-user" alt="">
                             </div>
                             <a href="?mod=profile&act=profile" class="header-search-info">
                                
