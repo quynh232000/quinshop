@@ -1,7 +1,9 @@
-
 <?php
 session_start();
-include_once "lib/session.php";
+include_once "./lib/session.php";
+include_once 'view/inc/header.php';
+            include_once 'view/home.php';
+            include_once 'view/inc/footer.php';
 extract($_REQUEST);
 if (isset($mod)) {
     switch ($mod) {
@@ -14,9 +16,9 @@ if (isset($mod)) {
         case 'admin':
             include_once 'controller/admin.php';
             break;
-            case 'request':
-                include_once 'controller/request.php';
-                break;
+        case 'request':
+            include_once 'controller/request.php';
+            break;
 
         default:
             header("Location: ?page=404");
