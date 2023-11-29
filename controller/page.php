@@ -1,8 +1,6 @@
 <?php
 include_once 'view/inc/header.php';
-include_once 'view/home.php';
-include_once 'view/inc/footer.php';
-include_once 'model/category.php';
+
 include_once 'model/product.php';
 include_once 'model/entity.php';
 include_once "model/cart.php";
@@ -14,7 +12,11 @@ $cartResult = $classCart->getCartUser();
 
 
 extract($_REQUEST);
+include_once 'model/category.php';
 if (isset($act)) {
+    include_once 'view/collection.php';
+    include_once 'view/home.php';
+    include_once 'view/inc/footer.php';
     switch ($act) {
         case 'home':
             $allCategory = $cate->getAllCate();
