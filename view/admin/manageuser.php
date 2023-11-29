@@ -70,7 +70,7 @@
                                     <input type="checkbox" class="item-input" user-id='${item?.id}' />
                                     <div class="item-img">
                                         <img
-                                            src='<?=$value['avatar'] ?>' />
+                                            src='./assest/upload/<?=$value['avatar'] ?>' />
                                     </div>
                                     <div class="item-name">
                                         <p><?=$value['userName'] ?></p>
