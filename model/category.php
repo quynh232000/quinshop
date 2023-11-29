@@ -49,10 +49,10 @@ class Category
     public function getAllCate()
     {
         $query = "SELECT c.*, COUNT(p.categoryId) as count
-                from product AS p
-                INNER JOIN category as c
+                from  category as c
+                LEFT JOIN product AS p
                 ON p.categoryId = c.id
-                GROUP BY p.categoryId
+                GROUP BY c.id
         ";
         $result = $this->db->select($query);
         return $result;
