@@ -121,9 +121,13 @@ class Product
             }
         }
     }
-    public function getAllProduct($page = 1, $limit = 10)
+    public function getAllProduct($page = 1, $limit = 10,$type="")
     {
-        $getTotal = $this->db->select("SELECT COUNT(*) AS total from product");
+       
+        if($type){
+            $type = "WHERE pr.status = '$type'";
+        }
+        $getTotal = $this->db->select("SELECT COUNT(*) AS total from product AS pr $type");
         $total = $getTotal->fetch_assoc();
         $total = $total == false ? 0 : $total['total'];
         if ($page < 1) {
@@ -134,6 +138,7 @@ class Product
 
         $query = "SELECT pr.*, cate.nameCate as nameCategory from product as pr 
             INNER JOIN category as cate on pr.categoryId = cate.id 
+            $type
             ORDER BY pr.createdAt DESC 
             limit $currentPage,$limit
         ";
@@ -247,7 +252,72 @@ class Product
         return new Response(true, "Successcully", $result, "");
 
     }
+    public function dashboard(){
+        $result = [];
+        $totalProduct = $this->db->select("SELECT count(*) as total FROM product");
+        if ($totalProduct == false) {
+            $result['totalPro'] = 0;
+        }else{
+            $totalProduct = $totalProduct->fetch_assoc();
+            $result['totalPro'] = $totalProduct['total'];
+        }
+        $totalSold = $this->db->select("SELECT sum(i.quantity) as total FROM invoicedetail as i");
+        if ($totalSold == false) {
+            $result['totalSold'] = 0;
+        }else{
+            $totalSold = $totalSold->fetch_assoc();
+            $result['totalSold'] = $totalSold['total'];
+        }
+        $totalOut = $this->db->select("SELECT count(p.id) as total FROM product as p where p.id < 1");
+        if ($totalOut == false) {
+            $result['totalOut'] = 0;
+        }else{
+            $totalOut = $totalOut->fetch_assoc();
+            $result['totalOut'] = $totalOut['total'];
+        }
+        // totalHidden
+        $totalHidden = $this->db->select("SELECT count(p.id) as total FROM product as p where p.status ='hidden'");
+        if ($totalHidden == false) {
+            $result['totalHidden'] = 0;
+        }else{
+            $totalHidden = $totalHidden->fetch_assoc();
+            $result['totalHidden'] = $totalHidden['total'];
+        }
+        // totalOrder
+        $totalOrder = $this->db->select("SELECT count(*) as total FROM invoice");
+        if ($totalOrder == false) {
+            $result['totalOrder'] = 0;
+        }else{
+            $totalOrder = $totalOrder->fetch_assoc();
+            $result['totalOrder'] = $totalOrder['total'];
+        }
+         // totalOrderNew
+         $totalOrderNew = $this->db->select("SELECT count(*) as total FROM invoice  where invoice.status ='new'");
+         if ($totalOrderNew == false) {
+             $result['totalOrderNew'] = 0;
+         }else{
+             $totalOrderNew = $totalOrderNew->fetch_assoc();
+             $result['totalOrderNew'] = $totalOrderNew['total'];
+         }
+         // totalOrderSuccess
+         $totalOrderSuccess = $this->db->select("SELECT count(*) as total FROM invoice  where invoice.status ='success'");
+         if ($totalOrderSuccess == false) {
+             $result['totalOrderSuccess'] = 0;
+         }else{
+             $totalOrderSuccess = $totalOrderSuccess->fetch_assoc();
+             $result['totalOrderSuccess'] = $totalOrderSuccess['total'];
+         }
+         // totalOrderCancel
+         $totalOrderCancel = $this->db->select("SELECT count(*) as total FROM invoice  where invoice.status ='cancel'");
+         if ($totalOrderCancel == false) {
+             $result['totalOrderCancel'] = 0;
+         }else{
+             $totalOrderCancel = $totalOrderCancel->fetch_assoc();
+             $result['totalOrderCancel'] = $totalOrderCancel['total'];
+         }
+         return new Response(true, "Thành công!", $result, "");
 
+    }
 
 }
 

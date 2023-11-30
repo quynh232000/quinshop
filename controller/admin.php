@@ -13,6 +13,9 @@ extract($_REQUEST);
 if (isset($act)) {
     switch ($act) {
         case 'dashboard':
+            $classPro = new Product();
+            $resultData = $classPro->dashboard();
+            
             $viewTitle = 'Dashboard';
             include_once 'view/inc/headerAdmin.php';
             include_once 'view/inc/sidebarAdmin.php';

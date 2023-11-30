@@ -200,7 +200,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="shop-pro-info-action">
-                                                    <a href="." class="shop-pro-info-view" title="View detail">
+                                                    <a href="?mod=page&act=detail&id=<?= $value['id'] ?>" class="shop-pro-info-view" title="View detail">
                                                         <i class="fa-solid fa-eye"></i>
                                                     </a>
                                                     <div class="shop-pro-info-heart">
