@@ -19,6 +19,7 @@ if (isset($act)) {
                 $updateUser = $classUser->updateProfile($_POST["fullName"],$_FILES['avatar'], $_POST["phone"], $_POST["email"]);
                 if (isset($updateUser)) {
                     if ($updateUser->status) {
+                        
                         echo '<div id="toast" mes-type="success" mes-title="Thành công!" mes-text="' . $updateUser->message. '"></div>';
                     } else {
                         echo '<div id="toast" mes-type="error" mes-title="Thành công!" mes-text="' . $updateUser->message . '"></div>';

@@ -156,6 +156,31 @@ if (isset($act)) {
         case 'manageuser':
             $classUser = new User();
             $allUser = $classUser->getAllUser();
+            if(isset($_GET['type']) &&
+                isset($_GET['userid']) &&
+                $_GET['type'] == 'edit'
+            ){
+                $userInfo = $classUser->getUserById($_GET['userid']);
+            }
+
+            if(isset($_POST['fullName']) && $_POST['fullName'] && isset($_GET['userid'])) {
+                $updateUser = $classUser->updateUser($_POST["fullName"],$_FILES['avatar'], $_POST["phone"], $_POST["email"],$_POST["role"],$_GET['userid']);
+                if (isset($updateUser)) {
+                    if ($updateUser->status) {
+                        echo '<div id="toast" mes-type="success" mes-title="Thành công!" mes-text="' . $updateUser->message. '"></div>';
+                        echo ' <script>
+                                setTimeout(function() {
+                                    window.location.href="' . $updateUser->redirect . '";
+                                }, 2000);
+                            </script>';
+                    } else {
+                        echo '<div id="toast" mes-type="error" mes-title="Thành công!" mes-text="' . $updateUser->message . '"></div>';
+                    }
+                }
+            }
+
+
+
             $viewTitle = 'Quản lý user';
             include_once 'view/inc/headerAdmin.php';
             include_once 'view/inc/sidebarAdmin.php';

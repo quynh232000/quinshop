@@ -27,16 +27,20 @@
                 <div class="p-pagination">
                     <div class="p-pagination-left">
                         <span>
-                            (<span class="count-product">0</span>/20)
-                            sản phẩm
+                            (<span class="count-product"><?php
+                             if (isset($allUser)){
+                                echo count($allUser->result);
+                             }
+                            ?></span>/20)
+                            Users
                         </span>
-                        <div>|</div>
+                        <!-- <div>|</div>
                         <span>
                             (<span class="current-page">1</span>/
                             <span class="total-page">6</span>) trang
-                        </span>
+                        </span> -->
                     </div>
-                    <div class="p-pagination-right">
+                    <!-- <div class="p-pagination-right">
                         <div class="p-pagination-item previous-page">
                             Trước
                         </div>
@@ -44,11 +48,12 @@
                         <div class="p-pagination-item">2</div>
                         <div class="p-pagination-item">3</div>
                         <div class="p-pagination-item next-page">Sau</div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="item item-nav">
                     <div class="item-left">
-                        <input type="checkbox" class="item-input" />
+                        <!-- <input type="checkbox" class="item-input" /> -->
+                        <i class="fa-solid fa-feather-pointed item-input hidden"></i>
                         <div class="item-img">Ảnh</div>
                         <div class="item-name">Tài khoản</div>
                     </div>
@@ -63,31 +68,36 @@
                     </div>
                     <?php
                     if (isset($allUser) && is_array($allUser->result)) {
-                        
+
                         foreach ($allUser->result as $key => $value) { ?>
                             <div class="item">
                                 <div class="item-left">
-                                    <input type="checkbox" class="item-input" user-id='${item?.id}' />
+                                    <!-- <input type="checkbox" class="item-input" user-id='${item?.id}' /> -->
+                                    <i class="fa-solid fa-feather-pointed item-input"></i>
                                     <div class="item-img">
-                                        <img
-                                            src='./assest/upload/<?=$value['avatar'] ?>' />
+                                        <img src='./assest/upload/<?= $value['avatar'] ?>' />
                                     </div>
                                     <div class="item-name">
-                                        <p><?=$value['userName'] ?></p>
-                                        <span><?=$value['email'] ?></span>
+                                        <p>
+                                            <?= $value['userName'] ?>
+                                        </p>
+                                        <span>
+                                            <?= $value['email'] ?>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="item-right">
                                     <div class="item-role">
-                                        <div class="role <?=$value['role'] ?>">
-                                        <?=$value['role'] ?>
+                                        <div class="role <?= $value['role'] ?>">
+                                            <?= $value['role'] ?>
                                         </div>
                                     </div>
                                     <div class="item-action">
-                                        <div class="action modify">
+                                        <a href="?mod=admin&act=manageuser&type=edit&userid=<?= $value['id'] ?>"
+                                            class="action modify">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                             <span>Sửa</span>
-                                        </div>
+                                        </a>
                                         <div class="action delete-btn" user-id='${item?.id}'>
                                             <i class="fa-solid fa-trash"></i>
                                             <span>Xóa</span>
@@ -103,148 +113,141 @@
                     <!-- item -->
 
                 </div>
-               
+
             </div>
         </div>
     </div>
 </main>
-<div class="modal hidden modal-detail-user">
+<div class="modal 
+    <?php
+    if (isset($_GET['type']) && isset($_GET['userid']) && ($_GET['type']) == "edit") {
+        echo "";
+    } else {
+        echo "hidden";
+    }
+    ?>
+    modal-detail-user">
     <div class="modal-wrapper">
-        <div class="m-close">
+        <a href="?mod=admin&act=manageuser" class="m-close">
             <i class="fa-solid fa-xmark"></i>
-        </div>
-        <div class="m-title">Edit Profile</div>
+        </a>
+        <div class="m-title">Chỉnh sửa hồ sơ</div>
 
         <div class="m-body">
-            <div class="loading-all hidden">
-                <div class="spinner-3"></div>
+            <?php
+            if (isset($userInfo) && $userInfo->status == 1) { 
+                $user = $userInfo->result;
+                ?>
 
-            </div>
-            <!-- body -->
-            <div class="form-modal-user">
-                <div class="form-body-wrapper">
-
-                    <div class="body-item w-50">
-                        <div class="avatar w-100">
-                            <div class="avatar-body">
-                                <img src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg"
-                                    alt="" class="img-avatar" />
-                                <label for="input-avatar" class="label-avatar">
-                                    <i class="fa-regular fa-pen-to-square"></i>
-                                </label>
-                                <input type="file" name="avatar" id="input-avatar" class="input-avatar" />
+                <!-- body -->
+                <form class="form-modal-user" method="POST" enctype="multipart/form-data">
+                    <div class="form-body-wrapper">
+                        <div class="body-item w-50">
+                            <div class="avatar w-100">
+                                <div class="avatar-body">
+                                    <img src="./assest/upload/<?=$user['avatar'] ?>"
+                                        alt="" class="img-avatar" />
+                                    <label for="input-avatar" class="label-avatar">
+                                        <i class="fa-regular fa-pen-to-square"></i>
+                                    </label>
+                                    <input type="file" name="avatar" id="input-avatar" class="input-avatar" />
+                                </div>
                             </div>
-                        </div>
 
 
-                        <div class="form-group w-100">
-                            <div class="form-wrapper">
-                                <label for="">Roles</label>
-                                <div class="form-body">
-                                    <div class="list-roles">
-                                        <div class="role">
-                                            <span>Admin</span>
-                                            <i class="fa-solid fa-trash-can"></i>
-                                        </div>
-                                        <div class="role">
-                                            <span>Seller</span>
-                                            <i class="fa-solid fa-trash-can"></i>
-                                        </div>
-                                        <div class="role">
-                                            <span>Member</span>
-                                            <i class="fa-solid fa-trash-can"></i>
+                            <div class="form-group w-100">
+                                <div class="form-wrapper">
+                                    <label for="">Vai trò</label>
+                                    <div class="form-body">
+                                        <div class="list-roles">
+                                            <div class="role">
+                                                <span><?=$user['role'] ?></span>
+                                                <!-- <i class="fa-solid fa-trash-can"></i> -->
+                                            </div>
+
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-msg"></div>
-                            </div>
-                        </div>
-                        <div class="form-group w-100">
-                            <div class="form-wrapper">
-                                <label for="">Add roles</label>
-                                <div class="form-body">
-                                    <select class="select-role w-100" name="" id="">
-                                        <option value="">Admin</option>
-                                        <option value="">Seller</option>
-                                        <option value="">Member</option>
-                                    </select>
-                                </div>
-                                <div class="form-msg"></div>
-                            </div>
-                        </div>
-
-                        <div class="form-group w-50">
-                            <div class="form-wrapper">
-                                <label for="userName">Gender</label>
-                                <div class="form-body">
-                                    <span class="info-more">Male</span>
+                                    <div class="form-msg"></div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-group w-50">
-                            <div class="form-wrapper">
-                                <label for="userName">Country</label>
-                                <div class="form-body">
-                                    <span class="info-more">Viet nam</span>
+                            <div class="form-group w-100">
+                                <div class="form-wrapper">
+                                    <label for="">Thay đổi vai trò</label>
+                                    <div class="form-body">
+                                       
+                                        <select class="select-role w-100" name="role" id="">
+                                            <option value="">--Chọn--</option>
+                                            <?php 
+                                            foreach ($userInfo->total as $key => $value) {
+                                                if($user['role'] != $value['role']){
+                                                    echo '<option value="'. $value['role'].'">'. $value['role'].'</option>';
+                                                }
+                                            }
+                                            ?>
+                                          
+                                        </select>
+                                    </div>
+                                    <div class="form-msg"></div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="body-item w-50">
+                        <div class="body-item w-50">
 
-                        <div class="form-group w-100">
-                            <div class="form-wrapper">
-                                <label for="userName">Username</label>
-                                <div class="form-body">
-                                    <input type="text" class="form-control" id="userName" name="UserName"
-                                        rules="required" placeholder="Username" />
+                            <div class="form-group w-100">
+                                <div class="form-wrapper">
+                                    <label for="userName">Tài khoản</label>
+                                    <div class="form-body">
+                                        <input readonly type="text" class="form-control" id="userName" name="UserName"
+                                          value="<?=$user['userName'] ?>"  rules="required" placeholder="userName" />
+                                    </div>
+                                    <div class="form-msg"></div>
                                 </div>
-                                <div class="form-msg"></div>
                             </div>
-                        </div>
 
-                        <div class="form-group w-100">
-                            <div class="form-wrapper">
-                                <label for="">Phone</label>
-                                <div class="form-body">
-                                    <input type="text" class="form-control" name="email" rules="required"
-                                        placeholder="Phone Number" />
+                            <div class="form-group w-100">
+                                <div class="form-wrapper">
+                                    <label for="">Số điện thoại</label>
+                                    <div class="form-body">
+                                        <input type="text" value="<?=$user['phone'] ?>" class="form-control" name="phone" rules="required"
+                                            placeholder="Phone Number" />
+                                    </div>
+                                    <div class="form-msg"></div>
                                 </div>
-                                <div class="form-msg"></div>
                             </div>
-                        </div>
 
-                        <div class="form-group w-100">
-                            <div class="form-wrapper">
-                                <label for="userName">FullName</label>
-                                <div class="form-body">
-                                    <input type="text" class="form-control" name="fullName" rules="required"
-                                        placeholder="FullName" />
+                            <div class="form-group w-100">
+                                <div class="form-wrapper">
+                                    <label for="userName">Họ tên</label>
+                                    <div class="form-body">
+                                        <input type="text" value="<?=$user['fullName'] ?>" class="form-control" name="fullName" rules="required"
+                                            placeholder="FullName" />
+                                    </div>
+                                    <div class="form-msg"></div>
                                 </div>
-                                <div class="form-msg"></div>
                             </div>
-                        </div>
 
-                        <div class="form-group w-100">
-                            <div class="form-wrapper">
-                                <label for="userName">Email</label>
-                                <div class="form-body">
-                                    <input type="text" class="form-control" name="email" rules="required"
-                                        placeholder="Email" />
+                            <div class="form-group w-100">
+                                <div class="form-wrapper">
+                                    <label for="userName">Email</label>
+                                    <div class="form-body">
+                                        <input type="text" class="form-control" value="<?=$user['email'] ?>" name="email" rules="required"
+                                            placeholder="Email" />
+                                    </div>
+                                    <div class="form-msg"></div>
                                 </div>
-                                <div class="form-msg"></div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="btn-body w-100">
-                    <button type="reset" class="btn">Cancel</button>
-                    <div class="btn btn-submit">Save</div>
-                </div>
-            </div>
+                    <div class="btn-body w-100">
+                        <button type="reset" class="btn">Hủy</button>
+                        <button type="submit" class="btn btn-submit">Lưu</button>
+                    </div>
+                </form>
+
+            <?php }
+            ?>
         </div>
     </div>
 </div>

@@ -77,7 +77,8 @@ class Category
         if ($id) {
             $result = $this->db->select("SELECT * FROM category WHERE id = '$id'");
             $result = $result->fetch_assoc();
-            return new Response(true, "Thành công!", $result, "", "");
+            // return new Response(true, "Thành công!", $result, "", "");
+            return $result;
         }
     }
     public function deleteCate($id)
