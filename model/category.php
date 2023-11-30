@@ -17,7 +17,7 @@ class Category
         $this->fm = new Format();
         $this->tool = new Tool();
     }
-    public function createNewCate($name, $file)
+    public function createNewCate($name, $file, $type = "", $id = "")
     {
         $name = $this->fm->validation($name);
         $name = mysqli_real_escape_string($this->db->link, $name);
@@ -27,22 +27,37 @@ class Category
         } else {
             $slug = $this->tool->slug($name, '-');
             $fileResult = $this->tool->uploadFile($file);
-            if ($fileResult == false) {
-                return 'Something arong from your file!';
-            }
-            $query = "INSERT INTO category (nameCate, slug, imageCate) VALUES
-                    (
-                        '$name',
-                        '$slug',
-                        '$fileResult'
-                    )
-                ";
-            $result = $this->db->insert($query);
-            if ($result != false) {
-                return "Create new category successfully!";
+            if (($type && $type == 'update') && $id != "") {
+                if ($fileResult) {
+                    $sqlFile = "imageCate = '$fileResult',";
+                }
+                $resultUpdate = $this->db->update("UPDATE category 
+                    SET nameCate = '$name',slug ='$slug',$sqlFile createdAt = NOW()
+                    WHERE id = '$id'
+                ");
+                if ($resultUpdate == false) {
+                    return "Update category fail!";
+                } else {
+                    return "Update category successfully!";
+                }
             } else {
-                $alert = "Wrong from server!";
-                return $alert;
+                if ($fileResult == false) {
+                    return 'Something arong from your file!';
+                }
+                $query = "INSERT INTO category (nameCate, slug, imageCate) VALUES
+                        (
+                            '$name',
+                            '$slug',
+                            '$fileResult'
+                        )
+                    ";
+                $result = $this->db->insert($query);
+                if ($result != false) {
+                    return "Create new category successfully!";
+                } else {
+                    $alert = "Wrong from server!";
+                    return $alert;
+                }
             }
         }
     }
@@ -56,6 +71,14 @@ class Category
         ";
         $result = $this->db->select($query);
         return $result;
+    }
+    public function getInfoCate($id)
+    {
+        if ($id) {
+            $result = $this->db->select("SELECT * FROM category WHERE id = '$id'");
+            $result = $result->fetch_assoc();
+            return new Response(true, "Thành công!", $result, "", "");
+        }
     }
     public function deleteCate($id)
     {
@@ -76,17 +99,6 @@ class Category
             return new Response(true, "Xóa danh mục thành công!", "", "");
         } else {
             return new Response(false, "Xóa danh mục thất bại!", "", "");
-        }
-    }
-    public function getInfoCate($id)
-    {
-        if (!empty($id)) {
-            $query = "SELECT * from category WHERE id = $id";
-            $result = $this->db->select($query);
-            if ($result != false) {
-                return mysqli_fetch_assoc($result);
-
-            }
         }
     }
 

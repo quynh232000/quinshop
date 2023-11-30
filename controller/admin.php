@@ -15,7 +15,7 @@ if (isset($act)) {
         case 'dashboard':
             $classPro = new Product();
             $resultData = $classPro->dashboard();
-            
+
             $viewTitle = 'Dashboard';
             include_once 'view/inc/headerAdmin.php';
             include_once 'view/inc/sidebarAdmin.php';
@@ -28,8 +28,8 @@ if (isset($act)) {
             $cate = new Category();
             $allCategory = $cate->getAllCate();
             if (isset($_POST['btn-create-product']) && $_POST['btn-create-product']) {
-                $type =isset( $_GET['type']) ? $_GET['type'] :"create";
-                $id = isset($_GET['idPro'])?$_GET['idPro']:"";
+                $type = isset($_GET['type']) ? $_GET['type'] : "create";
+                $id = isset($_GET['idPro']) ? $_GET['idPro'] : "";
                 $resAddPro = $classPro->updateProduct(
                     $_POST['name'],
                     $_POST["description"],
@@ -69,8 +69,8 @@ if (isset($act)) {
             $viewTitle = 'Manage your products';
             $classPro = new Product();
             // get page product
-            $page=1;
-            if(isset($_GET['page']) && $_GET['page']) {
+            $page = 1;
+            if (isset($_GET['page']) && $_GET['page']) {
                 $page = $_GET['page'];
             }
             $allProduct = $classPro->getAllProduct($page);
@@ -106,18 +106,29 @@ if (isset($act)) {
         case 'managecategory':
             $viewTitle = 'Manage category';
             $cate = new Category();
-
             if (isset($_POST['create-cate-btn']) && $_POST['create-cate-btn']) {
                 $createCate = $cate->createNewCate($_POST['name'], $_FILES['image']);
+            }
+            if (
+                isset($_POST['create-cate-btn']) &&
+                $_POST['create-cate-btn'] &&
+                (isset($_GET['type']) && isset($_GET['idCate'])) &&
+                ($_GET['type']) && $_GET['idCate'] &&
+                $_GET['type'] == "edit"
+            ) {
+                $createCate = $cate->createNewCate($_POST['name'], $_FILES['image'], "update", $_GET['idCate']);
             }
             if ((isset($_GET['type']) && isset($_GET['idCate'])) && ($_GET['type']) && $_GET['idCate']) {
                 $type = $_GET['type'];
                 $idCate = $_GET['idCate'];
-                if ($type == "delete") {
-                    $resultDeleteCate = $cate->deleteCate($idCate);
+                switch ($type) {
+                    case 'delete':
+                        $resultDeleteCate = $cate->deleteCate($idCate);
+                        break;
+                    case 'edit':
+                        $resultGetInfo = $cate->getInfoCate($idCate);
+                        break;
                 }
-
-
             }
             if (isset($resultDeleteCate)) {
                 if ($resultDeleteCate->status == true) {
@@ -126,11 +137,6 @@ if (isset($act)) {
                     echo '<div id="toast" mes-type="error" mes-title="Thất bại!" mes-text="' . $resultDeleteCate->message . '"></div>';
 
                 }
-                // echo ' <script>
-                //     setTimeout(function() {
-                //         window.location.href="'.$resultDeletePro->redirect.'";
-                //     }, 4000);
-                // </script>';
             }
             $allCategory = $cate->getAllCate();
             include_once 'view/inc/headerAdmin.php';
@@ -139,11 +145,8 @@ if (isset($act)) {
             include_once 'view/inc/footer.php';
             break;
         case 'manageorders':
-
             $classOrder = new Order();
             $resultOrder = $classOrder->getAllInvoince();
-
-
             $viewTitle = 'Manage orders';
             include_once 'view/inc/headerAdmin.php';
             include_once 'view/inc/sidebarAdmin.php';
@@ -153,7 +156,6 @@ if (isset($act)) {
         case 'manageuser':
             $classUser = new User();
             $allUser = $classUser->getAllUser();
-
             $viewTitle = 'Quản lý user';
             include_once 'view/inc/headerAdmin.php';
             include_once 'view/inc/sidebarAdmin.php';

@@ -279,3 +279,14 @@ border-color: var(--primary);
     background-color: var(--primary);
     color: white;
 }
+.cate-img-wrapper{width: 360px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+.cate-img-preview{
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+}

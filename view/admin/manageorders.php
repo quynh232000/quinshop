@@ -38,19 +38,19 @@
                 <div class="s-orders-option">
                     <div class="s-orders-option-item">
                         <span>Xác nhận đơn hàng</span>
-                        <i class="fa-solid fa-angle-down"></i>
+                        <!-- <i class="fa-solid fa-angle-down"></i> -->
                     </div>
                     <div class="s-orders-option-item">
                         <span>Xác nhận đã giao</span>
-                        <i class="fa-solid fa-angle-down"></i>
+                        <!-- <i class="fa-solid fa-angle-down"></i> -->
                     </div>
                     <div class="s-orders-option-item">
                         <span>Hủy đơn hàng</span>
-                        <i class="fa-solid fa-angle-down"></i>
+                        <!-- <i class="fa-solid fa-angle-down"></i> -->
                     </div>
                     <div class="s-orders-option-item">
                         <span>Xóa đơn hàng</span>
-                        <i class="fa-solid fa-angle-down"></i>
+                        <!-- <i class="fa-solid fa-angle-down"></i> -->
                     </div>
                 </div>
             </div>
