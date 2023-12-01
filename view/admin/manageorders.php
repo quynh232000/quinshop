@@ -94,7 +94,7 @@
                 </div>
                 <div class="s-orders-list">
                     <?php
-                    if (isset($resultOrder)) {
+                    if (isset($resultOrder) && is_array($resultOrder->result)) {
                         $status =['new'=>["s1"=>"Chờ xác nhận",'s2'=>'Chưa thanh toán'],'confirmed'=>["s1"=>"Đang giao hàng",'s2'=>'Chưa thanh toán'],'success'=>['s1'=>"Đã giao hàng",'s2'=>'Đã thanh toán'],'cancel'=>['s1'=>"Đã hủy",'s2'=>"Đã hủy"]];
                         foreach ($resultOrder->result as $key => $value) { ?>
                             <div class="s-order-item">
@@ -125,6 +125,8 @@
                                 </div>
                             </div>
                         <?php }
+                    }else{
+                        echo '<div class="no-orders">Không có đơn hàng nào!</div>';
                     }
                     ?>
                    

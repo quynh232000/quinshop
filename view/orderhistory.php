@@ -89,9 +89,9 @@
                                 ?></div>
                             </div>
                         </div>
-                    <?php } } else {
-                        echo '<div class="no-orders">Không có đơn hàng nào!</div>';
-                    }
+                    <?php } }
+                } else {
+                    echo '<div class="no-orders">Không có đơn hàng nào!</div>';
                 }
                 ?>
                
