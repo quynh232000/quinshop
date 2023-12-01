@@ -229,13 +229,13 @@
                                     ?>    
                                 </span>
                                 <div class="header-search-text-s">
-                                    Profile
+                                    Hồ sơ
                                 </div>
                             </a>
                             <div class="account-more">
                                     <a href="?mod=profile&act=profile" class="account-more-item">
                                         <i class="fa-solid fa-user"></i>
-                                        <span>Profile</span>
+                                        <span>Hồ sơ</span>
                                     </a>
                                     <?php
                                     if (isset($_GET['action']) && $_GET["action"] == 'logout') {
@@ -244,7 +244,7 @@
                                     ?>
                                     <a href="?mod=admin&act=dashboard&action=logout" class="account-more-item">
                                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                        <span>Logout</span>
+                                        <span>Đăng xuất</span>
                                     </a>
                                 </div>
                         </div>
