@@ -62,6 +62,24 @@ class Order
         }
         return new Response(true, "success", $result, "");
     }
+    public function updateInvoice($status, $listId){
+        if($status =="" || $listId == "") {
+            return new Response(false, "Missing parammeter", "", "");
+        }
+        $queryId ="";
+        foreach ($listId as $key => $value) {
+            $queryId .= $value.",";
+        }
+        $queryId = rtrim($queryId,",");
+        $resultUpdate = $this->db->update("UPDATE invoice as i  
+            SET i.status = '$status' 
+            WHERE i.id in ($queryId)
+        ");
+        if($resultUpdate ==false){
+            return new Response(false, "Something wrong from server!", "", "");
+        }
+        return new Response(true, "Cập nhật đơn hàng thành công!", "", "");
+    }
     
     
 }

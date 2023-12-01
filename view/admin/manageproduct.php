@@ -3,7 +3,7 @@
     <div class="shop-main-content">
         <div class="shop-top">
             <div class="shop-title">Quản lí sản phẩm</div>
-            <div class="shop-pro-filter">
+            <!-- <div class="shop-pro-filter">
                 <div class="shop-pro-filter-item">
                     <div class="shop-pro-filter-input">
                         <select name="" id="" class="shop-pro-filter-search">
@@ -48,7 +48,7 @@
                         <input type="text" placeholder="Max...">
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="shop-pro-content">
             <div class="shop-pro-show">

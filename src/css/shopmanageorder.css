@@ -159,6 +159,12 @@
     flex:1;
     text-align: center;
 }
+.s-orders-status.confirmed{
+    color: var(--primary);
+}
+.cancel{
+    color: red;
+}
 .s-order-right div{
     padding: 0 6px;
 }
@@ -170,6 +176,9 @@
 }
 .s-orders-check.cancel{
     color: var(--red);
+}
+.s-orders-payment.confirmed{
+    color: var(--bg-yellow);
 }
 .new{
     color: var(--bg-yellow);

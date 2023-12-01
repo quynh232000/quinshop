@@ -5,7 +5,7 @@
             <!-- content -->
             <div class="shop-main-content">
                 <div class="shop-top">
-                    <div class="shop-title">Manage category</div>
+                    <div class="shop-title">Quản lí danh mục</div>
                     <div class="shop-pro-filter">
                         <div class="category">
                             <form method="post" class="cate-add" enctype="multipart/form-data">
@@ -13,8 +13,8 @@
                                 <div class="form-group">
                                     <label for="name" class="form-label">Tên danh mục</label>
                                     <input type="text" value="<?php
-                                        if (isset($resultGetInfo) && $resultGetInfo->status) {
-                                            echo $resultGetInfo->result['nameCate'];
+                                        if (isset($resultGetInfo)) {
+                                            echo $resultGetInfo['nameCate'];
                                         }
                                     ?>" name="name" rules="required" class="form-control"
                                         placeholder="Aa..." />
@@ -28,8 +28,8 @@
                                 <div class="form-group">
                                     <label for="idcateimage" class="cate-img-wrapper">
                                         <img  class="cate-img-preview" src="<?php
-                                        if (isset($resultGetInfo) && $resultGetInfo->status) {
-                                            echo "./assest/upload/".$resultGetInfo->result['imageCate'];
+                                        if (isset($resultGetInfo) ) {
+                                            echo "./assest/upload/".$resultGetInfo['imageCate'];
                                         }else{
                                             echo "https://png.pngtree.com/png-clipart/20190921/original/pngtree-file-upload-icon-png-image_4717174.jpg";
                                         }
@@ -47,7 +47,7 @@
 
                                 <!-- <button class="form-submit">Tạo</button> -->
                                 <input class="form-submit" type="submit" name="create-cate-btn" value="<?php
-                                        if (isset($resultGetInfo) && $resultGetInfo->status) {
+                                        if (isset($resultGetInfo) ) {
                                             echo "Cập nhật";
                                         }else{ echo "Tạo";}
                                     ?>">

@@ -121,14 +121,14 @@ if (isset($act)) {
             if ((isset($_GET['type']) && isset($_GET['idCate'])) && ($_GET['type']) && $_GET['idCate']) {
                 $type = $_GET['type'];
                 $idCate = $_GET['idCate'];
-                switch ($type) {
-                    case 'delete':
-                        $resultDeleteCate = $cate->deleteCate($idCate);
-                        break;
-                    case 'edit':
-                        $resultGetInfo = $cate->getInfoCate($idCate);
-                        break;
+                if($type == 'delete'){
+                    $resultDeleteCate = $cate->deleteCate($idCate);
                 }
+                if($type == 'edit'){
+                    $resultGetInfo = $cate->getInfoCate($idCate);
+                }
+
+                
             }
             if (isset($resultDeleteCate)) {
                 if ($resultDeleteCate->status == true) {

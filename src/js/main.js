@@ -437,6 +437,38 @@ $().ready(function(){
       const files = $(this).prop('files')
       $(".cate-img-preview").attr("src",URL.createObjectURL(files[0]))
     })
+    // update order admin
+    $(".s-orders-option-item").click(function(){
+      const type = $(this).attr("type")
+      let listId = []
+      $(".order-input-check").each(function(){
+        if($(this).is(":checked")){
+          const idorder = $(this).attr("orderid")
+          listId.push(idorder);
+        }
+      })
+      if(type && listId){
+        const data = {
+          status:type,
+          listId:listId
+        }
+        $.ajax({
+          url:"?mod=request&act=updateinvoice",
+          type: "POST",
+          data: JSON.stringify(data),
+          cache: false,
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+        }).done(data=>{
+          toastjs( data.message)
+          if(data.status){
+            setTimeout(()=>{
+              location.reload()
+            },2000)
+          }
+        })
+      }
+    })
     
 })
 function updateViewCart(_this,type,count,price,idpro){

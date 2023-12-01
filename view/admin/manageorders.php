@@ -7,7 +7,7 @@
         </div>
         <div class="shop-orders">
             <div class="s-orders-top">
-                <div class="s-orders-filter">
+                <!-- <div class="s-orders-filter">
                     <div class="s-orders-filter-left">
                         <div class="s-orders-filter-select">
                             <input type="text" placeholder="Tìm kiếm...">
@@ -34,24 +34,21 @@
                             <span>Đặt lại</span>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="s-orders-option">
-                    <div class="s-orders-option-item">
+                    <div class="s-orders-option-item" type="confirmed">
                         <span>Xác nhận đơn hàng</span>
                         <!-- <i class="fa-solid fa-angle-down"></i> -->
                     </div>
-                    <div class="s-orders-option-item">
+                    <div class="s-orders-option-item" type="success">
                         <span>Xác nhận đã giao</span>
                         <!-- <i class="fa-solid fa-angle-down"></i> -->
                     </div>
-                    <div class="s-orders-option-item">
+                    <div class="s-orders-option-item" type="cancel">
                         <span>Hủy đơn hàng</span>
                         <!-- <i class="fa-solid fa-angle-down"></i> -->
                     </div>
-                    <div class="s-orders-option-item">
-                        <span>Xóa đơn hàng</span>
-                        <!-- <i class="fa-solid fa-angle-down"></i> -->
-                    </div>
+                    
                 </div>
             </div>
            
@@ -98,12 +95,12 @@
                 <div class="s-orders-list">
                     <?php
                     if (isset($resultOrder)) {
-                        $status =['new'=>["s1"=>"Đang giao hàng",'s2'=>'Chưa thanh toán'],'success'=>['s1'=>"Đã giao hàng",'s2'=>'Đã thanh toán'],'fail'=>['s1'=>"Đã hủy",'s2'=>"Đã hủy"]];
+                        $status =['new'=>["s1"=>"Chờ xác nhận",'s2'=>'Chưa thanh toán'],'confirmed'=>["s1"=>"Đang giao hàng",'s2'=>'Chưa thanh toán'],'success'=>['s1'=>"Đã giao hàng",'s2'=>'Đã thanh toán'],'cancel'=>['s1'=>"Đã hủy",'s2'=>"Đã hủy"]];
                         foreach ($resultOrder->result as $key => $value) { ?>
                             <div class="s-order-item">
                                 <div class="s-order-left">
                                     <div class="s-orders-input">
-                                        <input type="checkbox">
+                                        <input type="checkbox" class="order-input-check" orderid ="<?=$value['id'] ?>" >
                                         <div class="s-orders-view">
                                             <a href="?mod=admin&act=detailorder&id=<?=$value['id'] ?>" class="s-orders-view-wrapper">
                                                 <i class="fa-solid fa-eye"></i>
@@ -120,8 +117,8 @@
                                     <div class="s-orders-user"><?=$value['nameReceiver'] ?></div>
                                     <div class="s-orders-phone"><?=$value['phone'] ?></div>
                                     <div class="s-orders-payment <?=$value['status'] ?>"><?=$status[$value['status']]['s2'] ?></div>
-                                    <div class="s-orders-status new">
-                                        New
+                                    <div class="s-orders-status <?=$value['status'] ?>">
+                                    <?=$status[$value['status']]['s1'] ?>
                                     </div>
                                     
                                     <div class="s-orders-total-price fm-price"><?=$value['total'] ?></div>
