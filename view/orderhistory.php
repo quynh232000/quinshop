@@ -53,7 +53,7 @@
                 <?php
                 if (isset($allOrder) && $allOrder->status) {
                     if (count($allOrder->result) > 0) { 
-                        $status =['new'=>["s1"=>"Đang giao hàng",'s2'=>'Chưa thanh toán'],'success'=>['s1'=>"Đã giao hàng",'s2'=>'Đã thanh toán'],'fail'=>['s1'=>"Đã hủy",'s2'=>"Đã hủy"]];
+                        $status =['new'=>["s1"=>"Chờ xác nhận",'s2'=>'Chưa thanh toán'],'confirmed'=>["s1"=>"Đang giao hàng",'s2'=>'Chưa thanh toán'],'success'=>['s1'=>"Đã giao hàng",'s2'=>'Đã thanh toán'],'cancel'=>['s1'=>"Đã hủy",'s2'=>"Đã hoàn tiền"]];
                         foreach ($allOrder->result as $key => $value) {
                             # code...
                         ?>
