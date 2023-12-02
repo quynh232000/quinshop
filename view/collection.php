@@ -1,7 +1,7 @@
 <!-- main -->
 <main class="collection">
     <div class="wrapper">
-        <div class="c-banner">
+        <!-- <div class="c-banner">
             <div class="swiper  swipper-banner-collection">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide banner-mid-item ">
@@ -12,17 +12,11 @@
                     </div>
 
                 </div>
-                <!-- If we need pagination -->
                 <div class="swiper-pagination"></div>
-
-                <!-- If we need navigation buttons -->
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
-
-                <!-- If we need scrollbar -->
-                <!-- <div class="swiper-scrollbar"></div> -->
             </div>
-        </div>
+        </div> -->
         <div class="c-mall">
             <div class="c-mall-top">
                 <div class="c-mall-top-title">
