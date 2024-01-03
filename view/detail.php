@@ -2,7 +2,7 @@
 <?php
 if (isset($productInfo)) {
     $proInfo = $productInfo[0];
-    $listImg = $productInfo[1]; 
+    $listImg = $productInfo[1];
     ?>
 
     <main class="detail">
@@ -17,7 +17,7 @@ if (isset($productInfo)) {
                     <a href="?mod=page&act=collection&category=<?= $proInfo['categoryId'] ?>" class="detail-tab-item">
                         <span class="navllink-cate">
                             <?= $proInfo['nameCategory'] ?>
-                            </span>
+                        </span>
                         <i class="fa-solid fa-angle-right"></i>
                     </a>
 
@@ -37,7 +37,7 @@ if (isset($productInfo)) {
                             <div class="detail-list-img">
                                 <?php
                                 if (count($listImg) > 0) {
-                                   
+
                                     foreach ($listImg as $key => $value) {
                                         echo ' <div class="detail-img-item">
                                                 <img src="./assest/upload/' . $value['link'] . '"
@@ -56,7 +56,7 @@ if (isset($productInfo)) {
                                 }
 
                                 ?>
-                               
+
                             </div>
                         </div>
                         <div class="detail-share">
@@ -187,9 +187,12 @@ if (isset($productInfo)) {
                             <div class="detail-info-title">Số lượng</div>
                             <div class="detail-info-quantity">
                                 <div class="detail-amount">
-                                    <div class="detail-info-quantity-item detail-btn-count" type="minus"  ><i class="fa-solid fa-minus"></i></div>
-                                    <input class="detail-info-quantity-item detail-input-quantity" type="text"  value="1" readonly />
-                                    <div class="detail-info-quantity-item detail-btn-count" type="plus" ><i class="fa-solid fa-plus"></i></div>
+                                    <div class="detail-info-quantity-item detail-btn-count" type="minus"><i
+                                            class="fa-solid fa-minus"></i></div>
+                                    <input class="detail-info-quantity-item detail-input-quantity" type="text" value="1"
+                                        readonly />
+                                    <div class="detail-info-quantity-item detail-btn-count" type="plus"><i
+                                            class="fa-solid fa-plus"></i></div>
                                 </div>
                                 <div class="detail-amount-total">
                                     <?= $proInfo['quantity'] ?> sản phẩm
@@ -197,9 +200,9 @@ if (isset($productInfo)) {
                             </div>
                         </div>
                         <div class="detail-btn-body" style="margin-top:30px">
-                            <a href="?mod=page&act=cart"
-                                class="detail-btn detail-btn-cart">Giỏ hàng </a>
-                            <button class=" detail-btn  detail-btn-add detail-btn-buy" idpro="<?= $proInfo['id'] ?>" data-price="<?= $proInfo['price'] ?>"  >
+                            <a href="?mod=page&act=cart" class="detail-btn detail-btn-cart">Giỏ hàng </a>
+                            <button class=" detail-btn  detail-btn-add detail-btn-buy" idpro="<?= $proInfo['id'] ?>"
+                                data-price="<?= $proInfo['price'] ?>">
                                 <i class="fa-solid fa-cart-plus"></i>
                                 <span>Thêm vào giỏ hàng</span>
                             </button>
@@ -208,10 +211,86 @@ if (isset($productInfo)) {
                 </div>
             </div>
             <!-- desciption -->
-            <div class="detail-desciption">
-                <div class="detail-desctiption-title">MÔ TẢ CHI TIẾT</div>
-                <div class="detail-description-body">
-                    <?= $proInfo['description'] ?>
+            <div class="detail-wrapper-des">
+                <div class="detail-desciption detail-des">
+                    <div class="detail-desctiption-title">MÔ TẢ CHI TIẾT</div>
+                    <div class="detail-description-body">
+                        <?= $proInfo['description'] ?>
+                    </div>
+                    <div class="detail-des-btn-more-wrapper">
+                        <div class="detail-des-btn-more">
+
+                            Xem thêm
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-desciption des-cmt" id="show-list-cmt" >
+                    <div class="detail-desctiption-title">Bình luận</div>
+                    <div class="detail-cmt-body">
+                        <!-- cmt -->
+                        <div class="cmt">
+                            <form id="form-cmt" class="cmt-input"><textarea name="content" class="cmt-textarea"
+                                    placeholder="Nhập nội dung bình luận..."></textarea>
+                                <input type="text" name="productId" value="<?= $proInfo['id'] ?>" hidden>
+                                <button type="submit" class="cmt-send">Gửi</button>
+                            </form>
+                            <div class="cmt-total"><strong><?php
+                                if(isset($listCmt)){
+                                    echo $listCmt->result['count'];
+                                }
+                            ?> hỏi đáp về</strong> “<?= $proInfo['namePro'] ?>”</div>
+                            <div class="cmt-list-comment">
+                                <?php
+                                if (isset($listCmt)) {
+                                    foreach ($listCmt->result['data'] as $key => $value) { ?>
+                                        <div class="cmt-item"><img class="cmt-user-img"
+                                                src="./assest/upload/<?= $value['avatar'] ?>">
+                                            <div class="cmt-user-info">
+                                                <p class="cmt-user-name">
+                                                    <?= $value['fullname'] ?>
+                                                </p>
+                                                <div class="cmt-user-content">
+                                                    <?= $value['content'] ?>
+                                                </div>
+                                                <div class="cmt-user-time">
+                                                    <p>
+                                                        <?= explode(" ", $value['createdAt'])[0] ?>
+                                                    </p><span>Thích</span><span>Trả lời</span>
+                                                </div>
+                                            </div>
+                                            <?php 
+                                                if(Session::get("id") == $value['userId'] ){?>
+                                                
+                                                <div class="cmt-icon-remove">
+                                                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                        class="DetailProduct_delete-icon__6GgVP" height="1em" width="1em"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <circle cx="12" cy="12" r="1"></circle>
+                                                        <circle cx="12" cy="5" r="1"></circle>
+                                                        <circle cx="12" cy="19" r="1"></circle>
+                                                    </svg>
+                                                    <p class="cmt-show-delete" cmt-id="<?=$value['id'] ?>">Xóa</p>
+                                                </div>
+                                           <?php } ?>
+                                        </div>
+                                    <?php }
+                                }
+
+                                ?>
+                            </div>
+                            <div class="cmt-more-wrapper">
+                                <?php 
+                                    $page=2;
+                                    if(isset($_GET['page']) && $_GET['page']){
+                                        $page = $_GET['page']+1;
+                                    }
+                                    ?>
+                                <a href="?mod=page&act=detail&id=<?=$proInfo['id'] ?>&page=<?=$page ?>#show-list-cmt" class="cmt-view-more">Xem thêm</a>
+                            </div>
+                        </div>
+                        <!-- cmt -->
+                    </div>
                 </div>
             </div>
 
@@ -222,7 +301,7 @@ if (isset($productInfo)) {
                         <div class="new-product-wrapper">
                             <div class="new-product-top">
                                 <div class="new-product-title">
-                                Gợi ý cho bạn
+                                    Gợi ý cho bạn
                                 </div>
                                 <div class="new-product-more">
                                     Xem thêm
@@ -298,7 +377,8 @@ if (isset($productInfo)) {
                                                         </del>
                                                     </div>
                                                 </a>
-                                                <div class="product-btn" idpro="<?= $value['id'] ?>" data-price= "<?= $value['price'] ?>">
+                                                <div class="product-btn" idpro="<?= $value['id'] ?>"
+                                                    data-price="<?= $value['price'] ?>">
                                                     <i class="fa-solid fa-cart-plus"></i>
                                                     <span>Thêm giỏ hàng</span>
                                                 </div>

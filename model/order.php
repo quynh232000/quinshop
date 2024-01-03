@@ -35,32 +35,30 @@ class Order
         if ($oders == false) {
             return new Response(false, "false", "", "");
         } 
-        $result = [];
-        while ($row = mysqli_fetch_assoc($oders)) {
-            $result[] = $row;
-        }
-        return new Response(true, "success", $result, "");
+       
+        return new Response(true, "success", $oders->fetchAll(), "");
     }
-    public function getAllInvoince()
+    public function getAllInvoince($type = "")
     {
         $isLogin = Session::get("isLogin");
         if ($isLogin != true) {
             return new Response(false, "false", "", "");
         }
+        $typeWhere ='';
+        if($type != ""){
+            $typeWhere = "WHERE i.status = '".$type."'";
+        }
         $invoice = $this->db->select("SELECT i.*,ad.nameReceiver, ad.phone
             FROM invoice AS i
             INNER JOIN quin.address as ad
             ON i.addressId = ad.id
+            $typeWhere
             ORDER BY i.createdAt
         ");
         if ($invoice == false) {
             return new Response(false, "false", "", "");
         } 
-        $result = [];
-        while ($row = mysqli_fetch_assoc($invoice)) {
-            $result[] = $row;
-        }
-        return new Response(true, "success", $result, "");
+        return new Response(true, "success", $invoice->fetchAll(), "");
     }
     public function updateInvoice($status, $listId){
         if($status =="" || $listId == "") {

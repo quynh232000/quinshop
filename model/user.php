@@ -22,17 +22,11 @@ class User
         if ($isLogin != true) {
             return new Response(false, "false", "", "");
         }
-        $userId = Session::get("id");
-
         $user = $this->db->select("SELECT * from user WHERE isDelete = '0'");
         if ($user == false) {
             return new Response(false, "false", "", "");
         }
-        $result = [];
-        while ($row = mysqli_fetch_assoc($user)) {
-            $result[] = $row;
-        }
-        return new Response(true, "success", $result, "");
+        return new Response(true, "success", $user->fetchAll(), "");
 
     }
     public function getUserById($id)
@@ -41,19 +35,19 @@ class User
             return new Response(false, "false", "", "");
         }
         $allRole = $this->db->select("SELECT u.role   FROM user as u group by u.role");
-        $getAllRole = [];
-        if ($allRole != false) {
-            while ($row = mysqli_fetch_assoc($allRole)) {
-                $getAllRole[] = $row;
-            }
+        // $getAllRole = [];
+        // if ($allRole != false) {
+        //     while ($row = mysqli_fetch_assoc($allRole)) {
+        //         $getAllRole[] = $row;
+        //     }
 
-        }
+        // }
         $user = $this->db->select("SELECT * FROM user Where id = '$id'");
         if ($user == false) {
             return new Response(false, "Tài khoản không tồn tại!", "", "");
         }
-        $user = $user->fetch_assoc();
-        return new Response(true, "success", $user, "", $getAllRole);
+        // $user = $user->fetch_assoc();
+        return new Response(true, "success", $user->fetch(), "", $allRole->fetchAll());
 
     }
     public function updateUser($fullName, $image, $phone, $email, $role, $id)
@@ -105,6 +99,21 @@ class User
         header("Location: ?mod=admin&act=manageuser");
         return new Response(true, "Cập nhật thông tin thành công", "", "?mod=admin&act=manageuser", "");
 
+    }
+    public function deleteUser($id) {
+        $isLogin = Session::get("isLogin");
+        if ($isLogin != true) {
+            return new Response(false, "false", "", "?mod=profile&act=login");
+        }
+        $checkRoleAdmin = Session::get("role");
+        if ($checkRoleAdmin != "adminall") {
+            return new Response(false, "Bạn không có quyền xóa thông tin tài khoản!", "", "?mod=profile&act=login",'');
+        }
+        if($id == ""){
+            return new Response(false, "Missing parammeter!", "Missing parammeter!", "?mod=admin&act=manageuser", "");
+        }
+        $this->db->delete("DELETE FROM user WHERE id = '$id' ");
+        return new Response(true, "Xóa tài khoản thành công", "Xóa tài khoản thành công", "?mod=admin&act=manageuser", "");
     }
 
 }

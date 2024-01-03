@@ -121,14 +121,14 @@ if (isset($act)) {
             if ((isset($_GET['type']) && isset($_GET['idCate'])) && ($_GET['type']) && $_GET['idCate']) {
                 $type = $_GET['type'];
                 $idCate = $_GET['idCate'];
-                if($type == 'delete'){
+                if ($type == 'delete') {
                     $resultDeleteCate = $cate->deleteCate($idCate);
                 }
-                if($type == 'edit'){
+                if ($type == 'edit') {
                     $resultGetInfo = $cate->getInfoCate($idCate);
                 }
 
-                
+
             }
             if (isset($resultDeleteCate)) {
                 if ($resultDeleteCate->status == true) {
@@ -146,35 +146,69 @@ if (isset($act)) {
             break;
         case 'manageorders':
             $classOrder = new Order();
-            $resultOrder = $classOrder->getAllInvoince();
+            $type = '';
+            if (isset($_GET['type']) && ($_GET['type'] == 'confirmed' || $_GET['type'] == 'new' || $_GET['type'] == 'cancel')) {
+                $type = $_GET['type'];
+            }
+            $resultOrder = $classOrder->getAllInvoince($type);
             $viewTitle = 'Manage orders';
             include_once 'view/inc/headerAdmin.php';
             include_once 'view/inc/sidebarAdmin.php';
             include_once 'view/admin/manageorders.php';
             include_once 'view/inc/footer.php';
             break;
+        case 'detailorder':
+            $classOrder = new Order();
+            
+            $resultOrder = $classOrder->getAllInvoince();
+            $viewTitle = 'Manage orders';
+            include_once 'view/inc/headerAdmin.php';
+            include_once 'view/inc/sidebarAdmin.php';
+            include_once 'view/admin/orderdetail.php';
+            include_once 'view/inc/footer.php';
+            break;
         case 'manageuser':
             $classUser = new User();
             $allUser = $classUser->getAllUser();
-            if(isset($_GET['type']) &&
+            if (
+                isset($_GET['type']) &&
                 isset($_GET['userid']) &&
-                $_GET['type'] == 'edit'
-            ){
-                $userInfo = $classUser->getUserById($_GET['userid']);
+                $_GET['type'] != ""
+            ) {
+                $type = $_GET['type'];
+                if($type== 'edit'){
+                    $userInfo = $classUser->getUserById($_GET['userid']);
+
+                }else if($type == 'delete'){
+                    $deleteUser = $classUser->deleteUser($_GET['userid']);
+                    if (isset($deleteUser)) {
+                        if ($deleteUser->status ==true) {
+                            echo '<div id="toast" mes-type="success" mes-title="Thành công!" mes-text="' .'Xóa tài khoản thành công' . '"></div>';
+                            
+                        } else {
+                            echo '<div id="toast" mes-type="error" mes-title="Thất bại!" mes-text="' . 'Bạn không có quyền với hàng động này!' . '"></div>';
+                        }
+                        echo ' <script>
+                                    setTimeout(function() {
+                                        window.location.href="?mod=admin&act=manageuser";
+                                    }, 2000);
+                                </script>';
+                    }
+                }
             }
 
-            if(isset($_POST['fullName']) && $_POST['fullName'] && isset($_GET['userid'])) {
-                $updateUser = $classUser->updateUser($_POST["fullName"],$_FILES['avatar'], $_POST["phone"], $_POST["email"],$_POST["role"],$_GET['userid']);
+            if (isset($_POST['fullName']) && $_POST['fullName'] && isset($_GET['userid'])) {
+                $updateUser = $classUser->updateUser($_POST["fullName"], $_FILES['avatar'], $_POST["phone"], $_POST["email"], $_POST["role"], $_GET['userid']);
                 if (isset($updateUser)) {
                     if ($updateUser->status) {
-                        echo '<div id="toast" mes-type="success" mes-title="Thành công!" mes-text="' . $updateUser->message. '"></div>';
+                        echo '<div id="toast" mes-type="success" mes-title="Thành công!" mes-text="' . $updateUser->message . '"></div>';
                         echo ' <script>
                                 setTimeout(function() {
                                     window.location.href="' . $updateUser->redirect . '";
                                 }, 2000);
                             </script>';
                     } else {
-                        echo '<div id="toast" mes-type="error" mes-title="Thành công!" mes-text="' . $updateUser->message . '"></div>';
+                        echo '<div id="toast" mes-type="error" mes-title="Thất bại!" mes-text="' . $updateUser->message . '"></div>';
                     }
                 }
             }

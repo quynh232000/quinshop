@@ -4,6 +4,7 @@ include_once "lib/session.php";
 include_once "model/cart.php";
 include_once "model/product.php";
 include_once "model/order.php";
+include_once "model/comment.php";
 
 extract($_REQUEST);
 if (isset($act)) {
@@ -29,23 +30,38 @@ if (isset($act)) {
             break;
         case 'updateinvoice':
             $entityBody = file_get_contents('php://input');
-            if(isset($entityBody) ) {
+            if (isset($entityBody)) {
                 $entityBody = json_decode($entityBody, true);
-                // print_r($entityBody);
-                if($entityBody["status"] !=""){
+                if ($entityBody["status"] != "") {
                     $classOrders = new Order();
-                    $result = $classOrders->updateInvoice($entityBody["status"],$entityBody["listId"]);
+                    $result = $classOrders->updateInvoice($entityBody["status"], $entityBody["listId"]);
                     echo json_encode($result, JSON_PRETTY_PRINT);
                     return;
-                }else{
+                } else {
                     echo json_encode($entityBody, JSON_PRETTY_PRINT);
-                    return ;
+                    return;
                 }
-            }else{
+            } else {
                 echo json_encode($entityBody, JSON_PRETTY_PRINT);
                 return;
             }
-        
+        case 'createcomment':
+            $entityBody = file_get_contents('php://input');
+            if (isset($entityBody)) {
+                $entityBody = json_decode($entityBody, true);
+                if ($entityBody["productId"] != "") {
+                    $classOrders = new Comment();
+                    $result = $classOrders->createComment($entityBody["productId"], $entityBody["content"]);
+                    echo json_encode($result, JSON_PRETTY_PRINT);
+                    return;
+                } else {
+                    echo json_encode($entityBody, JSON_PRETTY_PRINT);
+                    return;
+                }
+            } else {
+                echo json_encode($entityBody, JSON_PRETTY_PRINT);
+                return;
+            }
         default:
             break;
 

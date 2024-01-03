@@ -20,7 +20,6 @@ class Category
     public function createNewCate($name, $file, $type = "", $id = "")
     {
         $name = $this->fm->validation($name);
-        $name = mysqli_real_escape_string($this->db->link, $name);
         if (empty($name)) {
             $alert = "Name and file image must no be empty!";
             return $alert;
@@ -76,7 +75,7 @@ class Category
     {
         if ($id) {
             $result = $this->db->select("SELECT * FROM category WHERE id = '$id'");
-            $result = $result->fetch_assoc();
+            $result = $result->fetchAll()[0];
             // return new Response(true, "Thành công!", $result, "", "");
             return $result;
         }

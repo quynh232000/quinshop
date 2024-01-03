@@ -4,13 +4,17 @@
 include_once 'model/product.php';
 include_once 'model/entity.php';
 include_once 'model/category.php';
+include_once 'model/comment.php';
 
 include_once "model/cart.php";
 $cate = new Category();
 $product = new Product();
 $classCart = new Cart();
+$classComment = new Comment();
 $getCartInfo = $classCart->getCartView();
 $cartResult = $classCart->getCartUser();
+// print_r($cartResult);
+// return;
 
 
 extract($_REQUEST);
@@ -49,6 +53,12 @@ if (isset($_GET['act'] )&& $_GET['act']) {
                 $infoPro = $product->filterProduct("detail", $_GET['id']);
                 if (isset($infoPro) && $infoPro->status == true) {
                     $productInfo = $infoPro->result;
+                    $page = 1;
+                    if(isset($_GET['page']) && $_GET['page']){
+                        $page = $_GET['page'];
+                    }
+                    $listCmt = $classComment->getAllCommentById( $_GET['id'],$page);
+                    
                     $viewTitle = $productInfo[0]['namePro'];
                 }
             } else {

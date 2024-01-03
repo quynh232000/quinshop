@@ -34,11 +34,11 @@ class Cart
         if ($cartUser == false) {
             return new Response(false, "false", "", "");
         } else {
-            $result = [];
-            while ($row = mysqli_fetch_array($cartUser)) {
-                $result[] = $row;
-            }
-            return new Response(true, "success", $result, "");
+            // $result = [];
+            // while ($row = mysqli_fetch_array($cartUser)) {
+            //     $result[] = $row;
+            // }
+            return new Response(true, "success", $cartUser->fetchAll(), "");
         }
     }
     public function getCartView()
@@ -58,7 +58,7 @@ class Cart
             return new Response(true, "success", ["total" => "0", "totalPrice" => 0], "");
         } else {
 
-            $result = $resultGetCart->fetch_assoc();
+            $result = $resultGetCart->fetchAll()[0];
 
             return new Response(true, "success", $result, "");
         }
@@ -70,7 +70,8 @@ class Cart
             return new Response(false, "Vui lòng đăng nhập!", "", "");
         }
         $userId = Session::get("id");
-        $checkCart = $this->db->select("SELECT * from cart  as c WHERE c.userId = '$userId' AND c.productId = '$value'");
+        $carts = $this->db->select("SELECT * from cart  as c WHERE c.userId = '$userId' AND c.productId = '$value'");
+        $checkCart = count($carts->fetchAll())>0 ?true:false;
         // return new Response(true, "Đã thêm sản phẩm vào giỏ hàng thành công!", "", "");
         switch ($key) {
             case 'minus':
@@ -127,7 +128,7 @@ class Cart
                         $createCart = $this->db->insert("INSERT INTO cart (userId,productId,count) VALUE ('$userId', '$value', '$count')");
                     }
                     if ($createCart == false) {
-                        return new Response(false, "Thêm sản phẩm thất bại!", "", "");
+                        return new Response(false, "Thêm sản phẩm thất bại123!", "", "");
                     } else {
                         return new Response(true, "Đã thêm sản phẩm vào giỏ hàng thành công!", "", "");
                     }
@@ -161,7 +162,7 @@ class Cart
             return new Response(false, "Create new address fail!","", "");
         }
         $getIdAddress = $this->db->select("SELECT LAST_INSERT_ID();");
-        $idAddress = mysqli_fetch_assoc($getIdAddress)['LAST_INSERT_ID()'];
+        $idAddress =$getIdAddress->fetchColumn();
         // creeate invoice
         $invoince = $this->db->insert("INSERT INTO invoice (userId,subTotal,total,addressId,note,fee) VALUES
             ('$userId','$subtotal','$total','$idAddress','$note','$fee');
@@ -170,7 +171,7 @@ class Cart
             return new Response(false, "Create new invoice fail!","", "");
         }
         $getIdInvoice = $this->db->select("SELECT LAST_INSERT_ID();");
-        $idInvoice = mysqli_fetch_assoc($getIdInvoice)['LAST_INSERT_ID()'];
+        $idInvoice = $getIdInvoice->fetchColumn();
         // create invoicedetail
         $invoiceDetail = $this->db->insert("INSERT INTO invoicedetail (invoinceId,productId,quantity)
             SELECT  '$idInvoice' ,c.productId, c.count FROM cart AS c

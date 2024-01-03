@@ -132,7 +132,7 @@
                    
                  
                 </div>
-                <div class="p-pagination" style="margin-top:40px">
+                <!-- <div class="p-pagination" style="margin-top:40px">
                     <div class="p-pagination-left">
                         <span>
                             (<span class="count-product">0</span>/20)
@@ -153,7 +153,7 @@
                         <div class="p-pagination-item">3</div>
                         <div class="p-pagination-item next-page">Sau</div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

@@ -98,10 +98,10 @@
                                             <i class="fa-solid fa-pen-to-square"></i>
                                             <span>Sửa</span>
                                         </a>
-                                        <div class="action delete-btn" user-id='${item?.id}'>
+                                        <a href="?mod=admin&act=manageuser&type=delete&userid=<?= $value['id'] ?>" class="action delete-btn" user-id='${item?.id}'>
                                             <i class="fa-solid fa-trash"></i>
                                             <span>Xóa</span>
-                                        </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

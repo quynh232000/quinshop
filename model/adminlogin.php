@@ -25,17 +25,22 @@ class Adminlogin
         $adminUser = $this->fm->validation($adminUser);
         $adminPass = $this->fm->validation($adminPass);
 
-        $adminUser = mysqli_real_escape_string($this->db->link, $adminUser);
-        $adminPass = mysqli_real_escape_string($this->db->link, $adminPass);
+      
 
         if (empty($adminUser) || empty($adminPass)) {
+
+
+
             $alert = "Vui lòng nhập đầy đủ thông tin!";
             return ["status" => false, "message" => $alert, "result" => [], "redirect" => ""];
         } else {
             $query = "SELECT * FROM user WHERE userName ='$adminUser' AND pass = '$adminPass' LIMIT 1";
-            $result = $this->db->select($query);
-            if ($result != false) {
-                $value = $result->fetch_assoc();
+            $user = $this->db->select($query);
+            $result = $user->fetch();
+           
+            if (count($result)>0) {
+
+                $value =$result;
                 Session::set('isLogin', true);
                 Session::set('id', $value['id']);
                 Session::set('userName', $value['userName']);
@@ -44,8 +49,6 @@ class Adminlogin
                 Session::set('avatar', $value['avatar']);
                 Session::set('phone', $value['phone']);
                 Session::set('role', $value['role']);
-
-                // header("Location: ./");
                 return ["status" => true, "message" => "Đăng nhập thành công!", "result" => [], "redirect" => "./"];
             } else {
                 $alert = "Tên đăng nhập hoặc tài khoản không đúng!";
@@ -78,7 +81,7 @@ class Adminlogin
         }
 
         $checkUser = $this->db->select("select * from user where userName = '$userName';");
-        if ($checkUser != false) {
+        if (count($checkUser->fetchAll())>0) {
             return ["status" => false, "message" => "Tên đăng nhập đã tồn tại!", "result" => []];
         }
         $avatar = '5EA63482-44B3-40C9-B3A8-1479DB08CCD4.jpg';

@@ -48,7 +48,7 @@ if (empty($viewTitle)) {
     <div id="toastjs"></div>
     <div class="app">
         <!--header-->
-        <header class="header">
+        <header class="header header-no-show">
             <!-- sidebar -->
             <div class="sidebar">
                 <div class="sidebar-wrapper">
@@ -230,7 +230,7 @@ if (empty($viewTitle)) {
                         <div class="m-header-search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
-                        <div class="header-search-item header-contact">
+                        <!-- <div class="header-search-item header-contact">
                             <div class="header-search-item-icon">
                                 <i class="fa-solid fa-phone"></i>
                             </div>
@@ -240,7 +240,7 @@ if (empty($viewTitle)) {
                                     (Liên hệ)
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- not login -->
                         <?php if (Session::get("isLogin") == true) { ?>
                             <!-- login -->
@@ -333,7 +333,7 @@ if (empty($viewTitle)) {
                                 <p class="header__cart-heading">Sản phẩm đã thêm</p>
                                 <ul class="header__cart-list-item">
                                     <?php
-                                    if ($cartResult->status && count($cartResult->result[0]) > 0) {
+                                    if ($cartResult->status && count($cartResult->result) > 0) {
                                         foreach ($cartResult->result as $key => $value) { ?>
                                             <li class="header__cart-item">
                                                 <img src="./assest/upload/<?= $value['image'] ?>" alt=""

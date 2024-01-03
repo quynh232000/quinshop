@@ -29,9 +29,12 @@
         <div class="form-group">
           <div class="form-wrapper">
             <label for="userName">Tên đăng nhập</label>
+              
             <div class="form-body">
               <i class="fa-solid fa-user"></i>
-              <input type="text" class="form-control" id="userName" name="adminUser" rules="required"
+              <input type="text" class="form-control"
+             
+              id="userName" name="adminUser" rules="required"
                 placeholder="Tên đăng nhập..." />
             </div>
             <div class="form-msg"></div>
@@ -61,7 +64,7 @@
                 echo ' <script>
                 setTimeout(function() {
                     window.location.href="' . $login_check['redirect'] . '";
-                }, 3000);
+                }, 2500);
             </script>';
               }
             }

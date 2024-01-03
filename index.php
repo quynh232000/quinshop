@@ -17,6 +17,9 @@ if (isset($mod)) {
         case 'request':
             include_once 'controller/request.php';
             break;
+        case 'redirect-google':
+            include_once 'model/redirect-google.php';
+            break;
 
         default:
             header("Location: ?page=404");

@@ -92,7 +92,7 @@ class Product
             }
             // get id product
             $getIdPro = $this->db->select("SELECT LAST_INSERT_ID();");
-            $idPro = mysqli_fetch_assoc($getIdPro)['LAST_INSERT_ID()'];
+            $idPro = $getIdPro->fetchColumn();
             // list img
             $totalFile = count($listImage['name']);
             $querylistImg = "";
@@ -123,19 +123,16 @@ class Product
     }
     public function getAllProduct($page = 1, $limit = 10,$type="")
     {
-       
         if($type){
             $type = "WHERE pr.status = '$type'";
         }
         $getTotal = $this->db->select("SELECT COUNT(*) AS total from product AS pr $type");
-        $total = $getTotal->fetch_assoc();
+        $total = $getTotal->fetchAll()[0];
         $total = $total == false ? 0 : $total['total'];
         if ($page < 1) {
             $page = 1;
         }
-
         $currentPage = ($page - 1) * $limit;
-
         $query = "SELECT pr.*, cate.nameCate as nameCategory from product as pr 
             INNER JOIN category as cate on pr.categoryId = cate.id 
             $type
@@ -144,12 +141,7 @@ class Product
         ";
         $result = $this->db->select($query);
         if ($result != false) {
-            $rows = [];
-            while ($row = mysqli_fetch_array($result)) {
-                $rows[] = $row;
-            }
-            return new Response(true, "success", $rows, "", $total);
-
+            return new Response(true, "success", $result->fetchAll(), "", $total);
         } else {
 
             return "something wrong from server!";
@@ -189,23 +181,13 @@ class Product
         } else {
             $result = [];
             if ($key == "detail") {
-                // mysqli_fetch_assoc
-                while ($row = mysqli_fetch_assoc($response)) {
-                    $result[] = $row;
-                }
+                $result =  $response->fetchAll();
                 $listImg = $this->db->select("SELECT imagePro as link FROM listimage WHERE productId = $value ");
                 if ($listImg != false) {
-                    $arrayimg = [];
-                    while ($rowimg = mysqli_fetch_array($listImg)) {
-                        $arrayimg[] = $rowimg;
-                    }
-                    array_push($result, $arrayimg);
+                    array_push($result, $listImg->fetchAll());
                 }
             } else {
-                while ($row = mysqli_fetch_array($response)) {
-                    $result[] = $row;
-                }
-
+                $result =  $response->fetchAll();
             }
             return new Response(true, "Successcully", $result, "");
         }
@@ -234,7 +216,6 @@ class Product
     }
     public function seachProduct($value = "")
     {
-
         $resultSql = $this->db->select("SELECT p.id, p.namePro, p.brand,p.image FROM product AS p 
                 WHERE p.namePro 
                 LIKE '%$value%'
@@ -244,35 +225,32 @@ class Product
         if ($resultSql == false) {
             return new Response(false, "Fail", [], "");
         }
-        $result = [];
-        while ($row = mysqli_fetch_array($resultSql)) {
-            $result[] = $row;
-        }
-
+        $result = $resultSql->fetchAll();
         return new Response(true, "Successcully", $result, "");
 
     }
     public function dashboard(){
         $result = [];
         $totalProduct = $this->db->select("SELECT count(*) as total FROM product");
+       
         if ($totalProduct == false) {
             $result['totalPro'] = 0;
         }else{
-            $totalProduct = $totalProduct->fetch_assoc();
+            $totalProduct = $totalProduct->fetchAll()[0];
             $result['totalPro'] = $totalProduct['total'];
         }
         $totalSold = $this->db->select("SELECT sum(i.quantity) as total FROM invoicedetail as i");
         if ($totalSold == false) {
             $result['totalSold'] = 0;
         }else{
-            $totalSold = $totalSold->fetch_assoc();
+            $totalSold = $totalSold->fetchAll()[0];
             $result['totalSold'] = $totalSold['total'];
         }
         $totalOut = $this->db->select("SELECT count(p.id) as total FROM product as p where p.id < 1");
         if ($totalOut == false) {
             $result['totalOut'] = 0;
         }else{
-            $totalOut = $totalOut->fetch_assoc();
+            $totalOut = $totalOut->fetchAll()[0];
             $result['totalOut'] = $totalOut['total'];
         }
         // totalHidden
@@ -280,7 +258,7 @@ class Product
         if ($totalHidden == false) {
             $result['totalHidden'] = 0;
         }else{
-            $totalHidden = $totalHidden->fetch_assoc();
+            $totalHidden = $totalHidden->fetchAll()[0];
             $result['totalHidden'] = $totalHidden['total'];
         }
         // totalOrder
@@ -288,7 +266,7 @@ class Product
         if ($totalOrder == false) {
             $result['totalOrder'] = 0;
         }else{
-            $totalOrder = $totalOrder->fetch_assoc();
+            $totalOrder = $totalOrder->fetchAll()[0];
             $result['totalOrder'] = $totalOrder['total'];
         }
          // totalOrderNew
@@ -296,15 +274,15 @@ class Product
          if ($totalOrderNew == false) {
              $result['totalOrderNew'] = 0;
          }else{
-             $totalOrderNew = $totalOrderNew->fetch_assoc();
+             $totalOrderNew = $totalOrderNew->fetchAll()[0];
              $result['totalOrderNew'] = $totalOrderNew['total'];
          }
          // totalOrderSuccess
-         $totalOrderSuccess = $this->db->select("SELECT count(*) as total FROM invoice  where invoice.status ='success'");
+         $totalOrderSuccess = $this->db->select("SELECT count(*) as total FROM invoice  where invoice.status ='confirmed'");
          if ($totalOrderSuccess == false) {
              $result['totalOrderSuccess'] = 0;
          }else{
-             $totalOrderSuccess = $totalOrderSuccess->fetch_assoc();
+             $totalOrderSuccess = $totalOrderSuccess->fetchAll()[0];
              $result['totalOrderSuccess'] = $totalOrderSuccess['total'];
          }
          // totalOrderCancel
@@ -312,8 +290,16 @@ class Product
          if ($totalOrderCancel == false) {
              $result['totalOrderCancel'] = 0;
          }else{
-             $totalOrderCancel = $totalOrderCancel->fetch_assoc();
+             $totalOrderCancel = $totalOrderCancel->fetchAll()[0];
              $result['totalOrderCancel'] = $totalOrderCancel['total'];
+         }
+        //  total balance
+        $totalBalance = $this->db->select("SELECT sum(invoice.total) as total FROM invoice  where invoice.status ='confirmed'");
+         if ($totalBalance == false) {
+             $result['totalBalance'] = 0;
+         }else{
+             $totalBalance = $totalBalance->fetchAll()[0];
+             $result['totalBalance'] = $totalBalance['total'];
          }
          return new Response(true, "Thành công!", $result, "");
 
