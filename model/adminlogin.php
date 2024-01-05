@@ -190,7 +190,7 @@ class Adminlogin
         $mail->Password = 'gskrqbqnnlrhfkrg';
         $mail->SMTPSecure = 'tsl';
         $mail->SetLanguage("vi", 'lib/phpmailer/language');
-        $mail->Port = 587; // TCP port to connect to
+        $mail->Port = 465; // TCP port to connect to
         $mail->SMTPOptions = array(
             'ssl' => array(
                 'verify_peer' => false,
