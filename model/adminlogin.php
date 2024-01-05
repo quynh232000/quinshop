@@ -149,6 +149,7 @@ class Adminlogin
     }
     public function sendCodePassEmail($email)
     {
+        echo "okoko";
         if (empty($email)) {
             return new Response(false, "Missing parammeter: Email", "", "?mod=profile&act=forgotpassword");
         }
@@ -180,7 +181,7 @@ class Adminlogin
         </div>';
         // mesage
 
-        echo $mesage;
+        
         // send email
         $mail = new PHPMailer(true);
         $mail->isSMTP();
