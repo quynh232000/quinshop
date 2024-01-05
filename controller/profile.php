@@ -7,6 +7,7 @@ include_once "model/category.php";
 include_once "model/adminlogin.php";
 include_once "model/cart.php";
 include_once "model/order.php";
+include_once "model/user.php";
 $classCart = new Cart();
 $classUser = new Adminlogin();
 $getCartInfo = $classCart->getCartView();
@@ -56,6 +57,19 @@ if (isset($act)) {
             }
             include_once 'view/register.php';
             break;
+        case 'sendemail':
+            
+            if(isset($_POST['email']) && $_POST['email']!=""){
+                $email = $_POST['email'];
+                $checkemail = $classUser->sendCodePassEmail($email);
+                print_r($checkemail);
+            }else{
+                header('location: ?mod=profile&act=forgotpassword');
+            }
+            break;
+
+
+
         case 'orderhistory':
             $classOrder = new Order();
 

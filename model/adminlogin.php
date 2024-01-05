@@ -25,7 +25,7 @@ class Adminlogin
         $adminUser = $this->fm->validation($adminUser);
         $adminPass = $this->fm->validation($adminPass);
 
-      
+
 
         if (empty($adminUser) || empty($adminPass)) {
 
@@ -37,10 +37,10 @@ class Adminlogin
             $query = "SELECT * FROM user WHERE userName ='$adminUser' AND pass = '$adminPass' LIMIT 1";
             $user = $this->db->select($query);
             $result = $user->fetch();
-           
-            if ($result !=false) {
 
-                $value =$result;
+            if ($result != false) {
+
+                $value = $result;
                 Session::set('isLogin', true);
                 Session::set('id', $value['id']);
                 Session::set('userName', $value['userName']);
@@ -56,7 +56,7 @@ class Adminlogin
             }
         }
     }
-    public function register_admin($userName,$fullName, $email, $phone, $password, $confirmPassword)
+    public function register_admin($userName, $fullName, $email, $phone, $password, $confirmPassword)
     {
 
 
@@ -81,7 +81,7 @@ class Adminlogin
         }
 
         $checkUser = $this->db->select("select * from user where userName = '$userName';");
-        if (count($checkUser->fetchAll())>0) {
+        if (count($checkUser->fetchAll()) > 0) {
             return ["status" => false, "message" => "Tên đăng nhập đã tồn tại!", "result" => []];
         }
         $avatar = '5EA63482-44B3-40C9-B3A8-1479DB08CCD4.jpg';
@@ -99,7 +99,7 @@ class Adminlogin
         return ["status" => true, "message" => "Đăng kí thành công!", "result" => [], "redirect" => "?mod=profile&act=login"];
 
     }
-    public function updateProfile( $fullName, $image, $phone, $email)
+    public function updateProfile($fullName, $image, $phone, $email)
     {
         $isLogin = Session::get("isLogin");
         if ($isLogin != true) {
@@ -114,7 +114,7 @@ class Adminlogin
             return new Response(false, "Họ tên và Email không được để trống thông tin!", "", "");
         }
         // update user
-        $queryUpdate ="";
+        $queryUpdate = "";
         $fileResult = $this->tool->uploadFile($image);
         if ($fileResult) {
             $queryUpdate .= "u.avatar = '$fileResult',";
@@ -127,17 +127,36 @@ class Adminlogin
             SET $queryUpdate
             WHERE u.id = '$userId'
         ");
-        if($updateUser ==false){
-            return new Response(false, "Cập nhật thông tin tài khoản thất bại", "", "","");
+        if ($updateUser == false) {
+            return new Response(false, "Cập nhật thông tin tài khoản thất bại", "", "", "");
         }
-        Session::set('fullName',$fullName);
+        Session::set('fullName', $fullName);
         Session::set('email', $email);
         if ($fileResult) {
-            Session::set('avatar', $fileResult );
+            Session::set('avatar', $fileResult);
         }
-        Session::set('phone',$phone);
-        return new Response(true, "Cập nhật thông tin thành công", "", "","");
+        Session::set('phone', $phone);
+        return new Response(true, "Cập nhật thông tin thành công", "", "", "");
 
+    }
+    public function sendCodePassEmail($email)
+    {
+        if (empty($email)) {
+            return new Response(false, "Missing parammeter: Email", "", "?mod=profile&act=forgotpassword");
+        }
+        $checkEmail = $this->db->select("SELECT * FROM user WHERE email =  '$email'");
+        if (empty($checkEmail->fetch())) {
+            return new Response(false, "Email không tồn tại trong hệ thống", "", "?mod=profile&act=forgotpassword");
+        }
+        $to = 'quynh232000@gmail.com';
+        $subject = 'the subject';
+        $message = 'hello';
+        $headers = 'From: tranong600@gmail.com' . "\r\n" .
+            'Reply-To: webmaster@example.com' . "\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+
+        mail($to, $subject, $message, $headers);
+        return $checkEmail->fetch();
     }
 }
 

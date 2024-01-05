@@ -24,7 +24,7 @@
   <!-- forgot-bg -->
   <div class="register ">
     <div class="wrapper">
-      <form class="form-login" action="?mod=profile&act=login" method="post" enctype="multipart/form-data">
+      <form class="form-login" action="?mod=profile&act=sendemail" method="POST" >
         <h1>Quên mật khẩu!</h1>
         <!-- invalidate -->
         <!-- form input email -->
@@ -36,7 +36,7 @@
         </div>
 
         <!-- form verify code -->
-        <div class=" ve-form ">
+        <!-- <div class=" ve-form ">
           <div class="ve-title">OTP - Mã xác thực</div>
           <p class="ve-message">Chúng tôi đã gửi cho bạn 1 mã code tại
             <strong class="ve-email-send">quynh@gmail.com</strong>
@@ -48,7 +48,7 @@
             <input id="input4" type="text" maxlength="1">
           </div>
           <button class="ve-action">Xác thực</button>
-        </div>
+        </div> -->
 
         <!-- form change password -->
         <!-- <div class=" ve-form ">
