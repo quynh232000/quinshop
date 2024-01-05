@@ -83,7 +83,9 @@ if (isset($act)) {
         case 'forgotpassword':
             $active = 'default';
             if (isset($_POST['email']) && $_POST['email'] != "") {
+
                 $email = $_POST['email'];
+                echo $email;
                 $checkemail = $classUser->sendCodePassEmail($email);
                 if ($checkemail->status == false) {
                     echo '<div id="toast" mes-type="error" mes-title="Thất bại!" mes-text="' . $checkemail->message . '"></div>';
