@@ -17,53 +17,96 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://code.jquery.com/jquery-2.2.4.min.js"
     integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-
+   
+    <script src="./src/js/define.js"></script>
 </head>
 
 <body>
   <!-- forgot-bg -->
   <div class="register ">
     <div class="wrapper">
-      <form class="form-login" action="?mod=profile&act=sendemail" method="POST" >
+      <form class="form-login" action="?mod=profile&act=forgotpassword<?php 
+        if(($active == 'submitcode')){
+          echo '&verifytoken='.$_GET['verifytoken'];
+        }
+        if(($active == 'changepassword')){
+          echo '&verifytoken='.$_GET['verifytoken'];
+        }
+        
+      
+      ?>" method="POST">
         <h1>Quên mật khẩu!</h1>
         <!-- invalidate -->
         <!-- form input email -->
-        <div class="subscribe">
-          <p>Email của bạn</p>
-          <input placeholder="Your e-mail" class="subscribe-input" name="email" type="email">
-          <br>
-          <button type="submit" class="submit-btn">SUBMIT</button>
-        </div>
+        <?php
+        if ($active == 'default') { ?>
+          <div class="subscribe">
+            <p>Email của bạn</p>
+            <input placeholder="Your e-mail" class="subscribe-input" name="email" type="email">
+            <br>
+            <button type="submit" class="submit-btn">SUBMIT</button>
+          </div>
+          <?php
+        }
+        ?>
+
+
+
 
         <!-- form verify code -->
-        <!-- <div class=" ve-form ">
-          <div class="ve-title">OTP - Mã xác thực</div>
-          <p class="ve-message">Chúng tôi đã gửi cho bạn 1 mã code tại
-            <strong class="ve-email-send">quynh@gmail.com</strong>
-          </p>
-          <div class="ve-inputs">
-            <input id="input1" type="text" maxlength="1">
-            <input id="input2" type="text" maxlength="1">
-            <input id="input3" type="text" maxlength="1">
-            <input id="input4" type="text" maxlength="1">
+        <?php
+        if ($active == 'submitcode') { ?>
+          <div class=" ve-form ">
+            <div class="ve-title">OTP - Mã xác thực</div>
+            <p class="ve-message">Chúng tôi đã gửi cho bạn 1 mã code tại
+              <strong class="ve-email-send">quynh@gmail.com</strong>
+            </p>
+            <div class="ve-inputs">
+              <input id="input1" name="code[]"  maxlength="1">
+              <input id="input2" name="code[]" maxlength="1">
+              <input id="input3" name="code[]" maxlength="1">
+              <input id="input4" name="code[]" maxlength="1">
+            </div>
+            <button class="ve-action">Xác thực</button>
           </div>
-          <button class="ve-action">Xác thực</button>
-        </div> -->
+          <div class="time-count">
+                <div class="time-count-title">Mã xác nhận sẽ hết hạn trong:</div>
+                <div class="time-count-body">60s</div>
+                
+          </div>
+        <?php 
+        echo '<script>countTime(60)</script>'  ;
+      
+      }
+
+        ?>
+        
 
         <!-- form change password -->
-        <!-- <div class=" ve-form ">
-          <div class="ve-title">Thay đổi mật khẩu</div>
-          </p>
-          <div class="change-pass-body">
-            <input required="" class="input" type="email" name="email" id="email" placeholder="Mật khẩu mới">
-            <input required="" class="input" type="password" name="password" id="password" placeholder="Xác nhận lại mật khẩu">
+        <?php
+        if ($active == 'changepassword') { ?>
+          <div class=" ve-form ">
+            <div class="ve-title">Thay đổi mật khẩu</div>
+            </p>
+            <div class="change-pass-body">
+              <input required="" class="input" type="password" name="password" placeholder="Mật khẩu mới">
+              <input required="" class="input" type="password" name="passwordconfirm"
+                placeholder="Xác nhận lại mật khẩu">
+
+            </div>
+            <button class="ve-action">Xác nhận</button>
+          </div>
+        <?php }
+        ?>
+        <!-- error form -->
+        <?php
+        if ($active == 'tokenerror') { ?>
+          <div class=" ve-form ">
+            <div class="ve-title">Trang web không hợp lệ</div>
             
           </div>
-          <button class="ve-action">Xác nhận</button>
-        </div> -->
-
-
-
+        <?php }
+        ?>
 
 
         <div class="form-change">

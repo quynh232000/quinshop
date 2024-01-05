@@ -511,6 +511,7 @@ $().ready(function () {
 
 
 });
+
 function updateViewCart(_this, type, count, price, idpro) {
   const currentSubtotal = _this.find(".cart-subtotal1").attr("data-subtotal");
   const currentInputCount = _this.find(".cart-count-input").val();

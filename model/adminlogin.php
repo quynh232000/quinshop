@@ -1,7 +1,15 @@
 <?php
 
-include_once "lib/session.php";
+// include_once "lib/phpmailer/";
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+include_once 'lib/phpmailer/src/Exception.php';
+include_once 'lib/phpmailer/src/PHPMailer.php';
+include_once 'lib/phpmailer/src/SMTP.php';
+
 // Session::checkLogin();
+include_once "lib/database.php";
 include_once "lib/database.php";
 include_once "helpers/format.php";
 include_once "helpers/tool.php";
@@ -144,19 +152,116 @@ class Adminlogin
         if (empty($email)) {
             return new Response(false, "Missing parammeter: Email", "", "?mod=profile&act=forgotpassword");
         }
-        $checkEmail = $this->db->select("SELECT * FROM user WHERE email =  '$email'");
-        if (empty($checkEmail->fetch())) {
+        $resultUser = $this->db->select("SELECT * FROM user WHERE email =  '$email'");
+        $checkEmail =$resultUser->fetchAll();
+        if (empty($checkEmail)) {
             return new Response(false, "Email không tồn tại trong hệ thống", "", "?mod=profile&act=forgotpassword");
         }
-        $to = 'quynh232000@gmail.com';
-        $subject = 'the subject';
-        $message = 'hello';
-        $headers = 'From: tranong600@gmail.com' . "\r\n" .
-            'Reply-To: webmaster@example.com' . "\r\n" .
-            'X-Mailer: PHP/' . phpversion();
+        $checkEmail =  $checkEmail[0];
+        $id = $checkEmail['id'];
 
-         $resultEmail =mail($to, $subject, $message, $headers);
-        return $resultEmail ;
+        $idEncode = base64_encode($id);
+        
+        $code = mt_rand(1000, 9999);
+
+        // insert database
+        $this->db->update("UPDATE user 
+        set timeVerify = DATE_ADD(now(), INTERVAL 3 MINUTE) , codeVerify = '$code' 
+        WHERE id = '$id'
+        ");
+
+
+        // mesage
+        $mesage = '<div style="padding: 40px 40px; font-size: 20px; border: 4px solid rgb(8, 110, 234);">
+            <div style="width: 100%; text-align: center;margin-bottom: 20px;">Hi, <span style="color: blue;font-weight: bold;">' . $checkEmail['fullName'] . '</span>!</div>
+            <div style="text-align: center;">Here is the confirmation code:</div>
+            <div style="font-size: 60px;letter-spacing: 10px;font-weight: bolder; text-align: center;margin: 20px 0;" >' . $code . '</div>
+            <div style="color: rgb(72, 20, 141);text-align: center;">All you have to do is copy the confirmation code and paste it to your form to complete the email verification process</div>
+        </div>';
+        // mesage
+
+
+        // send email
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'tranong600@gmail.com';
+        $mail->Password = 'gskrqbqnnlrhfkrg';
+        $mail->SMTPSecure = 'tsl';
+        $mail->SetLanguage("vi", 'lib/phpmailer/language');
+        $mail->Port = 587; // TCP port to connect to
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
+
+        $mail->setFrom('tranong600@gmail.com');
+        $mail->addAddress($email);
+        $mail->isHTML(true);
+        $mail->Subject = "Code verify change password!";
+        
+        $mail->Body = $mesage;
+        $mail->send();
+
+        return new Response(true, "Send email successfully", "", "?mod=profile&act=forgotpassword&verifytoken=".$idEncode);
+    }
+    function checkToken($token) {
+        $tokenDecode = base64_decode($token);
+
+        $checkUser = $this->db->select("SELECT * FROM user WHERE id = '$tokenDecode'");
+        if(empty($checkUser->fetchAll())){
+            return new Response(false, "Đường dẫn không hợp lệ!", "", "?mod=profile&act=forgotpassword");
+        }else{
+            return new Response(true, "success",  $tokenDecode, "");
+        }
+        
+    }
+    function checkCode($code,$token)  {
+        $checkTokenVerify = self::checkToken($token);
+        if($checkTokenVerify->status ==false){
+            return $checkTokenVerify;
+        }
+        $userId = $checkTokenVerify->result;
+        $userInfoSelect = $this->db->select("SELECT * FROM user where id = '$userId' ");
+        $userInfo = $userInfoSelect->fetchAll();
+        if(empty($userInfo)){
+            return new Response(false, "Người dùng không tồn tại",  "", "");
+        }
+
+        $userInfo = $userInfo[0];
+        // print_r($userInfo);
+        // return;
+        if($userInfo['codeVerify'] != $code){
+            return new Response(false, "Mã xác nhận không hợp lệ!",  "", "");
+        }
+        $timeVerify = $userInfo['timeVerify'];
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $timeNow = date('Y-m-d h:i:s');
+        if($timeNow > ($timeVerify)){
+            return new Response(false, "Mã xác thực đã hết hạn. Vui lòng thử lại!",  "", "");
+        }
+        return new Response(true, "success",  "", "");
+    }
+    public function changePassword($pass, $token)  {
+        $checkTokenVerify = self::checkToken($token);
+        if($checkTokenVerify->status ==false){
+            return $checkTokenVerify;
+        }
+        $userId = $checkTokenVerify->result;
+        $userInfoSelect = $this->db->select("SELECT * FROM user where id = '$userId' ");
+        $userInfo = $userInfoSelect->fetchAll();
+        if(empty($userInfo)){
+            return new Response(false, "Người dùng không tồn tại",  "", "");
+        }
+        // change pass
+        $changePass = $this->db->update("UPDATE user set pass = '$pass'
+        WHERE id = '$userId'
+        ");
+        return new Response(true, "success",  "", "");
     }
 }
 
