@@ -163,14 +163,14 @@ class Adminlogin
 
         $idEncode = base64_encode($id);
         
-        $code = mt_rand(1000, 9999);echo "okoko";
+        $code = mt_rand(1000, 9999);
         // insert database
         $this->db->update("UPDATE user 
         set timeVerify = DATE_ADD(now(), INTERVAL 3 MINUTE) , codeVerify = '$code' 
         WHERE id = '$id'
         ");
 
-
+        
         // mesage
         $mesage = '<div style="padding: 40px 40px; font-size: 20px; border: 4px solid rgb(8, 110, 234);">
             <div style="width: 100%; text-align: center;margin-bottom: 20px;">Hi, <span style="color: blue;font-weight: bold;">' . $checkEmail['fullName'] . '</span>!</div>

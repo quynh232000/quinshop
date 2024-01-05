@@ -85,9 +85,9 @@ if (isset($act)) {
             if (isset($_POST['email']) && $_POST['email'] != "") {
 
                 $email = $_POST['email'];
-                echo "1";
+               
                 $checkemail = $classUser->sendCodePassEmail($email);
-                echo "okoko2";
+                
                 if ($checkemail->status == false) {
                     echo '<div id="toast" mes-type="error" mes-title="Thất bại!" mes-text="' . $checkemail->message . '"></div>';
                 } else {
