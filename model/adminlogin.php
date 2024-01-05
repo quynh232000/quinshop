@@ -155,8 +155,8 @@ class Adminlogin
             'Reply-To: webmaster@example.com' . "\r\n" .
             'X-Mailer: PHP/' . phpversion();
 
-        mail($to, $subject, $message, $headers);
-        return $checkEmail->fetch();
+         $resultEmail =mail($to, $subject, $message, $headers);
+        return $resultEmail ;
     }
 }
 
