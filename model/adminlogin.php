@@ -180,7 +180,7 @@ class Adminlogin
         </div>';
         // mesage
 
-
+        echo $mesage;
         // send email
         $mail = new PHPMailer(true);
         $mail->isSMTP();
