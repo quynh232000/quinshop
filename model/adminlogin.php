@@ -190,7 +190,7 @@ class Adminlogin
         $mail->Password = 'gskrqbqnnlrhfkrg';
         $mail->SMTPSecure = 'tsl';
         $mail->SetLanguage("vi", 'lib/phpmailer/language');
-        $mail->Port = 465; // TCP port to connect to
+        $mail->Port = 587; // TCP port to connect to 587
         $mail->SMTPOptions = array(
             'ssl' => array(
                 'verify_peer' => false,
@@ -206,6 +206,7 @@ class Adminlogin
         
         $mail->Body = $mesage;
         $mail->send();
+        print_r($mail);
 
         return new Response(true, "Send email successfully", "", "?mod=profile&act=forgotpassword&verifytoken=".$idEncode);
     }
