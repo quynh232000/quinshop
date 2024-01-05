@@ -149,7 +149,7 @@ class Adminlogin
     }
     public function sendCodePassEmail($email)
     {
-        echo "okoko";
+        
         if (empty($email)) {
             return new Response(false, "Missing parammeter: Email", "", "?mod=profile&act=forgotpassword");
         }
@@ -163,8 +163,7 @@ class Adminlogin
 
         $idEncode = base64_encode($id);
         
-        $code = mt_rand(1000, 9999);
-
+        $code = mt_rand(1000, 9999);echo "okoko";
         // insert database
         $this->db->update("UPDATE user 
         set timeVerify = DATE_ADD(now(), INTERVAL 3 MINUTE) , codeVerify = '$code' 
