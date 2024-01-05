@@ -72,6 +72,9 @@ if (isset($act)) {
             include_once 'view/sercurity.php';
             include_once 'view/inc/footer.php';
             break;
+        case 'forgotpassword':
+            include_once 'view/forgotpassword.php';
+            break;
         default:
             include_once 'view/inc/header.php';
             include_once 'view/error.php';

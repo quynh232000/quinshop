@@ -71,6 +71,9 @@
             ?>
           </div>
         </div>
+        <div class="forgot-pass">
+          <a href="?mod=profile&act=forgotpassword">Quên mật khẩu!</a>
+        </div>
 
         <div class="form-btn">
           <button class="btn-submit" type="submit">Đăng nhập</button>

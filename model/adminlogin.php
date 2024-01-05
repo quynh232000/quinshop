@@ -38,7 +38,7 @@ class Adminlogin
             $user = $this->db->select($query);
             $result = $user->fetch();
            
-            if (count($result)>0) {
+            if ($result !=false) {
 
                 $value =$result;
                 Session::set('isLogin', true);
