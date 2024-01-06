@@ -206,7 +206,6 @@ class Adminlogin
         
         $mail->Body = $mesage;
         $mail->send();
-        print_r($mail);
 
         return new Response(true, "Send email successfully", "", "?mod=profile&act=forgotpassword&verifytoken=".$idEncode);
     }
