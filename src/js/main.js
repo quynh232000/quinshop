@@ -495,21 +495,118 @@ $().ready(function () {
       contentType: "application/json; charset=utf-8",
       dataType: "json",
     }).done((res) => {
-      if(res.status == false){
+      if (res.status == false) {
         toastjs(res.message);
-      }else{
-        location.href = '?mod=page&act=detail&id='+productId+'&type=cmt-'+res.result+'#show-list-cmt'
+      } else {
+        location.href =
+          "?mod=page&act=detail&id=" +
+          productId +
+          "&type=cmt-" +
+          res.result +
+          "#show-list-cmt";
       }
     });
   });
   // delete comment
-  $('.cmt-show-delete').click(function () {
-    const idCmt = $(this).attr('cmt-id')
-    console.log(12312,idCmt);
-  })
-
-
-
+  $(".cmt-show-delete").click(function () {
+    const idCmt = $(this).attr("cmt-id");
+    console.log(12312, idCmt);
+  });
+  // show product suggesstion
+  $(".suggestion-nav-item").click(function () {
+    $(".suggestion-nav-item").each(function () {
+      $(this).removeClass("active");
+    });
+    const id = $(this).attr("cateid");
+    $(this).addClass("active");
+    $.ajax({
+      url: "?mod=request&act=fillterproduct&id=" + id,
+    }).done((res) => {
+      const resJson = JSON.parse(res);
+      if (resJson.status) {
+        const data = resJson.result;
+        if (data.length > 0) {
+        }
+        const html = data
+          .map((item) => {
+            return `
+            <div class="product">
+            <div class="product-wrapper">
+                <a href="?mod=page&act=detail&id=<?= $value['id'] ?>" class="product-info">
+                    <div class="product-sale-label">
+                        <svg width="48" height="50" viewBox="0 0 48 50" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g filter="url(#filter0_d_604_13229)">
+                                <path
+                                    d="M4.49011 0C3.66365 0 2.99416 0.677946 2.99416 1.51484V11.0288V26.9329C2.99416 30.7346 5.01545 34.2444 8.28604 36.116L20.4106 43.0512C22.6241 44.3163 25.3277 44.3163 27.5412 43.0512L39.6658 36.116C42.9363 34.2444 44.9576 30.7346 44.9576 26.9329V11.0288V1.51484C44.9576 0.677946 44.2882 0 43.4617 0H4.49011Z"
+                                    fill="#F5C144" />
+                            </g>
+                            <defs>
+                                <filter id="filter0_d_604_13229" x="-1.00584" y="0" width="49.9635" height="52"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset dy="4" />
+                                    <feGaussianBlur stdDeviation="2" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix"
+                                        result="effect1_dropShadow_604_13229" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_604_13229"
+                                        result="shape" />
+                                </filter>
+                            </defs>
+                        </svg>
+                        <span>-%
+                           ${item.salePercent}
+                        </span>
+                    </div>
+                    <div class="product-img">
+                        <img src="./assest/upload/${item.image}" alt="">
+                    </div>
+                    <div class="product-brand">
+                        ${item.brand}
+                    </div>
+                    <div class="product-name">
+                        ${item.namePro}
+                    </div>
+                    <div class="product-stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <span>(1.1k)</span>
+                    </div>
+                    <div class="product-price">
+                        <div class="product-price-sale fm-price">
+                        ${item.price}
+                        </div>
+                        <del class="product-price-old fm-price">
+                        ${item.price* (1 + item.salePercent / 100)}
+                           
+                        </del>
+                    </div>
+                </a>
+                <div class="product-btn" idpro="${item.id}" data-price= "${item.price}">
+                    <i class="fa-solid fa-cart-plus"></i>
+                    <span>Thêm giỏ hàng</span>
+                </div>
+            </div>
+        </div>
+            `;
+          })
+          .join("");
+          $('.suggest-list-products').html(html)
+          $('.sg-btn-more').on('click',function () {
+            location.href = '?mod=page&act=collection&category='+id
+          })
+      }
+    });
+    // end ajax
+  });
 });
 
 function updateViewCart(_this, type, count, price, idpro) {

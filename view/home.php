@@ -1,4 +1,5 @@
 <!-- main -->
+
 <main class="home-main">
     <div class="main-top">
         <div class="banner">
@@ -445,18 +446,18 @@
             <div class="home-title">Sản phẩm gợi ý</div>
             <div class="suggestion-nav">
                 <div class="suggestion-nav-left">
-                    <div class="suggestion-nav-item active">
-                        Thời trang nam
+                    <div class="suggestion-nav-item active" cateid = '16'>
+                        Laptop
                     </div>
-                    <div class="suggestion-nav-item">
+                    <div class="suggestion-nav-item" cateid = '22'>
                         Túi ví nữ
                     </div>
-                    <div class="suggestion-nav-item">
-                        Laptop
+                    <div class="suggestion-nav-item" cateid = '17'>
+                        Đồng hồ
                     </div>
 
                 </div>
-                <div class="suggestion-nav-right">
+                <div class="suggestion-nav-right sg-btn-more" >
                     Xem thêm
                     <i class="fa-solid fa-chevron-right"></i>
                 </div>
@@ -538,7 +539,7 @@
 
             </div>
             <div class="sugestion-btn-more">
-                <div class="suggestion-btn-more-body">Xem thêm</div>
+                <div class="suggestion-btn-more-body ">Xem thêm</div>
             </div>
             <div class="more-info">
                 <div class="more-info-item">

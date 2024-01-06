@@ -5,6 +5,7 @@ include_once 'model/product.php';
 include_once 'model/entity.php';
 include_once 'model/category.php';
 include_once 'model/comment.php';
+include_once 'model/user.php';
 
 include_once "model/cart.php";
 $cate = new Category();
@@ -36,8 +37,14 @@ if (isset($_GET['act'] )&& $_GET['act']) {
             break;
         case 'collection':
             $allCategory = $cate->getAllCate();
+            $page =1;
+            if(isset($_GET['page']) && $_GET['page']){
+                $page = $_GET['page'];
+            }
+
+
             if (isset($_GET['category']) && !empty($_GET['category'])) {
-                $collectionPro = $product->filterProduct("category", $_GET['category']);
+                $collectionPro = $product->filterProduct("category", $_GET['category'],10,$page);
                 $infoCate = $cate->getInfoCate($_GET['category']);
             } else {
                 $collectionPro = $product->filterProduct();
@@ -75,6 +82,13 @@ if (isset($_GET['act'] )&& $_GET['act']) {
             include_once 'view/inc/footer.php';
             break;
         case 'checkout':
+            $classUser = new User();
+            $getUserInfo = $classUser->getAddress();
+            if($getUserInfo->status ==true){
+                $userInfo = $getUserInfo->result;
+                
+            }
+
             if (isset($_POST['nameReceiver']) && !empty($_POST['nameReceiver'])) {
                 $nameReceiver = $_POST['nameReceiver'];
                 $city = $_POST['city'];

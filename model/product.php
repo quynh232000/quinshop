@@ -147,12 +147,17 @@ class Product
             return "something wrong from server!";
         }
     }
-    public function filterProduct($key = "", $value = "", $limit = 20)
+    public function filterProduct($key = "", $value = "", $limit = 20,$page =1)
     {
         if ($limit == "all") {
             $limit = "0,18446744073709551615";
         }
+        if ($page < 1) {
+            $page = 1;
+        }
+        $currentPage = ($page - 1) * $limit;
         $query = "";
+        $total = 0;
         switch ($key) {
             case 'random':
                 $query = "SELECT pr.id, pr.brand, pr.namePro ,pr.categoryId, pr.quantity , pr.image, pr.origin, pr.price, pr.salePercent, pr.slug,
@@ -164,8 +169,11 @@ class Product
 
                 break;
             case 'category':
+
+                $sqlTotal = $this->db->select("SELECT count(*) from product where categoryId = '$value'");
+
                 $query = "SELECT pr.id, pr.brand, pr.namePro ,pr.categoryId, pr.quantity, pr.image, pr.origin, pr.price, pr.salePercent, pr.slug,
-                 cate.nameCate as nameCategory from product as pr INNER JOIN category as cate on pr.categoryId = cate.id  WHERE pr.categoryId = $value LIMIT $limit";
+                 cate.nameCate as nameCategory from product as pr INNER JOIN category as cate on pr.categoryId = cate.id  WHERE pr.categoryId = $value  limit $currentPage,$limit";
                 break;
 
             default:
@@ -189,7 +197,7 @@ class Product
             } else {
                 $result =  $response->fetchAll();
             }
-            return new Response(true, "Successcully", $result, "");
+            return new Response(true, "Successcully", $result, "",$total);
         }
     }
     public function deleteProduct($id)

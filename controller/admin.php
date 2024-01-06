@@ -161,6 +161,16 @@ if (isset($act)) {
             $classOrder = new Order();
             
             $resultOrder = $classOrder->getAllInvoince();
+            if(isset($_GET['id']) && $_GET['id']){
+                $getInvoiceDetail = $classOrder->getOrderDetail($_GET['id']);
+                if($getInvoiceDetail->status ==true){
+                    $data = $getInvoiceDetail->result;
+                }else{
+                    header('location: ?mod=admin&act=manageorders');
+                }
+            }else{
+                header('location: ?mod=admin&act=manageorders');
+            }
             $viewTitle = 'Manage orders';
             include_once 'view/inc/headerAdmin.php';
             include_once 'view/inc/sidebarAdmin.php';

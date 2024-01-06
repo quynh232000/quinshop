@@ -62,6 +62,14 @@ if (isset($act)) {
                 echo json_encode($entityBody, JSON_PRETTY_PRINT);
                 return;
             }
+        case 'fillterproduct':
+            if(isset($_GET['id']) && $_GET['id']){
+                $classProduct = new Product();
+                $result = $classProduct->filterProduct('category',$_GET['id']);
+                echo json_encode($result, JSON_PRETTY_PRINT);
+            }
+            
+            return;
         default:
             break;
 

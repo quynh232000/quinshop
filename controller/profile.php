@@ -16,6 +16,7 @@ extract($_REQUEST);
 if (isset($act)) {
     switch ($act) {
         case 'profile':
+            $viewTitle = 'Hồ sơ';
             if (isset($_POST['username']) && $_POST['username']) {
                 $updateUser = $classUser->updateProfile($_POST["fullName"], $_FILES['avatar'], $_POST["phone"], $_POST["email"]);
                 if (isset($updateUser)) {
@@ -33,6 +34,7 @@ if (isset($act)) {
             include_once 'view/inc/footer.php';
             break;
         case 'login':
+            $viewTitle = 'Đăng nhập';
             // session_start();
             $class = new AdminLogin();
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -43,6 +45,7 @@ if (isset($act)) {
             include_once 'view/login.php';
             break;
         case 'register':
+            $viewTitle = 'Đăng kí';
             $class = new Adminlogin();
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $checkRegister = $class->register_admin(
@@ -57,14 +60,10 @@ if (isset($act)) {
             }
             include_once 'view/register.php';
             break;
-        case 'sendemail':
-
-
-            break;
-
 
 
         case 'orderhistory':
+            $viewTitle = 'Lịch sử đơn hàng';
             $classOrder = new Order();
 
             $allOrder = $classOrder->getAllOrder();
@@ -75,6 +74,37 @@ if (isset($act)) {
             include_once 'view/inc/footer.php';
             break;
         case 'sercurity':
+            $viewTitle = 'Đổi mật khẩu';
+            if (isset($_POST['submit-change-pass']) && $_POST['submit-change-pass']) {
+                $oldpassword = $_POST['oldpassword'];
+                $newpassword = $_POST['newpassword'];
+                $confirmpassword = $_POST['confirmpassword'];
+                if (($oldpassword) == '' || ($newpassword) == "" || ($confirmpassword) == "") {
+                    echo '<div id="toast" mes-type="error" mes-title="Thất bại!" mes-text="Vui lòng nhập đầy đủ thông tin"></div>';
+                } else {
+                    $classUser = new User();
+                    $checkPass = $classUser->checkPass(md5($oldpassword));
+                    if ($checkPass->status == false) {
+                        echo '<div id="toast" mes-type="error" mes-title="Thất bại!" mes-text="' . $checkPass->message . '"></div>';
+                    } else {
+                        if ($newpassword != $confirmpassword) {
+                            echo '<div id="toast" mes-type="error" mes-title="Thất bại!" mes-text="Mật khẩu mới không khớp nhau!"></div>';
+                        } else {
+                            $changeNewPass = $classUser->changeNewPass(md5($newpassword));
+                            if ($changeNewPass->status == false) {
+                                echo '<div id="toast" mes-type="error" mes-title="Thất bại!" mes-text="' . $changeNewPass->message . '"></div>';
+
+                            } else {
+                                echo '<div id="toast" mes-type="success" mes-title="Thành công!" mes-text="Thay đổi mật khẩu thành công!"></div>';
+
+                            }
+                        }
+                    }
+
+                }
+            }
+
+
             include_once 'view/inc/header.php';
             include_once 'view/inc/profilesidebar.php';
             include_once 'view/sercurity.php';
@@ -85,9 +115,9 @@ if (isset($act)) {
             if (isset($_POST['email']) && $_POST['email'] != "") {
 
                 $email = $_POST['email'];
-               
+
                 $checkemail = $classUser->sendCodePassEmail($email);
-                
+
                 if ($checkemail->status == false) {
                     echo '<div id="toast" mes-type="error" mes-title="Thất bại!" mes-text="' . $checkemail->message . '"></div>';
                 } else {

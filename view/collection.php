@@ -27,7 +27,7 @@
                     ?>
                 </div>
                 <div class="suggestion-nav-right">
-                    See more
+                    Xem thêm
                     <i class="fa-solid fa-chevron-right"></i>
                 </div>
             </div>

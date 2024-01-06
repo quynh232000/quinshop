@@ -115,7 +115,45 @@ class User
         $this->db->delete("DELETE FROM user WHERE id = '$id' ");
         return new Response(true, "Xóa tài khoản thành công", "Xóa tài khoản thành công", "?mod=admin&act=manageuser", "");
     }
+    public function checkPass($pass)  {
+        $isLogin = Session::get("isLogin");
+        $userId = Session::get("id");
+        if ($isLogin != true) {
+            return new Response(false, "Something wrong! Your are not login", "", "?mod=profile&act=login");
+        }
 
+        $checkPassSql = $this->db->select("SELECT * from user where id = '$userId' and pass = '$pass'");
+        $user = $checkPassSql->fetchAll();
+        if(empty($user)){
+            return new Response(false, "Mật khẩu cũ không chính xác. Vui lòng nhập lại!", "", "");
+        }
+        return new Response(true, "success", "", "");
+
+    }
+    public function changeNewPass($newPass) {
+        $isLogin = Session::get("isLogin");
+        $userId = Session::get("id");
+        if ($isLogin != true) {
+            return new Response(false, "Something wrong! Your are not login", "", "?mod=profile&act=login");
+        }
+        $this->db->update("UPDATE  user SET pass='$newPass', updatedAt = NOW() WHERE id = '$userId'");
+
+        return new Response(true, "success", "", "");
+    }
+
+    public function getAddress() {
+        $isLogin = Session::get("isLogin");
+        $userId = Session::get("id");
+        if ($isLogin != true) {
+            return new Response(false, "Something wrong! Your are not login", "", "?mod=profile&act=login");
+        }
+        $addressSql = $this->db->select("SELECT * FROM address WHERE userId = '$userId' limit 1");
+        $address = $addressSql->fetchAll();
+        if(empty($address)){
+            return new Response(false, "Empty", "", "");
+        }
+        return new Response(true, "success", $address[0], "");
+    }
   
 
 }

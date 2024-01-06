@@ -23,7 +23,7 @@
                             <i class="fa-solid fa-user"></i> Người nhận
                         </div>
                         <div class="checkout-group">
-                            <input class="checkout-input" placeholder="Aa.." name="nameReceiver">
+                            <input class="checkout-input" value="<?php echo isset($userInfo) ? $userInfo['nameReceiver']:"" ?>" required placeholder="Aa.." name="nameReceiver">
                         </div>
                     </div>
                     <div class="input-box">
@@ -31,7 +31,7 @@
                             <i class="fa-solid fa-city"></i> Thành phố
                         </div>
                         <div class="checkout-group">
-                            <input class="checkout-input" placeholder="Aa..." name="city">
+                            <input class="checkout-input" value="<?php echo isset($userInfo) ? $userInfo['city']:"" ?>" required placeholder="Aa..." name="city">
                         </div>
                     </div>
                     <div class="input-box">
@@ -39,7 +39,7 @@
                             <i class="fa-solid fa-user"></i>Huyện
                         </div>
                         <div class="checkout-group">
-                            <input class="checkout-input" placeholder="Aa..." name="province">
+                            <input class="checkout-input" value="<?php echo isset($userInfo) ? $userInfo['province']:"" ?>" required placeholder="Aa..." name="province">
                         </div>
                     </div>
                     <div class="input-box">
@@ -47,7 +47,7 @@
                             <i class="fa-solid fa-road"></i>Địa chỉ chi tiết
                         </div>
                         <div class="checkout-group">
-                            <input class="checkout-input" placeholder="Aa..." name="addressDetail">
+                            <input class="checkout-input" value="<?php echo isset($userInfo) ? $userInfo['addressDetail']:"" ?>" required placeholder="Aa..." name="addressDetail">
                         </div>
                     </div>
                     
@@ -56,7 +56,7 @@
                         <div class="checkout-title mt-2">
                             <i class="fa-solid fa-phone"></i> Số điện thoại
                         </div>
-                        <input class="checkout-input" value="<?=Session::get("phone")   ?>" placeholder="+84-..." name="phone">
+                        <input class="checkout-input" value="<?php echo isset($userInfo) ? $userInfo['phone']:Session::get("phone") ?>"  required placeholder="+84-..." name="phone">
                     </div>
                     
                 </div>
@@ -68,7 +68,7 @@
                         <i class="fa-solid fa-file-lines"></i>Ghi chú
                     </div>
                     <div class="checkout-group">
-                        <textarea class="checkout-input" placeholder="Thêm ghi chú..." rows="5" name="note"></textarea>
+                        <textarea class="checkout-input"  placeholder="Thêm ghi chú..." rows="5" name="note"></textarea>
                     </div>
                 </div>
             </div>

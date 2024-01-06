@@ -263,3 +263,78 @@
                                                 transparent)
     }
 }
+/* orderdetail */
+.de-info{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.de-info-title{
+    font-size: 1.8rem;
+    color: orangered;
+    margin: 6px 0 14px;
+    font-weight: 600;
+    background-color: antiquewhite;
+    width: 100%;
+    padding: 10px;
+}
+.de-info-item-group{
+    display: flex;
+    gap: 5px;
+    padding: 10px;
+    align-items: center;
+    border-bottom: 1px solid rgba(119, 119, 121, 0.12);
+}
+.de-info-item-group span{
+    min-width: 120px;
+}
+.de-info-group-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.de-pro img{
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.de-table{
+    width: 100%;
+    border-collapse: collapse;
+    
+}
+.de-table th{
+    text-align: center;
+}
+table, th, td {
+    border: 1px solid rgb(121, 139, 174);
+    border-collapse: collapse;
+  }
+th,td{
+    padding: 10px;
+    text-align: center;
+}
+th{
+    background-color: var(--primary);
+    color: white;
+}
+td{
+    color: black;
+}
+tr:nth-child(2n+1){
+    background-color: aliceblue;
+}
+.de-group-total{
+    background-color: rgb(186, 249, 186);
+    color: black;
+    font-weight: 600;
+    font-size: 1.8rem;
+    padding: 18px 10px;
+}
+.de-pro-status{
+    color: var(--primary);
+}
+.de-content{
+    margin: 30px 0;
+}

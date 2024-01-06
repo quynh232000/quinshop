@@ -155,8 +155,8 @@ class Cart
             return new Response(true, "success", ["total" => 0, "totalPrice" => 0], "");
         }
         $userId = Session::get("id");
-        $newAddress = $this->db->insert("INSERT INTO quin.address (userId, nameReceiver, phone, city, province) VALUES
-            ('$userId','$nameReceiver','$phone','$city','$province');
+        $newAddress = $this->db->insert("INSERT INTO quin.address (userId, nameReceiver,addressDetail, phone, city, province) VALUES
+            ('$userId','$nameReceiver','$addressDetail','$phone','$city','$province');
         ");
         if ($newAddress == false) {
             return new Response(false, "Create new address fail!","", "");

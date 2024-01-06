@@ -1,12 +1,12 @@
 
             <div class="referral-body">
                 <div class="profile-title">Mật khẩu</div>
-                <form class="form-update-password">
+                <form class="form-update-password" method="POST">
                     <div class="profile-wrapper">
                         <div class="profile-group">
                             <label for="">Mật khẩu cũ</label>
                             <div class="profile-content">
-                                <input type="password" value="" placeholder="Nhập mật khẩu cũ..." name="olldpassword" class="profile-input">
+                                <input type="password" value="" placeholder="Nhập mật khẩu cũ..." name="oldpassword" class="profile-input">
                             </div>
                         </div>
                         <div class="profile-group">
@@ -22,9 +22,10 @@
                             </div>
                         </div>
                         <div class="profile-eidt-submit">
-                            <button class="btn-update-profile" type="submit">
+                            <input type="submit" value="Cập nhật" name="submit-change-pass" class="btn-update-profile">
+                            <!-- <button class="btn-update-profile" type="submit">
                                 Cập nhật
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                 </form>
