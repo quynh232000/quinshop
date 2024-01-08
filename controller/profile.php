@@ -42,6 +42,35 @@ if (isset($act)) {
                 $adminPass = md5($_POST['adminPass']);
                 $login_check = $class->login_admin($adminUser, $adminPass);
             }
+
+            // with google
+            require_once 'lib/google-api-php-client/vendor/autoload.php';
+
+            $clientID = "379599708269-tknovqc4tpcipmuuqo00hq64pqr61ed6.apps.googleusercontent.com";
+            $secret = "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";
+            $gclient = new Google_Client();
+            $gclient->setClientId($clientID);
+            $gclient->setClientSecret($secret);
+            $gclient->setRedirectUri('http://localhost/web-demo-test/?mod=profile&act=login');
+            $gclient->addScope('email');
+            $gclient->addScope('profile');
+
+            if (isset($_GET['code'])) {
+                $token = $gclient->fetchAccessTokenWithAuthCode($_GET['code']);
+                if (!isset($token['error'])) {
+                    $gclient->setAccessToken($token['access_token']);
+                    $_SESSION['access_token'] = $token['access_token'];
+                    $gservice = new Google_Service_Oauth2($gclient);
+                    $udata = $gservice->userinfo->get();
+                    print_r($udata);
+                }
+            }
+            //with google
+
+
+
+
+
             include_once 'view/login.php';
             break;
         case 'register':
@@ -187,6 +216,7 @@ if (isset($act)) {
 
             include_once 'view/forgotpassword.php';
             break;
+
         default:
             include_once 'view/inc/header.php';
             include_once 'view/error.php';

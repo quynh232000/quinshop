@@ -187,7 +187,7 @@ class Adminlogin
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'tranong600@gmail.com';
-        $mail->Password = 'gskrqbqnnlrhfkrg';
+        $mail->Password = 'loxzmyaqqfuiupmj';
         $mail->SMTPSecure = 'tsl';
         $mail->SetLanguage("vi", 'lib/phpmailer/language');
         $mail->Port = 587; // TCP port to connect to 587
@@ -241,9 +241,9 @@ class Adminlogin
         $timeVerify = $userInfo['timeVerify'];
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $timeNow = date('Y-m-d h:i:s');
-        if($timeNow > ($timeVerify)){
-            return new Response(false, "Mã xác thực đã hết hạn. Vui lòng thử lại!",  "", "");
-        }
+        // if($timeNow > strtotime($timeVerify)){
+        //     return new Response(false, "Mã xác thực đã hết hạn. Vui lòng thử lại!",  "", "");
+        // }
         return new Response(true, "success",  "", "");
     }
     public function changePassword($pass, $token)  {
