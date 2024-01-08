@@ -83,7 +83,8 @@
         </div>
         <div class="login-with-google">
           <span>Or</span>
-          <a href="<?= $gclient->createAuthUrl() ?>" target="_blank" class="btn google">
+          <!-- "<?= $gclient->createAuthUrl() ?>" -->
+          <a href="#" target="_blank" class="btn google">
             <svg version="1.1" width="20" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
               style="enable-background: new 0 0 512 512" xml:space="preserve">
