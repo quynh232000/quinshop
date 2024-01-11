@@ -52,7 +52,7 @@
 
 </head>
 <body>
-    <div class="app">
+    <div class="app admin">
         <!--header-->
         <header class="header header-no-show">
           <!-- sidebar -->

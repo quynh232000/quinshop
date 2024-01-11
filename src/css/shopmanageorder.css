@@ -1,6 +1,6 @@
 .shop-orders{
     box-shadow: 0 0 8px var(--box-shadows2);
-    border-radius: 12px;
+    border-radius: var(--boder-radius);
     padding: 24px 20px;
 }
 .s-orders-top{

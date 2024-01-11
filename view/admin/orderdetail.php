@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="./src/css/detailorder.css">
 
-<div class="invoicePreview">
+<div class="shop-main invoicePreview">
     <?php
     if (isset($data)) {
         $invoiceInfo = $data['invoice'][0];

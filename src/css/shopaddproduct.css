@@ -68,7 +68,7 @@
 .form-group-wrapper{
     width: 100%;
     border: 1px solid rgba(22,22,24, 0.12);
-    border-radius: 12px;
+    border-radius: var(--boder-radius);
     padding:  15px;
     box-shadow: 0 0 8px rgba(22,22,24,0.12);
     background-color: var(--white);

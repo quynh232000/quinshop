@@ -607,8 +607,40 @@ $().ready(function () {
     });
     // end ajax
   });
-});
+  // run time mega sale
+  if($('.mega-time').length){
+    $('.mega-time').each(function () {
+      const type = $(this).attr('type')
+     
+      switch (type) {
+        case 'hour':
+          
+          $(this).text(randomTime(1,12)+"")
+          break;
+      case 'minute':
+        $(this).text(randomTime(1,59)+"")
+      break;
+        default:
+          let timenow = randomTime(1,59)
+          setInterval(()=>{
+            if(timenow <1){
+              timenow = 59
+            }else{
+              timenow--
+            }
+            $(this).text(timenow+"")
 
+          },1000)
+          break;
+      }
+    })
+  }
+  
+});
+// =================funtions====================//
+function randomTime(min,max){
+  return Math.floor(Math.random() * max) + min
+}
 function updateViewCart(_this, type, count, price, idpro) {
   const currentSubtotal = _this.find(".cart-subtotal1").attr("data-subtotal");
   const currentInputCount = _this.find(".cart-count-input").val();

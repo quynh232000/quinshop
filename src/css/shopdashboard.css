@@ -11,7 +11,7 @@
 .dash-top-item{
     flex: 1;
     box-shadow: 0 0 8px var(--box-shadows2);
-    border-radius: 12px;
+    border-radius: var(--boder-radius);
     padding: 24px 20px;
     display: flex;
     flex-direction: column;
@@ -42,7 +42,7 @@
     flex-direction: column;
     padding:0 20px;
     box-shadow: 0 0 6px var(--box-shadows2);
-    border-radius: 12px;
+    border-radius: var(--boder-radius);
 }
 .dash-content-row{
     display: flex;

@@ -160,7 +160,7 @@
     }
     .shop-top{
         background-color: var(--white);
-        border-radius: 12px;
+        border-radius: var(--boder-radius);
     }
     .shop-title{
         padding: 20px;
@@ -290,3 +290,363 @@ border-color: var(--primary);
     object-fit: cover;
     border-radius: 50%;
 }
+/* admin */
+.admin .wrapper{
+    width: 100%;
+    padding: 20px;
+}
+
+.admin .shop-sidebar{
+    background-color: rgb(13, 16, 71) ;
+    margin: 0;
+    height: 100%;
+    color: white;
+    position: fixed;
+    padding-top: 20px;
+}
+.shop-title{
+    margin-top: 20px;
+}
+.shop .wrapper{
+    padding-left: 0;
+}
+.admin{
+    --primary:#153d78;
+    padding-top: 42px;
+}
+.admin .shop-main{
+    padding-left: 220px;
+}
+.admin .l-footer{
+    padding-left: 220px;
+}
+.admin .header-body{
+    background-color: var(--primary);
+    --s: 60px;
+    --c1: rgb(13, 16, 71);
+    --c2: var(--primary);
+    --_g: radial-gradient(
+      25% 25% at 25% 25%,
+      var(--c1) 99%,
+      rgba(0, 0, 0, 0) 101%
+    );
+    background: var(--_g) var(--s) var(--s) / calc(2 * var(--s))
+        calc(2 * var(--s)),
+      var(--_g) 0 0 / calc(2 * var(--s)) calc(2 * var(--s)),
+      radial-gradient(50% 50%, var(--c2) 98%, rgba(0, 0, 0, 0)) 0 0 / var(--s)
+        var(--s),
+      repeating-conic-gradient(var(--c2) 0 50%, var(--c1) 0 100%)
+        calc(0.5 * var(--s)) 0 / calc(2 * var(--s)) var(--s);
+  
+}
+.admin .header-top{
+    display: none;
+}
+.admin .l-footer-wrapper{
+    width: 100%;
+}
+.admin .header-body{
+    color: white !important;
+}
+.admin .header-search-info span{
+    color: white;
+}
+/* dash cảd */
+.card {
+    --primary-clr: #1C204B;
+    --dot-clr: #BBC0FF;
+    --play: hsl(195, 74%, 62%);
+    width: 400px;
+    height: 170px;
+    border-radius: 10px;
+   }
+   
+   .card {
+    font-family: "Arial";
+    color: #fff;
+    display: grid;
+    cursor: pointer;
+    grid-template-rows: 50px 1fr;
+   }
+   
+   .card:hover .img-section {
+    transform: translateY(1em);
+   }
+   
+   .card-desc {
+    border-radius: 10px;
+    padding: 15px;
+    position: relative;
+    top: -10px;
+    display: grid;
+    gap: 10px;
+    background: var(--primary-clr);
+   }
+   
+   .card-time {
+    font-size: 1.7em;
+    font-weight: 500;
+   }
+   
+   .img-section {
+    transition: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background: hsl(195, 74%, 62%);
+   }
+   
+   .card-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+   }
+   
+   .card-title {
+    flex: 1;
+    font-size: 0.9em;
+    font-weight: 500;
+   }
+   
+   .card-menu {
+    display: flex;
+    gap: 4px;
+    margin-inline: auto;
+   }
+   
+   .card svg {
+    float: right;
+    max-width: 100%;
+    max-height: 100%;
+   }
+   
+   .card .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--dot-clr);
+   }
+   
+   .card .recent {
+    line-height: 0;
+    font-size: 0.8em;
+   }
+   /* cảt */
+   /* btn add product */
+   .btn-add-pro {
+    position: relative;
+    padding: 12px 35px;
+    background: #4c83fa;
+    font-size: 17px;
+    font-weight: 1000;
+    color: #ffffff;
+    border: 3px solid #4c83fa;
+    border-radius: 8px;
+    box-shadow: 0 0 0 #ffffff;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .star-1 {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 25px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #4c83fa);
+    z-index: -5;
+    transition: all 1s cubic-bezier(0.05, 0.83, 0.43, 0.96);
+  }
+  
+  .star-2 {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    width: 15px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #4c83fa);
+    z-index: -5;
+    transition: all 1scubic-bezier(0, 0.4, 0, 1.01);
+  }
+  
+  .star-3 {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    width: 5px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #4c83fa);
+    z-index: -5;
+    transition: all 1s cubic-bezier(0, 0.4, 0, 1.01);
+  }
+  
+  .star-4 {
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    width: 8px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #4c83fa);
+    z-index: -5;
+    transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
+  }
+  
+  .star-5 {
+    position: absolute;
+    top: 25%;
+    left: 45%;
+    width: 15px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #4c83fa);
+    z-index: -5;
+    transition: all 0.6s cubic-bezier(0, 0.4, 0, 1.01);
+  }
+  
+  .star-6 {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    width: 5px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #4c83fa);
+    z-index: -5;
+    transition: all 0.8s ease;
+  }
+  
+  .btn-add-pro:hover {
+    background: transparent;
+    color: #4c83fa;
+    box-shadow: 0 0 0px #4c83fa;
+  }
+  
+  .btn-add-pro:hover .star-1 {
+    position: absolute;
+    top: -80%;
+    left: -30%;
+    width: 25px;
+    height: auto;
+    filter: drop-shadow(0 0 0px #4c83fa);
+    z-index: 2;
+  }
+  
+  .btn-add-pro:hover .star-2 {
+    position: absolute;
+    top: -0%;
+    left: 10%;
+    width: 15px;
+    height: auto;
+    filter: drop-shadow(0 0 0px #4c83fa);
+    z-index: 2;
+  }
+  
+  .btn-add-pro:hover .star-3 {
+    position: absolute;
+    top: 55%;
+    left: 25%;
+    width: 5px;
+    height: auto;
+    filter: drop-shadow(0 0 0px #4c83fa);
+    z-index: 2;
+  }
+  
+  .btn-add-pro:hover .star-4 {
+    position: absolute;
+    top: 30%;
+    left: 80%;
+    width: 8px;
+    height: auto;
+    filter: drop-shadow(0 0 0px #4c83fa);
+    z-index: 2;
+  }
+  
+  .btn-add-pro:hover .star-5 {
+    position: absolute;
+    top: 25%;
+    left: 115%;
+    width: 15px;
+    height: auto;
+    filter: drop-shadow(0 0 0px #4c83fa);
+    z-index: 2;
+  }
+  
+  .btn-add-pro:hover .star-6 {
+    position: absolute;
+    top: 5%;
+    left: 60%;
+    width: 5px;
+    height: auto;
+    filter: drop-shadow(0 0 0px #4c83fa);
+    z-index: 2;
+  }
+  
+  .fil0 {
+    fill: #4c83fa;
+  }
+  /* chẹckbox */
+  .checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .checkbox-container {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+    user-select: none;
+  }
+  
+  /* Create a custom checkbox */
+  .checkbox-checkmark {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 2.3em;
+    width: 2.3em;
+    background-color: #ccc;
+    border-radius: 50%;
+    transition: .4s;
+  }
+  
+  .checkbox-checkmark:hover {
+    box-shadow: inset 17px 17px 16px #b3b3b3,
+              inset -17px -17px 16px #ffffff;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .checkbox-container input:checked ~ .checkbox-checkmark {
+    box-shadow: none;
+    background-color: limegreen;
+    transform: rotateX(360deg);
+  }
+  
+  .checkbox-container input:checked ~ .checkbox-checkmark:hover {
+    box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkbox-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .checkbox-container input:checked ~ .checkbox-checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .checkbox-container .checkbox-checkmark:after {
+    left: 0.96em;
+    top: 0.7em;
+    width: 0.25em;
+    height: 0.5em;
+    border: solid white;
+    border-width: 0 0.15em 0.15em 0;
+    box-shadow: 0.1em 0.1em 0em 0 rgba(0,0,0,0.3);
+    transform: rotate(45deg);
+  }
+  

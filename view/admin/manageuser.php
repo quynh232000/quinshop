@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="./src/css/manageuser.css">
-<main class="main-manageuser">
+<main class="shop-main main-manageuser">
     <div class="manage-user">
 
         <div class="p-body">

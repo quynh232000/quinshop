@@ -88,19 +88,19 @@
             <div class="mega-top-content">
                 <div class="mega-top-wrapper">
                     <div class="mega-top-date">
-                        <span>12</span>
-                        <p>DAY</p>
+                        <span>02</span>
+                        <p>DAYS</p>
                     </div>
                     <div class="mega-top-date">
-                        <span>12</span>
+                        <span class="mega-time" type="hour">12</span>
                         <p>HOUR</p>
                     </div>
                     <div class="mega-top-date">
-                        <span>12</span>
+                        <span class="mega-time" type="minute">12</span>
                         <p>MINUES</p>
                     </div>
                     <div class="mega-top-date">
-                        <span>12</span>
+                        <span class="mega-time" type="second">12</span>
                         <p>SECOND</p>
                     </div>
                 </div>
