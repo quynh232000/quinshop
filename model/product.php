@@ -35,8 +35,8 @@ class Product
     ) {
         // edit
 
-        if ($type == 'edit' && $id !='') {
-            $queryUpdate ='';
+        if ($type == 'edit' && $id != '') {
+            $queryUpdate = '';
             $queryUpdate .= "p.namePro = '$name',";
             $queryUpdate .= "p.description = '$description',";
             $queryUpdate .= "p.categoryId = '$categoryId',";
@@ -48,7 +48,7 @@ class Product
             $queryUpdate .= "p.price = '$price',";
             // upload img
             $fileResult = $this->tool->uploadFile($image);
-            if($fileResult){
+            if ($fileResult) {
                 $queryUpdate .= "p.image = '$fileResult',";
             }
             $queryUpdate .= 'updatedAt = NOW()';
@@ -56,10 +56,10 @@ class Product
                         SET $queryUpdate
                         WHERE p.id = $id
             ");
-            if($resultEditPro ==false){
-                return new Response(false, "Cập nhật sản phẩm thất bại", "", "","");
+            if ($resultEditPro == false) {
+                return new Response(false, "Cập nhật sản phẩm thất bại", "", "", "");
             }
-            return new Response(true, "Cập nhật sản phẩm thành công", "", "","");
+            return new Response(true, "Cập nhật sản phẩm thành công", "", "", "");
         } else {
             // create
             $slug = $this->tool->slug($name, '-');
@@ -121,9 +121,9 @@ class Product
             }
         }
     }
-    public function getAllProduct($page = 1, $limit = 10,$type="")
+    public function getAllProduct($page = 1, $limit = 10, $type = "")
     {
-        if($type){
+        if ($type) {
             $type = "WHERE pr.status = '$type'";
         }
         $getTotal = $this->db->select("SELECT COUNT(*) AS total from product AS pr $type");
@@ -147,7 +147,7 @@ class Product
             return "something wrong from server!";
         }
     }
-    public function filterProduct($key = "", $value = "", $limit = 20,$page =1)
+    public function filterProduct($key = "", $value = "", $limit = 20, $page = 1)
     {
         if ($limit == "all") {
             $limit = "0,18446744073709551615";
@@ -189,15 +189,15 @@ class Product
         } else {
             $result = [];
             if ($key == "detail") {
-                $result =  $response->fetchAll();
+                $result = $response->fetchAll();
                 $listImg = $this->db->select("SELECT imagePro as link FROM listimage WHERE productId = $value ");
                 if ($listImg != false) {
                     array_push($result, $listImg->fetchAll());
                 }
             } else {
-                $result =  $response->fetchAll();
+                $result = $response->fetchAll();
             }
-            return new Response(true, "Successcully", $result, "",$total);
+            return new Response(true, "Successcully", $result, "", $total);
         }
     }
     public function deleteProduct($id)
@@ -237,27 +237,28 @@ class Product
         return new Response(true, "Successcully", $result, "");
 
     }
-    public function dashboard(){
+    public function dashboard()
+    {
         $result = [];
         $totalProduct = $this->db->select("SELECT count(*) as total FROM product");
-       
+
         if ($totalProduct == false) {
             $result['totalPro'] = 0;
-        }else{
+        } else {
             $totalProduct = $totalProduct->fetchAll()[0];
             $result['totalPro'] = $totalProduct['total'];
         }
         $totalSold = $this->db->select("SELECT sum(i.quantity) as total FROM invoicedetail as i");
         if ($totalSold == false) {
             $result['totalSold'] = 0;
-        }else{
+        } else {
             $totalSold = $totalSold->fetchAll()[0];
             $result['totalSold'] = $totalSold['total'];
         }
         $totalOut = $this->db->select("SELECT count(p.id) as total FROM product as p where p.id < 1");
         if ($totalOut == false) {
             $result['totalOut'] = 0;
-        }else{
+        } else {
             $totalOut = $totalOut->fetchAll()[0];
             $result['totalOut'] = $totalOut['total'];
         }
@@ -265,7 +266,7 @@ class Product
         $totalHidden = $this->db->select("SELECT count(p.id) as total FROM product as p where p.status ='hidden'");
         if ($totalHidden == false) {
             $result['totalHidden'] = 0;
-        }else{
+        } else {
             $totalHidden = $totalHidden->fetchAll()[0];
             $result['totalHidden'] = $totalHidden['total'];
         }
@@ -273,43 +274,43 @@ class Product
         $totalOrder = $this->db->select("SELECT count(*) as total FROM invoice");
         if ($totalOrder == false) {
             $result['totalOrder'] = 0;
-        }else{
+        } else {
             $totalOrder = $totalOrder->fetchAll()[0];
             $result['totalOrder'] = $totalOrder['total'];
         }
-         // totalOrderNew
-         $totalOrderNew = $this->db->select("SELECT count(*) as total FROM invoice  where invoice.status ='new'");
-         if ($totalOrderNew == false) {
-             $result['totalOrderNew'] = 0;
-         }else{
-             $totalOrderNew = $totalOrderNew->fetchAll()[0];
-             $result['totalOrderNew'] = $totalOrderNew['total'];
-         }
-         // totalOrderSuccess
-         $totalOrderSuccess = $this->db->select("SELECT count(*) as total FROM invoice  where invoice.status ='confirmed'");
-         if ($totalOrderSuccess == false) {
-             $result['totalOrderSuccess'] = 0;
-         }else{
-             $totalOrderSuccess = $totalOrderSuccess->fetchAll()[0];
-             $result['totalOrderSuccess'] = $totalOrderSuccess['total'];
-         }
-         // totalOrderCancel
-         $totalOrderCancel = $this->db->select("SELECT count(*) as total FROM invoice  where invoice.status ='cancel'");
-         if ($totalOrderCancel == false) {
-             $result['totalOrderCancel'] = 0;
-         }else{
-             $totalOrderCancel = $totalOrderCancel->fetchAll()[0];
-             $result['totalOrderCancel'] = $totalOrderCancel['total'];
-         }
+        // totalOrderNew
+        $totalOrderNew = $this->db->select("SELECT count(*) as total FROM invoice  where invoice.status ='new'");
+        if ($totalOrderNew == false) {
+            $result['totalOrderNew'] = 0;
+        } else {
+            $totalOrderNew = $totalOrderNew->fetchAll()[0];
+            $result['totalOrderNew'] = $totalOrderNew['total'];
+        }
+        // totalOrderSuccess
+        $totalOrderSuccess = $this->db->select("SELECT count(*) as total FROM invoice  where invoice.status ='confirmed'");
+        if ($totalOrderSuccess == false) {
+            $result['totalOrderSuccess'] = 0;
+        } else {
+            $totalOrderSuccess = $totalOrderSuccess->fetchAll()[0];
+            $result['totalOrderSuccess'] = $totalOrderSuccess['total'];
+        }
+        // totalOrderCancel
+        $totalOrderCancel = $this->db->select("SELECT count(*) as total FROM invoice  where invoice.status ='cancel'");
+        if ($totalOrderCancel == false) {
+            $result['totalOrderCancel'] = 0;
+        } else {
+            $totalOrderCancel = $totalOrderCancel->fetchAll()[0];
+            $result['totalOrderCancel'] = $totalOrderCancel['total'];
+        }
         //  total balance
         $totalBalance = $this->db->select("SELECT sum(invoice.total) as total FROM invoice  where invoice.status ='confirmed'");
-         if ($totalBalance == false) {
-             $result['totalBalance'] = 0;
-         }else{
-             $totalBalance = $totalBalance->fetchAll()[0];
-             $result['totalBalance'] = $totalBalance['total'];
-         }
-         return new Response(true, "Thành công!", $result, "");
+        if ($totalBalance == false) {
+            $result['totalBalance'] = 0;
+        } else {
+            $totalBalance = $totalBalance->fetchAll()[0];
+            $result['totalBalance'] = $totalBalance['total'];
+        }
+        return new Response(true, "Thành công!", $result, "");
 
     }
 

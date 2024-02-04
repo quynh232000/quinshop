@@ -374,6 +374,10 @@ $().ready(function () {
             +price + +$(".view-total-cart").attr("view-total-cart");
           $(".view-total-cart").attr("view-total-cart", newPrice);
           $(".view-total-cart").text(formartPrice(newPrice));
+          
+          setTimeout(()=>{
+            location.href="?mod=page&act=cart"
+          },2000)
         }
       });
     }
@@ -743,11 +747,14 @@ function updateViewCart(_this, type, count, price, idpro) {
   }
 }
 function ajaxUpdateCart(type, idpro) {
+  console.log(123);
   $.ajax({
     url: "?mod=request&act=cart&type=" + type + "&idpro=" + idpro,
   }).done((data) => {
     data = JSON.parse(data);
+    
     toastjs(data.message);
+    
   });
 }
 const toastEl = document.getElementById("toast");
