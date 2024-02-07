@@ -314,7 +314,7 @@
     padding: 20px 0;
 }
 .suggestion .product{
-    width: 16.667%;
+    width: 20%;
 }
 .suggestion-wrapper{
     display: flex;
@@ -363,7 +363,7 @@
 .suggest-list-products{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    /* justify-content: center; */
 }
 .sugestion-btn-more{
     display: flex;
@@ -577,6 +577,9 @@
     }
     .l-footer-item{
         width: 100%;
+    }
+    .categories{
+        display: none;
     }
     
 }

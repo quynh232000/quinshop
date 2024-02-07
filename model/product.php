@@ -171,14 +171,17 @@ class Product
             case 'category':
 
                 $sqlTotal = $this->db->select("SELECT count(*) from product where categoryId = '$value'");
+                $total = $sqlTotal->fetchColumn();
 
                 $query = "SELECT pr.id, pr.brand, pr.namePro ,pr.categoryId, pr.quantity, pr.image, pr.origin, pr.price, pr.salePercent, pr.slug,
                  cate.nameCate as nameCategory from product as pr INNER JOIN category as cate on pr.categoryId = cate.id  WHERE pr.categoryId = $value  limit $currentPage,$limit";
                 break;
 
             default:
+                $sqlTotal = $this->db->select("SELECT count(*) from product ");
+                $total = $sqlTotal->fetchColumn();
                 $query = "SELECT pr.id, pr.brand, pr.namePro ,pr.categoryId, pr.quantity, pr.image, pr.origin, pr.price, pr.salePercent, pr.slug,
-                 cate.nameCate as nameCategory from product as pr INNER JOIN category as cate on pr.categoryId = cate.id  ORDER BY pr.createdAt LIMIT $limit";
+                 cate.nameCate as nameCategory from product as pr INNER JOIN category as cate on pr.categoryId = cate.id  ORDER BY pr.createdAt limit $currentPage,$limit";
                 break;
         }
         // ================================

@@ -42,7 +42,7 @@
             <label for="userName">Tên đăng nhập</label>
             <div class="form-body">
               <i class="fa-solid fa-user"></i>
-              <input type="text" class="form-control" id="userName" rules="required" name="username"
+              <input type="text" class="form-control"  value="<?=$_POST['username'] ??"" ?>" id="userName" rules="required" name="username"
                 placeholder="Tên đăng nhập..." />
             </div>
             <div class="form-msg"></div>
@@ -53,7 +53,7 @@
             <label for="Full name">Họ tên</label>
             <div class="form-body">
               <i class="fa-solid fa-user"></i>
-              <input type="text" class="form-control" id="Full name" rules="required" name="fullname"
+              <input type="text" class="form-control" id="Full name" value="<?=$_POST['fullname'] ??"" ?>" rules="required" name="fullname"
                 placeholder="Họ tên..." />
             </div>
             <div class="form-msg"></div>
@@ -65,7 +65,7 @@
             <label for="email">Email</label>
             <div class="form-body">
               <i class="fa-solid fa-paper-plane"></i>
-              <input type="text" class="form-control" rules="required|email" id="email" name="email"
+              <input type="text" class="form-control" value="<?=$_POST['email'] ??"" ?>" rules="required|email" id="email" name="email"
                 placeholder="Email..." />
             </div>
             <div class="form-msg"></div>
@@ -76,7 +76,7 @@
             <label for="phone">Số điện thoại</label>
             <div class="form-body">
               <i class="fa-solid fa-phone"></i>
-              <input type="text" class="form-control" id="phone" rules="required" name="phone"
+              <input type="text" class="form-control" value="<?=$_POST['phone'] ??"" ?>" id="phone" rules="required" name="phone"
                 placeholder="Số điện thoại..." />
             </div>
             <div class="form-msg"></div>
@@ -87,7 +87,7 @@
             <label for="password">Mật khẩu</label>
             <div class="form-body">
               <i class="fa-solid fa-lock"></i>
-              <input type="password" class="form-control" id="password" rules="required|min:6" name="password"
+              <input type="password" class="form-control" value="<?=$_POST['password'] ??"" ?>" id="password" rules="required|min:6" name="password"
                 placeholder="Mật khẩu..." />
             </div>
             <div class="form-msg"></div>
@@ -98,7 +98,7 @@
             <label for="confirmPassword">Xác nhận mật khẩu</label>
             <div class="form-body">
               <i class="fa-solid fa-lock"></i>
-              <input type="password" class="form-control" id="confirmPassword" rules="required|min:6" name="confirmpassword"
+              <input type="password" class="form-control" id="confirmPassword" rules="required|min:6" value="<?=$_POST['confirmpassword'] ??"" ?>" name="confirmpassword"
                 placeholder="Xác nhận mật khẩu..." />
             </div>
             <div class="form-msg"></div>

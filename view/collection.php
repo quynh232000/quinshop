@@ -23,13 +23,15 @@
                     <?php
                     if (isset($infoCate)) {
                         echo ($infoCate['nameCate']);
+                    }else{
+                        echo "Tất cả sản phẩm";
                     }
                     ?>
                 </div>
-                <div class="suggestion-nav-right">
-                    Xem thêm
+                <a href="?mod=page&act=collection" class="suggestion-nav-right">
+                    Xem tất cả
                     <i class="fa-solid fa-chevron-right"></i>
-                </div>
+                </a>
             </div>
             <!-- <div class="c-mall-body">
                 <div class="swiper-collection-brand">
@@ -99,7 +101,7 @@
 
         <div class="c-body">
             <div class="g-left">
-               
+
                 <div class="g-left-top">
                     <div class="g-left-top-title">
                         <i class="fa-solid fa-filter"></i>
@@ -113,9 +115,10 @@
                         if (isset($allCategory)) {
                             foreach ($allCategory as $key => $value) { ?>
                                 <p>
-                                    <a href="?mod=page&act=collection&category=<?=$value['id'] ?>">
-                                        <input type="radio" <?= $_GET['category'] == $value['id'] ? "checked" :  "" ?> /> 
-                                        <?=$value['nameCate'] ?> (<?=$value['count'] ?>)
+                                    <a href="?mod=page&act=collection&category=<?= $value['id'] ?>">
+                                        <input type="radio" <?= isset($_GET['category']) ? ($_GET['category'] == $value['id'] ? "checked" : "") : "" ?> />
+                                        <?= $value['nameCate'] ?> (
+                                        <?= $value['count'] ?>)
                                     </a>
                                 </p>
                             <?php }
@@ -160,24 +163,53 @@
 
                     </div>
                     <div class="g-nav-right">
-                        <div class="g-nav-page">
-                            <span class="g-nav-current">1</span>
+
+
+
+
+
+                        <!-- <div class="g-nav-page">
+                            <span class="g-nav-current">
+                                <?= $_GET['page'] ?? '1' ?>
+                            </span>
                             <span>/</span>
-                            <span class="g-nav-total">9</span>
-                        </div>
+                            <span class="g-nav-total">
+                                <?= ceil($collectionPro->total / 8) ?>
+                            </span>
+                        </div> -->
                         <div class="g-nav-btn-group">
-                            <a href="#" class="g-nav-btn ">
-                                <i class="fa-solid fa-angle-left"></i>
-                            </a>
-                            <a href="#" class="g-nav-btn ">
-                                <i class="fa-solid fa-angle-right"></i>
-                            </a>
+
+                            <!-- pagination -->
+                            <?php
+                            $totalPage = ceil($collectionPro->total / 8);
+                            $page = $_GET['page'] ?? 1;
+                            $cate = isset($_GET['category'])?"&category=".$_GET['category'] :"";
+                            // previous
+
+                            echo '<a href="'.($page>1?"?mod=page&act=collection$cate&page=".($page-1):"#").'" class="g-nav-btn '.($page==1?"disabled":"").'">
+                                        <i class="fa-solid fa-angle-left"></i>
+                                    </a>';
+                            // for number
+                            for ($i = 0; $i < $totalPage; $i++) {
+                                $active = $page == ($i + 1) ? "active" : "";
+
+                                $link ="?mod=page&act=collection$cate&page=".($i+1);
+                                echo '<a href="'.$link.'" class="g-nav-btn ' . $active . '">
+                                       ' . ($i + 1) . '
+                                    </a>';
+                            }
+                            // next
+                            echo '<a href="'.($page<$totalPage?"?mod=page&act=collection$cate&page=".($page+1):"#").'" class="g-nav-btn '.($page==$totalPage?"disabled":"").'">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </a>';
+                            ?>
+
                         </div>
                     </div>
                 </div>
                 <!-- list product -->
                 <div class="g-list-product">
-                    <?php if (isset($collectionPro) && $collectionPro->status && is_array($collectionPro->result)) {
+                    <?php if (isset($collectionPro) && $collectionPro->status && is_array($collectionPro->result) && count($collectionPro->result)>0) {
                         foreach ($collectionPro->result as $key => $value) { ?>
 
                             <div class="product">
@@ -243,7 +275,7 @@
                                     </a>
                                     <div class="product-btn" idpro="<?= $value['id'] ?>" data-price="<?= $value['price'] ?>">
                                         <i class="fa-solid fa-cart-plus"></i>
-                                        <span>ADD TO CART</span>
+                                        <span>Thêm giỏ hàng</span>
                                     </div>
                                 </div>
                             </div>

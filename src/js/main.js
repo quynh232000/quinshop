@@ -365,7 +365,7 @@ $().ready(function () {
         url: "?mod=request&act=cart&type=addcart&idpro=" + id,
       }).done((data) => {
         data = JSON.parse(data);
-        toastjs(data.message);
+        toastjs(data.message, data.status);
         if (data.status) {
           let newCount = +$(".view-total-count").attr("view-total-count") + 1;
           $(".view-total-count").attr("view-total-count", newCount);
@@ -374,10 +374,10 @@ $().ready(function () {
             +price + +$(".view-total-cart").attr("view-total-cart");
           $(".view-total-cart").attr("view-total-cart", newPrice);
           $(".view-total-cart").text(formartPrice(newPrice));
-          
-          setTimeout(()=>{
-            location.href="?mod=page&act=cart"
-          },2000)
+
+          setTimeout(() => {
+            location.href = "?mod=page&act=cart";
+          }, 2000);
         }
       });
     }
@@ -396,21 +396,24 @@ $().ready(function () {
         count,
     }).done((data) => {
       data = JSON.parse(data);
-      toastjs(data.message);
-      const currentCountView = +$(".view-total-count").attr("view-total-count");
-      const currentTotalView = +$(".view-total-cart").attr("view-total-cart");
-      $(".view-total-count").attr(
-        "view-total-count",
-        currentCountView + +count
-      );
-      $(".view-total-count").text(currentCountView + +count + "");
-      $(".view-total-cart").attr(
-        "view-total-cart",
-        currentTotalView + +price * +count
-      );
-      $(".view-total-cart").text(
-        formartPrice(+currentTotalView + +price * +count)
-      );
+      toastjs(data.message, data.status);
+      if (data.status) {
+        const currentCountView =
+          +$(".view-total-count").attr("view-total-count");
+        const currentTotalView = +$(".view-total-cart").attr("view-total-cart");
+        $(".view-total-count").attr(
+          "view-total-count",
+          currentCountView + +count
+        );
+        $(".view-total-count").text(currentCountView + +count + "");
+        $(".view-total-cart").attr(
+          "view-total-cart",
+          currentTotalView + +price * +count
+        );
+        $(".view-total-cart").text(
+          formartPrice(+currentTotalView + +price * +count)
+        );
+      }
     });
   });
   // update cart
@@ -536,7 +539,9 @@ $().ready(function () {
             return `
             <div class="product">
             <div class="product-wrapper">
-                <a href="?mod=page&act=detail&id=<?= $value['id'] ?>" class="product-info">
+                <a href="?mod=page&act=detail&id=${
+                  item.id
+                }" class="product-info">
                     <div class="product-sale-label">
                         <svg width="48" height="50" viewBox="0 0 48 50" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -589,12 +594,14 @@ $().ready(function () {
                         ${item.price}
                         </div>
                         <del class="product-price-old fm-price">
-                        ${item.price* (1 + item.salePercent / 100)}
+                        ${item.price * (1 + item.salePercent / 100)}
                            
                         </del>
                     </div>
                 </a>
-                <div class="product-btn" idpro="${item.id}" data-price= "${item.price}">
+                <div class="product-btn" idpro="${item.id}" data-price= "${
+              item.price
+            }">
                     <i class="fa-solid fa-cart-plus"></i>
                     <span>Thêm giỏ hàng</span>
                 </div>
@@ -603,47 +610,53 @@ $().ready(function () {
             `;
           })
           .join("");
-          $('.suggest-list-products').html(html)
-          $('.sg-btn-more').on('click',function () {
-            location.href = '?mod=page&act=collection&category='+id
-          })
+        $(".suggest-list-products").html(html);
+        $(".sg-btn-more").on("click", function () {
+          location.href = "?mod=page&act=collection&category=" + id;
+        });
+        // format price
+        const VND = new Intl.NumberFormat("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        });
+        const prices = document.querySelectorAll(".fm-price");
+        prices.forEach((item) => {
+          item.textContent = VND.format(item.textContent);
+        });
       }
     });
     // end ajax
   });
   // run time mega sale
-  if($('.mega-time').length){
-    $('.mega-time').each(function () {
-      const type = $(this).attr('type')
-     
-      switch (type) {
-        case 'hour':
-          
-          $(this).text(randomTime(1,12)+"")
-          break;
-      case 'minute':
-        $(this).text(randomTime(1,59)+"")
-      break;
-        default:
-          let timenow = randomTime(1,59)
-          setInterval(()=>{
-            if(timenow <1){
-              timenow = 59
-            }else{
-              timenow--
-            }
-            $(this).text(timenow+"")
+  if ($(".mega-time").length) {
+    $(".mega-time").each(function () {
+      const type = $(this).attr("type");
 
-          },1000)
+      switch (type) {
+        case "hour":
+          $(this).text(randomTime(1, 12) + "");
+          break;
+        case "minute":
+          $(this).text(randomTime(1, 59) + "");
+          break;
+        default:
+          let timenow = randomTime(1, 59);
+          setInterval(() => {
+            if (timenow < 1) {
+              timenow = 59;
+            } else {
+              timenow--;
+            }
+            $(this).text(timenow + "");
+          }, 1000);
           break;
       }
-    })
+    });
   }
-  
 });
 // =================funtions====================//
-function randomTime(min,max){
-  return Math.floor(Math.random() * max) + min
+function randomTime(min, max) {
+  return Math.floor(Math.random() * max) + min;
 }
 function updateViewCart(_this, type, count, price, idpro) {
   const currentSubtotal = _this.find(".cart-subtotal1").attr("data-subtotal");
@@ -747,14 +760,12 @@ function updateViewCart(_this, type, count, price, idpro) {
   }
 }
 function ajaxUpdateCart(type, idpro) {
-  console.log(123);
   $.ajax({
     url: "?mod=request&act=cart&type=" + type + "&idpro=" + idpro,
   }).done((data) => {
     data = JSON.parse(data);
-    
+
     toastjs(data.message);
-    
   });
 }
 const toastEl = document.getElementById("toast");
@@ -815,9 +826,13 @@ function toast({ title = "", message = "", type = "info", duration = 3000 }) {
   }
 }
 
-function toastjs(text) {
+function toastjs(text, type = true) {
   var x = document.getElementById("snackbar");
+
   x.className = "show";
+  if (type == false) {
+    x.classList.add("toast-error");
+  }
   x.textContent = text;
   setTimeout(function () {
     x.className = x.className.replace("show", "");

@@ -32,7 +32,7 @@
 
             <div class="form-body">
               <i class="fa-solid fa-user"></i>
-              <input type="text" class="form-control" id="userName" name="adminUser" rules="required"
+              <input type="text" class="form-control" id="userName" value="<?=$_POST['adminUser'] ??"" ?>" name="adminUser" rules="required"
                 placeholder="Tên đăng nhập..." />
             </div>
             <div class="form-msg"></div>
@@ -44,7 +44,7 @@
             <label for="password">Mật khẩu</label>
             <div class="form-body">
               <i class="fa-solid fa-lock"></i>
-              <input type="password" class="form-control" id="password" name="adminPass" rules="required|min:6"
+              <input type="password" class="form-control"  value="<?=$_POST['adminPass']??"" ?>" id="password" name="adminPass" rules="required|min:6"
                 placeholder="Mật khẩu..." />
             </div>
             <div class="form-msg"></div>

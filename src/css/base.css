@@ -350,6 +350,9 @@ select{
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
   }
+  #snackbar.toast-error{
+    background-color: red;
+  }
   
   @-webkit-keyframes fadein {
     from {top: -30px; opacity: 0;} 

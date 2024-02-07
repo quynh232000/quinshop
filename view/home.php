@@ -211,10 +211,10 @@
                     <div class="new-product-title">
                         Sản phẩm mới
                     </div>
-                    <div class="new-product-more">
+                    <a href="?mod=page&act=collection" class="new-product-more">
                         Xem thêm
                         <i class="fa-solid fa-chevron-right"></i>
-                    </div>
+                    </a>
                 </div>
                 <div class="new-product-body">
                     <div class="new-product-big">
@@ -431,9 +431,9 @@
                     </div>
                     <div class="best-selling-btn-body">
                         <div class="best-selling-content">
-                            <div class="best-selling-btn">
+                            <a href="?mod=page&act=collection" class="best-selling-btn">
                                 Xem thêm
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -457,10 +457,10 @@
                     </div>
 
                 </div>
-                <div class="suggestion-nav-right sg-btn-more" >
+                <a href="?mod=page&act=collection" class="suggestion-nav-right sg-btn-more" >
                     Xem thêm
                     <i class="fa-solid fa-chevron-right"></i>
-                </div>
+                </a>
             </div>
             <div class="suggest-list-products">
                 <?php
@@ -538,9 +538,9 @@
 
 
             </div>
-            <div class="sugestion-btn-more">
+            <a href="?mod=page&act=collection" class="sugestion-btn-more">
                 <div class="suggestion-btn-more-body ">Xem thêm</div>
-            </div>
+            </a>
             <div class="more-info">
                 <div class="more-info-item">
                     <div class="more-infor-wrapper">
@@ -582,10 +582,10 @@
             <div class="news">
                 <div class="news-top">
                     <div class="home-title">Lastest News</div>
-                    <div class="suggestion-nav-right">
+                    <a href="?mod=page&act=collection" class="suggestion-nav-right">
                         Xem thêm
                         <i class="fa-solid fa-chevron-right"></i>
-                    </div>
+                    </a>
                 </div>
                 <div class="news-wrapper">
                     <div class="news-left">

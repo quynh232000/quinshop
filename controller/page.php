@@ -44,10 +44,10 @@ if (isset($_GET['act'] )&& $_GET['act']) {
 
 
             if (isset($_GET['category']) && !empty($_GET['category'])) {
-                $collectionPro = $product->filterProduct("category", $_GET['category'],10,$page);
+                $collectionPro = $product->filterProduct("category", $_GET['category'],8,$page);
                 $infoCate = $cate->getInfoCate($_GET['category']);
             } else {
-                $collectionPro = $product->filterProduct();
+                $collectionPro = $product->filterProduct('','',8,$page);
             }
             if (isset($infoCate))
                 $viewTitle = $infoCate['nameCate'];
@@ -77,9 +77,14 @@ if (isset($_GET['act'] )&& $_GET['act']) {
             include_once 'view/inc/footer.php';
             break;
         case 'cart':
-            include_once 'view/inc/header.php';
-            include_once 'view/cart.php';
-            include_once 'view/inc/footer.php';
+            if(Session::get("isLogin") == true){
+                include_once 'view/inc/header.php';
+                include_once 'view/cart.php';
+                include_once 'view/inc/footer.php';
+
+            }else{
+                header('location: ./');
+            }
             break;
         case 'checkout':
             $classUser = new User();

@@ -38,7 +38,7 @@ if (empty($viewTitle)) {
     <link rel="stylesheet" href="./src/css/shopcustom.css">
     <link rel="stylesheet" href="./src/css/shopdashboard.css">
     <link rel="stylesheet" href="./src/css/orderhistory.css">
-    
+
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 
     <!-- swiper -->
@@ -62,60 +62,31 @@ if (empty($viewTitle)) {
                     </div>
                     <div class="sidebar-body">
 
-                        <a href="./profile.php" class="sidebar-item-account">
+                        <a href="?mod=profile&act=profile" class="sidebar-item-account">
                             <div class="m-user-img">
-                                <img src="https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj"
-                                    alt="">
+                                <img src="<?php echo "./assest/upload/" . Session::get("avatar"); ?>" alt="">
                             </div>
-                            <span>Hi, Mr Bin </span>
+                            <span>Hi,
+                                <?php echo Session::get("fullName") ?>
+                            </span>
 
                         </a>
 
                         <a href="./" class="sidebar-item">
                             <i class="fa-solid fa-house"></i>
-                            Home
+                            Trang chủ
                         </a>
-                        <a href="./" class="sidebar-item">
+                        <a href="?mod=admin&act=dashboard" class="sidebar-item">
                             <i class="fa-solid fa-cart-plus"></i>
-                            Shopping
+                            Quản trị
                         </a>
-                        <a href="#partner" class="sidebar-item">
-                            <i class="fa-solid fa-handshake"></i>
-                            Partner
-                        </a>
-                        <!-- <a href="./" class="sidebar-item">
-                            <i class="fa-solid fa-handshake"></i>
-                            Stock
-                        </a> -->
-
-                        <a href="./shopowner" class="sidebar-item">
-                            <i class="fa-solid fa-store"></i>
-                            Become a seller
-                        </a>
-                        <!-- <a href="./shopowner/index.php" class="sidebar-item">
-                            <i class="fa-solid fa-droplet"></i>
-                            Become a pooler
-                        </a> -->
-                        <a href="./shop.php" class="sidebar-item">
-                            <i class="fa-solid fa-shop-lock"></i>
-                            My shop
-                        </a>
-                        <!-- not login -->
-                        <!-- <div class="sidebar-bottom">
-                            <a href="./login" class="sidebar-item action">
-                                <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                                Sign in
-                            </a>
-                            <a href="./register" class="sidebar-item action">
-                                <i class="fa-solid fa-registered"></i>
-                                Register
-                            </a>
-                        </div> -->
-                        <!-- is login -->
                         <div class="sidebar-bottom">
-                            <a href="./logout" class="sidebar-item action">
+                           
+
+
+                            <a href="?mod=page&act=home&action=logout" class="sidebar-item action">
                                 <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                                Logout
+                                Đăng xuất
                             </a>
 
                         </div>
@@ -247,7 +218,8 @@ if (empty($viewTitle)) {
                             <!-- login -->
                             <div class="header-search-item header-search-account">
                                 <div class="header-search-item-icon">
-                                    <img src="<?php echo "./assest/upload/" . Session::get("avatar");?>" class="img-user" alt="">
+                                    <img src="<?php echo "./assest/upload/" . Session::get("avatar"); ?>" class="img-user"
+                                        alt="">
                                 </div>
                                 <!-- if (str_contains(Session::get("avatar"), "http")) {
                                         echo Session::get('avatar');

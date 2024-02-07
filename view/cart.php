@@ -26,7 +26,7 @@
                         <div class="cart-title">Giá</div>
                     </div>
                     <div class="cart-quantity">
-                        <div class="cart-title">Số</div>
+                        <div class="cart-title">Số lượng</div>
                     </div>
                     <div class="cart-subtotal">
                         <div class="cart-title">Tổng tiền</div>
