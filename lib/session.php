@@ -26,7 +26,7 @@
         public static function checkPermission($role){
             self::checkSession();
             if(!(self::get("role") == 'admin' || self::get("role") == 'adminall')){
-                header("Location: ?mod=profile&act=login");
+                header("Location: ?mod=profile&act=login&redirect=admin");
             }
         }
         public static function checkSession(){
@@ -54,9 +54,7 @@
             
             session_destroy();
             return  "<script>location.href = '?mod=profile&act=login';</script>";
-            // self::checkLogin();
-            // header("Location:/web-demo_php/login.php");
-            // exit(header("Location:/web-demo_php/login.php"));
+            
             
         }
         

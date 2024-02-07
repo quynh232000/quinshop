@@ -22,7 +22,7 @@
 <body>
   <div class="register">
     <div class="wrapper">
-      <form class="form-login" action="?mod=profile&act=login" method="post" enctype="multipart/form-data">
+      <form class="form-login" action="?mod=profile&act=login<?=isset($_GET['redirect']) ? "&redirect=".$_GET['redirect'] :""  ?>" method="post" enctype="multipart/form-data">
         <h1>Đăng nhập</h1>
 
         <!-- invalidate -->

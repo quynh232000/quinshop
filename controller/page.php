@@ -43,7 +43,9 @@ if (isset($_GET['act'] )&& $_GET['act']) {
             }
 
 
-            if (isset($_GET['category']) && !empty($_GET['category'])) {
+            if (isset($_GET['category']) && !empty($_GET['category']) && is_numeric($_GET['category']) ) {
+
+
                 $collectionPro = $product->filterProduct("category", $_GET['category'],8,$page);
                 $infoCate = $cate->getInfoCate($_GET['category']);
             } else {
@@ -56,10 +58,14 @@ if (isset($_GET['act'] )&& $_GET['act']) {
             include_once 'view/inc/footer.php';
             break;
         case 'detail':
-            if (isset($_GET['id']) && !empty($_GET['id'])) {
+            if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
                 $infoPro = $product->filterProduct("detail", $_GET['id']);
+                
                 if (isset($infoPro) && $infoPro->status == true) {
                     $productInfo = $infoPro->result;
+                    if(!isset($productInfo[0]['namePro'])){
+                        header("Location: ?page=404");
+                    }
                     $page = 1;
                     if(isset($_GET['page']) && $_GET['page']){
                         $page = $_GET['page'];
@@ -67,6 +73,8 @@ if (isset($_GET['act'] )&& $_GET['act']) {
                     $listCmt = $classComment->getAllCommentById( $_GET['id'],$page);
                     
                     $viewTitle = $productInfo[0]['namePro'];
+                }else{
+                    header("Location: ?page=404");
                 }
             } else {
                 header("Location: ?page=404");

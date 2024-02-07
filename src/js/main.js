@@ -503,7 +503,7 @@ $().ready(function () {
       dataType: "json",
     }).done((res) => {
       if (res.status == false) {
-        toastjs(res.message);
+        toastjs(res.message,false);
       } else {
         location.href =
           "?mod=page&act=detail&id=" +

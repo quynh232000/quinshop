@@ -38,16 +38,16 @@ if (isset($act)) {
             // session_start();
             $class = new AdminLogin();
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $redirect = ""; 
+                if(isset($_GET['redirect']) && $_GET['redirect']=='admin'){
+                    $redirect ="?mod=admin&act=dashboard";
+                }else{
+                    $redirect = "./";
+                }
                 $adminUser = $_POST['adminUser'];
                 $adminPass = md5($_POST['adminPass']);
-                $login_check = $class->login_admin($adminUser, $adminPass);
+                $login_check = $class->login_admin($adminUser, $adminPass,$redirect);
             }
-
-       
-
-
-
-
             include_once 'view/login.php';
             break;
         case 'register':

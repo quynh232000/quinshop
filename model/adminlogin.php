@@ -28,7 +28,7 @@ class Adminlogin
         $this->fm = new Format();
         $this->tool = new Tool();
     }
-    public function login_admin($adminUser, $adminPass)
+    public function login_admin($adminUser, $adminPass,$redirect ="")
     {
         $adminUser = $this->fm->validation($adminUser);
         $adminPass = $this->fm->validation($adminPass);
@@ -57,7 +57,7 @@ class Adminlogin
                 Session::set('avatar', $value['avatar']);
                 Session::set('phone', $value['phone']);
                 Session::set('role', $value['role']);
-                return ["status" => true, "message" => "Đăng nhập thành công!", "result" => [], "redirect" => "./"];
+                return ["status" => true, "message" => "Đăng nhập thành công!", "result" => [], "redirect" => $redirect];
             } else {
                 $alert = "Tên đăng nhập hoặc tài khoản không đúng!";
                 return ["status" => false, "message" => $alert, "result" => [], "redirect" => ""];
