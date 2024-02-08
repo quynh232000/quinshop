@@ -59,8 +59,8 @@ if (isset($act)) {
                     $_POST['fullname'],
                     $_POST['email'],
                     $_POST['phone'],
-                    md5($_POST['password']),
-                    md5($_POST['confirmpassword'])
+                    ($_POST['password']),
+                    ($_POST['confirmpassword'])
                 );
 
             }

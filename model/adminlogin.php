@@ -82,25 +82,34 @@ class Adminlogin
             return ["status" => false, "message" => $alert, "result" => []];
 
         }
+        
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+            return ["status" => false, "message" => 'Email không đúng định dạng!', "result" => []];
+       }
         if ($password != $confirmPassword) {
             $alert = "Mật khẩu không khớp!";
             return ["status" => false, "message" => $alert, "result" => []];
 
         }
+        if ( strlen($password)<8 ){
+            return ["status" => false, "message" => 'Password phải từ 8 kí tự chở lên!', "result" => []];
 
+        }
         $checkUser = $this->db->select("select * from user where userName = '$userName';");
         if (count($checkUser->fetchAll()) > 0) {
             return ["status" => false, "message" => "Tên đăng nhập đã tồn tại!", "result" => []];
         }
         $avatar = '5EA63482-44B3-40C9-B3A8-1479DB08CCD4.jpg';
         $id = $this->tool->GUID();
+        $pass = md5($password);
         $query = "INSERT INTO user (id,userName,fullName,email,phone,pass,avatar) VALUE
                ( '$id',
                 '$userName',
                  '$fullName',
                 '$email',
                 '$phone',
-                '$password',
+                '$pass',
                 '$avatar')
             ";
         $this->db->insert($query);
