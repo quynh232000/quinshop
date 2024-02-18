@@ -52,8 +52,8 @@
                     </div>
                     <div class="cart-product">
                         <?php
-                        if ($cartResult->status && count($cartResult->result) > 0) {
-                            foreach ($cartResult->result as $key => $value) { 
+                        if ($cartcheckout->status && count($cartcheckout->result) > 0) {
+                            foreach ($cartcheckout->result as $key => $value) { 
                                 ?>
                                 <div class="cart-item" idpro="<?=$value['productId'] ?>" checkpro="<?=$value['origin']; ?>" countpro = "<?=$value['count'] ?>" pricepro="<?=$value['price'] ?>">
                                     <div class="cart-info">

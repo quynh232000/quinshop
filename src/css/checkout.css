@@ -138,3 +138,13 @@
         gap: 0px;
     }
 }
+.checkout .cart-subtotal{
+    width: 40%;
+    text-align: right;
+}
+.checkout .cart-body{
+    background-color: rgba(22,22,24,.02);
+}
+.checkout-body{
+    padding: 0;
+}

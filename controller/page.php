@@ -95,6 +95,7 @@ if (isset($_GET['act'] )&& $_GET['act']) {
             }
             break;
         case 'checkout':
+            $cartcheckout = $classCart->getCartUser('checked');
             $classUser = new User();
             $getUserInfo = $classUser->getAddress();
             if($getUserInfo->status ==true){

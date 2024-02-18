@@ -14,6 +14,93 @@
                 <span>Đặt hàng</span>
             </div>
         </div>
+        <!-- show prodduct -->
+        <div class="cart-body">
+            <div class="cart-nav">
+                <div class="cart-item">
+                    <div class="cart-info">
+                        <div class="cart-checkbox">
+                            <!-- <input checked type="checkbox"> -->
+                        </div>
+                        <div class="cart-title">Tất cả (
+                            <?= $cartResult->status ? count($cartResult->result) : 0 ?> Sản phẩm)
+                        </div>
+                    </div>
+                    <div class="cart-price">
+                        <div class="cart-title">Giá</div>
+                    </div>
+                    <div class="cart-quantity">
+                        <div class="cart-title">Số lượng</div>
+                    </div>
+                    <div class="cart-subtotal">
+                        <div class="cart-title">Tổng tiền</div>
+                    </div>
+                    <!-- <div class="cart-action">
+                        <div class="cart-title"><i class="fa-solid fa-trash-can"></i></div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="cart-list-shop">
+                <!-- shop  -->
+                <div class="cart-group">
+                   
+                    <div class="cart-product">
+                        <?php
+                        if ($cartResult->status && count($cartResult->result) > 0) {
+                            foreach ($cartResult->result as $key => $value) { 
+                                ?>
+                                <div class="cart-item" idpro="<?=$value['productId'] ?>" checkpro="<?=$value['origin']; ?>" countpro = "<?=$value['count'] ?>" pricepro="<?=$value['price'] ?>">
+                                    <div class="cart-info">
+                                        
+                                        <div class="cart-item-pro">
+                                            <div class="cart-item-img">
+                                                <img src="./assest/upload/<?=$value['image'] ?>"
+                                                    alt="">
+                                            </div>
+                                            <div class="cart-info-right">
+                                                <div class="cart-item-name">
+                                                <?=$value['namePro']; ?>
+                                                </div>
+                                                <div class="cart-item-note">
+                                                <?=$value['brand']; ?> - <?=$value['origin']; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cart-price">
+                                        <div class="cart-item-price fm-price"><?=$value['price'];?> </div>
+                                    </div>
+                                    <div class="cart-quantity">
+
+                                        <div class="cart-item-count">
+                                            <input type="text" class="cart-count-input" readonly value="<?=$value['count']?>" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="cart-subtotal">
+                                        <div class="cart-item-subtotal cart-subtotal1 fm-price" data-subtotal="<?=($value['price']*$value['count']) ?>"><?=($value['price']*$value['count']) ?></div>
+                                    </div>
+                                    <!-- <div class="cart-action">
+                                        <div class="cart-item-action-icon">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </div>
+                                        <div class="cart-item-action-icon cart-btn-action" type-btn="delete">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            <?php }
+                        } else {
+                            echo '<div class="no-product-cart">Bạn không có sản phẩm nào trong giỏ hàng</div>';
+                        };
+                        ?>
+                    </div>
+                </div>
+               
+            </div>
+           
+
+        </div>
+        <!-- show prodduct -->
         <form method="POST" class="checkout-body">
 
             <div class="checkout-left">
