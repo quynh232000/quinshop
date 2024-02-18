@@ -23,7 +23,7 @@ class Cart
             return new Response(false, "false", "", "");
         }
         $userId = Session::get("id");
-        if(!empty($type) && $type =="checked"){
+        if( $type =="checked"){
             $type = "AND c.check = '1'";
         }else{
             $type = "";
